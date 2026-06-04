@@ -1,6 +1,4 @@
 name: prometheus
-displayName: Prometheus
-description: Explore Prometheus targets, alerts, rules, metrics, PromQL queries, and status from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

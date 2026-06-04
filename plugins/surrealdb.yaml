@@ -1,6 +1,4 @@
 name: surrealdb
-displayName: SurrealDB
-description: Explore SurrealDB namespaces, databases, tables, records, and SurrealQL queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

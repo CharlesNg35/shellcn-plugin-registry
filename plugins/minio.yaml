@@ -1,6 +1,4 @@
 name: minio
-displayName: MinIO
-description: Browse MinIO buckets and objects from ShellCN using the S3-compatible plugin.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

@@ -1,6 +1,4 @@
 name: mssql
-displayName: Microsoft SQL Server
-description: Explore Microsoft SQL Server databases, schemas, tables, rows, and queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

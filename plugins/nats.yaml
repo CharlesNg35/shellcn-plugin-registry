@@ -1,6 +1,4 @@
 name: nats
-displayName: NATS
-description: Inspect NATS server info, streams, consumers, messages, and publish flows from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

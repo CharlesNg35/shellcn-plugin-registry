@@ -16,8 +16,6 @@ Add `plugins/<name>.yaml` (file name must equal the plugin `name`):
 
 ```yaml
 name: surrealdb
-displayName: SurrealDB
-description: Explore, query, and manage a SurrealDB namespace/database.
 repo: github.com/CharlesNg35/shellcn-plugin-surrealdb
 homepage: https://surrealdb.com # optional
 license: MIT
@@ -40,6 +38,8 @@ Rules CI enforces:
 
 - Asset URLs must be release downloads of the declared `repo` - nowhere else.
 - `sha256` must match the actual bytes (CI downloads and checks).
+- Marketplace name and description come from the plugin binary's own manifest,
+  not this registry file.
 - Only `linux/amd64` is **required**. Every other platform
   (`linux|darwin|windows` × `amd64|arm64`) is optional - ship what you can
   build; gateways without a matching build simply see the plugin as

@@ -1,6 +1,4 @@
 name: kafka
-displayName: Kafka
-description: Inspect Kafka brokers, topics, partitions, consumer groups, and messages from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

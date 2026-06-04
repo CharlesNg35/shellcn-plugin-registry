@@ -1,6 +1,4 @@
 name: oracle
-displayName: Oracle Database
-description: Explore Oracle schemas, tables, rows, and SQL queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

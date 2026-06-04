@@ -1,6 +1,4 @@
 name: opensearch
-displayName: OpenSearch
-description: Explore OpenSearch indices, documents, cluster status, and search queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

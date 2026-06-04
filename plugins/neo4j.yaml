@@ -1,6 +1,4 @@
 name: neo4j
-displayName: Neo4j
-description: Explore Neo4j databases, labels, relationship types, nodes, and Cypher queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

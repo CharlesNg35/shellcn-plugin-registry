@@ -1,6 +1,4 @@
 name: clickhouse
-displayName: ClickHouse
-description: Explore ClickHouse databases, tables, columns, and queries from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

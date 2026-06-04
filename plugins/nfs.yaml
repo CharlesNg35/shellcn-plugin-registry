@@ -1,6 +1,4 @@
 name: nfs
-displayName: NFS
-description: Browse NFS exports and files from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

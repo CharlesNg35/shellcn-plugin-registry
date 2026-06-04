@@ -1,6 +1,4 @@
 name: rabbitmq
-displayName: RabbitMQ
-description: Inspect RabbitMQ overview data, queues, exchanges, bindings, connections, and messages from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

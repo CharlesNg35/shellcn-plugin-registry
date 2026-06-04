@@ -88,9 +88,12 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 
 	for _, m := range manifests {
 		entry := IndexEntry{
-			Name: m.Name, DisplayName: m.DisplayName, Description: m.Description,
-			Repo: m.Repo, Homepage: m.Homepage, License: m.License, Maintainers: m.Maintainers,
-			Versions: []IndexVersion{},
+			Name:        m.Name,
+			Repo:        m.Repo,
+			Homepage:    m.Homepage,
+			License:     m.License,
+			Maintainers: m.Maintainers,
+			Versions:    []IndexVersion{},
 		}
 		for _, v := range m.Versions {
 			snap, err := LoadSnapshot(snapshotDir, m.Name, v.Version)
@@ -100,6 +103,12 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 			if snap == nil {
 				skipped = append(skipped, fmt.Sprintf("%s %s (no snapshot yet)", m.Name, v.Version))
 				continue
+			}
+			if entry.DisplayName == "" {
+				entry.DisplayName = snap.Projection.Title
+			}
+			if entry.Description == "" {
+				entry.Description = snap.Projection.Description
 			}
 			iv := IndexVersion{
 				Version: v.Version, Yanked: v.Yanked,

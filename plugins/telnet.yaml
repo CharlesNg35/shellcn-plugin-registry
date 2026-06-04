@@ -1,6 +1,4 @@
 name: telnet
-displayName: Telnet
-description: Open legacy Telnet terminal sessions from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]

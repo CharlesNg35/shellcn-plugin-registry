@@ -11,8 +11,6 @@ import (
 )
 
 const validManifest = `name: demo
-displayName: Demo
-description: A demo plugin.
 repo: github.com/acme/shellcn-plugin-demo
 license: MIT
 maintainers: [acme]
@@ -118,7 +116,8 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	snaps := t.TempDir()
 	if err := WriteSnapshot(snaps, &Snapshot{
 		Name: "demo", Version: "0.2.0", APIVersion: 1, ProtocolVersion: 1,
-		Icon: plugin.Icon{Type: plugin.IconLucide, Value: "box"},
+		Icon:       plugin.Icon{Type: plugin.IconLucide, Value: "box"},
+		Projection: plugin.Projection{Title: "Demo", Description: "A demo plugin."},
 	}); err != nil {
 		t.Fatal(err)
 	}
@@ -132,6 +131,9 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	}
 	if len(idx.Plugins) != 1 || len(idx.Plugins[0].Versions) != 1 {
 		t.Fatalf("index shape: %+v", idx.Plugins)
+	}
+	if idx.Plugins[0].DisplayName != "Demo" || idx.Plugins[0].Description != "A demo plugin." {
+		t.Fatalf("index metadata should come from snapshot: %+v", idx.Plugins[0])
 	}
 	urls := idx.Plugins[0].Versions[0].Assets["linux/amd64"].URLs
 	if len(urls) != 2 ||

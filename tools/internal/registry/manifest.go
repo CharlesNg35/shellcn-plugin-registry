@@ -46,8 +46,6 @@ type Version struct {
 // Manifest is one plugins/<name>.yaml registry entry.
 type Manifest struct {
 	Name        string    `yaml:"name" json:"name"`
-	DisplayName string    `yaml:"displayName" json:"displayName"`
-	Description string    `yaml:"description" json:"description"`
 	Repo        string    `yaml:"repo" json:"repo"`
 	Homepage    string    `yaml:"homepage,omitempty" json:"homepage,omitempty"`
 	License     string    `yaml:"license" json:"license"`
@@ -98,12 +96,6 @@ func (m *Manifest) Validate() error {
 
 	if !nameRe.MatchString(m.Name) {
 		add("name %q must match %s", m.Name, nameRe)
-	}
-	if strings.TrimSpace(m.DisplayName) == "" {
-		add("displayName is required")
-	}
-	if strings.TrimSpace(m.Description) == "" {
-		add("description is required")
 	}
 	if !strings.HasPrefix(m.Repo, "github.com/") || strings.Count(m.Repo, "/") != 2 {
 		add("repo %q must be github.com/<owner>/<name>", m.Repo)

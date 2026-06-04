@@ -1,6 +1,4 @@
 name: dynamodb
-displayName: DynamoDB
-description: Explore DynamoDB tables, items, indexes, and common table operations from ShellCN.
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers: [CharlesNg35]
