@@ -1,0 +1,58 @@
+name: Validate
+
+on:
+  pull_request:
+    paths: ["plugins/**", "tools/**", ".github/workflows/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.4"
+          cache-dependency-path: tools/go.sum
+
+      - name: Test tooling
+        working-directory: tools
+        run: |
+          gofmt -l . | tee /dev/stderr | wc -l | grep -q '^0$'
+          go vet ./...
+          go test ./...
+
+      - name: Build regctl
+        run: go -C tools build -o "$RUNNER_TEMP/regctl" ./cmd/regctl
+
+      - name: Validate all manifests
+        run: '"$RUNNER_TEMP/regctl" validate'
+
+      - name: Verify and inspect changed manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- 'plugins/*.yaml')
+          [ -z "$changed" ] && { echo "no manifest changes"; exit 0; }
+          for f in $changed; do
+            [ -f "$f" ] || continue   # deleted manifest
+            name=$(basename "$f" .yaml)
+            for ver in $(grep -E '^\s+- version:' "$f" | awk '{print $3}'); do
+              echo "::group::${name} ${ver}"
+              dir="$RUNNER_TEMP/assets/${name}/${ver}"
+              mkdir -p "$dir"
+              # Download every asset of this version and check sha256 against the manifest.
+              "$RUNNER_TEMP/regctl" verify "$f" -version "$ver" -dir "$dir"
+              # Smoke-load the linux/amd64 binary through the real go-plugin
+              # handshake and validate its manifest the way the gateway would.
+              bin=$(ls "$dir"/*linux-amd64* | head -1)
+              chmod +x "$bin"
+              "$RUNNER_TEMP/regctl" inspect "$bin"
+              echo "::endgroup::"
+            done
+          done

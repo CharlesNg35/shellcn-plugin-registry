@@ -1,0 +1,68 @@
+name: Mirror
+
+on:
+  push:
+    branches: [main]
+    paths: ["plugins/**", "tools/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write # create mirror releases; commit snapshots + index.json
+
+# Releases and the generated-files commit are not transactional: serialize.
+concurrency: mirror
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.4"
+          cache-dependency-path: tools/go.sum
+
+      - name: Build regctl
+        run: go -C tools build -o "$RUNNER_TEMP/regctl" ./cmd/regctl
+
+      - name: Mirror unreleased versions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release list --limit 1000 --json tagName --jq '.[].tagName' > "$RUNNER_TEMP/tags" || : > "$RUNNER_TEMP/tags"
+          "$RUNNER_TEMP/regctl" plan -existing "$RUNNER_TEMP/tags" | while read -r name ver; do
+            tag="${name}-v${ver}"
+            echo "::group::mirror ${tag}"
+            dir="$RUNNER_TEMP/mirror/${tag}"
+            mkdir -p "$dir"
+            # Re-download from upstream and re-verify against the merged manifest:
+            # the hashes in git are the contract, not whatever upstream serves now.
+            "$RUNNER_TEMP/regctl" verify "plugins/${name}.yaml" -version "$ver" -dir "$dir"
+            # Snapshot the verified linux/amd64 binary (projection + icon policy).
+            bin=$(ls "$dir"/*linux-amd64* | head -1)
+            chmod +x "$bin"
+            "$RUNNER_TEMP/regctl" inspect "$bin" -o snapshots
+            (cd "$dir" && sha256sum * > checksums.txt)
+            gh release create "$tag" \
+              --title "${name} v${ver}" \
+              --notes "Mirror of ${name} v${ver}, verified from the upstream release by run ${{ github.run_id }}. Source: $(grep '^repo:' "plugins/${name}.yaml" | awk '{print $2}')" \
+              "$dir"/*
+            echo "::endgroup::"
+          done
+
+      - name: Rebuild index.json
+        run: '"$RUNNER_TEMP/regctl" build-index -generated-by "mirror@${{ github.sha }}"'
+
+      - name: Commit generated files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add snapshots index.json
+          git diff --cached --quiet && { echo "nothing to commit"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: mirror releases and regenerate index"
+          git push

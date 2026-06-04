@@ -1,0 +1,58 @@
+name: Revalidate
+
+on:
+  schedule:
+    - cron: "17 4 * * *" # daily; catches asset rot before users do
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revalidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.4"
+          cache-dependency-path: tools/go.sum
+
+      - name: Build regctl
+        run: go -C tools build -o "$RUNNER_TEMP/regctl" ./cmd/regctl
+
+      - name: Verify every indexed asset
+        id: verify
+        shell: bash
+        run: |
+          set -uo pipefail
+          failed=0
+          : > "$RUNNER_TEMP/failures"
+          for f in plugins/*.yaml; do
+            [ -e "$f" ] || continue
+            if ! "$RUNNER_TEMP/regctl" verify "$f" 2>>"$RUNNER_TEMP/failures"; then
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            { echo "report<<EOF"; cat "$RUNNER_TEMP/failures"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+
+      - name: Open an issue on rot
+        if: failure() && steps.verify.outputs.report != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Revalidation failed: $(date -u +%F)" \
+            --label registry-rot \
+            --body "Scheduled asset verification failed. Affected entries should be investigated and, if upstream is gone for good, served from the mirror only or yanked.
+
+\`\`\`
+${{ steps.verify.outputs.report }}
+\`\`\`
+
+Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
