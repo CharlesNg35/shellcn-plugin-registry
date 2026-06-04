@@ -37,7 +37,7 @@ jobs:
             fi
           done
           if [ "$failed" -ne 0 ]; then
-            { echo "report<<EOF"; cat "$RUNNER_TEMP/failures"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+            { echo "report<<REPORT_EOF"; cat "$RUNNER_TEMP/failures"; echo "REPORT_EOF"; } >> "$GITHUB_OUTPUT"
             exit 1
           fi
 
@@ -45,14 +45,21 @@ jobs:
         if: failure() && steps.verify.outputs.report != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPORT: ${{ steps.verify.outputs.report }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
         run: |
+          {
+            echo "Scheduled asset verification failed. Investigate the entries below; if upstream is gone for good, serve installs from the mirror only or yank the version."
+            echo
+            echo '```'
+            printf '%s\n' "$REPORT"
+            echo '```'
+            echo
+            echo "Run: $RUN_URL"
+          } > "$RUNNER_TEMP/body.md"
+          gh label create registry-rot --color D93F0B --description "Indexed asset failed revalidation" --force || true
           gh issue create \
             --title "Revalidation failed: $(date -u +%F)" \
             --label registry-rot \
-            --body "Scheduled asset verification failed. Affected entries should be investigated and, if upstream is gone for good, served from the mirror only or yanked.
-
-\`\`\`
-${{ steps.verify.outputs.report }}
-\`\`\`
-
-Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            --body-file "$RUNNER_TEMP/body.md"
