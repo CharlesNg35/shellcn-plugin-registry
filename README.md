@@ -24,10 +24,10 @@ index.json (regenerated)  ──fetched by──▶  ShellCN gateway → Marketp
   release can break availability, never integrity.
 - **The mirror removes the availability risk too.** Installs are served from
   this repo's releases (`<name>-v<version>`), which exist independently of the
-  upstream repo. Mirror releases are immutable — a fix is always a new version.
+  upstream repo. Mirror releases are immutable - a fix is always a new version.
 - **What you see is what was reviewed.** The gateway shows each plugin's full
   permission/risk/transport surface from a projection snapshot taken from the
-  _verified binary_ by CI — not from anything the manifest author typed.
+  _verified binary_ by CI - not from anything the manifest author typed.
 - **`yanked: true`** on a version hides it from installs registry-side, with no
   cooperation needed from the upstream maintainer.
 
@@ -47,7 +47,7 @@ release with per-platform binaries, then PR one YAML file here.
 
 | Path         | What                                                         |
 | ------------ | ------------------------------------------------------------ |
-| `plugins/`   | One manifest per plugin — the only files contributors touch. |
+| `plugins/`   | One manifest per plugin - the only files contributors touch. |
 | `snapshots/` | Generated projection snapshots (committed by the mirror CI). |
 | `index.json` | Generated catalog the gateway fetches. Never edit by hand.   |
 | `tools/`     | `regctl`, the registry tool CI runs (works locally too).     |

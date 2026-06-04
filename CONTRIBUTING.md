@@ -2,11 +2,11 @@
 
 ## Before you start
 
-1. Build your plugin against the published ShellCN SDK — start from the
+1. Build your plugin against the published ShellCN SDK - start from the
    [starter template](https://github.com/CharlesNg35/shellcn-plugin-starter).
 2. Tag a release on **your** repo with one binary per platform plus a
    `checksums.txt` (the starter's release workflow does this). `linux/amd64` is
-   mandatory — CI inspects it.
+   mandatory - CI inspects it.
 3. Make sure your manifest passes the gateway's validation locally
    (`plugin.Validate` runs in the starter's tests).
 
@@ -39,10 +39,10 @@ versions: # newest first
 
 Rules CI enforces:
 
-- Asset URLs must be release downloads of the declared `repo` — nowhere else.
+- Asset URLs must be release downloads of the declared `repo` - nowhere else.
 - `sha256` must match the actual bytes (CI downloads and checks).
 - Only `linux/amd64` is **required**. Every other platform
-  (`linux|darwin|windows` × `amd64|arm64`) is optional — ship what you can
+  (`linux|darwin|windows` × `amd64|arm64`) is optional - ship what you can
   build; gateways without a matching build simply see the plugin as
   incompatible.
 - Every asset you ship is downloaded, checksum-verified, and **executed on a
@@ -71,7 +71,7 @@ binaries here and the new version appears in the index.
 
 ## Fixing a bad release
 
-Mirror releases are immutable — never re-tag with different bytes upstream
+Mirror releases are immutable - never re-tag with different bytes upstream
 (installs would fail the checksum). Ship a new patch version. To pull a version
 (e.g. a security issue), PR `yanked: true` onto it; it disappears from installs
 immediately, no upstream cooperation required.
@@ -80,4 +80,4 @@ immediately, no upstream cooperation required.
 
 Maintainers review the manifest, the plugin's source repo, and the projection
 CI prints (permissions, risk levels, transports). Keep your repo public and
-buildable from source — unreviewable blobs don't get merged.
+buildable from source - unreviewable blobs don't get merged.
