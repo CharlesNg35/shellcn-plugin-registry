@@ -68,12 +68,11 @@ func usage() {
   regctl verify <manifest.yaml> [flags]      download assets and verify sha256
       -version <v>    only this version (default: all)
       -dir <path>     keep downloads here (default: verify and discard)
-  regctl inspect <binary> [flags]            handshake, validate, snapshot a plugin binary
-      -o <path>             write the snapshot JSON here (default: stdout)
-      -expect-name <n>      fail unless the binary presents this plugin name
-      -expect-version <v>   fail unless the binary presents this version
-      -expect-sdk <vX.Y.Z>  fail unless the binary was built against this SDK
-  regctl check <manifest.yaml> -platform <os/arch> [-version v]
+	  regctl inspect <binary> [flags]            handshake, validate, snapshot a plugin binary
+	      -o <path>             write the snapshot JSON here (default: stdout)
+	      -expect-name <n>      fail unless the binary presents this plugin name
+	      -expect-version <v>   fail unless the binary presents this version
+	  regctl check <manifest.yaml> -platform <os/arch> [-version v]
                                              download, hash-verify, and execute every version's
                                              binary for one platform; versions without that
                                              platform are skipped
@@ -145,14 +144,13 @@ func cmdInspect(args []string) error {
 	out := fs.String("o", "", "")
 	expectName := fs.String("expect-name", "", "")
 	expectVersion := fs.String("expect-version", "", "")
-	expectSDK := fs.String("expect-sdk", "", "")
 	path, rest := splitPositional(args)
 	_ = fs.Parse(rest)
 	if path == "" {
 		return fmt.Errorf("inspect: exactly one binary path required")
 	}
 	snap, err := registry.Inspect(path, registry.Expect{
-		Name: *expectName, Version: *expectVersion, SDK: *expectSDK,
+		Name: *expectName, Version: *expectVersion,
 	})
 	if err != nil {
 		return err
@@ -171,7 +169,7 @@ func cmdInspect(args []string) error {
 
 // cmdCheck runs the full per-platform gate for one manifest: fetch the asset,
 // verify its sha256, execute it through the plugin handshake, and require the
-// identity (name/version/SDK) the manifest claims. Used by the CI matrix where
+// identity (name/version) the manifest claims. Used by the CI matrix where
 // the runner's platform matches -platform.
 func cmdCheck(args []string) error {
 	fs := flag.NewFlagSet("check", flag.ExitOnError)
@@ -209,13 +207,13 @@ func cmdCheck(args []string) error {
 		if err != nil {
 			return fmt.Errorf("%s %s %s: %w", m.Name, v.Version, *platform, err)
 		}
-		snap, err := registry.Inspect(bin, registry.Expect{Name: m.Name, Version: v.Version, SDK: v.SDK})
+		snap, err := registry.Inspect(bin, registry.Expect{Name: m.Name, Version: v.Version})
 		if err != nil {
 			annotate(path, fmt.Errorf("%s %s (%s): %w", m.Name, v.Version, *platform, err))
 			return fmt.Errorf("check failed")
 		}
-		fmt.Printf("ok: %s %s %s (apiVersion %d, sdk %s)\n",
-			m.Name, v.Version, *platform, snap.APIVersion, snap.SDKModule)
+		fmt.Printf("ok: %s %s %s (apiVersion %d)\n",
+			m.Name, v.Version, *platform, snap.APIVersion)
 		_ = os.Remove(bin)
 	}
 	return nil

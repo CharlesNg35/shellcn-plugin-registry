@@ -22,7 +22,6 @@ type IndexAsset struct {
 // IndexVersion is one installable version in the index.
 type IndexVersion struct {
 	Version         string                `json:"version"`
-	SDK             string                `json:"sdk"`
 	APIVersion      int                   `json:"apiVersion"`
 	ProtocolVersion int                   `json:"protocolVersion"`
 	Yanked          bool                  `json:"yanked,omitempty"`
@@ -103,7 +102,7 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				continue
 			}
 			iv := IndexVersion{
-				Version: v.Version, SDK: v.SDK, Yanked: v.Yanked,
+				Version: v.Version, Yanked: v.Yanked,
 				APIVersion: snap.APIVersion, ProtocolVersion: snap.ProtocolVersion,
 				Assets: map[string]IndexAsset{},
 				Icon:   snap.Icon, Projection: &snap.Projection,

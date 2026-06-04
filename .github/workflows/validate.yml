@@ -46,7 +46,7 @@ jobs:
             # Hash-verify every asset of every version, all platforms.
             "$RUNNER_TEMP/regctl" verify "$f"
             # Execute the required platform's binary: handshake, gateway-grade
-            # manifest validation, name/version/SDK identity pinning.
+            # manifest validation and name/version identity pinning.
             "$RUNNER_TEMP/regctl" check "$f" -platform linux/amd64
           done
 

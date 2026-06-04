@@ -18,13 +18,11 @@ license: MIT
 maintainers: [acme]
 versions:
   - version: 0.2.0
-    sdk: v0.1.3
     assets:
       linux/amd64:
         url: https://github.com/acme/shellcn-plugin-demo/releases/download/v0.2.0/demo-linux-amd64
         sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   - version: 0.1.0
-    sdk: v0.1.2
     assets:
       linux/amd64:
         url: https://github.com/acme/shellcn-plugin-demo/releases/download/v0.1.0/demo-linux-amd64

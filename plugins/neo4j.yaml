@@ -1,0 +1,27 @@
+name: neo4j
+displayName: Neo4j
+description: Explore Neo4j databases, labels, relationship types, nodes, and Cypher queries from ShellCN.
+repo: github.com/CharlesNg35/shellcn-contrib
+license: GPL-3.0
+maintainers: [CharlesNg35]
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-amd64
+        sha256: bb8f5015983ba0e234fff9b44b167568a4de105cc98da07af166cecb1c3df9ea
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-arm64
+        sha256: 7e5e01880d4c4c8a18d163d9b2aa2a0ebc1fdad9ceec7072dbc680040b99d761
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-amd64
+        sha256: bcb93e14107250f729c29ff9778e391b0f9612d56d6a0cb10e5077c066759487
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-arm64
+        sha256: dfeb15453655039fc00b4a3609b38ad2bf9b24e0d9031c81fc71db0f3c6b182a
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-amd64.exe
+        sha256: 278e31346e75f15ea5b1cdc84c2330ee79b92ac107413d5973c9ca6d2aa4af5a
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-arm64.exe
+        sha256: a4fe2ca310eef32e02a6ac19b26f110f98821803a0dd834f8535c0d506144dfb

@@ -24,7 +24,6 @@ license: MIT
 maintainers: [CharlesNg35] # GitHub handles
 versions: # newest first
   - version: 0.2.0
-    sdk: v0.1.3 # ShellCN SDK version it builds against
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-plugin-surrealdb/releases/download/v0.2.0/surrealdb-linux-amd64
@@ -48,8 +47,8 @@ Rules CI enforces:
 - Every asset you ship is downloaded, checksum-verified, and **executed on a
   native runner for its platform** (linux amd64/arm64, macOS, Windows): each
   binary must complete the real plugin handshake, pass the gateway's manifest
-  validation, and present the same name/version/SDK the manifest claims.
-  Platforms you don't ship are simply skipped.
+  validation, and present the same name/version the manifest claims. Platforms
+  you don't ship are simply skipped.
 - **Icons** must be self-contained: `lucide` name, emoji, inline SVG (≤16KB, no
   scripts/handlers/external references), or an inline `base64` data URI
   (png/webp/jpeg/svg, ≤48KB). Remote icon URLs are rejected. If unsure, use a

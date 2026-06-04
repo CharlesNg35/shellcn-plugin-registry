@@ -39,7 +39,6 @@ type Asset struct {
 // Version is one released plugin version.
 type Version struct {
 	Version string           `yaml:"version" json:"version"`
-	SDK     string           `yaml:"sdk" json:"sdk"`
 	Yanked  bool             `yaml:"yanked,omitempty" json:"yanked,omitempty"`
 	Assets  map[string]Asset `yaml:"assets" json:"-"`
 }
@@ -129,9 +128,6 @@ func (m *Manifest) Validate() error {
 			add("%s: duplicate version", ctx)
 		}
 		seen[v.Version] = true
-		if v.SDK == "" || !semver.IsValid(v.SDK) {
-			add("%s: sdk must be the SDK semver (e.g. v0.1.3)", ctx)
-		}
 		if _, ok := v.Assets[RequiredPlatform]; !ok {
 			add("%s: an asset for %s is required (CI inspects it)", ctx, RequiredPlatform)
 		}

@@ -1,0 +1,27 @@
+name: kafka
+displayName: Kafka
+description: Inspect Kafka brokers, topics, partitions, consumer groups, and messages from ShellCN.
+repo: github.com/CharlesNg35/shellcn-contrib
+license: GPL-3.0
+maintainers: [CharlesNg35]
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-linux-amd64
+        sha256: 19cc58bfad8c79aedc1d5f30af38873424c29d1275a939c6dd70d5ff4b236695
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-linux-arm64
+        sha256: f126f31fa9a30ba86f4be4d6bf7a27886ad1391e3b2eb5a13d1ffffde394ee89
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-darwin-amd64
+        sha256: 791129c8edbdf853b69e0ea4fb5e10235a76b8a2285676e5759aba0d2c33dd1e
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-darwin-arm64
+        sha256: b2da3e7eef9e4437a143c84aae1b19e305b80e8dadc77fd571ecbc2c94bda95f
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-windows-amd64.exe
+        sha256: 691c95b8bc4c0c68c153e6b148eb9e99ec4c214f69ba55218ac348331da372c9
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-windows-arm64.exe
+        sha256: 78bb1de02d071a7853f34b2d6ab11bb5d897d70d39ad43d767d6bade08444c3c

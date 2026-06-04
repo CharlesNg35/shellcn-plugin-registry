@@ -1,0 +1,27 @@
+name: solr
+displayName: Solr
+description: Explore Solr collections, cores, schema, documents, and search queries from ShellCN.
+repo: github.com/CharlesNg35/shellcn-contrib
+license: GPL-3.0
+maintainers: [CharlesNg35]
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-amd64
+        sha256: eb85fd953fc9687017e8e56a4a065e70f64234f492f0218661b318ec67c14207
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-arm64
+        sha256: de41f895a9b6fedd3fdab43c19e0b1f2c828bf3a36693aa84a492b3b29afa3dd
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-amd64
+        sha256: d583206a8d51667337d3f5c8f6211d47598cfd001807195097ab024f8ed8153a
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-arm64
+        sha256: df000a29cef6bfac3413f0f1f40dd13d5d24d6339e620bc5fb2b3f4f00e900f7
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-amd64.exe
+        sha256: 63f6c4b72a2fdf0b071f4555cf68effb80b9f93428d278871f22d3e21b631836
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-arm64.exe
+        sha256: ceac9c857fa7cec9b431499605332900e9cf4243b4c9cf09ac7d5086fc983b1f

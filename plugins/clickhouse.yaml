@@ -1,0 +1,27 @@
+name: clickhouse
+displayName: ClickHouse
+description: Explore ClickHouse databases, tables, columns, and queries from ShellCN.
+repo: github.com/CharlesNg35/shellcn-contrib
+license: GPL-3.0
+maintainers: [CharlesNg35]
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-amd64
+        sha256: 7b3fc0fdb348383b74a9a9aef1dee86cb084428b4b39087cba72739952bc5c58
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-arm64
+        sha256: 922cf2147efcc8541e4b62ee974c446f86917f556c11f22cec99b173884fdcfd
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-amd64
+        sha256: bb830f9c65f5dc4a985aaff818e50235db465608908b0cf71156f09415225f0b
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-arm64
+        sha256: 7d3b1565f4dfcdd8b85ba7d12b80bc155b2b9612155e83b5785cff4ade7fb35f
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-amd64.exe
+        sha256: ab9380c14bb60c0107fde822dc340c67a719f5f2f8cdaf61a1017773150b52d6
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-arm64.exe
+        sha256: 41fc45d986546b174fb3324518e74c279d2879b9294c8a05f099089f078d31c2
