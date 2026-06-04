@@ -7,6 +7,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Stage 1: cheap, always meaningful — schema for every manifest, full hash
   # verification of every asset, and the required linux/amd64 binary executed.
