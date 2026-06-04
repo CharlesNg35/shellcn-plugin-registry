@@ -1,4 +1,4 @@
-// Command regctl is the shellcn-plugins registry tool: it validates manifests,
+// Command regctl is the shellcn-plugin-registry registry tool: it validates manifests,
 // verifies release assets against their checksums, inspects plugin binaries
 // through the real go-plugin handshake, and generates index.json. CI is its
 // only intended caller, but every subcommand runs locally too.
@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/CharlesNg35/shellcn-plugins/tools/internal/registry"
+	"github.com/CharlesNg35/shellcn-plugin-registry/tools/internal/registry"
 )
 
 func main() {

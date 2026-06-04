@@ -137,7 +137,7 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	}
 	urls := idx.Plugins[0].Versions[0].Assets["linux/amd64"].URLs
 	if len(urls) != 2 ||
-		urls[0] != "https://github.com/CharlesNg35/shellcn-plugins/releases/download/demo-v0.2.0/demo-linux-amd64" ||
+		urls[0] != "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/demo-v0.2.0/demo-linux-amd64" ||
 		!strings.Contains(urls[1], "acme/shellcn-plugin-demo") {
 		t.Fatalf("urls must be [mirror, upstream]: %v", urls)
 	}

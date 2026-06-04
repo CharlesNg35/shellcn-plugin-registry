@@ -1,4 +1,4 @@
-// Package registry implements the shellcn-plugins index tooling: manifest
+// Package registry implements the shellcn-plugin-registry index tooling: manifest
 // validation, asset verification, binary inspection, and index generation.
 package registry
 

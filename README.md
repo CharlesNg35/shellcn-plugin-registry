@@ -1,4 +1,4 @@
-# shellcn-plugins
+# shellcn-plugin-registry
 
 The community plugin registry for [ShellCN](https://github.com/CharlesNg35/shellcn).
 Fully hosted on GitHub: manifests live here as PRs, verified binaries are

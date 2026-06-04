@@ -11,7 +11,7 @@ import (
 
 // MirrorRepo is where verified binaries are republished. Asset URLs in the
 // index put the mirror first so installs survive upstream deletions.
-const MirrorRepo = "CharlesNg35/shellcn-plugins"
+const MirrorRepo = "CharlesNg35/shellcn-plugin-registry"
 
 // IndexAsset is one platform binary as the gateway consumes it.
 type IndexAsset struct {
