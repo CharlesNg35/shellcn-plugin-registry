@@ -41,10 +41,12 @@ jobs:
             # Re-download from upstream and re-verify against the merged manifest:
             # the hashes in git are the contract, not whatever upstream serves now.
             "$RUNNER_TEMP/regctl" verify "plugins/${name}.yaml" -version "$ver" -dir "$dir"
-            # Snapshot the verified linux/amd64 binary (projection + icon policy).
+            # Snapshot the verified linux/amd64 binary (projection + icon policy),
+            # pinned to the identity the manifest claims.
             bin=$(ls "$dir"/*linux-amd64* | head -1)
             chmod +x "$bin"
-            "$RUNNER_TEMP/regctl" inspect "$bin" -o snapshots
+            "$RUNNER_TEMP/regctl" inspect "$bin" -o snapshots \
+              -expect-name "$name" -expect-version "$ver"
             (cd "$dir" && sha256sum * > checksums.txt)
             gh release create "$tag" \
               --title "${name} v${ver}" \

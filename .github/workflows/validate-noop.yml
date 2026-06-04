@@ -1,6 +1,6 @@
 # Twin of validate.yml for PRs that touch none of its paths: same workflow and
-# job name, so the required "Validate / validate" status still reports green on
-# docs-only changes instead of blocking the merge forever.
+# job names, so the required "validate" and "binaries-ok" statuses still report
+# green on docs-only changes instead of blocking the merge forever.
 name: Validate
 
 on:
@@ -14,3 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "No registry-relevant changes; nothing to validate."
+  binaries-ok:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "No registry-relevant changes; no binaries to execute."

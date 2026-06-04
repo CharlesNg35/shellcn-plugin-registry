@@ -19,12 +19,12 @@ name: surrealdb
 displayName: SurrealDB
 description: Explore, query, and manage a SurrealDB namespace/database.
 repo: github.com/CharlesNg35/shellcn-plugin-surrealdb
-homepage: https://surrealdb.com          # optional
+homepage: https://surrealdb.com # optional
 license: MIT
-maintainers: [CharlesNg35]               # GitHub handles
-versions:                                # newest first
+maintainers: [CharlesNg35] # GitHub handles
+versions: # newest first
   - version: 0.2.0
-    sdk: v0.1.3                          # ShellCN SDK version it builds against
+    sdk: v0.1.3 # ShellCN SDK version it builds against
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-plugin-surrealdb/releases/download/v0.2.0/surrealdb-linux-amd64
@@ -41,10 +41,15 @@ Rules CI enforces:
 
 - Asset URLs must be release downloads of the declared `repo` — nowhere else.
 - `sha256` must match the actual bytes (CI downloads and checks).
-- `linux/amd64` is required; allowed platforms: `linux|darwin|windows` ×
-  `amd64|arm64`.
-- The `linux/amd64` binary must complete the real plugin handshake and pass the
-  gateway's manifest validation.
+- Only `linux/amd64` is **required**. Every other platform
+  (`linux|darwin|windows` × `amd64|arm64`) is optional — ship what you can
+  build; gateways without a matching build simply see the plugin as
+  incompatible.
+- Every asset you ship is downloaded, checksum-verified, and **executed on a
+  native runner for its platform** (linux amd64/arm64, macOS, Windows): each
+  binary must complete the real plugin handshake, pass the gateway's manifest
+  validation, and present the same name/version/SDK the manifest claims.
+  Platforms you don't ship are simply skipped.
 - **Icons** must be self-contained: `lucide` name, emoji, inline SVG (≤16KB, no
   scripts/handlers/external references), or an inline `base64` data URI
   (png/webp/jpeg/svg, ≤48KB). Remote icon URLs are rejected. If unsure, use a
