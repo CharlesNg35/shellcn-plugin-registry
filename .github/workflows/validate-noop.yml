@@ -1,0 +1,16 @@
+# Twin of validate.yml for PRs that touch none of its paths: same workflow and
+# job name, so the required "Validate / validate" status still reports green on
+# docs-only changes instead of blocking the merge forever.
+name: Validate
+
+on:
+  pull_request:
+    paths-ignore: ["plugins/**", "tools/**", ".github/workflows/**"]
+
+permissions: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "No registry-relevant changes; nothing to validate."

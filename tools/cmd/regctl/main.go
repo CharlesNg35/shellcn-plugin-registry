@@ -9,6 +9,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/CharlesNg35/shellcn-plugins/tools/internal/registry"
@@ -39,6 +40,17 @@ func main() {
 	}
 }
 
+// annotate emits a GitHub Actions error annotation so the failure shows inline
+// on the PR's changed file; outside Actions it is a plain stderr line.
+func annotate(file string, err error) {
+	if os.Getenv("GITHUB_ACTIONS") == "true" {
+		msg := strings.ReplaceAll(err.Error(), "\n", "%0A")
+		fmt.Printf("::error file=%s::%s\n", file, msg)
+		return
+	}
+	fmt.Fprintf(os.Stderr, "%s: %v\n", file, err)
+}
+
 // splitPositional pulls a leading positional argument off args so flags may
 // follow it (stdlib flag stops at the first non-flag otherwise).
 func splitPositional(args []string) (string, []string) {
@@ -66,27 +78,27 @@ func usage() {
 func cmdValidate(args []string) error {
 	paths := args
 	if len(paths) == 0 {
-		ms, err := registry.LoadAll("plugins")
+		var err error
+		paths, err = filepath.Glob(filepath.Join("plugins", "*.yaml"))
 		if err != nil {
 			return err
 		}
-		for _, m := range ms {
-			if err := m.Validate(); err != nil {
-				return err
-			}
-			fmt.Printf("ok: %s (%d versions)\n", m.Name, len(m.Versions))
-		}
-		return nil
 	}
+	failed := false
 	for _, p := range paths {
 		m, err := registry.Load(p)
-		if err != nil {
-			return err
+		if err == nil {
+			err = m.Validate()
 		}
-		if err := m.Validate(); err != nil {
-			return err
+		if err != nil {
+			annotate(p, err)
+			failed = true
+			continue
 		}
 		fmt.Printf("ok: %s (%d versions)\n", m.Name, len(m.Versions))
+	}
+	if failed {
+		return fmt.Errorf("validation failed")
 	}
 	return nil
 }
