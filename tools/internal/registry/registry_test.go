@@ -142,3 +142,16 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 		t.Fatalf("urls must be [mirror, upstream]: %v", urls)
 	}
 }
+
+func TestWriteSnapshotCreatesDirectory(t *testing.T) {
+	dir := filepath.Join(t.TempDir(), "nested", "snapshots")
+	if err := WriteSnapshot(dir, &Snapshot{
+		Name: "demo", Version: "0.2.0", APIVersion: 1, ProtocolVersion: 1,
+		Projection: plugin.Projection{Title: "Demo"},
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(SnapshotPath(dir, "demo", "0.2.0")); err != nil {
+		t.Fatal(err)
+	}
+}

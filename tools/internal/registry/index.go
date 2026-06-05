@@ -82,6 +82,9 @@ func WriteSnapshot(dir string, s *Snapshot) error {
 	if err != nil {
 		return err
 	}
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		return err
+	}
 	return os.WriteFile(SnapshotPath(dir, s.Name, s.Version), append(raw, '\n'), 0o644)
 }
 

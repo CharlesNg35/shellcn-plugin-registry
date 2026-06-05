@@ -277,11 +277,11 @@ func cmdRestoreSnapshots(args []string) error {
 				continue
 			}
 			snap, err := registry.LoadSnapshot(*snapshots, m.Name, v.Version)
-			if err != nil {
-				return fmt.Errorf("%s %s: %w", m.Name, v.Version, err)
-			}
-			if snap != nil {
+			if err == nil && snap != nil {
 				continue
+			}
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "stale snapshot: %s %s: %v\n", m.Name, v.Version, err)
 			}
 			asset, ok := v.Assets[registry.RequiredPlatform]
 			if !ok {
