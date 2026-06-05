@@ -27,7 +27,7 @@ type IndexVersion struct {
 	Yanked          bool                  `json:"yanked,omitempty"`
 	Assets          map[string]IndexAsset `json:"assets"`
 	Icon            plugin.Icon           `json:"icon"`
-	Projection      json.RawMessage       `json:"projection,omitempty"`
+	SnapshotURL     string                `json:"snapshotUrl"`
 }
 
 // IndexEntry is one plugin in index.json.
@@ -57,6 +57,12 @@ type projectionSummary struct {
 // SnapshotPath is where a version's inspection snapshot lives.
 func SnapshotPath(dir, name, version string) string {
 	return filepath.Join(dir, name, MirrorTag(name, version)+".json")
+}
+
+// SnapshotURL returns the raw GitHub URL for one committed inspection snapshot.
+func SnapshotURL(name, version string) string {
+	return fmt.Sprintf("https://raw.githubusercontent.com/%s/main/%s",
+		MirrorRepo, filepath.ToSlash(SnapshotPath("snapshots", name, version)))
 }
 
 // MirrorAssetURL returns the registry release URL for a mirrored upstream asset.
@@ -132,9 +138,11 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 			}
 			iv := IndexVersion{
 				Version: v.Version, Yanked: v.Yanked,
-				APIVersion: snap.APIVersion, ProtocolVersion: snap.ProtocolVersion,
-				Assets: map[string]IndexAsset{},
-				Icon:   snap.Icon, Projection: snap.Projection,
+				APIVersion:      snap.APIVersion,
+				ProtocolVersion: snap.ProtocolVersion,
+				Assets:          map[string]IndexAsset{},
+				Icon:            snap.Icon,
+				SnapshotURL:     SnapshotURL(m.Name, v.Version),
 			}
 			for platform, a := range v.Assets {
 				iv.Assets[platform] = IndexAsset{
