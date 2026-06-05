@@ -1,0 +1,26 @@
+name: jaeger
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.jaegertracing.io
+license: GPL-3.0
+maintainers: [CharlesNg35]
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-linux-amd64
+        sha256: b0c4eec4c7eb94f3f9c61c3151b45530ccf3b3b3931b988b7f193ffdef1c72d0
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-linux-arm64
+        sha256: 75cc417dfc02720de2cecd0cf1ac155d439f255f338718e2c96b5a571172cba5
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-darwin-amd64
+        sha256: 7c220dd0c7a115cc8c28df1f3cc63e31072ff3ba1dda54c6d823d5e97336cd33
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-darwin-arm64
+        sha256: 21bf2d37f4c4f8216877c6e6459cce30ed40a7deb77abffc8972de516d2662a6
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-windows-amd64.exe
+        sha256: 2e965cad46d559465e6ae0af2ec0ec23b87fa838838b1181fbda221cfab96fe0
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-windows-arm64.exe
+        sha256: 3a74d61b0561b7d1b129ec8d5cd3a12295ee04de99068817a9d70cba6b59c624
