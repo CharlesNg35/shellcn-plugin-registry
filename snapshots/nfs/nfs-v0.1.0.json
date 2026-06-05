@@ -1,0 +1,136 @@
+{
+  "name": "nfs",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "lucide",
+    "value": "network"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "nfs",
+    "version": "0.1.0",
+    "title": "NFS",
+    "description": "File browser for NFSv3 exports.",
+    "icon": {
+      "type": "lucide",
+      "value": "network"
+    },
+    "category": {
+      "key": "files",
+      "label": "Files \u0026 storage",
+      "icon": {
+        "type": "lucide",
+        "value": "folder-open"
+      },
+      "order": 20
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "nfs.example.internal"
+            },
+            {
+              "key": "export_path",
+              "label": "Export path",
+              "type": "text",
+              "required": true,
+              "placeholder": "/srv/share"
+            },
+            {
+              "key": "root_path",
+              "label": "Root path",
+              "type": "text",
+              "default": "/",
+              "placeholder": "/"
+            }
+          ]
+        },
+        {
+          "name": "AUTH_SYS",
+          "fields": [
+            {
+              "key": "machine_name",
+              "label": "Machine name",
+              "type": "text",
+              "default": "shellcn"
+            },
+            {
+              "key": "uid",
+              "label": "UID",
+              "type": "number",
+              "default": 0,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "key": "gid",
+              "label": "GID",
+              "type": "number",
+              "default": 0,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "filesystem"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "single",
+    "tabs": [
+      {
+        "key": "files",
+        "label": "Files",
+        "icon": {
+          "type": "lucide",
+          "value": "folder"
+        },
+        "panel": "file_browser",
+        "source": {
+          "routeId": "nfs.files.list",
+          "params": {
+            "path": "."
+          }
+        },
+        "config": {
+          "pathParam": "path",
+          "readRouteId": "nfs.files.read",
+          "downloadRouteId": "nfs.files.download",
+          "writeRouteId": "nfs.files.write",
+          "uploadRouteId": "nfs.files.upload",
+          "mkdirRouteId": "nfs.files.mkdir",
+          "renameRouteId": "nfs.files.rename",
+          "deleteRouteId": "nfs.files.delete",
+          "moveRouteId": "nfs.files.move",
+          "copyRouteId": "nfs.files.copy",
+          "archiveRouteId": "nfs.files.archive",
+          "writable": true,
+          "multipleUpload": true,
+          "maxUploadBytes": 52428800,
+          "uploadFieldName": "files"
+        }
+      }
+    ]
+  }
+}
