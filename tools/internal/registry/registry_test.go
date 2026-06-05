@@ -2,6 +2,7 @@ package registry
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"strings"
@@ -117,7 +118,7 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	if err := WriteSnapshot(snaps, &Snapshot{
 		Name: "demo", Version: "0.2.0", APIVersion: 1, ProtocolVersion: 1,
 		Icon:       plugin.Icon{Type: plugin.IconLucide, Value: "box"},
-		Projection: plugin.Projection{Title: "Demo", Description: "A demo plugin."},
+		Projection: json.RawMessage(`{"title":"Demo","description":"A demo plugin."}`),
 	}); err != nil {
 		t.Fatal(err)
 	}
@@ -143,15 +144,18 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	}
 }
 
-func TestBuildIndexSkipsStaleSnapshot(t *testing.T) {
+func TestBuildIndexPreservesActionConfigSnapshot(t *testing.T) {
 	m, err := Load(writeManifest(t, validManifest))
 	if err != nil {
 		t.Fatal(err)
 	}
 	snaps := t.TempDir()
+	if err := os.MkdirAll(filepath.Dir(SnapshotPath(snaps, "demo", "0.2.0")), 0o755); err != nil {
+		t.Fatal(err)
+	}
 	if err := os.WriteFile(
 		SnapshotPath(snaps, "demo", "0.2.0"),
-		[]byte(`{"name":"demo","version":"0.2.0","projection":{"actions":[{"id":"config","config":{}}]}}`),
+		[]byte(`{"name":"demo","version":"0.2.0","apiVersion":1,"protocolVersion":1,"icon":{"type":"lucide","value":"box"},"projection":{"title":"Demo","description":"A demo plugin.","actions":[{"id":"config","config":{}}]}}`),
 		0o644,
 	); err != nil {
 		t.Fatal(err)
@@ -161,11 +165,11 @@ func TestBuildIndexSkipsStaleSnapshot(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(idx.Plugins) != 0 {
-		t.Fatalf("stale snapshot should not produce an installable entry: %+v", idx.Plugins)
+	if len(skipped) != 1 || !strings.Contains(skipped[0], "0.1.0") {
+		t.Fatalf("only the unsnapshotted version should be skipped: %v", skipped)
 	}
-	if len(skipped) != 2 || !strings.Contains(skipped[0], "stale snapshot") {
-		t.Fatalf("stale snapshot should be reported as skipped: %v", skipped)
+	if len(idx.Plugins) != 1 || len(idx.Plugins[0].Versions) != 1 {
+		t.Fatalf("snapshot with action config should stay installable: %+v", idx.Plugins)
 	}
 }
 
@@ -173,9 +177,13 @@ func TestWriteSnapshotCreatesDirectory(t *testing.T) {
 	dir := filepath.Join(t.TempDir(), "nested", "snapshots")
 	if err := WriteSnapshot(dir, &Snapshot{
 		Name: "demo", Version: "0.2.0", APIVersion: 1, ProtocolVersion: 1,
-		Projection: plugin.Projection{Title: "Demo"},
+		Projection: json.RawMessage(`{"title":"Demo"}`),
 	}); err != nil {
 		t.Fatal(err)
+	}
+	want := filepath.Join(dir, "demo", "demo-v0.2.0.json")
+	if SnapshotPath(dir, "demo", "0.2.0") != want {
+		t.Fatalf("snapshot path = %q, want %q", SnapshotPath(dir, "demo", "0.2.0"), want)
 	}
 	if _, err := os.Stat(SnapshotPath(dir, "demo", "0.2.0")); err != nil {
 		t.Fatal(err)
