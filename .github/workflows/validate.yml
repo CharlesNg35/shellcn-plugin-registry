@@ -1,20 +1,42 @@
-name: Validate
+name: Plugin Registry
 
 on:
   pull_request:
-    paths: ["plugins/**", "tools/**", ".github/workflows/**"]
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
+  changes:
+    name: registry-changes
+    runs-on: ubuntu-latest
+    outputs:
+      manifests: ${{ steps.changed.outputs.manifests }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- 'plugins/*.yaml')
+          if [ -n "$changed" ]; then
+            echo "manifests=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "manifests=false" >> "$GITHUB_OUTPUT"
+          fi
+
   # Stage 1: cheap, always meaningful — schema for every manifest, full hash
   # verification of every asset, and the required linux/amd64 binary executed.
   validate:
+    name: registry-validate
+    needs: changes
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +80,9 @@ jobs:
   # executed natively on a matching runner; absent platforms skip cleanly. This
   # guarantees no invalid binary of any platform reaches the index.
   binaries:
-    needs: validate
+    name: registry-binaries-${{ matrix.platform }}
+    needs: [changes, validate]
+    if: needs.changes.outputs.manifests == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -102,6 +126,7 @@ jobs:
   # Single aggregate status so branch protection needs just "validate" and
   # "binaries-ok" while still covering every matrix leg.
   binaries-ok:
+    name: registry-binaries-ok
     needs: [validate, binaries]
     if: always()
     runs-on: ubuntu-latest
@@ -109,4 +134,7 @@ jobs:
       - name: Check results
         run: |
           [ "${{ needs.validate.result }}" = "success" ] || exit 1
-          [ "${{ needs.binaries.result }}" = "success" ] || exit 1
+          case "${{ needs.binaries.result }}" in
+            success|skipped) exit 0 ;;
+            *) exit 1 ;;
+          esac
