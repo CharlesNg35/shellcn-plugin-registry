@@ -55,6 +55,11 @@ jobs:
             echo "::endgroup::"
           done
 
+      - name: Restore missing snapshots from mirror
+        # Recovery path: if index/snapshots need rebuilding after upstream assets
+        # disappear, reuse an already mirrored release and still verify sha256.
+        run: '"$RUNNER_TEMP/regctl" restore-snapshots -existing "$RUNNER_TEMP/tags"'
+
       - name: Rebuild index.json
         run: '"$RUNNER_TEMP/regctl" build-index -generated-by "mirror@${{ github.sha }}"'
 

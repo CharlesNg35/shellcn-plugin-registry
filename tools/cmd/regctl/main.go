@@ -31,6 +31,8 @@ func main() {
 		err = cmdCheck(os.Args[2:])
 	case "plan":
 		err = cmdPlan(os.Args[2:])
+	case "restore-snapshots":
+		err = cmdRestoreSnapshots(os.Args[2:])
 	case "build-index":
 		err = cmdBuildIndex(os.Args[2:])
 	default:
@@ -73,13 +75,15 @@ func usage() {
 	      -expect-name <n>      fail unless the binary presents this plugin name
 	      -expect-version <v>   fail unless the binary presents this version
 	  regctl check <manifest.yaml> -platform <os/arch> [-version v]
-                                             download, hash-verify, and execute every version's
-                                             binary for one platform; versions without that
-                                             platform are skipped
-  regctl plan -existing <file>               print "name version" pairs missing a mirror tag
-  regctl build-index [flags]                 generate index.json from manifests + snapshots
-      -plugins <dir>  (default plugins) -snapshots <dir> (default snapshots)
-      -o <path>       (default index.json) -generated-by <id>`)
+	                                             download, hash-verify, and execute every version's
+	                                             binary for one platform; versions without that
+	                                             platform are skipped
+	  regctl plan -existing <file>               print "name version" pairs missing a mirror tag
+	  regctl restore-snapshots -existing <file>  regenerate missing snapshots from existing mirror releases
+	      -plugins <dir> (default plugins) -snapshots <dir> (default snapshots)
+	  regctl build-index [flags]                 generate index.json from manifests + snapshots
+	      -plugins <dir>  (default plugins) -snapshots <dir> (default snapshots)
+	      -o <path>       (default index.json) -generated-by <id>`)
 	os.Exit(2)
 }
 
@@ -228,18 +232,9 @@ func cmdPlan(args []string) error {
 	if *existing == "" {
 		return fmt.Errorf("plan: -existing <file> is required")
 	}
-	f, err := os.Open(*existing)
+	have, err := readTags(*existing)
 	if err != nil {
 		return err
-	}
-	defer f.Close()
-	have := map[string]bool{}
-	sc := bufio.NewScanner(f)
-	for sc.Scan() {
-		have[strings.TrimSpace(sc.Text())] = true
-	}
-	if err := sc.Err(); err != nil {
-		return fmt.Errorf("read %s: %w", *existing, err)
 	}
 	ms, err := registry.LoadAll("plugins")
 	if err != nil {
@@ -253,6 +248,93 @@ func cmdPlan(args []string) error {
 		}
 	}
 	return nil
+}
+
+func cmdRestoreSnapshots(args []string) error {
+	fs := flag.NewFlagSet("restore-snapshots", flag.ExitOnError)
+	existing := fs.String("existing", "", "")
+	pluginsDir := fs.String("plugins", "plugins", "")
+	snapshots := fs.String("snapshots", "snapshots", "")
+	_ = fs.Parse(args)
+	if *existing == "" {
+		return fmt.Errorf("restore-snapshots: -existing <file> is required")
+	}
+	have, err := readTags(*existing)
+	if err != nil {
+		return err
+	}
+	ms, err := registry.LoadAll(*pluginsDir)
+	if err != nil {
+		return err
+	}
+	for _, m := range ms {
+		if err := m.Validate(); err != nil {
+			return err
+		}
+		for _, v := range m.Versions {
+			tag := registry.MirrorTag(m.Name, v.Version)
+			if !have[tag] {
+				continue
+			}
+			snap, err := registry.LoadSnapshot(*snapshots, m.Name, v.Version)
+			if err != nil {
+				return fmt.Errorf("%s %s: %w", m.Name, v.Version, err)
+			}
+			if snap != nil {
+				continue
+			}
+			asset, ok := v.Assets[registry.RequiredPlatform]
+			if !ok {
+				return fmt.Errorf("%s %s: missing %s asset", m.Name, v.Version, registry.RequiredPlatform)
+			}
+			dir, err := os.MkdirTemp("", "regctl-restore-*")
+			if err != nil {
+				return err
+			}
+			mirrorAsset := registry.Asset{
+				URL:    registry.MirrorAssetURL(m.Name, v.Version, asset.URL),
+				SHA256: asset.SHA256,
+			}
+			bin, err := registry.FetchVerified(mirrorAsset, dir)
+			if err != nil {
+				_ = os.RemoveAll(dir)
+				return fmt.Errorf("%s %s: restore from mirror: %w", m.Name, v.Version, err)
+			}
+			if err := os.Chmod(bin, 0o755); err != nil {
+				_ = os.RemoveAll(dir)
+				return err
+			}
+			restored, err := registry.Inspect(bin, registry.Expect{Name: m.Name, Version: v.Version})
+			_ = os.RemoveAll(dir)
+			if err != nil {
+				return fmt.Errorf("%s %s: inspect restored mirror: %w", m.Name, v.Version, err)
+			}
+			if err := registry.WriteSnapshot(*snapshots, restored); err != nil {
+				return err
+			}
+			fmt.Printf("restored: %s %s from %s\n", m.Name, v.Version, mirrorAsset.URL)
+		}
+	}
+	return nil
+}
+
+func readTags(path string) (map[string]bool, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	have := map[string]bool{}
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		if tag := strings.TrimSpace(sc.Text()); tag != "" {
+			have[tag] = true
+		}
+	}
+	if err := sc.Err(); err != nil {
+		return nil, fmt.Errorf("read %s: %w", path, err)
+	}
+	return have, nil
 }
 
 func cmdBuildIndex(args []string) error {

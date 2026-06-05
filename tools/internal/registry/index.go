@@ -54,6 +54,12 @@ func SnapshotPath(dir, name, version string) string {
 	return filepath.Join(dir, MirrorTag(name, version)+".json")
 }
 
+// MirrorAssetURL returns the registry release URL for a mirrored upstream asset.
+func MirrorAssetURL(name, version, sourceURL string) string {
+	return fmt.Sprintf("https://github.com/%s/releases/download/%s/%s",
+		MirrorRepo, MirrorTag(name, version), AssetFileName(sourceURL))
+}
+
 // LoadSnapshot reads one inspection snapshot, returning nil when absent.
 func LoadSnapshot(dir, name, version string) (*Snapshot, error) {
 	raw, err := os.ReadFile(SnapshotPath(dir, name, version))
@@ -120,8 +126,7 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				iv.Assets[platform] = IndexAsset{
 					SHA256: a.SHA256,
 					URLs: []string{
-						fmt.Sprintf("https://github.com/%s/releases/download/%s/%s",
-							MirrorRepo, MirrorTag(m.Name, v.Version), AssetFileName(a.URL)),
+						MirrorAssetURL(m.Name, v.Version, a.URL),
 						a.URL,
 					},
 				}
