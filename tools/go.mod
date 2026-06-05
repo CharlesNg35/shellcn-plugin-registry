@@ -1,4 +1,4 @@
-module github.com/CharlesNg35/shellcn-plugins/tools
+module github.com/CharlesNg35/shellcn-plugin-registry/tools
 
 go 1.26.4
 

@@ -1,4 +1,4 @@
-// Package registry implements the shellcn-plugins index tooling: manifest
+// Package registry implements the shellcn-plugin-registry index tooling: manifest
 // validation, asset verification, binary inspection, and index generation.
 package registry
 
@@ -39,7 +39,6 @@ type Asset struct {
 // Version is one released plugin version.
 type Version struct {
 	Version string           `yaml:"version" json:"version"`
-	SDK     string           `yaml:"sdk" json:"sdk"`
 	Yanked  bool             `yaml:"yanked,omitempty" json:"yanked,omitempty"`
 	Assets  map[string]Asset `yaml:"assets" json:"-"`
 }
@@ -47,8 +46,6 @@ type Version struct {
 // Manifest is one plugins/<name>.yaml registry entry.
 type Manifest struct {
 	Name        string    `yaml:"name" json:"name"`
-	DisplayName string    `yaml:"displayName" json:"displayName"`
-	Description string    `yaml:"description" json:"description"`
 	Repo        string    `yaml:"repo" json:"repo"`
 	Homepage    string    `yaml:"homepage,omitempty" json:"homepage,omitempty"`
 	License     string    `yaml:"license" json:"license"`
@@ -100,12 +97,6 @@ func (m *Manifest) Validate() error {
 	if !nameRe.MatchString(m.Name) {
 		add("name %q must match %s", m.Name, nameRe)
 	}
-	if strings.TrimSpace(m.DisplayName) == "" {
-		add("displayName is required")
-	}
-	if strings.TrimSpace(m.Description) == "" {
-		add("description is required")
-	}
 	if !strings.HasPrefix(m.Repo, "github.com/") || strings.Count(m.Repo, "/") != 2 {
 		add("repo %q must be github.com/<owner>/<name>", m.Repo)
 	}
@@ -129,9 +120,6 @@ func (m *Manifest) Validate() error {
 			add("%s: duplicate version", ctx)
 		}
 		seen[v.Version] = true
-		if v.SDK == "" || !semver.IsValid(v.SDK) {
-			add("%s: sdk must be the SDK semver (e.g. v0.1.3)", ctx)
-		}
 		if _, ok := v.Assets[RequiredPlatform]; !ok {
 			add("%s: an asset for %s is required (CI inspects it)", ctx, RequiredPlatform)
 		}

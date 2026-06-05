@@ -11,7 +11,7 @@ import (
 
 // MirrorRepo is where verified binaries are republished. Asset URLs in the
 // index put the mirror first so installs survive upstream deletions.
-const MirrorRepo = "CharlesNg35/shellcn-plugins"
+const MirrorRepo = "CharlesNg35/shellcn-plugin-registry"
 
 // IndexAsset is one platform binary as the gateway consumes it.
 type IndexAsset struct {
@@ -22,7 +22,6 @@ type IndexAsset struct {
 // IndexVersion is one installable version in the index.
 type IndexVersion struct {
 	Version         string                `json:"version"`
-	SDK             string                `json:"sdk"`
 	APIVersion      int                   `json:"apiVersion"`
 	ProtocolVersion int                   `json:"protocolVersion"`
 	Yanked          bool                  `json:"yanked,omitempty"`
@@ -53,6 +52,12 @@ type Index struct {
 // SnapshotPath is where a version's inspection snapshot lives.
 func SnapshotPath(dir, name, version string) string {
 	return filepath.Join(dir, MirrorTag(name, version)+".json")
+}
+
+// MirrorAssetURL returns the registry release URL for a mirrored upstream asset.
+func MirrorAssetURL(name, version, sourceURL string) string {
+	return fmt.Sprintf("https://github.com/%s/releases/download/%s/%s",
+		MirrorRepo, MirrorTag(name, version), AssetFileName(sourceURL))
 }
 
 // LoadSnapshot reads one inspection snapshot, returning nil when absent.
@@ -89,9 +94,12 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 
 	for _, m := range manifests {
 		entry := IndexEntry{
-			Name: m.Name, DisplayName: m.DisplayName, Description: m.Description,
-			Repo: m.Repo, Homepage: m.Homepage, License: m.License, Maintainers: m.Maintainers,
-			Versions: []IndexVersion{},
+			Name:        m.Name,
+			Repo:        m.Repo,
+			Homepage:    m.Homepage,
+			License:     m.License,
+			Maintainers: m.Maintainers,
+			Versions:    []IndexVersion{},
 		}
 		for _, v := range m.Versions {
 			snap, err := LoadSnapshot(snapshotDir, m.Name, v.Version)
@@ -102,8 +110,14 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				skipped = append(skipped, fmt.Sprintf("%s %s (no snapshot yet)", m.Name, v.Version))
 				continue
 			}
+			if entry.DisplayName == "" {
+				entry.DisplayName = snap.Projection.Title
+			}
+			if entry.Description == "" {
+				entry.Description = snap.Projection.Description
+			}
 			iv := IndexVersion{
-				Version: v.Version, SDK: v.SDK, Yanked: v.Yanked,
+				Version: v.Version, Yanked: v.Yanked,
 				APIVersion: snap.APIVersion, ProtocolVersion: snap.ProtocolVersion,
 				Assets: map[string]IndexAsset{},
 				Icon:   snap.Icon, Projection: &snap.Projection,
@@ -112,8 +126,7 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				iv.Assets[platform] = IndexAsset{
 					SHA256: a.SHA256,
 					URLs: []string{
-						fmt.Sprintf("https://github.com/%s/releases/download/%s/%s",
-							MirrorRepo, MirrorTag(m.Name, v.Version), AssetFileName(a.URL)),
+						MirrorAssetURL(m.Name, v.Version, a.URL),
 						a.URL,
 					},
 				}

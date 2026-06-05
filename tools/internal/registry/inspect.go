@@ -2,7 +2,6 @@ package registry
 
 import (
 	"context"
-	"debug/buildinfo"
 	"fmt"
 	"os/exec"
 	"strings"
@@ -23,7 +22,6 @@ type Snapshot struct {
 	Version         string            `json:"version"`
 	APIVersion      int               `json:"apiVersion"`
 	ProtocolVersion int               `json:"protocolVersion"`
-	SDKModule       string            `json:"sdkModule,omitempty"`
 	Icon            plugin.Icon       `json:"icon"`
 	Projection      plugin.Projection `json:"projection"`
 }
@@ -32,28 +30,6 @@ type Snapshot struct {
 type Expect struct {
 	Name    string
 	Version string
-	SDK     string // SDK module semver from the registry manifest
-}
-
-const sdkModulePath = "github.com/charlesng35/shellcn/sdk"
-
-// sdkVersionOf reads the SDK module version from the binary's Go buildinfo.
-func sdkVersionOf(binary string) (string, error) {
-	bi, err := buildinfo.ReadFile(binary)
-	if err != nil {
-		return "", err
-	}
-	for _, dep := range bi.Deps {
-		if dep.Path != sdkModulePath {
-			continue
-		}
-		m := dep
-		if m.Replace != nil {
-			m = m.Replace
-		}
-		return m.Version, nil
-	}
-	return "", fmt.Errorf("binary does not depend on %s", sdkModulePath)
 }
 
 // check fails when the binary's identity diverges from the registry manifest:
@@ -65,9 +41,6 @@ func (s *Snapshot) check(want Expect) error {
 	}
 	if want.Version != "" && s.Version != want.Version {
 		errs = append(errs, fmt.Sprintf("binary presents version %q, manifest entry is %q", s.Version, want.Version))
-	}
-	if want.SDK != "" && s.SDKModule != "" && s.SDKModule != want.SDK {
-		errs = append(errs, fmt.Sprintf("binary was built against SDK %s, manifest claims %s (pin the published SDK, no replace)", s.SDKModule, want.SDK))
 	}
 	if len(errs) > 0 {
 		return fmt.Errorf("%s", strings.Join(errs, "; "))
@@ -141,9 +114,6 @@ func Inspect(binary string, want Expect) (*Snapshot, error) {
 		ProtocolVersion: grpcplugin.ProtocolVersion,
 		Icon:            icon,
 		Projection:      plugin.BuildProjection(manifest, byID),
-	}
-	if sdk, err := sdkVersionOf(binary); err == nil {
-		snap.SDKModule = sdk
 	}
 	if err := snap.check(want); err != nil {
 		return nil, err
