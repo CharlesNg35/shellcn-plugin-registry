@@ -63,12 +63,16 @@ jobs:
       - name: Rebuild index.json
         run: '"$RUNNER_TEMP/regctl" build-index -generated-by "mirror@${{ github.sha }}"'
 
-      - name: Create bypass token
-        id: app-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.REGISTRY_BOT_APP_ID }}
-          private-key: ${{ secrets.REGISTRY_BOT_PRIVATE_KEY }}
+      - name: Configure deploy key
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.REGISTRY_DEPLOY_KEY }}" > ~/.ssh/registry_deploy_key
+          chmod 600 ~/.ssh/registry_deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git remote set-url origin "git@github.com:${{ github.repository }}.git"
+          git config core.sshCommand "ssh -i ~/.ssh/registry_deploy_key -o IdentitiesOnly=yes"
 
       - name: Commit generated files
         shell: bash
@@ -79,4 +83,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: mirror releases and regenerate index"
-          git push "https://x-access-token:${{ steps.app-token.outputs.token }}@github.com/${{ github.repository }}.git" HEAD:main
+          git push origin HEAD:main
