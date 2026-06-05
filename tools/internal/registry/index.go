@@ -89,8 +89,8 @@ func WriteSnapshot(dir string, s *Snapshot) error {
 }
 
 // BuildIndex composes index.json from the manifests and their snapshots. A
-// version without a snapshot is skipped: it has not been mirror-verified yet
-// and must not be installable.
+// version without a readable snapshot is skipped: it has not been mirror-verified
+// yet and must not be installable.
 func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index, []string, error) {
 	idx := &Index{SchemaVersion: 1, GeneratedBy: generatedBy, Plugins: []IndexEntry{}}
 	var skipped []string
@@ -107,7 +107,8 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 		for _, v := range m.Versions {
 			snap, err := LoadSnapshot(snapshotDir, m.Name, v.Version)
 			if err != nil {
-				return nil, nil, fmt.Errorf("%s %s: %w", m.Name, v.Version, err)
+				skipped = append(skipped, fmt.Sprintf("%s %s (stale snapshot: %v)", m.Name, v.Version, err))
+				continue
 			}
 			if snap == nil {
 				skipped = append(skipped, fmt.Sprintf("%s %s (no snapshot yet)", m.Name, v.Version))

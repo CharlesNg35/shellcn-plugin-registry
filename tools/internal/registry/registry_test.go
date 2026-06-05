@@ -143,6 +143,32 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	}
 }
 
+func TestBuildIndexSkipsStaleSnapshot(t *testing.T) {
+	m, err := Load(writeManifest(t, validManifest))
+	if err != nil {
+		t.Fatal(err)
+	}
+	snaps := t.TempDir()
+	if err := os.WriteFile(
+		SnapshotPath(snaps, "demo", "0.2.0"),
+		[]byte(`{"name":"demo","version":"0.2.0","projection":{"actions":[{"id":"config","config":{}}]}}`),
+		0o644,
+	); err != nil {
+		t.Fatal(err)
+	}
+
+	idx, skipped, err := BuildIndex([]*Manifest{m}, snaps, "test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(idx.Plugins) != 0 {
+		t.Fatalf("stale snapshot should not produce an installable entry: %+v", idx.Plugins)
+	}
+	if len(skipped) != 2 || !strings.Contains(skipped[0], "stale snapshot") {
+		t.Fatalf("stale snapshot should be reported as skipped: %v", skipped)
+	}
+}
+
 func TestWriteSnapshotCreatesDirectory(t *testing.T) {
 	dir := filepath.Join(t.TempDir(), "nested", "snapshots")
 	if err := WriteSnapshot(dir, &Snapshot{
