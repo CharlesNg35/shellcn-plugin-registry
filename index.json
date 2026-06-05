@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedBy": "mirror@ac5b512c5a02679c2a0b6fe27e0b5841deb0225e",
+  "generatedBy": "mirror@9ca613a2e1daa03941d1855b0cba1ec859f365a8",
   "plugins": [
     {
       "name": "cassandra",
@@ -1203,6 +1203,60 @@
         "CharlesNg35"
       ],
       "versions": [
+        {
+          "version": "0.1.1",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "d3c412b5b12107075aa736fb48a6916113ca103e87fc7bbb2b42a0719c44d3e5",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "695c7a7651b35eb780a05c3919b7e07f410f1da28fb77202068e44d436c54d3a",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "a97719c4412e99d5f5a49ec780b9812212541c0d77b609b3266722f523202008",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "04e023a19aab191d3061b425a9d6f96d961e148cd93e487fe194a18f2d19af28",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "7cbbd667744ba12a2b26a4a5fa31a3ddaa4553e49291b04229353a26c3b35b50",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "2e11010d40bfa0459f98d84d4a4b0e2de6c00e4c08eb23b6051cc3b182ba481b",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.1/shellcn-plugin-qdrant-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg data-name=\"Capa 2\"id=Capa_2 viewBox=\"0 0 346.42 400\"xmlns=http://www.w3.org/2000/svg\u003e\u003cdefs\u003e\u003cstyle\u003e.cls-1{fill:#9e0d38}.cls-2{fill:#dc244c}.cls-3{fill:#ff516b}\u003c/style\u003e\u003c/defs\u003e\u003cg id=Vectors\u003e\u003cg\u003e\u003cg\u003e\u003cpolygon class=cls-2 points=\"173.21 0 0 100 0 300 173.21 400 238.16 362.5 238.16 287.5 173.21 325 64.96 262.5 64.96 137.5 173.21 75 281.46 137.5 281.46 387.5 346.42 350 346.42 100 173.21 0\"/\u003e\u003cpolygon class=cls-2 points=\"108.26 162.5 108.26 237.5 173.21 275 238.16 237.5 238.16 162.5 173.21 125 108.26 162.5\"/\u003e\u003c/g\u003e\u003cg\u003e\u003cpolygon class=cls-1 points=\"238.16 287.5 238.16 362.5 173.21 400 173.21 325 238.16 287.5\"/\u003e\u003cpolygon class=cls-1 points=\"346.42 100 346.42 350 281.46 387.5 281.46 137.5 346.42 100\"/\u003e\u003cpolygon class=cls-3 points=\"346.42 100 281.46 137.5 173.21 75 64.96 137.5 0 100 173.21 0 346.42 100\"/\u003e\u003cpolygon class=cls-2 points=\"173.21 325 173.21 400 0 300 0 100 64.96 137.5 64.96 262.5 173.21 325\"/\u003e\u003cpolygon class=cls-3 points=\"238.16 162.5 173.21 200 108.26 162.5 173.21 125 238.16 162.5\"/\u003e\u003cpolygon class=cls-2 points=\"173.21 200 173.21 275 108.26 237.5 108.26 162.5 173.21 200\"/\u003e\u003cpolygon class=cls-1 points=\"238.16 162.5 238.16 237.5 173.21 275 173.21 200 238.16 162.5\"/\u003e\u003c/g\u003e\u003c/g\u003e\u003c/g\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/qdrant/qdrant-v0.1.1.json"
+        },
         {
           "version": "0.1.0",
           "apiVersion": 1,
