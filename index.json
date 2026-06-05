@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedBy": "mirror@9ca613a2e1daa03941d1855b0cba1ec859f365a8",
+  "generatedBy": "mirror@32ca63237b340c4073f512add12321eefc1e9a38",
   "plugins": [
     {
       "name": "cassandra",
@@ -542,6 +542,60 @@
         "CharlesNg35"
       ],
       "versions": [
+        {
+          "version": "0.1.1",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "11cf373bdf45aa7cc5c15b4ffaaa40556af92b36d15e681bab4585e5e087cee4",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "6bf5a5b1f7bec7b34c4361b372c93569ba715322d1166c5008b1417ea46fcb0d",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "d87a5fa713fc359cfeec8d987fa0862edd0a8bd79a06cea18b9d59a0a5049c3f",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "dfe782133a765580544409ed94434f90cdfd62d3f17d63ac5a6250c0b6550e6d",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "ae8bf8cd76e6bd8f0cc8ec3298dc71abb28f00225d48d1ee43eadbf6c050f5ed",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "df7f553a4b1fb8b956aa97cb5fb56b1ee3fa62baa1f83c33036d620502123394",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/loki-v0.1.1/shellcn-plugin-loki-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.1/shellcn-plugin-loki-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003clinearGradient id=\"a\" x1=\"485.057\" x2=\"485.057\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m139.6 464.9-40.8 6.3 6.3 40.8 40.8-6.3z\" style=\"fill:url(#a)\"/\u003e\u003clinearGradient id=\"b\" x1=\"749.438\" x2=\"749.438\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"M286.9 418.6 467 390.9l-6.3-40.8-180.1 27.7z\" style=\"fill:url(#b)\"/\u003e\u003clinearGradient id=\"c\" x1=\"614.329\" x2=\"614.329\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m216.7 387.6 6.3 40.8 40.8-6.2-6.3-40.9z\" style=\"fill:url(#c)\"/\u003e\u003clinearGradient id=\"d\" x1=\"549.698\" x2=\"549.698\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m209.8 495.9-6.3-40.8-40.8 6.3 6.2 40.8z\" style=\"fill:url(#d)\"/\u003e\u003clinearGradient id=\"e\" x1=\"485.065\" x2=\"485.065\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m95.2 448.1 40.8-6.3-6.2-40.8-40.8 6.3z\" style=\"fill:url(#e)\"/\u003e\u003clinearGradient id=\"f\" x1=\"749.433\" x2=\"749.433\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m470.6 414-180.2 27.7 6.3 40.8 180.1-27.7z\" style=\"fill:url(#f)\"/\u003e\u003clinearGradient id=\"g\" x1=\"614.338\" x2=\"614.338\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m226.6 451.5 6.2 40.8 40.8-6.2-6.2-40.9z\" style=\"fill:url(#g)\"/\u003e\u003clinearGradient id=\"h\" x1=\"549.702\" x2=\"549.702\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m159.1 438.3 40.8-6.3-6.2-40.8-40.9 6.3z\" style=\"fill:url(#h)\"/\u003e\u003clinearGradient id=\"i\" x1=\"473.159\" x2=\"473.159\" y1=\"-693.123\" y2=\"-94.853\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m85.4 384.2 17.2-2.6L52.4 55l-17.2 2.7z\" style=\"fill:url(#i)\"/\u003e\u003clinearGradient id=\"j\" x1=\"497.114\" x2=\"497.114\" y1=\"-709.717\" y2=\"-67.381\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m109.1 380.6 17.2-2.7L72.4 27.3 55.2 30z\" style=\"fill:url(#j)\"/\u003e\u003clinearGradient id=\"k\" x1=\"538.062\" x2=\"538.062\" y1=\"-724.295\" y2=\"-43.24\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m149.6 374.3 17.2-2.6L109.6 0 92.4 2.7z\" style=\"fill:url(#k)\"/\u003e\u003clinearGradient id=\"l\" x1=\"562.005\" x2=\"562.005\" y1=\"-701.646\" y2=\"-80.743\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m173.2 370.7 17.3-2.7-52.2-338.8-17.2 2.6z\" style=\"fill:url(#l)\"/\u003e\u003clinearGradient id=\"m\" x1=\"602.42\" x2=\"602.42\" y1=\"-675.539\" y2=\"-123.976\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m213.2 364.6 17.2-2.7-46.3-301-17.2 2.6z\" style=\"fill:url(#m)\"/\u003e\u003clinearGradient id=\"n\" x1=\"626.396\" x2=\"626.396\" y1=\"-683.496\" y2=\"-110.797\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m236.9 360.9 17.2-2.6L206 45.7l-17.2 2.6z\" style=\"fill:url(#n)\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/loki/loki-v0.1.1.json"
+        },
         {
           "version": "0.1.0",
           "apiVersion": 1,
