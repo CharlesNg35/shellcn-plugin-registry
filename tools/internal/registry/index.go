@@ -27,7 +27,7 @@ type IndexVersion struct {
 	Yanked          bool                  `json:"yanked,omitempty"`
 	Assets          map[string]IndexAsset `json:"assets"`
 	Icon            plugin.Icon           `json:"icon"`
-	Projection      *plugin.Projection    `json:"projection,omitempty"`
+	Projection      json.RawMessage       `json:"projection,omitempty"`
 }
 
 // IndexEntry is one plugin in index.json.
@@ -49,9 +49,14 @@ type Index struct {
 	Plugins       []IndexEntry `json:"plugins"`
 }
 
+type projectionSummary struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
+
 // SnapshotPath is where a version's inspection snapshot lives.
 func SnapshotPath(dir, name, version string) string {
-	return filepath.Join(dir, MirrorTag(name, version)+".json")
+	return filepath.Join(dir, name, MirrorTag(name, version)+".json")
 }
 
 // MirrorAssetURL returns the registry release URL for a mirrored upstream asset.
@@ -82,7 +87,7 @@ func WriteSnapshot(dir string, s *Snapshot) error {
 	if err != nil {
 		return err
 	}
-	if err := os.MkdirAll(dir, 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(SnapshotPath(dir, s.Name, s.Version)), 0o755); err != nil {
 		return err
 	}
 	return os.WriteFile(SnapshotPath(dir, s.Name, s.Version), append(raw, '\n'), 0o644)
@@ -114,17 +119,22 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				skipped = append(skipped, fmt.Sprintf("%s %s (no snapshot yet)", m.Name, v.Version))
 				continue
 			}
+			var summary projectionSummary
+			if err := json.Unmarshal(snap.Projection, &summary); err != nil {
+				skipped = append(skipped, fmt.Sprintf("%s %s (invalid projection: %v)", m.Name, v.Version, err))
+				continue
+			}
 			if entry.DisplayName == "" {
-				entry.DisplayName = snap.Projection.Title
+				entry.DisplayName = summary.Title
 			}
 			if entry.Description == "" {
-				entry.Description = snap.Projection.Description
+				entry.Description = summary.Description
 			}
 			iv := IndexVersion{
 				Version: v.Version, Yanked: v.Yanked,
 				APIVersion: snap.APIVersion, ProtocolVersion: snap.ProtocolVersion,
 				Assets: map[string]IndexAsset{},
-				Icon:   snap.Icon, Projection: &snap.Projection,
+				Icon:   snap.Icon, Projection: snap.Projection,
 			}
 			for platform, a := range v.Assets {
 				iv.Assets[platform] = IndexAsset{
