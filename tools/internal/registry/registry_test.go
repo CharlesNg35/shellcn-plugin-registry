@@ -136,6 +136,17 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	if idx.Plugins[0].DisplayName != "Demo" || idx.Plugins[0].Description != "A demo plugin." {
 		t.Fatalf("index metadata should come from snapshot: %+v", idx.Plugins[0])
 	}
+	gotVersion := idx.Plugins[0].Versions[0]
+	if gotVersion.SnapshotURL != "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/demo/demo-v0.2.0.json" {
+		t.Fatalf("snapshot URL = %q", gotVersion.SnapshotURL)
+	}
+	rawVersion, err := json.Marshal(gotVersion)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(string(rawVersion), "projection") {
+		t.Fatalf("index version must not embed projection: %s", rawVersion)
+	}
 	urls := idx.Plugins[0].Versions[0].Assets["linux/amd64"].URLs
 	if len(urls) != 2 ||
 		urls[0] != "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/demo-v0.2.0/demo-linux-amd64" ||
@@ -144,7 +155,7 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	}
 }
 
-func TestBuildIndexPreservesActionConfigSnapshot(t *testing.T) {
+func TestBuildIndexAcceptsActionConfigSnapshot(t *testing.T) {
 	m, err := Load(writeManifest(t, validManifest))
 	if err != nil {
 		t.Fatal(err)
@@ -170,6 +181,13 @@ func TestBuildIndexPreservesActionConfigSnapshot(t *testing.T) {
 	}
 	if len(idx.Plugins) != 1 || len(idx.Plugins[0].Versions) != 1 {
 		t.Fatalf("snapshot with action config should stay installable: %+v", idx.Plugins)
+	}
+	rawVersion, err := json.Marshal(idx.Plugins[0].Versions[0])
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(string(rawVersion), "actions") || strings.Contains(string(rawVersion), "projection") {
+		t.Fatalf("index version should reference snapshot, not embed projection: %s", rawVersion)
 	}
 }
 
