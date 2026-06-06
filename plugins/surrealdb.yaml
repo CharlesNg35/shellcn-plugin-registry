@@ -1,25 +1,26 @@
 name: surrealdb
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
-maintainers: [CharlesNg35]
+maintainers:
+- CharlesNg35
 versions:
-  - version: 0.2.0
-    assets:
-      linux/amd64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-linux-amd64
-        sha256: 4c64ad91462aec2f3173cc791e48eb351cfff518e0ca668d25b32bd311b29e1d
-      linux/arm64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-linux-arm64
-        sha256: 41eae6d2c0295f7bbe65bc615737c3d635e8b25f233286a8f8202ddc5959ed20
-      darwin/amd64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-darwin-amd64
-        sha256: d3ad54869efbae36fdbaa22db049ef6dbfafac9e585e267cb7a30b4477457869
-      darwin/arm64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-darwin-arm64
-        sha256: 2e6797b5bdcecb20d558636e5456782c429249e60f41545a3c0f4f1f626ea21d
-      windows/amd64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-windows-amd64.exe
-        sha256: 6d3877b3052689e36af5a06e18da72287de928ad3de91e0b6075edde1a98d392
-      windows/arm64:
-        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-windows-arm64.exe
-        sha256: 08a6edd8d399246441efc170a8c13103311dae4c4f62734e7d890f18a09bbc0c
+- version: 0.1.0
+  assets:
+    linux/amd64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-linux-amd64
+      sha256: a43c671c9a4b1e45ba4950cd5b17dfa3515b880c789c1f084f9ad8c37f6c19bd
+    linux/arm64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-linux-arm64
+      sha256: a46bb3e4d8f49d5f7d77935650c9f44e85967f8b93466a79bbb124034c875167
+    darwin/amd64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-darwin-amd64
+      sha256: dfec6f187ed02774c1fb61c5ebbe45bbde16c506d4a661fab238aff2ff5e650d
+    darwin/arm64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-darwin-arm64
+      sha256: f76c5be27e2efaad17a91d9f23ca7fca595484f61d969d3c9fa2e6fcb96a3427
+    windows/amd64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-windows-amd64.exe
+      sha256: eba74f67ea60ae80b77e66668856e074107940ed30d7680d04356d7671e278e6
+    windows/arm64:
+      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/surrealdb-v0.1.0/shellcn-plugin-surrealdb-windows-arm64.exe
+      sha256: 5871befcdb10a59c806d218a1264ff06db0099ce3b9b8b2dde2841eae97e3f97
