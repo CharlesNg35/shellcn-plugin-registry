@@ -1,0 +1,2658 @@
+{
+  "name": "neo4j",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 128 128\"\u003e\u003cg fill=\"none\"\u003e\u003cpath fill=\"#000\" d=\"M63.333 32.567c-5.2.866-9.566 3-12.833 6.266c-3.867 3.867-5.833 8.5-6.5 15.367c-.3 3.133-.467 15.467-.2 15.467c.067 0 .7-.234 1.4-.534c1.633-.7 5.167-.7 7-.033l1.4.5l.167-8.033c.166-8.567.366-9.867 1.966-13.067c1.1-2.133 3.767-4.633 6.034-5.667c2.6-1.2 6.4-1.666 9.333-1.2c6.267 1.034 10 4.434 11.567 10.5c.633 2.434.666 3.7.666 17.1v14.434H93.4L93.233 67.9c-.1-14.9-.166-15.9-.866-18.567c-1.9-7.4-6.5-12.766-12.934-15.2c-3.433-1.3-6.7-1.8-11.2-1.766c-2.233.033-4.433.133-4.9.2z\"/\u003e\u003cpath fill=\"#018BFF\" d=\"M22.733 57.2c-2.866 1.433-4.4 4-4.4 7.467c0 1.1.2 2.5.467 3.133c.633 1.567 2.433 3.467 4 4.3c1.9 1 5.5 1 7.367.033l1.366-.7l4.267 2.9l4.267 2.934V81.7L35.8 84.633l-4.3 2.934l-1.1-.667c-1.6-.933-4.7-1.133-6.6-.4c-2 .767-4.067 2.6-4.833 4.333c-.834 1.767-.834 5.234 0 7c.7 1.567 2.333 3.3 3.8 4.067c.6.3 2.033.6 3.233.7c2.8.2 5.167-.733 6.867-2.733c1.366-1.6 2.266-4.4 2.033-6.334l-.167-1.366l4.3-2.9l4.3-2.9l1.534.7c2.333 1 5.8.766 8-.567c2.4-1.5 3.6-3.633 3.733-6.633c.1-2.1 0-2.567-.833-4.2c-2.167-4.134-7-5.7-11.134-3.634l-1.233.6l-4.233-2.9l-4.234-2.9l-.1-2.333c-.066-2.8-.866-4.6-2.833-6.233c-2.5-2.134-6.233-2.567-9.267-1.067z\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "neo4j",
+    "version": "0.1.0",
+    "title": "Neo4j",
+    "description": "Neo4j graph cockpit with databases, labels, relationship types, graph visualization, schema, Cypher editor, and guarded graph mutations.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 128 128\"\u003e\u003cg fill=\"none\"\u003e\u003cpath fill=\"#000\" d=\"M63.333 32.567c-5.2.866-9.566 3-12.833 6.266c-3.867 3.867-5.833 8.5-6.5 15.367c-.3 3.133-.467 15.467-.2 15.467c.067 0 .7-.234 1.4-.534c1.633-.7 5.167-.7 7-.033l1.4.5l.167-8.033c.166-8.567.366-9.867 1.966-13.067c1.1-2.133 3.767-4.633 6.034-5.667c2.6-1.2 6.4-1.666 9.333-1.2c6.267 1.034 10 4.434 11.567 10.5c.633 2.434.666 3.7.666 17.1v14.434H93.4L93.233 67.9c-.1-14.9-.166-15.9-.866-18.567c-1.9-7.4-6.5-12.766-12.934-15.2c-3.433-1.3-6.7-1.8-11.2-1.766c-2.233.033-4.433.133-4.9.2z\"/\u003e\u003cpath fill=\"#018BFF\" d=\"M22.733 57.2c-2.866 1.433-4.4 4-4.4 7.467c0 1.1.2 2.5.467 3.133c.633 1.567 2.433 3.467 4 4.3c1.9 1 5.5 1 7.367.033l1.366-.7l4.267 2.9l4.267 2.934V81.7L35.8 84.633l-4.3 2.934l-1.1-.667c-1.6-.933-4.7-1.133-6.6-.4c-2 .767-4.067 2.6-4.833 4.333c-.834 1.767-.834 5.234 0 7c.7 1.567 2.333 3.3 3.8 4.067c.6.3 2.033.6 3.233.7c2.8.2 5.167-.733 6.867-2.733c1.366-1.6 2.266-4.4 2.033-6.334l-.167-1.366l4.3-2.9l4.3-2.9l1.534.7c2.333 1 5.8.766 8-.567c2.4-1.5 3.6-3.633 3.733-6.633c.1-2.1 0-2.567-.833-4.2c-2.167-4.134-7-5.7-11.134-3.634l-1.233.6l-4.233-2.9l-4.234-2.9l-.1-2.333c-.066-2.8-.866-4.6-2.833-6.233c-2.5-2.134-6.233-2.567-9.267-1.067z\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "scheme",
+              "label": "Connection scheme",
+              "type": "select",
+              "required": true,
+              "default": "bolt",
+              "options": [
+                {
+                  "label": "Bolt",
+                  "value": "bolt"
+                },
+                {
+                  "label": "Neo4j routing",
+                  "value": "neo4j"
+                },
+                {
+                  "label": "Bolt + verified TLS",
+                  "value": "bolt+s"
+                },
+                {
+                  "label": "Neo4j routing + verified TLS",
+                  "value": "neo4j+s"
+                },
+                {
+                  "label": "Bolt + self-signed TLS",
+                  "value": "bolt+ssc"
+                },
+                {
+                  "label": "Neo4j routing + self-signed TLS",
+                  "value": "neo4j+ssc"
+                }
+              ]
+            },
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "neo4j.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Bolt port",
+              "type": "number",
+              "required": true,
+              "default": 7687,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "database",
+              "label": "Default database",
+              "type": "text",
+              "required": true,
+              "default": "neo4j"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "password",
+              "options": [
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                },
+                {
+                  "label": "Bearer token",
+                  "value": "bearer"
+                },
+                {
+                  "label": "Stored bearer token",
+                  "value": "stored_bearer"
+                },
+                {
+                  "label": "None",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "default": "neo4j",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable Neo4j password. The credential identity can also supply the username.",
+              "credential": {
+                "kinds": [
+                  "db_password"
+                ],
+                "protocols": [
+                  "neo4j"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "nin",
+                    "value": [
+                      "none",
+                      "bearer",
+                      "stored_bearer"
+                    ]
+                  }
+                ],
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "realm",
+              "label": "Realm",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_token",
+              "label": "Bearer token",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "bearer"
+                  },
+                  {
+                    "field": "bearer_credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_credential_id",
+              "label": "Stored bearer token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kinds": [
+                  "bearer_token"
+                ],
+                "protocols": [
+                  "neo4j"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "nin",
+                    "value": [
+                      "none",
+                      "password",
+                      "credential"
+                    ]
+                  }
+                ],
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_bearer"
+                  },
+                  {
+                    "field": "bearer_credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "Optional PEM CA bundle used with verified TLS schemes.",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "scheme",
+                    "op": "in",
+                    "value": [
+                      "bolt+s",
+                      "neo4j+s"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks CREATE, MERGE, SET, DELETE, REMOVE, DROP, ALTER, privilege changes, and write procedures."
+            },
+            {
+              "key": "require_write_confirmation",
+              "label": "Confirm write queries",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires confirmation before write or administrative Cypher executes."
+            },
+            {
+              "key": "query_timeout",
+              "label": "Query timeout",
+              "type": "duration",
+              "default": "30s"
+            },
+            {
+              "key": "connect_timeout",
+              "label": "Connect timeout",
+              "type": "duration",
+              "default": "10s"
+            },
+            {
+              "key": "retry_time",
+              "label": "Retry time",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "pool_size",
+              "label": "Pool size",
+              "type": "number",
+              "default": 16,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 100
+                }
+              ]
+            },
+            {
+              "key": "fetch_size",
+              "label": "Fetch size",
+              "type": "number",
+              "default": 500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "redact_properties",
+              "label": "Redacted properties",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for result columns/properties that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "graph",
+      "cypher",
+      "schema",
+      "nodes",
+      "relationships"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "databases",
+        "label": "Databases",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "neo4j.databases.tree"
+        },
+        "resourceKind": "database"
+      },
+      {
+        "key": "labels",
+        "label": "Labels",
+        "icon": {
+          "type": "lucide",
+          "value": "tags"
+        },
+        "source": {
+          "routeId": "neo4j.labels.tree"
+        },
+        "resourceKind": "label"
+      },
+      {
+        "key": "relationships",
+        "label": "Relationship Types",
+        "icon": {
+          "type": "lucide",
+          "value": "git-branch"
+        },
+        "source": {
+          "routeId": "neo4j.relationship_types.tree"
+        },
+        "resourceKind": "relationship_type"
+      },
+      {
+        "key": "schema",
+        "label": "Schema",
+        "icon": {
+          "type": "lucide",
+          "value": "list-tree"
+        },
+        "source": {
+          "routeId": "neo4j.schema.tree"
+        },
+        "resourceKind": "schema_item"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "database",
+        "title": "Databases",
+        "list": {
+          "routeId": "neo4j.databases.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Database",
+            "sortable": true
+          },
+          {
+            "key": "current_status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "dirty": "danger",
+              "failed": "danger",
+              "offline": "secondary",
+              "online": "success",
+              "populating": "warn",
+              "quarantined": "danger",
+              "starting": "warn",
+              "stopping": "warn",
+              "store copying": "warn"
+            }
+          },
+          {
+            "key": "requested_status",
+            "label": "Requested",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "dirty": "danger",
+              "failed": "danger",
+              "offline": "secondary",
+              "online": "success",
+              "populating": "warn",
+              "quarantined": "danger",
+              "starting": "warn",
+              "stopping": "warn",
+              "store copying": "warn"
+            }
+          },
+          {
+            "key": "role",
+            "label": "Role",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "address",
+            "label": "Address"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.database.overview",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "graph",
+              "label": "Graph",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "neo4j.graph",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "fitView": true,
+                "expandRouteId": "neo4j.node.graph",
+                "exportable": true
+              }
+            },
+            {
+              "key": "labels",
+              "label": "Labels",
+              "icon": {
+                "type": "lucide",
+                "value": "tags"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.labels.list",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Label",
+                    "sortable": true
+                  },
+                  {
+                    "key": "nodes",
+                    "label": "Nodes",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties"
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.node.create.database"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "relationship_types",
+              "label": "Relationship Types",
+              "icon": {
+                "type": "lucide",
+                "value": "git-branch"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.relationship_types.list",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "relationships",
+                    "label": "Relationships",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties"
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.relationship.create.database"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.indexes.list",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "entity_type",
+                    "label": "Entity",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "labels_or_types",
+                    "label": "Labels / Types"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties"
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "type": "badge",
+                    "severities": {
+                      "dirty": "danger",
+                      "failed": "danger",
+                      "offline": "secondary",
+                      "online": "success",
+                      "populating": "warn",
+                      "quarantined": "danger",
+                      "starting": "warn",
+                      "stopping": "warn",
+                      "store copying": "warn"
+                    }
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.index.create"
+                ],
+                "rowActionIds": [
+                  "neo4j.schema.drop"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "constraints",
+              "label": "Constraints",
+              "icon": {
+                "type": "lucide",
+                "value": "shield-check"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.constraints.list",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Constraint",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "entity_type",
+                    "label": "Entity",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "labels_or_types",
+                    "label": "Labels / Types"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties"
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.constraint.create"
+                ],
+                "rowActionIds": [
+                  "neo4j.schema.drop"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "cypher",
+              "label": "Cypher",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "neo4j.query",
+                "method": "WS",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "cypher",
+                "label": "Cypher",
+                "executeLabel": "Run query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a Cypher query to see results.",
+                "initialQuery": "MATCH (n) RETURN n LIMIT 25",
+                "completionRouteId": "neo4j.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "label",
+        "title": "Labels",
+        "list": {
+          "routeId": "neo4j.labels.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Label",
+            "sortable": true
+          },
+          {
+            "key": "nodes",
+            "label": "Nodes",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "properties",
+            "label": "Properties"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": ":${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.label.overview",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "label": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "graph",
+              "label": "Graph",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "neo4j.label.graph",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "label": "${resource.name}"
+                }
+              },
+              "config": {
+                "fitView": true,
+                "expandRouteId": "neo4j.node.graph",
+                "exportable": true
+              }
+            },
+            {
+              "key": "nodes",
+              "label": "Nodes",
+              "icon": {
+                "type": "lucide",
+                "value": "circle-dot"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.nodes.list",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "label": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "element_id",
+                    "label": "Element ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "labels",
+                    "label": "Labels"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties",
+                    "type": "json"
+                  },
+                  {
+                    "key": "degree",
+                    "label": "Degree",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.node.create.label"
+                ],
+                "rowActionIds": [
+                  "neo4j.node.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "cypher",
+              "label": "Cypher",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "neo4j.query",
+                "method": "WS",
+                "params": {
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "cypher",
+                "label": "Cypher",
+                "executeLabel": "Run query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a Cypher query to see results.",
+                "initialQuery": "MATCH (n:`${resource.name}`) RETURN n LIMIT 25",
+                "completionRouteId": "neo4j.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "relationship_type",
+        "title": "Relationship Types",
+        "list": {
+          "routeId": "neo4j.relationship_types.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "relationships",
+            "label": "Relationships",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "properties",
+            "label": "Properties"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "[:${resource.name}]"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.relationship_type.overview",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "type": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "graph",
+              "label": "Graph",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "neo4j.relationship_type.graph",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "type": "${resource.name}"
+                }
+              },
+              "config": {
+                "fitView": true,
+                "expandRouteId": "neo4j.node.graph",
+                "exportable": true
+              }
+            },
+            {
+              "key": "relationships",
+              "label": "Relationships",
+              "icon": {
+                "type": "lucide",
+                "value": "git-branch"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.relationships.list",
+                "params": {
+                  "database": "${resource.namespace}",
+                  "type": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "element_id",
+                    "label": "Element ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "start",
+                    "label": "Start"
+                  },
+                  {
+                    "key": "end",
+                    "label": "End"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "neo4j.relationship.create.type"
+                ],
+                "rowActionIds": [
+                  "neo4j.relationship.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "cypher",
+              "label": "Cypher",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "neo4j.query",
+                "method": "WS",
+                "params": {
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "cypher",
+                "label": "Cypher",
+                "executeLabel": "Run query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a Cypher query to see results.",
+                "initialQuery": "MATCH p=()-[r:`${resource.name}`]-\u003e() RETURN p LIMIT 25",
+                "completionRouteId": "neo4j.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Nodes",
+        "list": {
+          "routeId": "neo4j.nodes.list"
+        },
+        "columns": [
+          {
+            "key": "element_id",
+            "label": "Element ID",
+            "sortable": true
+          },
+          {
+            "key": "labels",
+            "label": "Labels"
+          },
+          {
+            "key": "properties",
+            "label": "Properties",
+            "type": "json"
+          },
+          {
+            "key": "degree",
+            "label": "Degree",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "row": [
+            "neo4j.node.delete"
+          ],
+          "detail": [
+            "neo4j.node.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.node.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "properties",
+              "label": "Properties",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "neo4j.node.properties",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "neo4j.node.update",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "id": "${resource.uid}"
+                }
+              }
+            },
+            {
+              "key": "relationships",
+              "label": "Relationships",
+              "icon": {
+                "type": "lucide",
+                "value": "git-branch"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "neo4j.node.relationships",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "element_id",
+                    "label": "Element ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "start",
+                    "label": "Start"
+                  },
+                  {
+                    "key": "end",
+                    "label": "End"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties",
+                    "type": "json"
+                  }
+                ],
+                "rowActionIds": [
+                  "neo4j.relationship.delete"
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "relationship",
+        "title": "Relationships",
+        "list": {
+          "routeId": "neo4j.relationships.list"
+        },
+        "columns": [
+          {
+            "key": "element_id",
+            "label": "Element ID",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "start",
+            "label": "Start"
+          },
+          {
+            "key": "end",
+            "label": "End"
+          },
+          {
+            "key": "properties",
+            "label": "Properties",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "row": [
+            "neo4j.relationship.delete"
+          ],
+          "detail": [
+            "neo4j.relationship.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.relationship.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "properties",
+              "label": "Properties",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "neo4j.relationship.properties",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "neo4j.relationship.update",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "id": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "schema_item",
+        "title": "Schema",
+        "list": {
+          "routeId": "neo4j.schema.list"
+        },
+        "columns": [
+          {
+            "key": "kind",
+            "label": "Kind",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "entity_type",
+            "label": "Entity",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "labels_or_types",
+            "label": "Labels / Types"
+          },
+          {
+            "key": "properties",
+            "label": "Properties"
+          }
+        ],
+        "actions": {
+          "row": [
+            "neo4j.schema.drop"
+          ],
+          "detail": [
+            "neo4j.schema.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "neo4j.schema.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "neo4j.node.create.database",
+        "label": "Create node",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "neo4j.node.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Node",
+              "fields": [
+                {
+                  "key": "labels",
+                  "label": "Labels",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "Person, Customer"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "json",
+                  "default": {}
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "nodes"
+        }
+      },
+      {
+        "id": "neo4j.node.create.label",
+        "label": "Create node",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "neo4j.node.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Node",
+              "fields": [
+                {
+                  "key": "labels",
+                  "label": "Labels",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "Person, Customer"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "json",
+                  "default": {}
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "nodes"
+        }
+      },
+      {
+        "id": "neo4j.node.delete",
+        "label": "Delete node",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "neo4j.node.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this node and detach its relationships?"
+      },
+      {
+        "id": "neo4j.relationship.create.database",
+        "label": "Create relationship",
+        "icon": {
+          "type": "lucide",
+          "value": "git-branch-plus"
+        },
+        "routeId": "neo4j.relationship.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Relationship",
+              "fields": [
+                {
+                  "key": "start_element_id",
+                  "label": "Start node element ID",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "end_element_id",
+                  "label": "End node element ID",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "KNOWS"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "json",
+                  "default": {}
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "relationships"
+        }
+      },
+      {
+        "id": "neo4j.relationship.create.type",
+        "label": "Create relationship",
+        "icon": {
+          "type": "lucide",
+          "value": "git-branch-plus"
+        },
+        "routeId": "neo4j.relationship.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Relationship",
+              "fields": [
+                {
+                  "key": "start_element_id",
+                  "label": "Start node element ID",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "end_element_id",
+                  "label": "End node element ID",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "KNOWS"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "json",
+                  "default": {}
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "relationships"
+        }
+      },
+      {
+        "id": "neo4j.relationship.delete",
+        "label": "Delete relationship",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "neo4j.relationship.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this relationship?"
+      },
+      {
+        "id": "neo4j.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "neo4j.index.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "entity_type",
+                  "label": "Entity",
+                  "type": "select",
+                  "required": true,
+                  "default": "node",
+                  "options": [
+                    {
+                      "label": "Node",
+                      "value": "node"
+                    },
+                    {
+                      "label": "Relationship",
+                      "value": "relationship"
+                    }
+                  ]
+                },
+                {
+                  "key": "label",
+                  "label": "Label / type",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "Person"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "name, email"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "neo4j.constraint.create",
+        "label": "Create constraint",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "neo4j.constraint.create",
+        "method": "POST",
+        "params": {
+          "database": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Constraint",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Constraint name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "entity_type",
+                  "label": "Entity",
+                  "type": "select",
+                  "required": true,
+                  "default": "node",
+                  "options": [
+                    {
+                      "label": "Node",
+                      "value": "node"
+                    },
+                    {
+                      "label": "Relationship",
+                      "value": "relationship"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "select",
+                  "required": true,
+                  "default": "unique",
+                  "options": [
+                    {
+                      "label": "Unique",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "Property existence",
+                      "value": "exists"
+                    },
+                    {
+                      "label": "Node key",
+                      "value": "node_key"
+                    }
+                  ]
+                },
+                {
+                  "key": "label",
+                  "label": "Label / type",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "Person"
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "name, email"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "constraints"
+        }
+      },
+      {
+        "id": "neo4j.schema.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "neo4j.schema.drop",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index or constraint?"
+      }
+    ],
+    "streams": [
+      {
+        "id": "neo4j.query",
+        "kind": "logs",
+        "routeId": "neo4j.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "archiveRouteId": {
+            "type": "string"
+          },
+          "chmodRouteId": {
+            "type": "string"
+          },
+          "copyRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "downloadRouteId": {
+            "type": "string"
+          },
+          "maxUploadBytes": {
+            "type": "number"
+          },
+          "mkdirRouteId": {
+            "type": "string"
+          },
+          "moveRouteId": {
+            "type": "string"
+          },
+          "multipleUpload": {
+            "type": "boolean"
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "renameRouteId": {
+            "type": "string"
+          },
+          "uploadFieldName": {
+            "type": "string"
+          },
+          "uploadRouteId": {
+            "type": "string"
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {}
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
