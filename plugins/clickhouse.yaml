@@ -2,25 +2,25 @@ name: clickhouse
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers:
-- CharlesNg35
+  - CharlesNg35
 versions:
-- version: 0.1.0
-  assets:
-    linux/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-amd64
-      sha256: 79cb6582a00f87d73e2f8ff6a723ad0fa354d0436b6718beb687c7c135eb49d5
-    linux/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-arm64
-      sha256: 8c0b5493cca9a9f26779a1ff0768714601de74d90da2c9a6cb5a3bc8256b822b
-    darwin/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-amd64
-      sha256: 9eccfb952003e017c48739fb468fd4be42bc90c10099d3b2b75ff47f0726d835
-    darwin/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-arm64
-      sha256: 1624b39456ebe6abbdb7acd2cd82c473d3c20293c913a43554b6bee8c662bfa5
-    windows/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-amd64.exe
-      sha256: b16b2c000c5d50a6d4a5c290258eadad93c51f8377275461e22a2d181b0055ba
-    windows/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-arm64.exe
-      sha256: 374804b492f91d3986a2d7345b694df7e9fd8ad5a6c3f95a565fe8c349c695b5
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-amd64
+        sha256: fc17eb26f871a3530e8d6cbbe51d5c69234b3297790053bec13ef14d8bdb5508
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-linux-arm64
+        sha256: d030af49f3a66e15b8bfafd16a13d99e464438c175f26986fd6fb1bf7bcb6526
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-amd64
+        sha256: 3aaee31278b2a2f809fbb3da4613805b2ff30cb46511721c5fb55a786a769c30
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-darwin-arm64
+        sha256: e8f73f1674cd375cf6c04a839d3ba73a314ea9ef8b53932ca39bf8bf113f9f3c
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-amd64.exe
+        sha256: d6dda6faaeaac10ae3a348a45dd8772f34b98b68b4cc09deb8f81332546a0f6e
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/clickhouse-v0.1.0/shellcn-plugin-clickhouse-windows-arm64.exe
+        sha256: e8ca9c94368db7ac8fe7a81308d3cd1c19b15f60b4508c811326832e24a79a17

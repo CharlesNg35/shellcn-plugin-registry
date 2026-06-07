@@ -2,25 +2,25 @@ name: influxdb
 repo: github.com/CharlesNg35/shellcn-contrib
 license: GPL-3.0
 maintainers:
-- CharlesNg35
+  - CharlesNg35
 versions:
-- version: 0.1.0
-  assets:
-    linux/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-linux-amd64
-      sha256: 384d07b0d08f94e2ab4c6e3ab3a285d414d4f087c25a2c659ff422ef5f6db971
-    linux/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-linux-arm64
-      sha256: 22d0a878a6fc3d60ade83b2c4f1633d5b00b9cd7954e069614b9814408e85469
-    darwin/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-darwin-amd64
-      sha256: d852765b58c40c70f463c0ce63aede657790bbc9d48cfbce494c2aa7be1e7ceb
-    darwin/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-darwin-arm64
-      sha256: 797b15f99236214124a58cf35cb189c305c3091962773f34b679338d05702bdc
-    windows/amd64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-windows-amd64.exe
-      sha256: 0952d5789815ea75a9245e46a548c479ec244ea74ede7c6b4077d00245c34d09
-    windows/arm64:
-      url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-windows-arm64.exe
-      sha256: 1043e1abb7a2bea39f0bc72fcb989c1bcd9d4e7a5c534b639730ebc2a0f90e41
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-linux-amd64
+        sha256: 8d871d02125eb871d7dbb55b9a4cc6451b01707a3b6e17b3018a0dc3bd31bc66
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-linux-arm64
+        sha256: 2e7b41e0945e62346412c7f1743505d55efe398bb2b3f5f9ed172f51356f4dd1
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-darwin-amd64
+        sha256: ed2236d45ddb7791c0dac4466d24b7b926f33bb8b6c65d2db61fd1e5e36fb0b6
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-darwin-arm64
+        sha256: abc7e269bb7a365545e91309c272c6d7aa9e0b5ac8b6abf1b0e8107b9bb42840
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-windows-amd64.exe
+        sha256: cf1977fb288508501634fa89444f88e1e091d620f12ad942ef0998bf338164f7
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/influxdb-v0.1.0/shellcn-plugin-influxdb-windows-arm64.exe
+        sha256: ac549cbc4d203d7380af47dfbcd47811860525b6f151cd5ba94187c7a2eb0b1d
