@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-linux-amd64
-        sha256: 4c0a533fcd703c628a99fc3c84b9776ece10b98de2401905c121b3bf7c4604bb
+        sha256: f4d4e1f913eea52a7ea028e42ba919a227f306bd78988f208e27f581186b4a5f
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-linux-arm64
-        sha256: 4df8804da4f379a8a7c9b71abde70ebbd27aa0acac4b3ca0fe8242482def045d
+        sha256: 46ecdfedc17b018d8bd9f78a938742e42e2f6b2025081da01146705477f28788
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-darwin-amd64
-        sha256: 02e3d99b4cb738c62e8313aa8c031e603c85403da8314c5aefa81fb6ad2c6dc4
+        sha256: c165ad9d84c59ed9f56a3855300c8b674352fd0c821441ba817b1c07335d997d
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-darwin-arm64
-        sha256: 4f39f7f551b62b21ca1521c5dd9e84c64c907b90552e709b723d9382ad26b6fd
+        sha256: da1c0df4ba4698ff6c2e6a8ddda757710f52994f6991fbd44b49cc0bd9c8d4d0
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-windows-amd64.exe
-        sha256: 5c831a070a8c48692cb1075285a821327e124b85102a7e7ad74b3602d8c52e00
+        sha256: 1e3e8902b582ef2929f677676df4826e56f5219d91199808f5b3443bfdf72722
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/rabbitmq-v0.1.0/shellcn-plugin-rabbitmq-windows-arm64.exe
-        sha256: ad14ef837ab3cc5e5bb1fe07025f5015e44a531660fec5c006fed52a667c8131
+        sha256: 0f19a2329aaa3e72f2497c3adb5d833c4d2666b68e540e7215a55bf072d7036d
