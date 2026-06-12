@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-linux-amd64
-        sha256: 735ae5debb995b109b1ab8e3c77b31917ecd2dd216f1e98a9ffb8e69a3fd3a3e
+        sha256: 6f132834f012245e356e54425768a457028c8a7d6d8c332d716d8662c0995ccc
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-linux-arm64
-        sha256: cb67b6e3890efa6366ee850dd00f72aec0baa8af05a619f559915b741759925d
+        sha256: e9d723ba3f8865a675f3b349b63e55ef6f3c0eb4fd15e2c59a5428f58102f082
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-darwin-amd64
-        sha256: a212fc1e7431f44964cee51a4af5ce4007b02b5c285982d491a1fe18908db8bb
+        sha256: 08be8c23d61db18b5cdf3452b82d2d90cdeadaa2e64660a8cd56009ec776f649
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-darwin-arm64
-        sha256: 85534cecc287381be6270aed6c751224c92f121f9c06c0a9e047729ce5a47169
+        sha256: e9573497e99f513cb6f5235acd1fcb2d823d63dc3f4e1c849650bd904cac9dfb
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-windows-amd64.exe
-        sha256: a23b5678cb348657755e409bac070c79f45609fbb526125682ad6de22807e154
+        sha256: b862082c719751adf2cfa4dfbac4c099d89c191fc4702a4923d192fd9c0d9788
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nats-v0.1.0/shellcn-plugin-nats-windows-arm64.exe
-        sha256: d02b4edf155ea34ecd149d49b1e3494b1dc33c8a7352d6b98b7ae9e2af6dc46a
+        sha256: 5d040d1052dec6cb31c8bf2cc6bd9b8cd787f77c381795b65b640ccfffab06ef
