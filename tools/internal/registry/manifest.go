@@ -26,8 +26,10 @@ var allowedPlatforms = map[string]bool{
 const RequiredPlatform = "linux/amd64"
 
 var (
-	nameRe   = regexp.MustCompile(`^[a-z][a-z0-9-]{1,40}$`)
-	sha256Re = regexp.MustCompile(`^[a-f0-9]{64}$`)
+	nameRe     = regexp.MustCompile(`^[a-z][a-z0-9-]{1,40}$`)
+	sha256Re   = regexp.MustCompile(`^[a-f0-9]{64}$`)
+	commitRe   = regexp.MustCompile(`^[a-f0-9]{7,64}$`)
+	workflowRe = regexp.MustCompile(`^\.github/workflows/[-A-Za-z0-9_.]+\.ya?ml$`)
 )
 
 // Asset is one downloadable binary for a platform.
@@ -43,6 +45,22 @@ type Version struct {
 	Assets  map[string]Asset `yaml:"assets" json:"-"`
 }
 
+// Source describes the source revision expected to produce plugin artifacts.
+type Source struct {
+	Repo     string `yaml:"repo,omitempty" json:"repo,omitempty"`
+	Commit   string `yaml:"commit,omitempty" json:"commit,omitempty"`
+	Tag      string `yaml:"tag,omitempty" json:"tag,omitempty"`
+	Workflow string `yaml:"workflow,omitempty" json:"workflow,omitempty"`
+}
+
+// Security records supply-chain evidence maintainers expect for a plugin.
+type Security struct {
+	Review     string `yaml:"review,omitempty" json:"review,omitempty"`
+	Provenance bool   `yaml:"provenance,omitempty" json:"provenance,omitempty"`
+	Signatures bool   `yaml:"signatures,omitempty" json:"signatures,omitempty"`
+	SBOM       bool   `yaml:"sbom,omitempty" json:"sbom,omitempty"`
+}
+
 // Manifest is one plugins/<name>.yaml registry entry.
 type Manifest struct {
 	Name        string    `yaml:"name" json:"name"`
@@ -50,6 +68,8 @@ type Manifest struct {
 	Homepage    string    `yaml:"homepage,omitempty" json:"homepage,omitempty"`
 	License     string    `yaml:"license" json:"license"`
 	Maintainers []string  `yaml:"maintainers" json:"maintainers"`
+	Source      Source    `yaml:"source,omitempty" json:"source,omitempty"`
+	Security    Security  `yaml:"security,omitempty" json:"security,omitempty"`
 	Versions    []Version `yaml:"versions" json:"versions"`
 }
 
@@ -100,6 +120,12 @@ func (m *Manifest) Validate() error {
 	if !strings.HasPrefix(m.Repo, "github.com/") || strings.Count(m.Repo, "/") != 2 {
 		add("repo %q must be github.com/<owner>/<name>", m.Repo)
 	}
+	if err := m.validateSource(); err != nil {
+		add("%v", err)
+	}
+	if err := m.validateSecurity(); err != nil {
+		add("%v", err)
+	}
 	if strings.TrimSpace(m.License) == "" {
 		add("license is required")
 	}
@@ -146,6 +172,61 @@ func (m *Manifest) Validate() error {
 		return fmt.Errorf("manifest %s:\n  - %s", m.Name, strings.Join(errs, "\n  - "))
 	}
 	return nil
+}
+
+func (m *Manifest) validateSource() error {
+	if m.Source == (Source{}) {
+		return nil
+	}
+	var errs []string
+	repo := strings.TrimSpace(m.Source.Repo)
+	if repo != "" {
+		normalized, err := normalizeGitHubRepo(repo)
+		if err != nil {
+			errs = append(errs, fmt.Sprintf("source.repo: %v", err))
+		} else if normalized != m.Repo {
+			errs = append(errs, fmt.Sprintf("source.repo %q must match repo %q", normalized, m.Repo))
+		}
+	}
+	if m.Source.Commit != "" && !commitRe.MatchString(m.Source.Commit) {
+		errs = append(errs, "source.commit must be a 7-64 character lowercase hex commit")
+	}
+	if m.Source.Workflow != "" && !workflowRe.MatchString(m.Source.Workflow) {
+		errs = append(errs, "source.workflow must be .github/workflows/<file>.yml")
+	}
+	if len(errs) > 0 {
+		return fmt.Errorf("%s", strings.Join(errs, "; "))
+	}
+	return nil
+}
+
+func (m *Manifest) validateSecurity() error {
+	if strings.TrimSpace(m.Security.Review) == "" {
+		return nil
+	}
+	if !allowedTrustLevels[m.Security.Review] {
+		return fmt.Errorf("security.review %q is not a known trust level", m.Security.Review)
+	}
+	return nil
+}
+
+func normalizeGitHubRepo(raw string) (string, error) {
+	raw = strings.TrimSpace(strings.TrimSuffix(raw, ".git"))
+	if strings.HasPrefix(raw, "github.com/") {
+		if strings.Count(raw, "/") != 2 {
+			return "", fmt.Errorf("must be github.com/<owner>/<name>")
+		}
+		return raw, nil
+	}
+	u, err := url.Parse(raw)
+	if err != nil || u.Scheme != "https" || u.Host != "github.com" {
+		return "", fmt.Errorf("must be github.com/<owner>/<name> or https://github.com/<owner>/<name>")
+	}
+	repo := strings.TrimPrefix(strings.TrimSuffix(u.Path, "/"), "/")
+	if strings.Count(repo, "/") != 1 {
+		return "", fmt.Errorf("must be https://github.com/<owner>/<name>")
+	}
+	return "github.com/" + repo, nil
 }
 
 // validateAssetURL pins asset URLs to release downloads of the declared repo:

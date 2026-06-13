@@ -25,6 +25,7 @@ type IndexVersion struct {
 	APIVersion      int                   `json:"apiVersion"`
 	ProtocolVersion int                   `json:"protocolVersion"`
 	Yanked          bool                  `json:"yanked,omitempty"`
+	Trust           Trust                 `json:"trust"`
 	Assets          map[string]IndexAsset `json:"assets"`
 	Icon            plugin.Icon           `json:"icon"`
 	SnapshotURL     string                `json:"snapshotUrl"`
@@ -140,6 +141,7 @@ func BuildIndex(manifests []*Manifest, snapshotDir, generatedBy string) (*Index,
 				Version: v.Version, Yanked: v.Yanked,
 				APIVersion:      snap.APIVersion,
 				ProtocolVersion: snap.ProtocolVersion,
+				Trust:           TrustForVersion(m, snap),
 				Assets:          map[string]IndexAsset{},
 				Icon:            snap.Icon,
 				SnapshotURL:     SnapshotURL(m.Name, v.Version),

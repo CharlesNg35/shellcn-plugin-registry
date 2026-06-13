@@ -20,6 +20,16 @@ repo: github.com/CharlesNg35/shellcn-plugin-surrealdb
 homepage: https://surrealdb.com # optional
 license: MIT
 maintainers: [CharlesNg35] # GitHub handles
+source: # required for external plugins
+  repo: https://github.com/CharlesNg35/shellcn-plugin-surrealdb
+  commit: <release commit sha>
+  tag: v0.2.0
+  workflow: .github/workflows/release.yml
+security:
+  review: external_unreviewed # contributor claim only; registry-generated trust is authoritative
+  provenance: true
+  signatures: true
+  sbom: true
 versions: # newest first
   - version: 0.2.0
     assets:
@@ -38,6 +48,13 @@ Rules CI enforces:
 
 - Asset URLs must be release downloads of the declared `repo` - nowhere else.
 - `sha256` must match the actual bytes (CI downloads and checks).
+- External plugins must be source-backed. Include the source repo, release
+  commit, release tag, and build workflow so maintainers can tie binaries back
+  to reviewed source.
+- External plugins should publish artifact signatures, build provenance, and an
+  SBOM. The `security:` block is a contributor claim and does **not** make a
+  plugin trusted by itself; registry-generated trust is based on checks the
+  registry runs and evidence maintainers review.
 - Marketplace name and description come from the plugin binary's own manifest,
   not this registry file.
 - Only `linux/amd64` is **required**. Every other platform
@@ -47,8 +64,10 @@ Rules CI enforces:
 - Every asset you ship is downloaded, checksum-verified, and **executed on a
   native runner for its platform** (linux amd64/arm64, macOS, Windows): each
   binary must complete the real plugin handshake, pass the gateway's manifest
-  validation, and present the same name/version the manifest claims. Platforms
-  you don't ship are simply skipped.
+  validation, and present the same name/version the manifest claims. Registry
+  CI runs inspection with a scrubbed environment and temporary working
+  directory so submitted binaries do not inherit runner secrets. Platforms you
+  don't ship are simply skipped.
 - **Icons** must be self-contained: `lucide` name, emoji, inline SVG (≤16KB, no
   scripts/handlers/external references), or an inline `base64` data URI
   (png/webp/jpeg/svg, ≤48KB). Remote icon URLs are rejected. If unsure, use a
@@ -59,7 +78,10 @@ Validate locally before opening the PR:
 ```sh
 cd tools
 go run ./cmd/regctl validate ../plugins/<name>.yaml
+go run ./cmd/regctl policy ../plugins/<name>.yaml
 go run ./cmd/regctl verify   ../plugins/<name>.yaml
+go run ./cmd/regctl check    ../plugins/<name>.yaml -platform linux/amd64 -sandbox
+go run ./cmd/regctl audit-source /path/to/plugin/source
 ```
 
 ## Releasing a new version
@@ -80,3 +102,11 @@ immediately, no upstream cooperation required.
 Maintainers review the manifest, the plugin's source repo, and the projection
 CI prints (permissions, risk levels, transports). Keep your repo public and
 buildable from source - unreviewable blobs don't get merged.
+
+The source audit is a review aid, not a malware detector. It flags high-risk Go
+patterns such as `init`, package-level calls, `os/exec`, `syscall`, `unsafe`,
+dynamic plugin loading, cgo, and debug HTTP endpoints for explicit maintainer
+review. Passing these checks does not prove a binary is safe; it only means the
+registry has verified identity, integrity, source traceability, and the plugin
+handshake under constrained inspection. Security claims in a submitted manifest
+are never treated as proof of signatures, provenance, SBOM, or review status.

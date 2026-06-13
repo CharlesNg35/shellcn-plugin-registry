@@ -29,6 +29,10 @@ func main() {
 		err = cmdInspect(os.Args[2:])
 	case "check":
 		err = cmdCheck(os.Args[2:])
+	case "policy":
+		err = cmdPolicy(os.Args[2:])
+	case "audit-source":
+		err = cmdAuditSource(os.Args[2:])
 	case "plan":
 		err = cmdPlan(os.Args[2:])
 	case "restore-snapshots":
@@ -74,10 +78,15 @@ func usage() {
 	      -o <path>             write the snapshot JSON here (default: stdout)
 	      -expect-name <n>      fail unless the binary presents this plugin name
 	      -expect-version <v>   fail unless the binary presents this version
+	      -sandbox              run with a temp cwd and scrubbed environment
 	  regctl check <manifest.yaml> -platform <os/arch> [-version v]
 	                                             download, hash-verify, and execute every version's
 	                                             binary for one platform; versions without that
 	                                             platform are skipped
+	      -sandbox              run plugin binaries with temp cwd and scrubbed environment
+	  regctl policy [manifest.yaml ...]          report registry trust policy status
+	      -strict               require external plugins to declare source, signatures, provenance, and SBOM
+	  regctl audit-source <dir>                 flag high-risk Go source patterns for review
 	  regctl plan -existing <file>               print "name version" pairs missing a mirror tag
 	  regctl restore-snapshots -existing <file>  regenerate missing snapshots from existing mirror releases
 	      -plugins <dir> (default plugins) -snapshots <dir> (default snapshots)
@@ -148,13 +157,19 @@ func cmdInspect(args []string) error {
 	out := fs.String("o", "", "")
 	expectName := fs.String("expect-name", "", "")
 	expectVersion := fs.String("expect-version", "", "")
+	sandbox := fs.Bool("sandbox", false, "")
 	path, rest := splitPositional(args)
 	_ = fs.Parse(rest)
 	if path == "" {
 		return fmt.Errorf("inspect: exactly one binary path required")
 	}
-	snap, err := registry.Inspect(path, registry.Expect{
-		Name: *expectName, Version: *expectVersion,
+	mode := registry.SandboxNone
+	if *sandbox {
+		mode = registry.SandboxBasic
+	}
+	snap, err := registry.InspectWithOptions(path, registry.InspectOptions{
+		Expect:  registry.Expect{Name: *expectName, Version: *expectVersion},
+		Sandbox: mode,
 	})
 	if err != nil {
 		return err
@@ -179,6 +194,7 @@ func cmdCheck(args []string) error {
 	fs := flag.NewFlagSet("check", flag.ExitOnError)
 	platform := fs.String("platform", "", "")
 	version := fs.String("version", "", "")
+	sandbox := fs.Bool("sandbox", false, "")
 	path, rest := splitPositional(args)
 	_ = fs.Parse(rest)
 	if path == "" || *platform == "" {
@@ -211,7 +227,14 @@ func cmdCheck(args []string) error {
 		if err != nil {
 			return fmt.Errorf("%s %s %s: %w", m.Name, v.Version, *platform, err)
 		}
-		snap, err := registry.Inspect(bin, registry.Expect{Name: m.Name, Version: v.Version})
+		mode := registry.SandboxNone
+		if *sandbox {
+			mode = registry.SandboxBasic
+		}
+		snap, err := registry.InspectWithOptions(bin, registry.InspectOptions{
+			Expect:  registry.Expect{Name: m.Name, Version: v.Version},
+			Sandbox: mode,
+		})
 		if err != nil {
 			annotate(path, fmt.Errorf("%s %s (%s): %w", m.Name, v.Version, *platform, err))
 			return fmt.Errorf("check failed")
@@ -220,6 +243,61 @@ func cmdCheck(args []string) error {
 			m.Name, v.Version, *platform, snap.APIVersion)
 		_ = os.Remove(bin)
 	}
+	return nil
+}
+
+func cmdPolicy(args []string) error {
+	fs := flag.NewFlagSet("policy", flag.ExitOnError)
+	strict := fs.Bool("strict", false, "")
+	_ = fs.Parse(args)
+	paths := fs.Args()
+	if len(paths) == 0 {
+		var err error
+		paths, err = filepath.Glob(filepath.Join("plugins", "*.yaml"))
+		if err != nil {
+			return err
+		}
+	}
+	failed := false
+	for _, p := range paths {
+		m, err := registry.Load(p)
+		if err == nil {
+			err = m.Validate()
+		}
+		var trust registry.Trust
+		if err == nil {
+			trust, err = registry.Policy(m, *strict)
+		}
+		if err != nil {
+			annotate(p, err)
+			failed = true
+			continue
+		}
+		fmt.Printf("policy: %s %s source=%t signatures=%t provenance=%t sbom=%t\n",
+			m.Name, trust.Level, trust.SourceReviewed, trust.SignatureVerified,
+			trust.ProvenanceVerified, trust.SBOMAvailable)
+	}
+	if failed {
+		return fmt.Errorf("policy failed")
+	}
+	return nil
+}
+
+func cmdAuditSource(args []string) error {
+	if len(args) != 1 {
+		return fmt.Errorf("audit-source: exactly one source directory is required")
+	}
+	findings, err := registry.AuditSource(args[0])
+	if err != nil {
+		return err
+	}
+	for _, finding := range findings {
+		fmt.Println(finding.String())
+	}
+	if len(findings) > 0 {
+		return fmt.Errorf("source audit found %d review finding(s)", len(findings))
+	}
+	fmt.Printf("audit-source: ok (%s)\n", args[0])
 	return nil
 }
 
@@ -304,7 +382,10 @@ func cmdRestoreSnapshots(args []string) error {
 				_ = os.RemoveAll(dir)
 				return err
 			}
-			restored, err := registry.Inspect(bin, registry.Expect{Name: m.Name, Version: v.Version})
+			restored, err := registry.InspectWithOptions(bin, registry.InspectOptions{
+				Expect:  registry.Expect{Name: m.Name, Version: v.Version},
+				Sandbox: registry.SandboxBasic,
+			})
 			_ = os.RemoveAll(dir)
 			if err != nil {
 				return fmt.Errorf("%s %s: inspect restored mirror: %w", m.Name, v.Version, err)
