@@ -1,0 +1,2252 @@
+{
+  "name": "nats",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003crect width=\"128\" height=\"128\" rx=\"18\" fill=\"#27aae1\"/\u003e\u003cpath fill=\"#fff\" d=\"M31 84V37h13l27 28V37h15v47H74L46 55v29z\"/\u003e\u003cpath fill=\"#164b78\" d=\"M88 87c9-10 13-21 12-33-2-19-17-34-36-34-15 0-29 9-34 23 8-8 18-12 30-10 17 2 29 16 29 33 0 8-2 15-7 21z\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "nats",
+    "version": "0.1.0",
+    "title": "NATS",
+    "description": "NATS and JetStream browser with server info, streams, consumers, stored messages, and publishing.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003crect width=\"128\" height=\"128\" rx=\"18\" fill=\"#27aae1\"/\u003e\u003cpath fill=\"#fff\" d=\"M31 84V37h13l27 28V37h15v47H74L46 55v29z\"/\u003e\u003cpath fill=\"#164b78\" d=\"M88 87c9-10 13-21 12-33-2-19-17-34-36-34-15 0-29 9-34 23 8-8 18-12 30-10 17 2 29 16 29 33 0 8-2 15-7 21z\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "messaging",
+      "label": "Messaging",
+      "icon": {
+        "type": "lucide",
+        "value": "messages-square"
+      },
+      "order": 140
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "urls",
+              "label": "Servers",
+              "type": "textarea",
+              "required": true,
+              "default": "nats://localhost:4222",
+              "placeholder": "nats://nats-1:4222, nats://nats-2:4222",
+              "help": "One or more nats:// URLs, comma-separated for a cluster."
+            },
+            {
+              "key": "name",
+              "label": "Client name",
+              "type": "text",
+              "default": "shellcn"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Username and password",
+                  "value": "password"
+                },
+                {
+                  "label": "Token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored credential",
+                  "value": "credential"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token",
+              "label": "Token",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored credential",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kinds": [
+                  "basic_auth",
+                  "bearer_token"
+                ],
+                "protocols": [
+                  "nats"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks publish, stream create, purge, and delete operations."
+            },
+            {
+              "key": "confirm_writes",
+              "label": "Confirm write operations",
+              "type": "toggle",
+              "default": true
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "5s"
+            },
+            {
+              "key": "message_limit",
+              "label": "Message limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "subjects",
+      "streams",
+      "consumers",
+      "messages",
+      "publish"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "streams",
+        "label": "Streams",
+        "icon": {
+          "type": "lucide",
+          "value": "waves"
+        },
+        "source": {
+          "routeId": "nats.streams.tree"
+        },
+        "resourceKind": "stream"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "stream",
+        "title": "Streams",
+        "list": {
+          "routeId": "nats.streams.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Stream",
+            "sortable": true
+          },
+          {
+            "key": "subjects",
+            "label": "Subjects",
+            "type": "json"
+          },
+          {
+            "key": "messages",
+            "label": "Messages",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "bytes",
+            "label": "Bytes",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "consumers",
+            "label": "Consumers",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "storage",
+            "label": "Storage",
+            "type": "badge"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "nats.stream.create"
+          ],
+          "row": [
+            "nats.stream.purge",
+            "nats.stream.delete"
+          ],
+          "detail": [
+            "nats.message.publish",
+            "nats.stream.update",
+            "nats.stream.purge",
+            "nats.stream.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nats.stream.overview",
+                "params": {
+                  "stream": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "messages",
+              "label": "Messages",
+              "icon": {
+                "type": "lucide",
+                "value": "mail"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nats.messages.list",
+                "params": {
+                  "stream": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "sequence",
+                    "label": "Sequence",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "subject",
+                    "label": "Subject",
+                    "sortable": true
+                  },
+                  {
+                    "key": "time",
+                    "label": "Time",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "headers",
+                    "label": "Headers",
+                    "type": "json"
+                  },
+                  {
+                    "key": "data",
+                    "label": "Data"
+                  }
+                ],
+                "actionIds": [
+                  "nats.message.publish"
+                ],
+                "rowActionIds": [
+                  "nats.message.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "consumers",
+              "label": "Consumers",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nats.consumers.list",
+                "params": {
+                  "stream": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Consumer",
+                    "sortable": true
+                  },
+                  {
+                    "key": "stream",
+                    "label": "Stream",
+                    "sortable": true
+                  },
+                  {
+                    "key": "deliver_policy",
+                    "label": "Deliver policy",
+                    "type": "number"
+                  },
+                  {
+                    "key": "ack_policy",
+                    "label": "Ack policy",
+                    "type": "number"
+                  },
+                  {
+                    "key": "pending",
+                    "label": "Pending",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "ack_pending",
+                    "label": "Ack pending",
+                    "type": "number"
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "actionIds": [
+                  "nats.consumer.create"
+                ],
+                "rowActionIds": [
+                  "nats.consumer.delete"
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "consumer",
+        "title": "Consumers",
+        "list": {
+          "routeId": "nats.consumers.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Consumer",
+            "sortable": true
+          },
+          {
+            "key": "stream",
+            "label": "Stream",
+            "sortable": true
+          },
+          {
+            "key": "deliver_policy",
+            "label": "Deliver policy",
+            "type": "number"
+          },
+          {
+            "key": "ack_policy",
+            "label": "Ack policy",
+            "type": "number"
+          },
+          {
+            "key": "pending",
+            "label": "Pending",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "ack_pending",
+            "label": "Ack pending",
+            "type": "number"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "nats.consumer.delete"
+          ],
+          "detail": [
+            "nats.consumer.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nats.consumer.overview",
+                "params": {
+                  "consumer": "${resource.name}",
+                  "stream": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "nats.stream.create",
+        "label": "Create stream",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "nats.stream.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Stream",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Stream name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "subjects",
+                  "label": "Subjects",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "orders.*\npayments.\u003e"
+                },
+                {
+                  "key": "storage",
+                  "label": "Storage",
+                  "type": "select",
+                  "required": true,
+                  "default": "file",
+                  "options": [
+                    {
+                      "label": "File",
+                      "value": "file"
+                    },
+                    {
+                      "label": "Memory",
+                      "value": "memory"
+                    }
+                  ]
+                },
+                {
+                  "key": "replicas",
+                  "label": "Replicas",
+                  "type": "number",
+                  "default": 1,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 5
+                    }
+                  ]
+                },
+                {
+                  "key": "max_msgs",
+                  "label": "Max messages",
+                  "type": "number",
+                  "default": -1
+                },
+                {
+                  "key": "max_bytes",
+                  "label": "Max bytes",
+                  "type": "number",
+                  "default": -1
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nats.stream.update",
+        "label": "Edit",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "nats.stream.update",
+        "method": "PUT",
+        "params": {
+          "stream": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Stream",
+              "fields": [
+                {
+                  "key": "subjects",
+                  "label": "Subjects",
+                  "type": "textarea",
+                  "placeholder": "orders.*\npayments.\u003e",
+                  "help": "Leave blank to keep the current subjects."
+                },
+                {
+                  "key": "replicas",
+                  "label": "Replicas",
+                  "type": "number",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 5
+                    }
+                  ]
+                },
+                {
+                  "key": "max_msgs",
+                  "label": "Max messages",
+                  "type": "number",
+                  "help": "-1 for unlimited."
+                },
+                {
+                  "key": "max_bytes",
+                  "label": "Max bytes",
+                  "type": "number",
+                  "help": "-1 for unlimited."
+                },
+                {
+                  "key": "max_age",
+                  "label": "Max age",
+                  "type": "duration",
+                  "placeholder": "24h",
+                  "help": "Empty or 0 keeps messages forever."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nats.stream.purge",
+        "label": "Purge",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "nats.stream.purge",
+        "method": "DELETE",
+        "params": {
+          "stream": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Purge every message in this stream?"
+      },
+      {
+        "id": "nats.stream.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "nats.stream.delete",
+        "method": "DELETE",
+        "params": {
+          "stream": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this stream?"
+      },
+      {
+        "id": "nats.consumer.create",
+        "label": "Create consumer",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "nats.consumer.create",
+        "method": "POST",
+        "params": {
+          "stream": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Consumer",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Consumer name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "filter_subject",
+                  "label": "Filter subject",
+                  "type": "text"
+                },
+                {
+                  "key": "ack_policy",
+                  "label": "Ack policy",
+                  "type": "select",
+                  "required": true,
+                  "default": "explicit",
+                  "options": [
+                    {
+                      "label": "Explicit",
+                      "value": "explicit"
+                    },
+                    {
+                      "label": "All",
+                      "value": "all"
+                    },
+                    {
+                      "label": "None",
+                      "value": "none"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nats.consumer.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "nats.consumer.delete",
+        "method": "DELETE",
+        "params": {
+          "consumer": "${resource.name}",
+          "stream": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this consumer?"
+      },
+      {
+        "id": "nats.message.publish",
+        "label": "Publish",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "nats.message.publish",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Publish this message?",
+        "input": {
+          "groups": [
+            {
+              "name": "Message",
+              "fields": [
+                {
+                  "key": "subject",
+                  "label": "Subject",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "data",
+                  "label": "Data",
+                  "type": "textarea",
+                  "required": true
+                },
+                {
+                  "key": "encoding",
+                  "label": "Encoding",
+                  "type": "select",
+                  "required": true,
+                  "default": "string",
+                  "options": [
+                    {
+                      "label": "String",
+                      "value": "string"
+                    },
+                    {
+                      "label": "Base64",
+                      "value": "base64"
+                    }
+                  ]
+                },
+                {
+                  "key": "jetstream",
+                  "label": "Require JetStream ack",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "headers",
+                  "label": "Headers",
+                  "type": "json"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nats.message.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "nats.message.delete",
+        "method": "DELETE",
+        "params": {
+          "sequence": "${resource.name}",
+          "stream": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this message?"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "archiveRouteId": {
+            "type": "string"
+          },
+          "chmodRouteId": {
+            "type": "string"
+          },
+          "copyRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "downloadRouteId": {
+            "type": "string"
+          },
+          "maxUploadBytes": {
+            "type": "number"
+          },
+          "mkdirRouteId": {
+            "type": "string"
+          },
+          "moveRouteId": {
+            "type": "string"
+          },
+          "multipleUpload": {
+            "type": "boolean"
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "renameRouteId": {
+            "type": "string"
+          },
+          "uploadFieldName": {
+            "type": "string"
+          },
+          "uploadRouteId": {
+            "type": "string"
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {}
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      }
+    }
+  }
+}
