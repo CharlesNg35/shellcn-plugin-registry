@@ -1,0 +1,4364 @@
+{
+  "name": "cockroachdb",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 31.82 32\" width=\"2486\" height=\"2500\"\u003e\u003ctitle\u003eCL\u003c/title\u003e\u003cpath d=\"M19.42 9.17a15.39 15.39 0 0 1-3.51.4 15.46 15.46 0 0 1-3.51-.4 15.63 15.63 0 0 1 3.51-3.91 15.71 15.71 0 0 1 3.51 3.91zM30 .57A17.22 17.22 0 0 0 25.59 0a17.4 17.4 0 0 0-9.68 2.93A17.38 17.38 0 0 0 6.23 0a17.22 17.22 0 0 0-4.44.57A16.22 16.22 0 0 0 0 1.13a.07.07 0 0 0 0 .09 17.32 17.32 0 0 0 .83 1.57.07.07 0 0 0 .08 0 16.39 16.39 0 0 1 1.81-.54 15.65 15.65 0 0 1 11.59 1.88 17.52 17.52 0 0 0-3.78 4.48c-.2.32-.37.65-.55 1s-.22.45-.33.69-.31.72-.44 1.08a17.46 17.46 0 0 0 4.29 18.7c.26.25.53.49.81.73s.44.37.67.54.59.44.89.64a.07.07 0 0 0 .08 0c.3-.21.6-.42.89-.64s.45-.35.67-.54.55-.48.81-.73a17.45 17.45 0 0 0 5.38-12.61 17.39 17.39 0 0 0-1.09-6.09c-.14-.37-.29-.73-.45-1.09s-.22-.47-.33-.69-.35-.66-.55-1a17.61 17.61 0 0 0-3.78-4.48 15.65 15.65 0 0 1 11.6-1.84 16.13 16.13 0 0 1 1.81.54.07.07 0 0 0 .08 0q.44-.76.82-1.56a.07.07 0 0 0 0-.09A16.89 16.89 0 0 0 30 .57z\" fill=\"#151f34\"/\u003e\u003cpath d=\"M21.82 17.47a15.51 15.51 0 0 1-4.25 10.69 15.66 15.66 0 0 1-.72-4.68 15.5 15.5 0 0 1 4.25-10.69 15.62 15.62 0 0 1 .72 4.68\" fill=\"#348540\"/\u003e\u003cpath d=\"M15 23.48a15.55 15.55 0 0 1-.72 4.68 15.54 15.54 0 0 1-3.53-15.37A15.5 15.5 0 0 1 15 23.48\" fill=\"#7dbc42\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "cockroachdb",
+    "version": "0.1.0",
+    "title": "CockroachDB",
+    "description": "CockroachDB cockpit with databases, schemas, table data, ranges, nodes, jobs, sessions, queries, SQL editor, DDL helpers, and safety controls.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 31.82 32\" width=\"2486\" height=\"2500\"\u003e\u003ctitle\u003eCL\u003c/title\u003e\u003cpath d=\"M19.42 9.17a15.39 15.39 0 0 1-3.51.4 15.46 15.46 0 0 1-3.51-.4 15.63 15.63 0 0 1 3.51-3.91 15.71 15.71 0 0 1 3.51 3.91zM30 .57A17.22 17.22 0 0 0 25.59 0a17.4 17.4 0 0 0-9.68 2.93A17.38 17.38 0 0 0 6.23 0a17.22 17.22 0 0 0-4.44.57A16.22 16.22 0 0 0 0 1.13a.07.07 0 0 0 0 .09 17.32 17.32 0 0 0 .83 1.57.07.07 0 0 0 .08 0 16.39 16.39 0 0 1 1.81-.54 15.65 15.65 0 0 1 11.59 1.88 17.52 17.52 0 0 0-3.78 4.48c-.2.32-.37.65-.55 1s-.22.45-.33.69-.31.72-.44 1.08a17.46 17.46 0 0 0 4.29 18.7c.26.25.53.49.81.73s.44.37.67.54.59.44.89.64a.07.07 0 0 0 .08 0c.3-.21.6-.42.89-.64s.45-.35.67-.54.55-.48.81-.73a17.45 17.45 0 0 0 5.38-12.61 17.39 17.39 0 0 0-1.09-6.09c-.14-.37-.29-.73-.45-1.09s-.22-.47-.33-.69-.35-.66-.55-1a17.61 17.61 0 0 0-3.78-4.48 15.65 15.65 0 0 1 11.6-1.84 16.13 16.13 0 0 1 1.81.54.07.07 0 0 0 .08 0q.44-.76.82-1.56a.07.07 0 0 0 0-.09A16.89 16.89 0 0 0 30 .57z\" fill=\"#151f34\"/\u003e\u003cpath d=\"M21.82 17.47a15.51 15.51 0 0 1-4.25 10.69 15.66 15.66 0 0 1-.72-4.68 15.5 15.5 0 0 1 4.25-10.69 15.62 15.62 0 0 1 .72 4.68\" fill=\"#348540\"/\u003e\u003cpath d=\"M15 23.48a15.55 15.55 0 0 1-.72 4.68 15.54 15.54 0 0 1-3.53-15.37A15.5 15.5 0 0 1 15 23.48\" fill=\"#7dbc42\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "cockroach.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 26257,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "database",
+              "label": "Database",
+              "type": "text",
+              "required": true,
+              "default": "defaultdb"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "password",
+              "options": [
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                },
+                {
+                  "label": "Client certificate",
+                  "value": "client_certificate"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "placeholder": "root",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "client_certificate"
+                  },
+                  {
+                    "field": "auth_client_cert_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable database password. The credential identity can also supply the username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "cockroachdb"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "auth_client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable client certificate and private key used for certificate authentication.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "cockroachdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  },
+                  {
+                    "field": "auth_client_cert_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional PEM containing the client certificate and private key for mTLS when password authentication is used.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "cockroachdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "neq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks INSERT, UPSERT, UPDATE, DELETE, IMPORT, BACKUP, RESTORE, DDL, TRUNCATE, and other write statements."
+            },
+            {
+              "key": "require_destructive_confirmation",
+              "label": "Confirm destructive statements",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires explicit confirmation before write, DDL, job-control, backup/restore, grant, and revoke statements execute."
+            },
+            {
+              "key": "query_timeout",
+              "label": "Query timeout",
+              "type": "duration",
+              "default": "30s"
+            },
+            {
+              "key": "row_limit",
+              "label": "Row limit",
+              "type": "number",
+              "default": 500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "max_connections",
+              "label": "Pool size",
+              "type": "number",
+              "default": 4,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 20
+                }
+              ]
+            },
+            {
+              "key": "redact_columns",
+              "label": "Redacted columns",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for result columns that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "sql",
+      "schema",
+      "tables",
+      "query_editor",
+      "cluster",
+      "jobs"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "databases",
+        "label": "Databases",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "cockroachdb.databases.tree"
+        },
+        "ref": {
+          "kind": "server",
+          "name": "Databases",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "nodes",
+        "label": "Nodes",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "source": {
+          "routeId": "cockroachdb.nodes.tree"
+        },
+        "resourceKind": "node"
+      },
+      {
+        "key": "ranges",
+        "label": "Ranges",
+        "icon": {
+          "type": "lucide",
+          "value": "blocks"
+        },
+        "resourceKind": "range"
+      },
+      {
+        "key": "jobs",
+        "label": "Jobs",
+        "icon": {
+          "type": "lucide",
+          "value": "briefcase-business"
+        },
+        "resourceKind": "job"
+      },
+      {
+        "key": "sessions",
+        "label": "Sessions",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "resourceKind": "session"
+      },
+      {
+        "key": "queries",
+        "label": "Queries",
+        "icon": {
+          "type": "lucide",
+          "value": "search-code"
+        },
+        "resourceKind": "query"
+      },
+      {
+        "key": "users",
+        "label": "Users",
+        "icon": {
+          "type": "lucide",
+          "value": "users"
+        },
+        "source": {
+          "routeId": "cockroachdb.users.tree"
+        },
+        "resourceKind": "user"
+      },
+      {
+        "key": "schemas",
+        "label": "Schemas",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-tree"
+        },
+        "source": {
+          "routeId": "cockroachdb.schemas.tree"
+        },
+        "resourceKind": "schema"
+      },
+      {
+        "key": "functions",
+        "label": "Functions",
+        "icon": {
+          "type": "lucide",
+          "value": "function-square"
+        },
+        "source": {
+          "routeId": "cockroachdb.functions.tree"
+        },
+        "resourceKind": "function"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "server",
+        "title": "Databases",
+        "list": {
+          "routeId": "cockroachdb.databases.list"
+        },
+        "columns": null,
+        "detail": {
+          "header": {
+            "title": "Databases"
+          },
+          "tabs": [
+            {
+              "key": "databases",
+              "label": "Databases",
+              "icon": {
+                "type": "lucide",
+                "value": "database"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.databases.list"
+              },
+              "config": {
+                "actionIds": [
+                  "cockroachdb.database.create"
+                ]
+              }
+            },
+            {
+              "key": "users",
+              "label": "Users",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.users.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "User",
+                    "sortable": true
+                  },
+                  {
+                    "key": "member_of",
+                    "label": "Member of"
+                  },
+                  {
+                    "key": "options",
+                    "label": "Options"
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.user.create"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.user.grant",
+                  "cockroachdb.user.drop"
+                ]
+              }
+            },
+            {
+              "key": "console",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "cockroachdb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running…",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT now();",
+                "cancelRouteId": "cockroachdb.query.cancel",
+                "completionRouteId": "cockroachdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "database",
+        "title": "Databases",
+        "list": {
+          "routeId": "cockroachdb.databases.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Database",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "size",
+            "label": "Size",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "schemas",
+            "label": "Schemas",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "encoding",
+            "label": "Encoding"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "cockroachdb.database.create"
+          ],
+          "row": [
+            "cockroachdb.database.drop"
+          ],
+          "detail": [
+            "cockroachdb.schema.create",
+            "cockroachdb.database.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.database.overview",
+                "params": {
+                  "database": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "schemas",
+              "label": "Schemas",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.schemas.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "tables",
+                    "label": "Tables",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "views",
+                    "label": "Views",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "functions",
+                    "label": "Functions",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.schema.create"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.schema.drop"
+                ]
+              }
+            },
+            {
+              "key": "relations",
+              "label": "Relationships",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "cockroachdb.relations.graph"
+              },
+              "config": {
+                "layout": "grid",
+                "fitView": true,
+                "exportable": true
+              }
+            },
+            {
+              "key": "nodes",
+              "label": "Nodes",
+              "icon": {
+                "type": "lucide",
+                "value": "server"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.nodes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "node_id",
+                    "label": "Node",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "version",
+                    "label": "Version"
+                  },
+                  {
+                    "key": "cluster_id",
+                    "label": "Cluster"
+                  },
+                  {
+                    "key": "platform",
+                    "label": "Platform"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "jobs",
+              "label": "Jobs",
+              "icon": {
+                "type": "lucide",
+                "value": "briefcase-business"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.jobs.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "job_id",
+                    "label": "Job",
+                    "sortable": true
+                  },
+                  {
+                    "key": "job_type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "fraction_completed",
+                    "label": "Progress",
+                    "type": "number"
+                  },
+                  {
+                    "key": "description",
+                    "label": "Description"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "ranges",
+              "label": "Ranges",
+              "icon": {
+                "type": "lucide",
+                "value": "blocks"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.ranges.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "range_id",
+                    "label": "Range",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "start_key",
+                    "label": "Start"
+                  },
+                  {
+                    "key": "end_key",
+                    "label": "End"
+                  },
+                  {
+                    "key": "lease_holder",
+                    "label": "Leaseholder"
+                  },
+                  {
+                    "key": "replicas",
+                    "label": "Replicas"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "query",
+              "label": "Query",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "cockroachdb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running…",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT now();",
+                "cancelRouteId": "cockroachdb.query.cancel",
+                "completionRouteId": "cockroachdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Nodes",
+        "list": {
+          "routeId": "cockroachdb.nodes.list"
+        },
+        "columns": [
+          {
+            "key": "node_id",
+            "label": "Node",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "version",
+            "label": "Version"
+          },
+          {
+            "key": "cluster_id",
+            "label": "Cluster"
+          },
+          {
+            "key": "platform",
+            "label": "Platform"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Node ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.node.overview",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "range",
+        "title": "Ranges",
+        "list": {
+          "routeId": "cockroachdb.ranges.list"
+        },
+        "columns": [
+          {
+            "key": "range_id",
+            "label": "Range",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "start_key",
+            "label": "Start"
+          },
+          {
+            "key": "end_key",
+            "label": "End"
+          },
+          {
+            "key": "lease_holder",
+            "label": "Leaseholder"
+          },
+          {
+            "key": "replicas",
+            "label": "Replicas"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Range ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.range.overview",
+                "params": {
+                  "range": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "job",
+        "title": "Jobs",
+        "list": {
+          "routeId": "cockroachdb.jobs.list"
+        },
+        "columns": [
+          {
+            "key": "job_id",
+            "label": "Job",
+            "sortable": true
+          },
+          {
+            "key": "job_type",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "relative_time"
+          },
+          {
+            "key": "fraction_completed",
+            "label": "Progress",
+            "type": "number"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Job ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.job.overview",
+                "params": {
+                  "job": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "session",
+        "title": "Sessions",
+        "list": {
+          "routeId": "cockroachdb.sessions.list"
+        },
+        "columns": [
+          {
+            "key": "session_id",
+            "label": "Session",
+            "sortable": true
+          },
+          {
+            "key": "node_id",
+            "label": "Node",
+            "type": "number"
+          },
+          {
+            "key": "username",
+            "label": "User"
+          },
+          {
+            "key": "client_address",
+            "label": "Client"
+          },
+          {
+            "key": "application_name",
+            "label": "Application"
+          },
+          {
+            "key": "active_queries",
+            "label": "Active",
+            "type": "number"
+          },
+          {
+            "key": "start",
+            "label": "Started",
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "cockroachdb.session.cancel"
+          ],
+          "detail": [
+            "cockroachdb.session.cancel"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "Session ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.session.overview",
+                "params": {
+                  "session": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "query",
+        "title": "Queries",
+        "list": {
+          "routeId": "cockroachdb.queries.list"
+        },
+        "columns": [
+          {
+            "key": "query_id",
+            "label": "Query",
+            "sortable": true
+          },
+          {
+            "key": "node_id",
+            "label": "Node",
+            "type": "number"
+          },
+          {
+            "key": "username",
+            "label": "User"
+          },
+          {
+            "key": "start",
+            "label": "Started",
+            "type": "relative_time"
+          },
+          {
+            "key": "status",
+            "label": "Status"
+          },
+          {
+            "key": "query",
+            "label": "SQL"
+          }
+        ],
+        "actions": {
+          "row": [
+            "cockroachdb.query.cancel.id"
+          ],
+          "detail": [
+            "cockroachdb.query.cancel.id"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "Query ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.query.overview",
+                "params": {
+                  "query": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "user",
+        "title": "Users",
+        "list": {
+          "routeId": "cockroachdb.users.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "User",
+            "sortable": true
+          },
+          {
+            "key": "member_of",
+            "label": "Member of"
+          },
+          {
+            "key": "options",
+            "label": "Options"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "cockroachdb.user.create"
+          ],
+          "row": [
+            "cockroachdb.user.drop"
+          ],
+          "detail": [
+            "cockroachdb.user.grant",
+            "cockroachdb.user.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.user.overview",
+                "params": {
+                  "user": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "schema",
+        "title": "Schemas",
+        "list": {
+          "routeId": "cockroachdb.schemas.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "tables",
+            "label": "Tables",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "views",
+            "label": "Views",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "functions",
+            "label": "Functions",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "cockroachdb.schema.create"
+          ],
+          "row": [
+            "cockroachdb.schema.drop"
+          ],
+          "detail": [
+            "cockroachdb.schema.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.schema.overview",
+                "params": {
+                  "schema": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "tables",
+              "label": "Tables",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.tables.list",
+                "params": {
+                  "schema": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "rows",
+                    "label": "Rows",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.table.create"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.table.truncate",
+                  "cockroachdb.table.drop"
+                ]
+              }
+            },
+            {
+              "key": "views",
+              "label": "Views",
+              "icon": {
+                "type": "lucide",
+                "value": "panel-top"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.views.list",
+                "params": {
+                  "schema": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "View",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "updatable",
+                    "label": "Updatable",
+                    "type": "bool"
+                  }
+                ],
+                "rowActionIds": [
+                  "cockroachdb.view.drop"
+                ]
+              }
+            },
+            {
+              "key": "functions",
+              "label": "Functions",
+              "icon": {
+                "type": "lucide",
+                "value": "function-square"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.functions.list",
+                "params": {
+                  "schema": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Function",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "arguments",
+                    "label": "Arguments"
+                  },
+                  {
+                    "key": "returns",
+                    "label": "Returns"
+                  },
+                  {
+                    "key": "language",
+                    "label": "Language",
+                    "sortable": true
+                  }
+                ]
+              }
+            },
+            {
+              "key": "sequences",
+              "label": "Sequences",
+              "icon": {
+                "type": "lucide",
+                "value": "list-ordered"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.sequences.list",
+                "params": {
+                  "schema": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Sequence",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "dataType",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "start",
+                    "label": "Start",
+                    "type": "number"
+                  },
+                  {
+                    "key": "increment",
+                    "label": "Increment",
+                    "type": "number"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "table",
+        "title": "Tables",
+        "list": {
+          "routeId": "cockroachdb.tables.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Table",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "rows",
+            "label": "Rows",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "size",
+            "label": "Size",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "row": [
+            "cockroachdb.table.truncate",
+            "cockroachdb.table.drop"
+          ],
+          "detail": [
+            "cockroachdb.table.rename",
+            "cockroachdb.table.truncate",
+            "cockroachdb.table.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.table.rows",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "cockroachdb.table.columns",
+                  "params": {
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "editable": true,
+                "insert": {
+                  "routeId": "cockroachdb.table.row.insert",
+                  "method": "POST",
+                  "params": {
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "update": {
+                  "routeId": "cockroachdb.table.row.update",
+                  "method": "PATCH",
+                  "params": {
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "delete": {
+                  "routeId": "cockroachdb.table.row.delete",
+                  "method": "DELETE",
+                  "params": {
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "emptyText": "No rows.",
+                "stagedEdits": true,
+                "exportable": true
+              }
+            },
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.table.columns",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "nullable",
+                    "label": "Nullable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "key": "identity",
+                    "label": "Identity"
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.column.add"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.column.rename",
+                  "cockroachdb.column.alter",
+                  "cockroachdb.column.drop"
+                ]
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "key-round"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.table.indexes",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "unique",
+                    "label": "Unique",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "primary",
+                    "label": "Primary",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "definition",
+                    "label": "Definition"
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.index.create"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.index.drop"
+                ]
+              }
+            },
+            {
+              "key": "constraints",
+              "label": "Constraints",
+              "icon": {
+                "type": "lucide",
+                "value": "shield-check"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.table.constraints",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Constraint",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "definition",
+                    "label": "Definition"
+                  }
+                ],
+                "actionIds": [
+                  "cockroachdb.constraint.add"
+                ],
+                "rowActionIds": [
+                  "cockroachdb.constraint.drop"
+                ]
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "cockroachdb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running…",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT * FROM ${resource.namespace}.${resource.name} LIMIT 100;",
+                "cancelRouteId": "cockroachdb.query.cancel",
+                "completionRouteId": "cockroachdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "view",
+        "title": "Views",
+        "list": {
+          "routeId": "cockroachdb.views.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "View",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "updatable",
+            "label": "Updatable",
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "row": [
+            "cockroachdb.view.drop"
+          ],
+          "detail": [
+            "cockroachdb.view.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "cockroachdb.view.rows",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "cockroachdb.view.definition",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "cockroachdb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running…",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT * FROM ${resource.namespace}.${resource.name} LIMIT 100;",
+                "cancelRouteId": "cockroachdb.query.cancel",
+                "completionRouteId": "cockroachdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "function",
+        "title": "Functions",
+        "list": {
+          "routeId": "cockroachdb.functions.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Function",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "arguments",
+            "label": "Arguments"
+          },
+          {
+            "key": "returns",
+            "label": "Returns"
+          },
+          {
+            "key": "language",
+            "label": "Language",
+            "sortable": true
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "cockroachdb.function.definition",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "sequence",
+        "title": "Sequences",
+        "list": {
+          "routeId": "cockroachdb.sequences.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Sequence",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "dataType",
+            "label": "Type"
+          },
+          {
+            "key": "start",
+            "label": "Start",
+            "type": "number"
+          },
+          {
+            "key": "increment",
+            "label": "Increment",
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "cockroachdb.sequence.overview",
+                "params": {
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "cockroachdb.database.create",
+        "label": "Create database",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "cockroachdb.database.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Database",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Database name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cockroachdb.database.drop",
+        "label": "Drop database",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "cockroachdb.database.drop",
+        "method": "DELETE",
+        "params": {
+          "database": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this database? All of its schemas and data will be permanently deleted."
+      },
+      {
+        "id": "cockroachdb.schema.create",
+        "label": "Create schema",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-plus"
+        },
+        "routeId": "cockroachdb.schema.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Schema",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Schema name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cockroachdb.schema.drop",
+        "label": "Drop schema",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "cockroachdb.schema.drop",
+        "method": "DELETE",
+        "params": {
+          "schema": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this schema? It must be empty."
+      },
+      {
+        "id": "cockroachdb.table.create",
+        "label": "Create table",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "cockroachdb.table.create",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Table",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Table name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "array",
+                  "required": true,
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "autocomplete",
+                        "required": true,
+                        "placeholder": "INT8",
+                        "options": [
+                          {
+                            "label": "INT8",
+                            "value": "INT8"
+                          },
+                          {
+                            "label": "INT8 DEFAULT unique_rowid()",
+                            "value": "INT8 DEFAULT unique_rowid()"
+                          },
+                          {
+                            "label": "INT4",
+                            "value": "INT4"
+                          },
+                          {
+                            "label": "INT2",
+                            "value": "INT2"
+                          },
+                          {
+                            "label": "SERIAL",
+                            "value": "SERIAL"
+                          },
+                          {
+                            "label": "DECIMAL(10,2)",
+                            "value": "DECIMAL(10,2)"
+                          },
+                          {
+                            "label": "FLOAT8",
+                            "value": "FLOAT8"
+                          },
+                          {
+                            "label": "BOOL",
+                            "value": "BOOL"
+                          },
+                          {
+                            "label": "STRING",
+                            "value": "STRING"
+                          },
+                          {
+                            "label": "VARCHAR(255)",
+                            "value": "VARCHAR(255)"
+                          },
+                          {
+                            "label": "BYTES",
+                            "value": "BYTES"
+                          },
+                          {
+                            "label": "DATE",
+                            "value": "DATE"
+                          },
+                          {
+                            "label": "TIMESTAMPTZ",
+                            "value": "TIMESTAMPTZ"
+                          },
+                          {
+                            "label": "TIMESTAMP",
+                            "value": "TIMESTAMP"
+                          },
+                          {
+                            "label": "TIME",
+                            "value": "TIME"
+                          },
+                          {
+                            "label": "UUID",
+                            "value": "UUID"
+                          },
+                          {
+                            "label": "JSONB",
+                            "value": "JSONB"
+                          },
+                          {
+                            "label": "INTERVAL",
+                            "value": "INTERVAL"
+                          },
+                          {
+                            "label": "INET",
+                            "value": "INET"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "nullable",
+                        "label": "Nullable",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "primary",
+                        "label": "Primary key",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "unique",
+                        "label": "Unique",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "default",
+                        "label": "Default expression",
+                        "type": "text"
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Column"
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "tables"
+        }
+      },
+      {
+        "id": "cockroachdb.table.rename",
+        "label": "Rename",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "cockroachdb.table.rename",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename table",
+              "fields": [
+                {
+                  "key": "newName",
+                  "label": "New name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cockroachdb.column.add",
+        "label": "Add column",
+        "icon": {
+          "type": "lucide",
+          "value": "columns-3"
+        },
+        "routeId": "cockroachdb.column.add",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Column",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Column name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "default": "STRING"
+                },
+                {
+                  "key": "nullable",
+                  "label": "Nullable",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "default",
+                  "label": "Default expression",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "cockroachdb.column.rename",
+        "label": "Rename column",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "cockroachdb.column.rename",
+        "method": "POST",
+        "params": {
+          "name": "${record.name}",
+          "schema": "${record.schema}",
+          "table": "${record.table}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename column",
+              "fields": [
+                {
+                  "key": "newName",
+                  "label": "New name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "cockroachdb.column.alter",
+        "label": "Change type",
+        "icon": {
+          "type": "lucide",
+          "value": "wand-2"
+        },
+        "routeId": "cockroachdb.column.alter",
+        "method": "POST",
+        "params": {
+          "name": "${record.name}",
+          "schema": "${record.schema}",
+          "table": "${record.table}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Change type",
+              "fields": [
+                {
+                  "key": "type",
+                  "label": "New type",
+                  "type": "text",
+                  "required": true,
+                  "default": "STRING"
+                },
+                {
+                  "key": "using",
+                  "label": "USING expression",
+                  "type": "text",
+                  "help": "Optional cast expression, e.g. column::INT8."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "cockroachdb.column.drop",
+        "label": "Drop column",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "cockroachdb.column.drop",
+        "method": "POST",
+        "params": {
+          "name": "${record.name}",
+          "schema": "${record.schema}",
+          "table": "${record.table}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this column? Its data is permanently removed.",
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "cockroachdb.constraint.add",
+        "label": "Add constraint",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "cockroachdb.constraint.add",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Constraint",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Constraint name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "select",
+                  "required": true,
+                  "default": "primary_key",
+                  "options": [
+                    {
+                      "label": "Primary key",
+                      "value": "primary_key"
+                    },
+                    {
+                      "label": "Unique",
+                      "value": "unique"
+                    },
+                    {
+                      "label": "Check",
+                      "value": "check"
+                    },
+                    {
+                      "label": "Foreign key",
+                      "value": "foreign_key"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "multiselect",
+                  "help": "Columns for primary key, unique, or the referencing side of a foreign key.",
+                  "optionsSource": {
+                    "routeId": "cockroachdb.table.columns",
+                    "params": {
+                      "schema": "${resource.namespace}",
+                      "table": "${resource.name}"
+                    }
+                  },
+                  "visibleWhen": {
+                    "anyOf": [
+                      {
+                        "field": "type",
+                        "op": "in",
+                        "value": [
+                          "primary_key",
+                          "unique",
+                          "foreign_key"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "check",
+                  "label": "Check expression",
+                  "type": "text",
+                  "help": "Boolean expression, e.g. price \u003e 0.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "check"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "refTable",
+                  "label": "Referenced table",
+                  "type": "text",
+                  "help": "Target table for a foreign key (schema-qualified or bare).",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "foreign_key"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "refColumns",
+                  "label": "Referenced columns",
+                  "type": "text",
+                  "help": "Comma-separated columns on the referenced table.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "foreign_key"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "onDelete",
+                  "label": "On delete",
+                  "type": "select",
+                  "options": [
+                    {
+                      "label": "No action",
+                      "value": "NO ACTION"
+                    },
+                    {
+                      "label": "Restrict",
+                      "value": "RESTRICT"
+                    },
+                    {
+                      "label": "Cascade",
+                      "value": "CASCADE"
+                    },
+                    {
+                      "label": "Set null",
+                      "value": "SET NULL"
+                    },
+                    {
+                      "label": "Set default",
+                      "value": "SET DEFAULT"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "foreign_key"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "constraints"
+        }
+      },
+      {
+        "id": "cockroachdb.constraint.drop",
+        "label": "Drop constraint",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "cockroachdb.constraint.drop",
+        "method": "POST",
+        "params": {
+          "name": "${record.name}",
+          "schema": "${record.schema}",
+          "table": "${record.table}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this constraint?",
+        "onSuccess": {
+          "selectTab": "constraints"
+        }
+      },
+      {
+        "id": "cockroachdb.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "cockroachdb.index.create",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "multiselect",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "cockroachdb.table.columns",
+                    "params": {
+                      "schema": "${resource.namespace}",
+                      "table": "${resource.name}"
+                    }
+                  }
+                },
+                {
+                  "key": "unique",
+                  "label": "Unique",
+                  "type": "toggle"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "cockroachdb.index.drop",
+        "label": "Drop index",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "cockroachdb.index.drop",
+        "method": "POST",
+        "params": {
+          "name": "${record.name}",
+          "schema": "${record.schema}",
+          "table": "${record.table}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index?",
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "cockroachdb.table.truncate",
+        "label": "Truncate",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "cockroachdb.table.truncate",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Truncate this table? Every row will be deleted."
+      },
+      {
+        "id": "cockroachdb.table.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "cockroachdb.table.drop",
+        "method": "DELETE",
+        "params": {
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this table? The table definition and data will be permanently deleted."
+      },
+      {
+        "id": "cockroachdb.view.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "cockroachdb.view.drop",
+        "method": "DELETE",
+        "params": {
+          "schema": "${resource.namespace}",
+          "view": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this view?"
+      },
+      {
+        "id": "cockroachdb.session.cancel",
+        "label": "Cancel session",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-stop"
+        },
+        "routeId": "cockroachdb.session.cancel",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Cancel this session? Its active query is stopped and the session ends."
+      },
+      {
+        "id": "cockroachdb.query.cancel.id",
+        "label": "Cancel query",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-stop"
+        },
+        "routeId": "cockroachdb.query.cancel.id",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Cancel this query? It will be stopped."
+      },
+      {
+        "id": "cockroachdb.user.create",
+        "label": "Create user",
+        "icon": {
+          "type": "lucide",
+          "value": "user-plus"
+        },
+        "routeId": "cockroachdb.user.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "User",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Username",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "password",
+                  "label": "Password",
+                  "type": "password",
+                  "secret": true,
+                  "help": "Optional. Leave blank to create a user without a password."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cockroachdb.user.grant",
+        "label": "Grant",
+        "icon": {
+          "type": "lucide",
+          "value": "shield-plus"
+        },
+        "routeId": "cockroachdb.user.grant",
+        "method": "POST",
+        "params": {
+          "user": "${resource.uid}"
+        },
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Grant privileges to this user?",
+        "input": {
+          "groups": [
+            {
+              "name": "Grant",
+              "fields": [
+                {
+                  "key": "target",
+                  "label": "Grant",
+                  "type": "select",
+                  "required": true,
+                  "default": "role",
+                  "options": [
+                    {
+                      "label": "Role",
+                      "value": "role"
+                    },
+                    {
+                      "label": "Database privilege",
+                      "value": "database"
+                    },
+                    {
+                      "label": "Schema privilege",
+                      "value": "schema"
+                    },
+                    {
+                      "label": "Table privilege",
+                      "value": "table"
+                    }
+                  ]
+                },
+                {
+                  "key": "role",
+                  "label": "Role",
+                  "type": "text",
+                  "help": "Role to grant to the user.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "target",
+                        "op": "eq",
+                        "value": "role"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "privilege",
+                  "label": "Privilege",
+                  "type": "select",
+                  "default": "ALL",
+                  "options": [
+                    {
+                      "label": "ALL",
+                      "value": "ALL"
+                    },
+                    {
+                      "label": "SELECT",
+                      "value": "SELECT"
+                    },
+                    {
+                      "label": "INSERT",
+                      "value": "INSERT"
+                    },
+                    {
+                      "label": "UPDATE",
+                      "value": "UPDATE"
+                    },
+                    {
+                      "label": "DELETE",
+                      "value": "DELETE"
+                    },
+                    {
+                      "label": "CREATE",
+                      "value": "CREATE"
+                    },
+                    {
+                      "label": "DROP",
+                      "value": "DROP"
+                    },
+                    {
+                      "label": "CONNECT",
+                      "value": "CONNECT"
+                    },
+                    {
+                      "label": "USAGE",
+                      "value": "USAGE"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "anyOf": [
+                      {
+                        "field": "target",
+                        "op": "in",
+                        "value": [
+                          "database",
+                          "schema",
+                          "table"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "object",
+                  "label": "Object",
+                  "type": "text",
+                  "help": "Database/schema name, or schema-qualified table (e.g. public.orders).",
+                  "visibleWhen": {
+                    "anyOf": [
+                      {
+                        "field": "target",
+                        "op": "in",
+                        "value": [
+                          "database",
+                          "schema",
+                          "table"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cockroachdb.user.drop",
+        "label": "Drop user",
+        "icon": {
+          "type": "lucide",
+          "value": "user-minus"
+        },
+        "routeId": "cockroachdb.user.drop",
+        "method": "DELETE",
+        "params": {
+          "user": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this user? They lose access to the cluster."
+      }
+    ],
+    "streams": [
+      {
+        "id": "cockroachdb.query",
+        "kind": "query",
+        "routeId": "cockroachdb.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {}
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      }
+    }
+  }
+}
