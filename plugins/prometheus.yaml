@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-linux-amd64
-        sha256: f85bb83242f9288a0389efbe58d6307dafb8ebad4f7d3babcd5d9402d1a7b387
+        sha256: 1e7d85fb2f7aa7995ee29418e1e81533fc9de2796a31431201a5f497066d28a0
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-linux-arm64
-        sha256: 94d0d37a48fd2417701a5a27ecdf23c81be38f0a8918ff0c50a32e437b77e8b7
+        sha256: 1b178975e6663c43a1acf56ca90a5c2615ad6b2c8c2a00b387aca5812167a2a0
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-darwin-amd64
-        sha256: 1538e910ba8089be3ea191b07300df422c3a948320364214c3cc8844fb28873d
+        sha256: 207555c5e84a1bcd05a396d7bd42372340876e08f0dfeb91dcc091b0783d42e5
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-darwin-arm64
-        sha256: fbf3afefe599d85b22468def5fa28624259ec8c93122283604234c52cd5e2809
+        sha256: 740da7089ec7d3d3ddc578de6534492d41f5625649f4bfa8cadeab5907c79e2d
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-windows-amd64.exe
-        sha256: b2ad308e496cd39238fdb3e5e3bfe7d7fe2c1aac397139d95c323ac8290dd76a
+        sha256: ba2c5ad859ca577bbf5af1cce68445a7aaad3db1dfa0205568604af582a751e3
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/prometheus-v0.1.0/shellcn-plugin-prometheus-windows-arm64.exe
-        sha256: 84c22e1eb281efbe154f3be063d64b243f03df7fb413900d9106307f8f0fa89d
+        sha256: 283b077b94365d966f18ee43f722af5e86b7b5c459f2d8624bf5eb12eb4924d4
