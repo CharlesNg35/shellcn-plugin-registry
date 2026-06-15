@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-amd64
-        sha256: f302aabc6930588cf4379dad1f77a83b57ca8608663fbf7af1cc78fe9cd94fe8
+        sha256: 9ffbed2178a6282cbce96f34a736b9a4b96242512ac0b245ee9f5a91ff61c298
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-arm64
-        sha256: 4428fedb29963e6cef722dc989e44242489402c519ed23decd291c6816cf6186
+        sha256: 119152a09e9750d5018b3891c3a90b4ede5ee367600b9f4ac19b83a718b9a607
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-amd64
-        sha256: 06dd0ee5c5b685fc54176c42d63476c3e2d903901474ffbb6e0e0611275d98b2
+        sha256: a603a1af49d4954d06d0e58ebacb4cb819cfcb9ebe9d8899c8347154ee3b972c
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-arm64
-        sha256: fc631ed87c3bdc090cc4542c2f1f3fe25e2e30ecb4613f030d75d17db22c7a5a
+        sha256: 4d6660be112b405ddade9a4f055c5b739e9064814d5337d2d3c31a297f00eaa2
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-amd64.exe
-        sha256: de60a75308c433895c26ab98736fb647ce722ba2f52dd468089043298e4f1039
+        sha256: d523bc0f842f9db46047bb518e6793b2256d9e89253536d46a3b192c093e9627
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-arm64.exe
-        sha256: e510437ff13696821163b5ae3de2d55c53f6837ce9c36640ee393c6b7f557b1b
+        sha256: 402916e2d85c59c60bf222688f11d7e377d2012cab9f6c1a9edd27d9c5189fa2

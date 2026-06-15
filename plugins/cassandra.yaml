@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-linux-amd64
-        sha256: 8bcb45c047ea9546f9374fd13f69e935f62c060703348ec640f17fafb199ec8d
+        sha256: 4262f3b53661b9e8d3a8777514f316827ecde937dee64dfe9697a9cc370fe4d2
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-linux-arm64
-        sha256: d9071d8bc6bb4e2c812f4578c605b9d4428772bdb30b0e83a87346e80a3a25cd
+        sha256: daab50a2b0b280f9b9bdbedbe66a5fca6a2a17062a4050969cc204d046e6e23f
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-darwin-amd64
-        sha256: c270ef48057b4449e8e4e88a9a15bd9b91c39159c1cc02081d21310d5a5998c5
+        sha256: 0a442ef4476995a97794e31b56b41af3e9dab1a14ed832f3a9ff72895f511149
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-darwin-arm64
-        sha256: 376ae50b44037c7496e13ffc32a2f70899dd136c51ad7d7630e07bff91f89614
+        sha256: 4048d801c6d98c623a8304a2624fc9ed726ab46eb0ee93c8ef250fea16182751
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-windows-amd64.exe
-        sha256: 7193fac59000f7cde0c938d78ace2b4dbca7b69d95339057ad74d31555dfa13d
+        sha256: 12b0e2fa9d0babca1f07a0f9e16ad079612517d9beb49481fd6ff823755525a0
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cassandra-v0.1.0/shellcn-plugin-cassandra-windows-arm64.exe
-        sha256: 2ea537f4928db94e66bcad043b163cd5e14a1af9aef8cc1805979f92dcd137ee
+        sha256: bf50a524f0e237655bfba3b545f89dec79efe01a9577e727ba0a2c56f446bb9f

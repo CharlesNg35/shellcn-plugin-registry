@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-amd64
-        sha256: ed2f52601b4d6b87430950ec659499f9b632f0b70ca5c666ac64dac1aa8dd9e4
+        sha256: 20e5b8b8fb3ff484714f09feeff0b7c8b9dd3bd2bd26a840f2b51bb088a80727
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-arm64
-        sha256: 07f119b28588ac82a7eebb297ceb43376373430d99efc4fc9d81f9ca932b59c9
+        sha256: 52a3f544cd8ab65a2c4cbf4035f9de5e085df8f1a3f751e9d919a6df7291a900
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-amd64
-        sha256: 3f2f4e10ca8cabceb2cfb347957a0fa18b0d140a4448d2cb53cd395e9cf93731
+        sha256: 64f2a53512e6ad8f52a2591b9839d0f4118ad9e2c716ab373c4a8950fe2367a6
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-arm64
-        sha256: fb77ea4518fc347f26e0c57f2014519d02056814567665cbdeeefeb5b0c27960
+        sha256: 47de4b841ce264fdfcc700e4375e267114dea1b901645c0b5d9b17d82b2a8ff6
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-amd64.exe
-        sha256: 2bf95e1745004acdae2bdef950ceb3e48dca318a039ec0c9c6a7bcefd92ada9e
+        sha256: cbe249b67ad860785d07aef424fb1b810fecaa9d1bbbb92d46d236ff5f0cea08
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-arm64.exe
-        sha256: 578ff67282c05640f43537320b4b5e70e97c863fb9fc3b5eea33d56db6977bf1
+        sha256: c26517bc4f0f64fa090dc643d595221325cea15b8ba2327613dab2b712c1490b
