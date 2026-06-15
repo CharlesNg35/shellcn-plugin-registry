@@ -9,19 +9,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-linux-amd64
-        sha256: 1387ba49d223eb612e3742fd6ac10877f23abdb8aded9fb581502d56a7680f5b
+        sha256: 766d9b87f8f52a80995a01da8d8428ce7c5414003ec873cc73368d1ecad6a33e
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-linux-arm64
-        sha256: 5a615faf9c61894bb02e1a16f3aaa67e99c2a317d048f89c7523c0208d3f7084
+        sha256: 245b8f9d72a51bc7d5b721aca18438c99483321415785da2a5121828b3779fe8
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-darwin-amd64
-        sha256: 43aefea9dbacce72e3c62f93c4f1e32887014115608977732feeaaa00d5b9b29
+        sha256: 37991e8b341090cb201ccca0f11d02bef562ddd42ce63a3fcd92284cf30557b5
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-darwin-arm64
-        sha256: a16adc4239b85054dd9c998086a705106d3a41e9cdaa7526b03ec88bc84ba5fe
+        sha256: ccd86ded4af82bc3373c27e532ac9c5a5098c7d4092eabd850d626dffca4903b
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-windows-amd64.exe
-        sha256: 22ba0d82a5bb1c9060ff184ce24b7e682de79f9a56150144c37a94e319c117c1
+        sha256: 9f1496ba8932bd2c3a2c0e12b8d0490de081db862918deb4b48fd5a568693bf0
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/qdrant-v0.1.0/shellcn-plugin-qdrant-windows-arm64.exe
-        sha256: fb0a3bdaebd86ac779cf77b56ae7ef0a250b292592fb8461a6547a9e3b4a0a82
+        sha256: 606b4c858bd7f114355e9ee7a295375bbc8084cff5249e66a9c4361ed4d2795f

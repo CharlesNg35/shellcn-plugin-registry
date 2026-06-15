@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-amd64
-        sha256: d8bebea8419057145927aada34f4939d81071da6eee38fbf45d01fef0630c689
+        sha256: f9ba4cb654705ae8c1616fb9eeaf03ff117051d1bec815202a698ef19f36e90d
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-arm64
-        sha256: e8f754fc0f749a82dfa1eb8dcdaaa4531d5d73c080b671133a6a6a0da5c5f9b1
+        sha256: b53c21b60a04eae937ba6375da07b8c4d1a9223e7ab4714b9e7e5312985f8eba
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-amd64
-        sha256: 2ca87427da19b739a65700596395ead0be07455c7f54654593972472cb60bf9d
+        sha256: 571b8f37dd114eedfd7e886a88490ed25d4debf313bacb009abeaae9b57f9f12
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-arm64
-        sha256: ebb27f107c244277b54df101258a84f3371b5cb9f7470dc79065e29ee85d5f32
+        sha256: 16a0d40afab6409d352c7269b973de2c865a84b4f43d9ad8f6f8be88aa30aafa
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-amd64.exe
-        sha256: 76fd4e88ba0d6692b4863874d654809d8124f49eaf0ac27094ed18a792f536ff
+        sha256: e5b6f3d0a7f86b66d1665b33a7aab7f28d5208f8c7c2e58805a5751ddc10232f
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-arm64.exe
-        sha256: 5f79538f43ed41fb798f999897b96f6b639a7914e1f4cc23e3d28127f14eb04f
+        sha256: 1b9f4326d5b37455979121b2f198cc5ebb38f0695b94932fea829af286d95f01

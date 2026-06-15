@@ -9,19 +9,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-linux-amd64
-        sha256: 1b7e30e4cdaa5fee311388b5686cb44220e9da95f51b4a07509f264b952691e2
+        sha256: f9316c2021235ae8bd4ccab8bd75a605cefe826d2c2cdbe91417664875132119
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-linux-arm64
-        sha256: 87c307915cc92d5ffdc0d38991dabb50be4cae3569d828b938790dc29cc86c4e
+        sha256: d1aa1bbc0be332b514b1d2fe50fddddf269e68222c092fa8ba9fbf8aee299f53
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-darwin-amd64
-        sha256: b1f19510f8ca536e0022269e0c38d6bcd752660d5d7e6463ee748e8990e6c926
+        sha256: 138458b5f3aa029fc55fb3d6e5e43b37037328b910d72d8daee40f293811e42b
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-darwin-arm64
-        sha256: 33c4d121d451e77e7bb6b0acfd675ec7a82a07d73f62c0fb99ece4b20b4d73b0
+        sha256: 93b5f4e209941472ea49cb804cc4b135675d18d70ce5d842646240a82c7a1270
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-windows-amd64.exe
-        sha256: 0e8a51f8ebefacfb9d46a2b4dfe52299b2d98e8ce55ec7dba219812f53eb0e70
+        sha256: 8d7afadacffd0a2e899995cf9ea81f2f681ce09f89a21febd82ff89549b1772f
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/loki-v0.1.0/shellcn-plugin-loki-windows-arm64.exe
-        sha256: 1aeaa68c6fb9878dc69dd05aed7c4a7fa5a0b5698d90542c75d0f23524c361fa
+        sha256: 35e0a2fb348bcc37a70a59d65c36d0ebc6c4d8d048aae6ccee1ecff8aeabc773

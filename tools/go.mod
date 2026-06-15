@@ -3,7 +3,7 @@ module github.com/CharlesNg35/shellcn-plugin-registry/tools
 go 1.26.4
 
 require (
-	github.com/charlesng35/shellcn/sdk v0.1.15
+	github.com/charlesng35/shellcn/sdk v0.1.16
 	github.com/hashicorp/go-plugin v1.8.0
 	golang.org/x/mod v0.35.0
 	gopkg.in/yaml.v3 v3.0.1
