@@ -1,0 +1,2581 @@
+{
+  "name": "influxdb",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"\u003e\u003cpath style=\"fill-rule:evenodd;fill:#f14668;fill-opacity:1\" d=\"m94.543 87.625 29.379-6.75a3.35 3.35 0 0 0 1.258-.543 3.358 3.358 0 0 0 1.383-2.305c.058-.46.019-.925-.114-1.37L113.957 22.34a3.499 3.499 0 0 0-1.59-2.14 3.49 3.49 0 0 0-2.633-.391l-29.37 6.75c-.887.23-1.65.8-2.118 1.593a3.452 3.452 0 0 0-.383 2.625L90.32 85.094a3.499 3.499 0 0 0 1.59 2.14c.79.477 1.738.618 2.633.391Zm-10.125 33.566 35.621-33.054c1.344-1.36 1.004-2.196-.844-1.528l-24.484 5.575a6.222 6.222 0 0 0-2.715 1.46 6.221 6.221 0 0 0-1.676 2.586l-7.425 23.954c-.508 1.855.168 2.363 1.523 1.007Zm-64.992-10.789 53.344 16.52c.91.172 1.851.012 2.656-.45a3.947 3.947 0 0 0 1.734-2.07l8.938-28.68a3.48 3.48 0 0 0 .117-1.378 3.492 3.492 0 0 0-.418-1.317 3.473 3.473 0 0 0-.89-1.058 3.562 3.562 0 0 0-1.227-.633L30.336 74.973a3.545 3.545 0 0 0-2.695.304 3.57 3.57 0 0 0-1.696 2.118l-8.879 28.62a3.556 3.556 0 0 0 .278 2.68 3.547 3.547 0 0 0 2.082 1.707ZM2.2 51.7l10.816 47.452c.336 1.856 1.207 1.856 1.68 0l7.425-23.949a6.709 6.709 0 0 0 .031-3.113 6.783 6.783 0 0 0-1.37-2.793L3.721 50.852c-1.183-1.395-2.066-1.008-1.523.847ZM43.906.973 3.046 38.875a3.47 3.47 0 0 0-.168 4.848l20.43 22.144a3.483 3.483 0 0 0 2.415 1.098 3.48 3.48 0 0 0 2.484-.926l40.848-37.965a3.446 3.446 0 0 0 .172-4.847L48.832 1.094A3.48 3.48 0 0 0 47.722.3a3.467 3.467 0 0 0-1.326-.3 3.419 3.419 0 0 0-1.34.238 3.435 3.435 0 0 0-1.149.735Zm39.496 85.804c1.864.508 3.035-.496 2.54-2.422L74.124 33.082c-.508-1.855-2.035-2.363-3.375-1.02L32.258 67.895c-1.352 1.343-1.016 2.859.836 3.367Zm20.09-71.515L56.898.972c-1.851-.511-2.187.169-.675 1.684l17.054 18.387a6.549 6.549 0 0 0 2.7 1.527 6.58 6.58 0 0 0 3.093.11l24.485-5.563c1.8-.508 1.8-1.355-.063-1.855Zm0 0\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "influxdb",
+    "version": "0.1.0",
+    "title": "InfluxDB",
+    "description": "InfluxDB cockpit for v3, v2, and v1 time-series APIs with database/bucket browsing, measurements, schema, data preview, queries, and line protocol writes.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"128\" height=\"128\" viewBox=\"0 0 128 128\"\u003e\u003cpath style=\"fill-rule:evenodd;fill:#f14668;fill-opacity:1\" d=\"m94.543 87.625 29.379-6.75a3.35 3.35 0 0 0 1.258-.543 3.358 3.358 0 0 0 1.383-2.305c.058-.46.019-.925-.114-1.37L113.957 22.34a3.499 3.499 0 0 0-1.59-2.14 3.49 3.49 0 0 0-2.633-.391l-29.37 6.75c-.887.23-1.65.8-2.118 1.593a3.452 3.452 0 0 0-.383 2.625L90.32 85.094a3.499 3.499 0 0 0 1.59 2.14c.79.477 1.738.618 2.633.391Zm-10.125 33.566 35.621-33.054c1.344-1.36 1.004-2.196-.844-1.528l-24.484 5.575a6.222 6.222 0 0 0-2.715 1.46 6.221 6.221 0 0 0-1.676 2.586l-7.425 23.954c-.508 1.855.168 2.363 1.523 1.007Zm-64.992-10.789 53.344 16.52c.91.172 1.851.012 2.656-.45a3.947 3.947 0 0 0 1.734-2.07l8.938-28.68a3.48 3.48 0 0 0 .117-1.378 3.492 3.492 0 0 0-.418-1.317 3.473 3.473 0 0 0-.89-1.058 3.562 3.562 0 0 0-1.227-.633L30.336 74.973a3.545 3.545 0 0 0-2.695.304 3.57 3.57 0 0 0-1.696 2.118l-8.879 28.62a3.556 3.556 0 0 0 .278 2.68 3.547 3.547 0 0 0 2.082 1.707ZM2.2 51.7l10.816 47.452c.336 1.856 1.207 1.856 1.68 0l7.425-23.949a6.709 6.709 0 0 0 .031-3.113 6.783 6.783 0 0 0-1.37-2.793L3.721 50.852c-1.183-1.395-2.066-1.008-1.523.847ZM43.906.973 3.046 38.875a3.47 3.47 0 0 0-.168 4.848l20.43 22.144a3.483 3.483 0 0 0 2.415 1.098 3.48 3.48 0 0 0 2.484-.926l40.848-37.965a3.446 3.446 0 0 0 .172-4.847L48.832 1.094A3.48 3.48 0 0 0 47.722.3a3.467 3.467 0 0 0-1.326-.3 3.419 3.419 0 0 0-1.34.238 3.435 3.435 0 0 0-1.149.735Zm39.496 85.804c1.864.508 3.035-.496 2.54-2.422L74.124 33.082c-.508-1.855-2.035-2.363-3.375-1.02L32.258 67.895c-1.352 1.343-1.016 2.859.836 3.367Zm20.09-71.515L56.898.972c-1.851-.511-2.187.169-.675 1.684l17.054 18.387a6.549 6.549 0 0 0 2.7 1.527 6.58 6.58 0 0 0 3.093.11l24.485-5.563c1.8-.508 1.8-1.355-.063-1.855Zm0 0\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "observability",
+      "label": "Observability",
+      "icon": {
+        "type": "lucide",
+        "value": "activity"
+      },
+      "order": 120
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "api_mode",
+              "label": "API mode",
+              "type": "select",
+              "required": true,
+              "default": "v3",
+              "options": [
+                {
+                  "label": "InfluxDB 3",
+                  "value": "v3"
+                },
+                {
+                  "label": "InfluxDB 2",
+                  "value": "v2"
+                },
+                {
+                  "label": "InfluxDB 1.x",
+                  "value": "v1"
+                }
+              ]
+            },
+            {
+              "key": "endpoint",
+              "label": "Endpoint",
+              "type": "text",
+              "required": true,
+              "placeholder": "https://influxdb.example.internal:8086"
+            },
+            {
+              "key": "org",
+              "label": "Organization",
+              "type": "text",
+              "required": true,
+              "placeholder": "production",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v2"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "database",
+              "label": "Default database",
+              "type": "text",
+              "placeholder": "metrics",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v1"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth_v3",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "token",
+              "options": [
+                {
+                  "label": "Token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored token",
+                  "value": "token_credential"
+                },
+                {
+                  "label": "Basic auth",
+                  "value": "basic"
+                },
+                {
+                  "label": "Stored basic auth",
+                  "value": "basic_credential"
+                },
+                {
+                  "label": "None",
+                  "value": "none"
+                }
+              ],
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "auth_v2",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "token",
+              "options": [
+                {
+                  "label": "Token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored token",
+                  "value": "credential"
+                },
+                {
+                  "label": "None",
+                  "value": "none"
+                }
+              ],
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v2"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "auth_v1",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Basic auth",
+                  "value": "basic"
+                },
+                {
+                  "label": "Stored basic auth",
+                  "value": "credential"
+                }
+              ],
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v1"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "api_token_v3",
+              "label": "Token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "auth_v3",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_v3_id",
+              "label": "Stored token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "influxdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "auth_v3",
+                    "op": "eq",
+                    "value": "token_credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "username_v3",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "auth_v3",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password_v3",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "auth_v3",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_v3_id",
+              "label": "Stored basic auth",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "influxdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  },
+                  {
+                    "field": "auth_v3",
+                    "op": "eq",
+                    "value": "basic_credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "api_token_v2",
+              "label": "Token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v2"
+                  },
+                  {
+                    "field": "auth_v2",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_v2_id",
+              "label": "Stored token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "influxdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v2"
+                  },
+                  {
+                    "field": "auth_v2",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "username_v1",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v1"
+                  },
+                  {
+                    "field": "auth_v1",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password_v1",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v1"
+                  },
+                  {
+                    "field": "auth_v1",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_v1_id",
+              "label": "Stored basic auth",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "influxdb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v1"
+                  },
+                  {
+                    "field": "auth_v1",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "InfluxDB",
+          "fields": [
+            {
+              "key": "query_language_v3",
+              "label": "Query language",
+              "type": "select",
+              "required": true,
+              "default": "sql",
+              "options": [
+                {
+                  "label": "SQL",
+                  "value": "sql"
+                },
+                {
+                  "label": "InfluxQL",
+                  "value": "influxql"
+                }
+              ],
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v3"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "lookback",
+              "label": "Default lookback",
+              "type": "text",
+              "default": "-1h",
+              "placeholder": "-24h",
+              "help": "Default Flux range for data previews and schema discovery.",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "api_mode",
+                    "op": "eq",
+                    "value": "v2"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks line protocol writes and non-read query statements."
+            },
+            {
+              "key": "confirm_writes",
+              "label": "Confirm writes",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires confirmation before writing line protocol or running write-capable statements."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "timeseries",
+      "query",
+      "measurements",
+      "line_protocol"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "status",
+        "label": "Status",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "source": {
+          "routeId": "influxdb.status.tree"
+        },
+        "resourceKind": "status"
+      },
+      {
+        "key": "namespaces",
+        "label": "Databases / Buckets",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "influxdb.namespaces.tree"
+        },
+        "resourceKind": "namespace"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "status",
+        "title": "Status",
+        "list": {
+          "routeId": "influxdb.status.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Status",
+            "sortable": true
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "influxdb.status.read",
+                "params": {
+                  "status": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "query",
+              "label": "Query",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "influxdb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "plaintext",
+                "label": "Query",
+                "executeLabel": "Run",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "completionRouteId": "influxdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "namespace",
+        "title": "Databases / Buckets",
+        "list": {
+          "routeId": "influxdb.namespaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Name",
+            "sortable": true
+          },
+          {
+            "key": "kind",
+            "label": "Kind",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "retention",
+            "label": "Retention"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "sortable": true,
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "influxdb.namespace.create"
+          ],
+          "row": [
+            "influxdb.namespace.delete"
+          ],
+          "detail": [
+            "influxdb.write.namespace",
+            "influxdb.namespace.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "influxdb.namespace.read",
+                "params": {
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "measurements",
+              "label": "Measurements",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "influxdb.measurements.list",
+                "params": {
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Measurement / Table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Database / Bucket",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "query",
+              "label": "Query",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "influxdb.query",
+                "method": "WS",
+                "params": {
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "plaintext",
+                "label": "Query",
+                "executeLabel": "Run",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "completionRouteId": "influxdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "measurement",
+        "title": "Measurements",
+        "list": {
+          "routeId": "influxdb.measurements.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Measurement / Table",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Database / Bucket",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          }
+        ],
+        "actions": {
+          "detail": [
+            "influxdb.write.measurement"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "influxdb.measurement.rows",
+                "params": {
+                  "measurement": "${resource.name}",
+                  "namespace": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "emptyText": "No points in the selected range.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "fields",
+              "label": "Fields",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "influxdb.measurement.fields",
+                "params": {
+                  "measurement": "${resource.name}",
+                  "namespace": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Field",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "tags",
+              "label": "Tags",
+              "icon": {
+                "type": "lucide",
+                "value": "tags"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "influxdb.measurement.tags",
+                "params": {
+                  "measurement": "${resource.name}",
+                  "namespace": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Tag",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "query",
+              "label": "Query",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "influxdb.query",
+                "method": "WS",
+                "params": {
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "plaintext",
+                "label": "Query",
+                "executeLabel": "Run",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "completionRouteId": "influxdb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "influxdb.write.namespace",
+        "label": "Write line protocol",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "influxdb.write",
+        "method": "POST",
+        "params": {
+          "namespace": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Write line protocol to this InfluxDB container?",
+        "input": {
+          "groups": [
+            {
+              "name": "Line protocol",
+              "fields": [
+                {
+                  "key": "line_protocol",
+                  "label": "Line protocol",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "cpu,host=web01 usage=0.64"
+                },
+                {
+                  "key": "precision",
+                  "label": "Precision",
+                  "type": "select",
+                  "default": "ns",
+                  "options": [
+                    {
+                      "label": "Nanoseconds",
+                      "value": "ns"
+                    },
+                    {
+                      "label": "Microseconds",
+                      "value": "us"
+                    },
+                    {
+                      "label": "Milliseconds",
+                      "value": "ms"
+                    },
+                    {
+                      "label": "Seconds",
+                      "value": "s"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "influxdb.write.measurement",
+        "label": "Write line protocol",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "influxdb.write",
+        "method": "POST",
+        "params": {
+          "namespace": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Write line protocol to this InfluxDB container?",
+        "input": {
+          "groups": [
+            {
+              "name": "Line protocol",
+              "fields": [
+                {
+                  "key": "line_protocol",
+                  "label": "Line protocol",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "cpu,host=web01 usage=0.64"
+                },
+                {
+                  "key": "precision",
+                  "label": "Precision",
+                  "type": "select",
+                  "default": "ns",
+                  "options": [
+                    {
+                      "label": "Nanoseconds",
+                      "value": "ns"
+                    },
+                    {
+                      "label": "Microseconds",
+                      "value": "us"
+                    },
+                    {
+                      "label": "Milliseconds",
+                      "value": "ms"
+                    },
+                    {
+                      "label": "Seconds",
+                      "value": "s"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "influxdb.namespace.create",
+        "label": "Create database / bucket",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "influxdb.namespace.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Database / bucket",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "retention_period",
+                  "label": "Retention period",
+                  "type": "text",
+                  "placeholder": "30d",
+                  "help": "Optional retention (e.g. 30d, 24h). Leave empty for infinite retention."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "influxdb.namespace.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "influxdb.namespace.delete",
+        "method": "DELETE",
+        "params": {
+          "namespace": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this database / bucket and all of its data?"
+      }
+    ],
+    "streams": [
+      {
+        "id": "influxdb.query",
+        "kind": "query",
+        "routeId": "influxdb.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {}
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      }
+    }
+  }
+}

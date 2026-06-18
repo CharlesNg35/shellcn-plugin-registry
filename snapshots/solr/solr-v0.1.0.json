@@ -1,0 +1,2542 @@
+{
+  "name": "solr",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"\u003e\u003cdefs\u003e\u003cclipPath id=\"a\" clipPathUnits=\"userSpaceOnUse\"\u003e\u003cpath d=\"M0 102.654h203.005V0H0Z\"/\u003e\u003c/clipPath\u003e\u003c/defs\u003e\u003cg clip-path=\"url(#a)\" transform=\"matrix(1.33333 0 0 -1.33333 0 136.872)\"\u003e\u003cpath d=\"m0 0-33-35.677L8.473-16.543A33.5 33.5 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(31.112 96.955)scale(.53706)\"/\u003e\u003cpath d=\"M0 0c-4.572 0-8.928-.917-12.9-2.572l-4.428-37.314L4.799-.347A34 34 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(17.962 102.654)scale(.53706)\"/\u003e\u003cpath d=\"m0 0-39.298-21.992 36.87 4.375A33.46 33.46 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(35.839 86.966)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.75 33.75 0 0 1 10.612 11.619l-34.559-6.863Z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(28.058 69.675)scale(.53706)\"/\u003e\u003cpath d=\"m0 0-19.237-41.695L16.448-8.689C11.973-4.384 6.313-1.303 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(21.626 102.28)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.4 33.4 0 0 1 10.54 2.638L-8.818 4.935Z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(19.47 66.654)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.4 33.4 0 0 1-2.829-10.792l5.215-9.32z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(1.524 92.034)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.74 33.74 0 0 1-11.832-10.567l4.867-24.504z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(9.471 100.531)scale(.53706)\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "solr",
+    "version": "0.1.0",
+    "title": "Apache Solr",
+    "description": "Apache Solr cockpit with cores, documents, schema fields, JSON queries, config, ping, commit, optimize, and CoreAdmin operations.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 48 48\"\u003e\u003cdefs\u003e\u003cclipPath id=\"a\" clipPathUnits=\"userSpaceOnUse\"\u003e\u003cpath d=\"M0 102.654h203.005V0H0Z\"/\u003e\u003c/clipPath\u003e\u003c/defs\u003e\u003cg clip-path=\"url(#a)\" transform=\"matrix(1.33333 0 0 -1.33333 0 136.872)\"\u003e\u003cpath d=\"m0 0-33-35.677L8.473-16.543A33.5 33.5 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(31.112 96.955)scale(.53706)\"/\u003e\u003cpath d=\"M0 0c-4.572 0-8.928-.917-12.9-2.572l-4.428-37.314L4.799-.347A34 34 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(17.962 102.654)scale(.53706)\"/\u003e\u003cpath d=\"m0 0-39.298-21.992 36.87 4.375A33.46 33.46 0 0 1 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(35.839 86.966)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.75 33.75 0 0 1 10.612 11.619l-34.559-6.863Z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(28.058 69.675)scale(.53706)\"/\u003e\u003cpath d=\"m0 0-19.237-41.695L16.448-8.689C11.973-4.384 6.313-1.303 0 0\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(21.626 102.28)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.4 33.4 0 0 1 10.54 2.638L-8.818 4.935Z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(19.47 66.654)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.4 33.4 0 0 1-2.829-10.792l5.215-9.32z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(1.524 92.034)scale(.53706)\"/\u003e\u003cpath d=\"M0 0a33.74 33.74 0 0 1-11.832-10.567l4.867-24.504z\" style=\"fill:#da3522;fill-opacity:1;fill-rule:nonzero;stroke:none\" transform=\"translate(9.471 100.531)scale(.53706)\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "search",
+      "label": "Search",
+      "icon": {
+        "type": "lucide",
+        "value": "search"
+      },
+      "order": 130
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "endpoint",
+              "label": "Endpoint",
+              "type": "text",
+              "required": true,
+              "default": "http://localhost:8983/solr",
+              "placeholder": "https://solr.example.internal/solr"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Basic auth",
+                  "value": "basic"
+                },
+                {
+                  "label": "Bearer token",
+                  "value": "bearer"
+                },
+                {
+                  "label": "Stored basic auth",
+                  "value": "stored_basic"
+                },
+                {
+                  "label": "Stored bearer token",
+                  "value": "stored_bearer"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_token",
+              "label": "Bearer token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "bearer"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_id",
+              "label": "Stored basic auth",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "solr"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_credential_id",
+              "label": "Stored bearer token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "bearer_token",
+                "protocols": [
+                  "solr"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_bearer"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks collection/core, document, schema, commit, and optimize writes."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "10s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "cores",
+      "documents",
+      "search",
+      "schema",
+      "config"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "cores",
+        "label": "Collections / Cores",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "solr.cores.tree"
+        },
+        "resourceKind": "core"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "core",
+        "title": "Collections / Cores",
+        "list": {
+          "routeId": "solr.cores.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Collection/Core",
+            "sortable": true
+          },
+          {
+            "key": "mode",
+            "label": "Mode",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "health",
+            "label": "Health",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "green": "success",
+              "red": "danger",
+              "yellow": "warn"
+            }
+          },
+          {
+            "key": "numDocs",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "maxDoc",
+            "label": "Max doc",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "deletedDocs",
+            "label": "Deleted",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "size",
+            "label": "Size"
+          },
+          {
+            "key": "uptime",
+            "label": "Uptime"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "solr.core.create"
+          ],
+          "row": [
+            "solr.core.delete"
+          ],
+          "detail": [
+            "solr.core.commit",
+            "solr.core.optimize",
+            "solr.core.reload",
+            "solr.core.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "solr.core.overview",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "documents",
+              "label": "Documents",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "solr.documents.list",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "_id",
+                    "label": "ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_core",
+                    "label": "Core",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_score",
+                    "label": "Score",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "_source",
+                    "label": "Document",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "solr.document.upsert",
+                  "solr.documents.delete_query"
+                ],
+                "rowActionIds": [
+                  "solr.document.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "solr.search.query",
+                "method": "WS",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "Solr query",
+                "executeLabel": "Search",
+                "runningLabel": "Searching...",
+                "emptyText": "Run a Solr JSON query to see documents.",
+                "initialQuery": "{\"q\":\"*:*\",\"rows\":50}",
+                "completionRouteId": "solr.completion",
+                "exportable": true
+              }
+            },
+            {
+              "key": "schema",
+              "label": "Schema",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "solr.schema.read",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "fields",
+              "label": "Fields",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "solr.schema.fields",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Field",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "indexed",
+                    "label": "Indexed",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "stored",
+                    "label": "Stored",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "multiValued",
+                    "label": "Multi-valued",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "required",
+                    "label": "Required",
+                    "sortable": true,
+                    "type": "bool"
+                  }
+                ],
+                "actionIds": [
+                  "solr.schema.field.add"
+                ],
+                "rowActionIds": [
+                  "solr.schema.field.replace",
+                  "solr.schema.field.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "config",
+              "label": "Config",
+              "icon": {
+                "type": "lucide",
+                "value": "settings"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "solr.config.read",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "ping",
+              "label": "Ping",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "solr.core.ping",
+                "params": {
+                  "core": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "document",
+        "title": "Documents",
+        "list": {
+          "routeId": "solr.documents.list"
+        },
+        "columns": [
+          {
+            "key": "_id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "_core",
+            "label": "Core",
+            "sortable": true
+          },
+          {
+            "key": "_score",
+            "label": "Score",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "_source",
+            "label": "Document",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "row": [
+            "solr.document.delete"
+          ],
+          "detail": [
+            "solr.document.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "defaultTab": "editor",
+          "tabs": [
+            {
+              "key": "document",
+              "label": "Document",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "solr.document.read",
+                "params": {
+                  "core": "${resource.namespace}",
+                  "id": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "editor",
+              "label": "Editor",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "solr.document.read",
+                "params": {
+                  "core": "${resource.namespace}",
+                  "id": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "solr.document.update",
+                "saveMethod": "PATCH",
+                "saveParams": {
+                  "core": "${resource.namespace}",
+                  "id": "${resource.name}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "field",
+        "title": "Fields",
+        "list": {
+          "routeId": "solr.schema.fields"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Field",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "indexed",
+            "label": "Indexed",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "stored",
+            "label": "Stored",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "multiValued",
+            "label": "Multi-valued",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "required",
+            "label": "Required",
+            "sortable": true,
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "row": [
+            "solr.schema.field.delete"
+          ],
+          "detail": [
+            "solr.schema.field.replace",
+            "solr.schema.field.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "solr.schema.field.read",
+                "params": {
+                  "core": "${resource.namespace}",
+                  "field": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "solr.core.create",
+        "label": "Create collection/core",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "solr.core.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Collection / core",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "config_set",
+                  "label": "Config set",
+                  "type": "text",
+                  "default": "_default",
+                  "placeholder": "_default"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "solr.core.reload",
+        "label": "Reload",
+        "icon": {
+          "type": "lucide",
+          "value": "refresh-cw"
+        },
+        "routeId": "solr.core.reload",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Reload this collection or core?"
+      },
+      {
+        "id": "solr.core.commit",
+        "label": "Commit",
+        "icon": {
+          "type": "lucide",
+          "value": "check"
+        },
+        "routeId": "solr.core.commit",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Commit pending updates for this collection or core?"
+      },
+      {
+        "id": "solr.core.optimize",
+        "label": "Optimize",
+        "icon": {
+          "type": "lucide",
+          "value": "gauge"
+        },
+        "routeId": "solr.core.optimize",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Optimize this collection or core now?"
+      },
+      {
+        "id": "solr.core.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "solr.core.delete",
+        "method": "DELETE",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this collection or unload this core with its index data?"
+      },
+      {
+        "id": "solr.document.upsert",
+        "label": "Upsert document",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "solr.document.upsert",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Document",
+              "fields": [
+                {
+                  "key": "document",
+                  "label": "Document",
+                  "type": "json",
+                  "required": true,
+                  "default": {
+                    "id": "example",
+                    "title_s": "Example"
+                  }
+                },
+                {
+                  "key": "commit",
+                  "label": "Commit immediately",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"id\": \"example\"\n}",
+          "saveRouteId": "solr.document.upsert",
+          "saveMethod": "POST",
+          "saveParams": {
+            "core": "${resource.name}"
+          },
+          "saveBodyKey": "document",
+          "saveExtra": {
+            "commit": true
+          }
+        }
+      },
+      {
+        "id": "solr.document.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "solr.document.delete",
+        "method": "DELETE",
+        "params": {
+          "core": "${resource.namespace}",
+          "id": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this document?"
+      },
+      {
+        "id": "solr.documents.delete_query",
+        "label": "Delete by query",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "solr.documents.delete_query",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete all Solr documents matching this query?",
+        "input": {
+          "groups": [
+            {
+              "name": "Delete",
+              "fields": [
+                {
+                  "key": "query",
+                  "label": "Query",
+                  "type": "text",
+                  "required": true,
+                  "default": "*:*"
+                },
+                {
+                  "key": "commit",
+                  "label": "Commit immediately",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "solr.schema.field.add",
+        "label": "Add field",
+        "icon": {
+          "type": "lucide",
+          "value": "columns-3"
+        },
+        "routeId": "solr.schema.field.add",
+        "method": "POST",
+        "params": {
+          "core": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Add this field to the managed schema?",
+        "input": {
+          "groups": [
+            {
+              "name": "Field",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "default": "string"
+                },
+                {
+                  "key": "indexed",
+                  "label": "Indexed",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "stored",
+                  "label": "Stored",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "multi_valued",
+                  "label": "Multi-valued",
+                  "type": "toggle"
+                },
+                {
+                  "key": "required",
+                  "label": "Required",
+                  "type": "toggle"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "solr.schema.field.replace",
+        "label": "Edit field",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "solr.schema.field.replace",
+        "method": "PUT",
+        "params": {
+          "core": "${resource.namespace}",
+          "field": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Replace this field's definition? Solr requires the full definition and reindexing may be needed for existing documents.",
+        "input": {
+          "groups": [
+            {
+              "name": "Field",
+              "fields": [
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "default": "string"
+                },
+                {
+                  "key": "indexed",
+                  "label": "Indexed",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "stored",
+                  "label": "Stored",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "multi_valued",
+                  "label": "Multi-valued",
+                  "type": "toggle"
+                },
+                {
+                  "key": "required",
+                  "label": "Required",
+                  "type": "toggle"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "solr.schema.field.delete",
+        "label": "Delete field",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "solr.schema.field.delete",
+        "method": "DELETE",
+        "params": {
+          "core": "${resource.namespace}",
+          "field": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this field from the managed schema?"
+      }
+    ],
+    "streams": [
+      {
+        "id": "solr.search.query",
+        "kind": "query",
+        "routeId": "solr.search.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {}
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      }
+    }
+  }
+}
