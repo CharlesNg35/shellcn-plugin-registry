@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedBy": "mirror@0569a823c1ab353cbe73dee11f82247fb2e738f0",
+  "generatedBy": "mirror@c6373fbd58d965c1fc1580d393c002f38b0476d3",
   "plugins": [
     {
       "name": "cassandra",
@@ -216,42 +216,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "b8eb4461f884b5c9c8a4c740c78fc83c809e68ad6b8e64bff521fe4ba2b207ec",
+              "sha256": "af682cdab6b1c273e41d33dc4e7239dbdbfcbb580af9f72244203c1999b07a95",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "544d1b4d6b4f1d2f4b4b1ed0b20b763b95a109e9f3483824879894cb01448e29",
+              "sha256": "dbcad791024c22c6676efa92545eb0c7865acd5cc08495191a264c311e65c754",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "85031047abcf9c88420b08f2c52df4281486e57f6d9543a8242a0546d634d74b",
+              "sha256": "60f4c50a2c33491cc700581af36574871c85b75f15c133709b37c1d4b5c07f64",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "85729b65a160e9397dc3cd3a25e6ab53b39319b36a3279e8869774a8497265e9",
+              "sha256": "bffe68a0fc0650698ab3aaabd268e60a8a80a627956efcb394e6ae88a53e443e",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "6b136dc909871de230e3ce30dacf5bc79760c59e64edb30f27eb2758aaede1f2",
+              "sha256": "bf045f4c3a80cf2b86242e5e01e974a9e632d41a83f883793833943073def6ab",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "58c09db144a466e8b1fb15c6942624012e16c85e7e32cb28824beac52e7229a1",
+              "sha256": "06bc9c6a31191a2d48b34b999289e1f9a7406ca0ea426808a58c9698ed3520b1",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/dynamodb-v0.1.0/shellcn-plugin-dynamodb-windows-arm64.exe"
@@ -282,42 +282,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "f070b586315a8e522066da5a4ec47d41e8f43b91c7015c1f0492909ef3ce0a82",
+              "sha256": "8a380b4252bc78876e066625f72de3af03fa20d408ca5a498221c9493db2ea52",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "17907aedef7a101b6fe76ac46f6d59a01d57ec8187ace473e1abc23ed2547d45",
+              "sha256": "2cfcd5ee63503555c12b2593e898270c77669b7d1fcb15d46df2f34164eff1ac",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "b004db022a87b46a20507a01d663dd983cbb3fc9cef2fa3fc21df513451ea4ae",
+              "sha256": "b8a0a4ef513f3a9250e58926671e5b22d18c0577363522241b3422172cdc092f",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "2f35e062300e29ef46da788750fb73e67ebcc1c0e079d75a2462c9e43c5eb3b4",
+              "sha256": "a59237bd3da71631308223be972f832f49c89b3c86da012b595ffa08332dc4f2",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "b035d8c38125cb87ec684cdaaad99aea88fac387967504b13d30f49bdbf16f84",
+              "sha256": "bde5dabb0d671e3eabbbaa5b815749b56212d045d2ad7691a9fe3205cc45f6f8",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "72b0ce1e7ac7814bfa5e73adf74f0f2e127724b1618bc34e751a9f3c79a7143e",
+              "sha256": "53befa6b9899e20dd5475a71b648d995f7c06cabbf893f163df37928548dd33f",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-arm64.exe"
@@ -878,42 +878,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "6dab200dcb960d8f1f7fdd1d22b5626bfbdf5394022fee1fbe76eee362c9c403",
+              "sha256": "fe668e8443d5b584c3f39b892fc37fc224495995d1fbc7a00066ca9892493a07",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "d509dc95c9ac322a18e12c6d096906fa46661da99a907f3b2b8b34ef282e6275",
+              "sha256": "5208391c8f3fa10f9d9bd752adebfe8e51fe291e96dad6c78238072aff3144ad",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "2088aaa680087a74f6491084add94b85bef26b6463589989ca0bdf67fa4d8709",
+              "sha256": "9665a62b441037bea15a11c1078ae06f7384f714e616f72ea261406e282284a2",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "2c0f4efdc0cc51deb89e0c62e552933ec67b0195a86784673c0c83c84f5b6e5a",
+              "sha256": "24b8ecdeeb7ff2ad16676e51a59462d4b1d698a500e999b5386e89c050cf2751",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "9ce1899491d324b7b321c902c709cb58799e651251aba1cfaa689a2660163da7",
+              "sha256": "916dc45ec8bb4a0173d7a65a866f639a7220648ead54383b2a7689cc2a6ed1e1",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "be6116620894cebbc6b6d87e2ff9aad80714781e5a238644ea5497326e45df61",
+              "sha256": "2c0c827fe918415a94fe271db233924a3640d8066b4b2fd50245565fb0d18229",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-arm64.exe"
@@ -1010,42 +1010,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "32e64f3dfe4985ea82a0ff3b43d4792a05fc2c54083032370533b039200d318a",
+              "sha256": "3daa1a31a7f392fb56b7a020335a7aacc311f1ad36206eb01a6e85f6eb9568dc",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "f3625fa219e9ac0d5705c961aff926468f6067a71aab1a448f00f65adf3c6d07",
+              "sha256": "f508e3f4a447867b62695a40462b7cb8900c9f72514dec3722a211b6588c6468",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "a6b807c7452efd164a0f4c74e669122acaa5c1817613e2c18b2d75909aaf6085",
+              "sha256": "24737e34a4b303bccf3187676b48d909af0d237d02198fbc4bfd6cc5c50a268e",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "d980103758b06908819a8f78cd0120a7c9d1c806a3ccfe75557bde124ad4a95b",
+              "sha256": "a6f7d8c604d415cb6465f20c56129bde6d6b9198b65a57abf38a703b6ab091cb",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "e28b4b11d37fd3090a924a4ba2b534480da993bc08b78b95ffa15d219bda4dc3",
+              "sha256": "8ec3913a206877da9981160c6834485ff604b872b8479b4065a9c81be83827eb",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "5a45c0ee7dc85d6afb5cb7818af7ecc6916c14eb8738f4d89912229d992b5a7c",
+              "sha256": "fe2d5f4a4a2ff3adad4df542ed50f956d9a2de209b30ba0788ad096917105009",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-arm64.exe"
@@ -1341,42 +1341,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "5fd6efebb07851a460fe19bcfd5aee489fd2d74dcbe397d61c75d2df171ad576",
+              "sha256": "1cc210d0964515198442d9d786c9cb658ad0d370fe96cf280994cf0b9e889a52",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "2c81bb4ad946046e44b3092f39e56aae7053548a927e6dddd5446a3697a0e423",
+              "sha256": "b4f7d7a826dd6edbac39f109164f1166bbe19233899788c8aa85c88ebd2b7878",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "88ee91a57b6fc3e928d96644c11241f9219def3149a87a47f8cc4690e37b2165",
+              "sha256": "479f8d077e880010229eea4700b96e1b1c196571f38ddf4081204dd30cbaf08c",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "46494909f183183dc0cfd8addab538de6625c299b1424e331b6b480b97a71101",
+              "sha256": "830dafeae7ddb6763642fef92337c1f5dd0a030f395d2af218419289ac4b84c8",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "d714db95fa44e14133f4b9e1c8f5d76a5014695761570f56bceab65cdd7e0db4",
+              "sha256": "102da1d1642ccf7e664ac66f8e0da159de2adf21cc05ee02d7620e13a55443dc",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "9951b5372064e4051c81914211e16d365a21e3e2ebe7a903bf740aa8365f29a0",
+              "sha256": "21d38a13f81a76dd0a617a13386860eec1c82cfe931de092bb5857c8fdbd23ad",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/solr-v0.1.0/shellcn-plugin-solr-windows-arm64.exe"
@@ -1539,42 +1539,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "c55efee6646861694c67df3b9d83a4790b9805915a4ccffcac2a7d9c8d8e1b44",
+              "sha256": "02f7e6e61874cff7b7e0d8163ad11e03e61667dc4832bf2cd3b426f270966abb",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "fa44dd143f95fac6d7aa479e71d362eb767ec0a67b0a71253523fd01d6ede5d6",
+              "sha256": "052ee7f8357538fe8756b6dce117a3f08690dd3ba150a0a049001d64b22226b7",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "8a9a29c30f163b4e443eef02fcde5e90c5f0761445dc7543cf7abf8140b7d428",
+              "sha256": "7b219fec4743e96d843d71ecd1db29dcb00b1751c3e3b92052acb32655485a88",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "bbf2dacad46891fe246f461145e2f3af98ba48cb7432fd937af326c63077b8b1",
+              "sha256": "a902c78e719bcd80466812d490fb00c319db81cf2804663b79f694a42f9187b8",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "15c83219e6da5a028b15380b0f447a02b965513dd9f8564fd466312bdbe44628",
+              "sha256": "e000662ff8f165607a6942e20828638e3c5312cb238e6a97f8a3f1d7bc10e871",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "22a9cf837c5f5a1f18e485eaf4d25b8e139d70f4429177b57fddc344290ef6e8",
+              "sha256": "48cad11cc417cf45c0b4a0232c71d4c2fc49e31d50031db418b30d907720cfac",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/typesense-v0.1.0/shellcn-plugin-typesense-windows-arm64.exe"
