@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-amd64
-        sha256: 4efd11ae56d7cb6b2e8ada3359a666fc7d3f302ba43dcd8012e181cc0d4c94fc
+        sha256: b004db022a87b46a20507a01d663dd983cbb3fc9cef2fa3fc21df513451ea4ae
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-linux-arm64
-        sha256: f9f937fad4ab4b01bc6995749c9651b9422de6bde9efbbe48808cc2b100eb3ed
+        sha256: 2f35e062300e29ef46da788750fb73e67ebcc1c0e079d75a2462c9e43c5eb3b4
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-amd64
-        sha256: 4388546f85737904aa2592706113c1471326b3a5d9ca062c54d6ae6b269ffe95
+        sha256: f070b586315a8e522066da5a4ec47d41e8f43b91c7015c1f0492909ef3ce0a82
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-darwin-arm64
-        sha256: 285a845f849d828778cb95d7008bd47956419c4652056685b151072c4542a669
+        sha256: 17907aedef7a101b6fe76ac46f6d59a01d57ec8187ace473e1abc23ed2547d45
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-amd64.exe
-        sha256: 8dd6d1058089bc22ed20ddd8822404324e0e54bd0c8fbc7a0627ba52a52fc388
+        sha256: b035d8c38125cb87ec684cdaaad99aea88fac387967504b13d30f49bdbf16f84
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/elasticsearch-v0.1.0/shellcn-plugin-elasticsearch-windows-arm64.exe
-        sha256: 818346b9cdcf7a159e559cc5776de21652886a56c155dca0a3399921008de7de
+        sha256: 72b0ce1e7ac7814bfa5e73adf74f0f2e127724b1618bc34e751a9f3c79a7143e
