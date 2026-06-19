@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-linux-amd64
-        sha256: f7815acd5e7bb0f005cf53911758636c61462a3aa12f53ff9832965a4fd2cf5f
+        sha256: c06ffead0ac27b79c9aca8314e3ebe6b77a6ee3ff377f554ac790d86cf9f20e5
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-linux-arm64
-        sha256: 77313c3d4fc5be41a01cfae9e7d2c4775006ec218fcd9d6f78955634f423ce58
+        sha256: 50b58c1229c1614e3f27c152adc0113e8e6ff9403ee4bc3ce6bc751b3600ed2b
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-darwin-amd64
-        sha256: 79e30c703e7b4fb76eeef805a1d238ce485c920cb3a0ee6a4f5d83783c132d0d
+        sha256: a35712097dd7dae2c3b45b64788c8bd5201c2bbbb3b8284f693dcaa8a2f80238
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-darwin-arm64
-        sha256: 9fa2fc20683dead4b7f42c8f25955a79eaf0965215197462566a67f3f492682e
+        sha256: 77b0694122d0c05f80e8d9d95ba9c528ed4ae3ec50fe3c8869cc485ae57855bd
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-windows-amd64.exe
-        sha256: e52095947c1103ccda8ec1c306cc9da15aafd9e5d7c4bcbd00c6eeabf1775013
+        sha256: 5a512328809aec67a6c030d5de2c227eff89817ccf4d35d49f576ca8b39bf7eb
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/minio-v0.1.0/shellcn-plugin-minio-windows-arm64.exe
-        sha256: f3c452a9737ffbf33207b79c698a0598a426c1340e1d406967429ace9d4e624e
+        sha256: bc0fa7cdc789a717bff25c995d41c675b07548717cd6981071dba8f0745ec53b
