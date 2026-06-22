@@ -1,0 +1,2989 @@
+{
+  "name": "opensearch",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg fill=none viewBox=\"0 0 64 64\"xmlns=http://www.w3.org/2000/svg\u003e\u003cpath d=\"M61.7374 23.5C60.4878 23.5 59.4748 24.513 59.4748 25.7626C59.4748 44.3813 44.3813 59.4748 25.7626 59.4748C24.513 59.4748 23.5 60.4878 23.5 61.7374C23.5 62.987 24.513 64 25.7626 64C46.8805 64 64 46.8805 64 25.7626C64 24.513 62.987 23.5 61.7374 23.5Z\"fill=#005EB8 /\u003e\u003cpath d=\"M48.0814 38C50.2572 34.4505 52.3615 29.7178 51.9475 23.0921C51.0899 9.36725 38.6589 -1.04463 26.9206 0.0837327C22.3253 0.525465 17.6068 4.2712 18.026 10.9805C18.2082 13.8961 19.6352 15.6169 21.9544 16.9399C24.1618 18.1992 26.9978 18.9969 30.2128 19.9011C34.0962 20.9934 38.6009 22.2203 42.063 24.7717C46.2125 27.8295 49.0491 31.3743 48.0814 38Z\"fill=#003B5C /\u003e\u003cpath d=\"M3.91861 14C1.74276 17.5495 -0.361506 22.2822 0.0524931 28.9079C0.910072 42.6327 13.3411 53.0446 25.0794 51.9163C29.6747 51.4745 34.3932 47.7288 33.974 41.0195C33.7918 38.1039 32.3647 36.3831 30.0456 35.0601C27.8382 33.8008 25.0022 33.0031 21.7872 32.0989C17.9038 31.0066 13.3991 29.7797 9.93694 27.2283C5.78746 24.1704 2.95092 20.6257 3.91861 14Z\"fill=#005EB8 /\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "opensearch",
+    "version": "0.1.0",
+    "title": "OpenSearch",
+    "description": "OpenSearch cockpit with cluster health, indices, mappings, settings, shards, documents, JSON DSL search, and OpenSearch-compatible index operations.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg fill=none viewBox=\"0 0 64 64\"xmlns=http://www.w3.org/2000/svg\u003e\u003cpath d=\"M61.7374 23.5C60.4878 23.5 59.4748 24.513 59.4748 25.7626C59.4748 44.3813 44.3813 59.4748 25.7626 59.4748C24.513 59.4748 23.5 60.4878 23.5 61.7374C23.5 62.987 24.513 64 25.7626 64C46.8805 64 64 46.8805 64 25.7626C64 24.513 62.987 23.5 61.7374 23.5Z\"fill=#005EB8 /\u003e\u003cpath d=\"M48.0814 38C50.2572 34.4505 52.3615 29.7178 51.9475 23.0921C51.0899 9.36725 38.6589 -1.04463 26.9206 0.0837327C22.3253 0.525465 17.6068 4.2712 18.026 10.9805C18.2082 13.8961 19.6352 15.6169 21.9544 16.9399C24.1618 18.1992 26.9978 18.9969 30.2128 19.9011C34.0962 20.9934 38.6009 22.2203 42.063 24.7717C46.2125 27.8295 49.0491 31.3743 48.0814 38Z\"fill=#003B5C /\u003e\u003cpath d=\"M3.91861 14C1.74276 17.5495 -0.361506 22.2822 0.0524931 28.9079C0.910072 42.6327 13.3411 53.0446 25.0794 51.9163C29.6747 51.4745 34.3932 47.7288 33.974 41.0195C33.7918 38.1039 32.3647 36.3831 30.0456 35.0601C27.8382 33.8008 25.0022 33.0031 21.7872 32.0989C17.9038 31.0066 13.3991 29.7797 9.93694 27.2283C5.78746 24.1704 2.95092 20.6257 3.91861 14Z\"fill=#005EB8 /\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "search",
+      "label": "Search",
+      "icon": {
+        "type": "lucide",
+        "value": "search"
+      },
+      "order": 130
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "endpoint",
+              "label": "Endpoint",
+              "type": "text",
+              "required": true,
+              "default": "http://localhost:9200",
+              "placeholder": "https://search.example.internal:9200"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Username and password",
+                  "value": "basic"
+                },
+                {
+                  "label": "API key",
+                  "value": "api_key"
+                },
+                {
+                  "label": "Bearer token",
+                  "value": "bearer"
+                },
+                {
+                  "label": "Stored username and password",
+                  "value": "stored_basic"
+                },
+                {
+                  "label": "Stored API key",
+                  "value": "stored_api_key"
+                },
+                {
+                  "label": "Stored bearer token",
+                  "value": "stored_bearer"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "api_key",
+              "label": "API key",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "api_key"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_token",
+              "label": "Bearer token",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "bearer"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_id",
+              "label": "Stored username and password",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "opensearch"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "api_key_credential_id",
+              "label": "Stored API key",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "opensearch"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_api_key"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_credential_id",
+              "label": "Stored bearer token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "bearer_token",
+                "protocols": [
+                  "opensearch"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_bearer"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks document writes, index creation, close/open, reindex, and deletes."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "10s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "indexes",
+      "documents",
+      "search",
+      "mappings",
+      "cluster_health"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "indexes",
+        "label": "Indexes",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "opensearch.indexes.tree"
+        },
+        "resourceKind": "index"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "index",
+        "title": "Indexes",
+        "list": {
+          "routeId": "opensearch.indexes.list"
+        },
+        "columns": [
+          {
+            "key": "health",
+            "label": "Health",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "green": "success",
+              "red": "danger",
+              "yellow": "warn"
+            }
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "close": "secondary",
+              "closed": "secondary",
+              "open": "success"
+            }
+          },
+          {
+            "key": "index",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "uuid",
+            "label": "UUID"
+          },
+          {
+            "key": "pri",
+            "label": "Primaries",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "rep",
+            "label": "Replicas",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "docs_count",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "docs_deleted",
+            "label": "Deleted",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "store_size",
+            "label": "Store",
+            "sortable": true,
+            "type": "bytes"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "opensearch.index.create"
+          ],
+          "row": [
+            "opensearch.index.delete"
+          ],
+          "detail": [
+            "opensearch.mapping.update",
+            "opensearch.settings.update",
+            "opensearch.index.refresh",
+            "opensearch.index.flush",
+            "opensearch.index.close",
+            "opensearch.index.open",
+            "opensearch.reindex",
+            "opensearch.documents.delete_by_query",
+            "opensearch.index.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "health",
+            "severities": {
+              "green": "success",
+              "red": "danger",
+              "yellow": "warn"
+            }
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "opensearch.index.overview",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "documents",
+              "label": "Documents",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "opensearch.documents.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "_id",
+                    "label": "ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_index",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_score",
+                    "label": "Score",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "_version",
+                    "label": "Version",
+                    "type": "number"
+                  },
+                  {
+                    "key": "_source",
+                    "label": "Source",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "opensearch.document.create"
+                ],
+                "rowActionIds": [
+                  "opensearch.document.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "opensearch.search.query",
+                "method": "WS",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "OpenSearch query",
+                "executeLabel": "Search",
+                "runningLabel": "Searching...",
+                "emptyText": "Run a JSON DSL search to see hits.",
+                "initialQuery": "{\"query\":{\"match_all\":{}},\"size\":50}",
+                "completionRouteId": "opensearch.completion",
+                "exportable": true
+              }
+            },
+            {
+              "key": "mapping",
+              "label": "Mapping",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "opensearch.mapping.read",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "settings",
+              "label": "Settings",
+              "icon": {
+                "type": "lucide",
+                "value": "settings"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "opensearch.settings.read",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "aliases",
+              "label": "Aliases",
+              "icon": {
+                "type": "lucide",
+                "value": "tag"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "opensearch.aliases.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "alias",
+                    "label": "Alias",
+                    "sortable": true
+                  },
+                  {
+                    "key": "index",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "filter",
+                    "label": "Filter"
+                  },
+                  {
+                    "key": "routing.index",
+                    "label": "Index routing"
+                  },
+                  {
+                    "key": "routing.search",
+                    "label": "Search routing"
+                  },
+                  {
+                    "key": "is_write_index",
+                    "label": "Write",
+                    "type": "bool"
+                  }
+                ],
+                "actionIds": [
+                  "opensearch.alias.create"
+                ],
+                "rowActionIds": [
+                  "opensearch.alias.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "shards",
+              "label": "Shards",
+              "icon": {
+                "type": "lucide",
+                "value": "split"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "opensearch.shards.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "index",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "shard",
+                    "label": "Shard",
+                    "sortable": true
+                  },
+                  {
+                    "key": "prirep",
+                    "label": "Type",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "initializing": "warn",
+                      "relocating": "warn",
+                      "started": "success",
+                      "unassigned": "danger"
+                    }
+                  },
+                  {
+                    "key": "docs",
+                    "label": "Docs",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "store",
+                    "label": "Store",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "ip",
+                    "label": "IP"
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node"
+                  }
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "document",
+        "title": "Documents",
+        "list": {
+          "routeId": "opensearch.documents.list"
+        },
+        "columns": [
+          {
+            "key": "_id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "_index",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "_score",
+            "label": "Score",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "_version",
+            "label": "Version",
+            "type": "number"
+          },
+          {
+            "key": "_source",
+            "label": "Source",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "row": [
+            "opensearch.document.delete"
+          ],
+          "detail": [
+            "opensearch.document.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "defaultTab": "editor",
+          "tabs": [
+            {
+              "key": "document",
+              "label": "Document",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "opensearch.document.read",
+                "params": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                }
+              }
+            },
+            {
+              "key": "editor",
+              "label": "Editor",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "opensearch.document.read",
+                "params": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "opensearch.document.update",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                },
+                "refreshField": "content"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "opensearch.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "opensearch.index.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "settings",
+                  "label": "Settings",
+                  "type": "json"
+                },
+                {
+                  "key": "mappings",
+                  "label": "Mappings",
+                  "type": "json"
+                },
+                {
+                  "key": "aliases",
+                  "label": "Aliases",
+                  "type": "json"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.index.refresh",
+        "label": "Refresh",
+        "icon": {
+          "type": "lucide",
+          "value": "refresh-cw"
+        },
+        "routeId": "opensearch.index.refresh",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "eq",
+              "value": "open"
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.index.flush",
+        "label": "Flush",
+        "icon": {
+          "type": "lucide",
+          "value": "hard-drive-download"
+        },
+        "routeId": "opensearch.index.flush",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Flush this index?",
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "eq",
+              "value": "open"
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.index.close",
+        "label": "Close",
+        "icon": {
+          "type": "lucide",
+          "value": "lock"
+        },
+        "routeId": "opensearch.index.close",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Close this index?",
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "eq",
+              "value": "open"
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.index.open",
+        "label": "Open",
+        "icon": {
+          "type": "lucide",
+          "value": "lock-open"
+        },
+        "routeId": "opensearch.index.open",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "in",
+              "value": [
+                "close",
+                "closed"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.index.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "opensearch.index.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this index and all documents?"
+      },
+      {
+        "id": "opensearch.mapping.update",
+        "label": "Update mapping",
+        "icon": {
+          "type": "lucide",
+          "value": "braces"
+        },
+        "routeId": "opensearch.mapping.update",
+        "method": "PUT",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Mapping",
+              "fields": [
+                {
+                  "key": "mapping",
+                  "label": "Mapping",
+                  "type": "json",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"properties\": {\n    \"new_field\": { \"type\": \"text\" }\n  }\n}",
+          "saveRouteId": "opensearch.mapping.update",
+          "saveMethod": "PUT",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "mapping"
+        }
+      },
+      {
+        "id": "opensearch.settings.update",
+        "label": "Update settings",
+        "icon": {
+          "type": "lucide",
+          "value": "settings"
+        },
+        "routeId": "opensearch.settings.update",
+        "method": "PUT",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Settings",
+              "fields": [
+                {
+                  "key": "settings",
+                  "label": "Settings",
+                  "type": "json",
+                  "required": true,
+                  "help": "Dynamic index settings to apply, e.g. {\"index\":{\"number_of_replicas\":1,\"refresh_interval\":\"30s\"}}."
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"index\": {\n    \"number_of_replicas\": 1,\n    \"refresh_interval\": \"30s\"\n  }\n}",
+          "saveRouteId": "opensearch.settings.update",
+          "saveMethod": "PUT",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "settings"
+        }
+      },
+      {
+        "id": "opensearch.documents.delete_by_query",
+        "label": "Delete by query",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "opensearch.documents.delete_by_query",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete all documents matching this query? This cannot be undone.",
+        "input": {
+          "groups": [
+            {
+              "name": "Delete by query",
+              "fields": [
+                {
+                  "key": "query",
+                  "label": "Query",
+                  "type": "json",
+                  "required": true,
+                  "help": "Query DSL selecting the documents to delete, e.g. {\"match\":{\"status\":\"archived\"}}."
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"match_all\": {}\n}",
+          "saveRouteId": "opensearch.documents.delete_by_query",
+          "saveMethod": "POST",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "query"
+        }
+      },
+      {
+        "id": "opensearch.document.create",
+        "label": "Create document",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "opensearch.document.create",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Document",
+              "fields": [
+                {
+                  "key": "id",
+                  "label": "Document ID",
+                  "type": "text"
+                },
+                {
+                  "key": "document",
+                  "label": "Document",
+                  "type": "json",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"title\": \"Example\"\n}",
+          "saveRouteId": "opensearch.document.create",
+          "saveMethod": "POST",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "document"
+        }
+      },
+      {
+        "id": "opensearch.document.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "opensearch.document.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.name}",
+          "index": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this document?"
+      },
+      {
+        "id": "opensearch.reindex",
+        "label": "Reindex",
+        "icon": {
+          "type": "lucide",
+          "value": "copy"
+        },
+        "routeId": "opensearch.reindex",
+        "method": "POST",
+        "params": {
+          "source": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Start a reindex operation?",
+        "input": {
+          "groups": [
+            {
+              "name": "Reindex",
+              "fields": [
+                {
+                  "key": "source",
+                  "label": "Source index",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "destination",
+                  "label": "Destination index",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "query",
+                  "label": "Query filter",
+                  "type": "json"
+                },
+                {
+                  "key": "wait_for_completion",
+                  "label": "Wait for completion",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.alias.create",
+        "label": "Add alias",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "opensearch.alias.create",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Alias",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Alias name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "filter",
+                  "label": "Filter",
+                  "type": "json",
+                  "help": "Optional query DSL to make this a filtered alias."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "opensearch.alias.delete",
+        "label": "Remove",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "opensearch.alias.delete",
+        "method": "DELETE",
+        "params": {
+          "alias": "${record.alias}",
+          "index": "${record.index}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Remove this alias?"
+      }
+    ],
+    "streams": [
+      {
+        "id": "opensearch.search.query",
+        "kind": "query",
+        "routeId": "opensearch.search.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      }
+    }
+  }
+}
