@@ -8,19 +8,25 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-linux-amd64
-        sha256: 284a44b52c551bfbea0be0837431e5997f7e488827c94f0fd9b6b75cad372d7f
+        sha256: db24038286b052d968d7a00d11693152429d4a301bd59aec2d86c95d837a2817
+
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-linux-arm64
-        sha256: 1f4b8a0b9fb24db101ad177a42e3412643a2df27a0cf6a2cba3f13243c6e1d1c
+        sha256: 2bd7796c083183b2b0bafaa1f644bcf519a1844601ac94cbdd9c3724fea24a50
+
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-darwin-amd64
-        sha256: 6dac0b45bbfc499e214abf6a26397ad34bc2104781c5b87b0264788bee51906a
+        sha256: 083dcfc53b3b8d03786399ccf40cb12caa81cc396401a34fe06af51ac65b5e51
+
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-darwin-arm64
-        sha256: c6a58b28de73fc974876c5d2a54c3e4a5abce50c4383fd541f6c5afa5ebc892a
+        sha256: a20ba2457a96508719349dd36e94eb93ef96eb9ef3155b7db85f562e857be56e
+
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-windows-amd64.exe
-        sha256: 784503f153747e5e225901717278cb639b2eafc9f3a389e9b1a574e771079e45
+        sha256: f12c8bea1f0081597a8acebfea4aaec4b9a334a7de8dce82b8cc53b58aea69c2
+
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/kafka-v0.1.0/shellcn-plugin-kafka-windows-arm64.exe
-        sha256: bebff76a256a3b6662f15a73a6fa25a75a80b3d353c2316c37ec9555db3bdd0a
+        sha256: 3fb34e3199396172b745bcc0d116baf9b2ad61c4d16f96fa828aa036c0e415c3
+

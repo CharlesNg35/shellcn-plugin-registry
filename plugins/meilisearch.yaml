@@ -8,19 +8,25 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-linux-amd64
-        sha256: 8f0673238d0592b28bdf3ae37f3efc182b190a581f4bb26315bdfc703d567cec
+        sha256: 785135418401d40aae7e5f3742e58e32ca95bc9e10fdf69c5fb72efd39e8b393
+
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-linux-arm64
-        sha256: f0ad923fe447b68aa8c7b00b815fd42b4d7e8fbe988cb5a8ab8790b3ffc38dc2
+        sha256: 22d65f38ac4eb6466d4ac17459e865240b8ce1f8e59d31ddfcfbcc0d03fb6df5
+
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-darwin-amd64
-        sha256: c3a72d8310a6d0a6ad8e7d179328bb587aa6339e9dd2e136a0298241e94617f6
+        sha256: 995f3402381dbfea3f014e0a35b33192d2c8c04aac6a351537318debccf94b2a
+
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-darwin-arm64
-        sha256: 2e7ec72556d946e067e3637971fe6793cd144e2807f18ff112cf3c7e1f6e18bc
+        sha256: d6d42bad123012c127a30955838cbb8c9ef4ec1763911807560ae90007283111
+
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-windows-amd64.exe
-        sha256: 739a2d9f1598c60ec4158f580b7a4c26471a35f4817f4f180adb4c4a5ed112b6
+        sha256: 22c5fe70deb164e02d850f29117108e6755fc2257a117594cea1b76f6527a5c4
+
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/meilisearch-v0.1.0/shellcn-plugin-meilisearch-windows-arm64.exe
-        sha256: 8f2323ccabec64accde6628a5d8bdb571f9911fde1dda9ad331c2c7fdd82e18c
+        sha256: b0fb04f31e1e83819a16598bbb861401e30bb062ca0bc948706ef79cdfe10ffa
+
