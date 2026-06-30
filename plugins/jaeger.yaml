@@ -9,25 +9,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-linux-amd64
-        sha256: 51f48e757aa66fd215130157ccd0db5acd3ee9513c743d30f68dfe2d46fa3680
-
+        sha256: 68987bb1473d90c260e85cb4c1e7c8eceb7f3323d3fcb95b5470992a75e3762d
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-linux-arm64
-        sha256: 76d03dcce9d72a447b4922a579ba616b5cb3d904e279b3f0d2aeb8633cdc1f16
-
+        sha256: a3ba989ea7a9886f1b1f3b0a4b8fe8a6f05ddfb14b44c20dd38ebc0a7335b167
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-darwin-amd64
-        sha256: 497bde06df0dad1cc6b1d5305ed0702a462d82d169c71bf8298387883447afb0
-
+        sha256: a2b28f44671d2ccec4ef873226930d7da56fd1cce26c3e95a82c440be8182316
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-darwin-arm64
-        sha256: f5fb5c44e92090a633a022e22a1aa80880452f607da8d654fd6b96271a6a5fe9
-
+        sha256: c41d9743a54afacbb204878e8c2788d4097849460c8afd7053b6f19831132496
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-windows-amd64.exe
-        sha256: 10284b1eac7340bd3e37e03019e82d96b35599ff13ae29e6a122e164537c82ce
-
+        sha256: cd1b65c6bb44fce788453ab810151cf7f1364241b058f599a0a4283716fdc29f
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/jaeger-v0.1.0/shellcn-plugin-jaeger-windows-arm64.exe
-        sha256: 1c24b04292c17b150183c00a666a4a4a4453cef510bc601c8b3ed2274a02f95f
-
+        sha256: 67b210ada299575aebe9c3c8d16705876dff25655268b1e2bbcc10f9a478b2ff
