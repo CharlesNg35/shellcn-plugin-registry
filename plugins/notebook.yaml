@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-linux-amd64
-        sha256: d9a36bda71a5ae43ec24e5e2d63a66bed50b7458fad8558baf45a3ac09e702c1
+        sha256: 1989a295cf232cf7feb49dc6a643d230e21bafb7096470a000f62ff1fcca0852
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-linux-arm64
-        sha256: b4427037c5c125a8fda5f455bd70cd1e485a9db888df13e38cef1ded316dc5b0
+        sha256: 1315d50c99a7d2378eda54c98f1a3999f641b86d2b09df4031516abc071a81b3
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-darwin-amd64
-        sha256: bbebb64a949842cdbfb77a2cfded2633ea24e5a31f6c045921ca9ef7ec855a40
+        sha256: 61719a2ebbd9c712ac245f44f1b41564856671b008cc863e17800b229b94966b
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-darwin-arm64
-        sha256: 45bf035f1734ea1ccab90b81dbfc11fd57f8d509fac6c7f58088471407f36b76
+        sha256: c504fe829a49558c637b4eac68f09dfb67d593ac9066745b43e280f22bedc5c4
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-windows-amd64.exe
-        sha256: 8aa8b918701fc066bac6a4a8e9a21ed9bac1387d1ac0dc3ec07ec1119bc4cfd0
+        sha256: 03abfcad07899b7dc859cce16956bb9f52f1d91b04505b18abb5f24669bff61d
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/notebook-v0.1.0/shellcn-plugin-notebook-windows-arm64.exe
-        sha256: df02bc494e6a0d2c8138528e38dae051db4342e78f9ba9f18231dd6b29d5eb1c
+        sha256: 7a796ccc20c2ae2f597f1fbaa98cce4fe3965b39c8d922fa221fd845ca20d7ea
