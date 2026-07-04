@@ -1,0 +1,4187 @@
+{
+  "name": "oracle",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg width=\"800px\" height=\"800px\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\"\u003e\u003cpath fill=\"#EA1B22\" fill-rule=\"evenodd\" d=\"M.1 8c0 2.761 2.237 5 4.997 5h5.806A4.999 4.999 0 0015.9 8c0-2.761-2.237-5-4.997-5H5.097A4.999 4.999 0 00.1 8zm13.911 0a3.235 3.235 0 01-3.234 3.237h-5.55A3.235 3.235 0 011.991 8a3.235 3.235 0 013.234-3.236h5.551A3.235 3.235 0 0114.011 8z\" clip-rule=\"evenodd\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "oracle",
+    "version": "0.1.0",
+    "title": "Oracle Database",
+    "description": "Oracle cockpit with schemas, tables, views, procedures, packages, sequences, users, tablespaces, sessions, SQL editor, DDL helpers, and safety controls.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg width=\"800px\" height=\"800px\" viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\"\u003e\u003cpath fill=\"#EA1B22\" fill-rule=\"evenodd\" d=\"M.1 8c0 2.761 2.237 5 4.997 5h5.806A4.999 4.999 0 0015.9 8c0-2.761-2.237-5-4.997-5H5.097A4.999 4.999 0 00.1 8zm13.911 0a3.235 3.235 0 01-3.234 3.237h-5.55A3.235 3.235 0 011.991 8a3.235 3.235 0 013.234-3.236h5.551A3.235 3.235 0 0114.011 8z\" clip-rule=\"evenodd\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "oracle.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 1521,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "service",
+              "label": "Service name",
+              "type": "text",
+              "required": true,
+              "default": "FREEPDB1"
+            },
+            {
+              "key": "sid",
+              "label": "SID",
+              "type": "text",
+              "help": "Optional SID. When set it is used instead of service name."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "password",
+              "options": [
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                },
+                {
+                  "label": "Client certificate",
+                  "value": "client_certificate"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "placeholder": "SYSTEM",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  },
+                  {
+                    "field": "auth_client_cert_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable Oracle password. The credential identity can also supply the username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "oracle"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "auth_client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable client certificate and private key used for TCPS external authentication.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "oracle"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  },
+                  {
+                    "field": "auth_client_cert_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "dba_privilege",
+              "label": "DBA privilege",
+              "type": "select",
+              "default": "",
+              "help": "Only use privileged modes for dedicated administrative connections.",
+              "options": [
+                {
+                  "label": "None",
+                  "value": ""
+                },
+                {
+                  "label": "SYSDBA",
+                  "value": "SYSDBA"
+                },
+                {
+                  "label": "SYSOPER",
+                  "value": "SYSOPER"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional PEM containing the client certificate and private key for TCPS client authentication.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "oracle"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "neq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks INSERT, UPDATE, DELETE, MERGE, PL/SQL blocks, DDL, TRUNCATE, GRANT, and other write statements."
+            },
+            {
+              "key": "require_destructive_confirmation",
+              "label": "Confirm destructive statements",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires explicit confirmation before write, DDL, PL/SQL, and privileged statements execute."
+            },
+            {
+              "key": "query_timeout",
+              "label": "Query timeout",
+              "type": "duration",
+              "default": "30s"
+            },
+            {
+              "key": "row_limit",
+              "label": "Row limit",
+              "type": "number",
+              "default": 500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "max_connections",
+              "label": "Pool size",
+              "type": "number",
+              "default": 4,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 20
+                }
+              ]
+            },
+            {
+              "key": "redact_columns",
+              "label": "Redacted columns",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for result columns that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "sql",
+      "schema",
+      "tables",
+      "query_editor",
+      "users",
+      "sessions"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "schemas",
+        "label": "Schemas",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-tree"
+        },
+        "source": {
+          "routeId": "oracle.schemas.tree"
+        },
+        "ref": {
+          "kind": "server",
+          "name": "Schemas",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "users",
+        "label": "Users",
+        "icon": {
+          "type": "lucide",
+          "value": "users"
+        },
+        "source": {
+          "routeId": "oracle.users.tree"
+        },
+        "resourceKind": "user"
+      },
+      {
+        "key": "tablespaces",
+        "label": "Tablespaces",
+        "icon": {
+          "type": "lucide",
+          "value": "hard-drive"
+        },
+        "source": {
+          "routeId": "oracle.tablespaces.tree"
+        },
+        "resourceKind": "tablespace"
+      },
+      {
+        "key": "sessions",
+        "label": "Sessions",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "resourceKind": "session"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "server",
+        "title": "Schemas",
+        "list": {
+          "routeId": "oracle.schemas.list"
+        },
+        "columns": null,
+        "detail": {
+          "header": {
+            "title": "Schemas"
+          },
+          "tabs": [
+            {
+              "key": "schemas",
+              "label": "Schemas",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.schemas.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "account_status",
+                    "label": "Status"
+                  },
+                  {
+                    "key": "default_tablespace",
+                    "label": "Default tablespace"
+                  },
+                  {
+                    "key": "temporary_tablespace",
+                    "label": "Temporary tablespace"
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "datetime"
+                  }
+                ],
+                "actionIds": [
+                  "oracle.schema.create"
+                ],
+                "rowActionIds": [
+                  "oracle.schema.drop"
+                ]
+              }
+            },
+            {
+              "key": "console",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "oracle.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "Oracle SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT SYSDATE AS now FROM dual",
+                "cancelRouteId": "oracle.query.cancel",
+                "completionRouteId": "oracle.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "schema",
+        "title": "Schemas",
+        "list": {
+          "routeId": "oracle.schemas.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "account_status",
+            "label": "Status"
+          },
+          {
+            "key": "default_tablespace",
+            "label": "Default tablespace"
+          },
+          {
+            "key": "temporary_tablespace",
+            "label": "Temporary tablespace"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "oracle.schema.overview",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "tables",
+              "label": "Tables",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.tables.list",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "tablespace",
+                    "label": "Tablespace"
+                  },
+                  {
+                    "key": "rows",
+                    "label": "Rows",
+                    "type": "number"
+                  },
+                  {
+                    "key": "blocks",
+                    "label": "Blocks",
+                    "type": "number"
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "datetime"
+                  },
+                  {
+                    "key": "last_analyzed",
+                    "label": "Analyzed",
+                    "type": "datetime"
+                  }
+                ],
+                "actionIds": [
+                  "oracle.table.create"
+                ],
+                "rowActionIds": [
+                  "oracle.table.truncate",
+                  "oracle.table.drop"
+                ]
+              }
+            },
+            {
+              "key": "relations",
+              "label": "Relationships",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "oracle.relations.graph",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "layout": "grid",
+                "fitView": true,
+                "exportable": true
+              }
+            },
+            {
+              "key": "views",
+              "label": "Views",
+              "icon": {
+                "type": "lucide",
+                "value": "panel-top"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.views.list",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "View",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "datetime"
+                  },
+                  {
+                    "key": "modified",
+                    "label": "Modified",
+                    "type": "datetime"
+                  }
+                ],
+                "rowActionIds": [
+                  "oracle.view.drop"
+                ]
+              }
+            },
+            {
+              "key": "procedures",
+              "label": "Procedures",
+              "icon": {
+                "type": "lucide",
+                "value": "function-square"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.procedures.list",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Procedure",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status"
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "datetime"
+                  },
+                  {
+                    "key": "modified",
+                    "label": "Modified",
+                    "type": "datetime"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "packages",
+              "label": "Packages",
+              "icon": {
+                "type": "lucide",
+                "value": "package"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.packages.list",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Package",
+                    "sortable": true
+                  },
+                  {
+                    "key": "owner",
+                    "label": "Owner",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status"
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "type": "datetime"
+                  },
+                  {
+                    "key": "modified",
+                    "label": "Modified",
+                    "type": "datetime"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "oracle.query",
+                "method": "WS",
+                "params": {
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "Oracle SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT SYSDATE AS now FROM dual",
+                "cancelRouteId": "oracle.query.cancel",
+                "completionRouteId": "oracle.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "table",
+        "title": "Tables",
+        "list": {
+          "routeId": "oracle.tables.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Table",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "tablespace",
+            "label": "Tablespace"
+          },
+          {
+            "key": "rows",
+            "label": "Rows",
+            "type": "number"
+          },
+          {
+            "key": "blocks",
+            "label": "Blocks",
+            "type": "number"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          },
+          {
+            "key": "last_analyzed",
+            "label": "Analyzed",
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "row": [
+            "oracle.table.truncate",
+            "oracle.table.drop"
+          ],
+          "detail": [
+            "oracle.table.rename",
+            "oracle.table.truncate",
+            "oracle.table.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.table.rows",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "oracle.table.columns",
+                  "params": {
+                    "id": "${resource.uid}"
+                  }
+                },
+                "editable": true,
+                "insert": {
+                  "routeId": "oracle.table.row.insert",
+                  "method": "POST",
+                  "params": {
+                    "id": "${resource.uid}"
+                  }
+                },
+                "update": {
+                  "routeId": "oracle.table.row.update",
+                  "method": "PATCH",
+                  "params": {
+                    "id": "${resource.uid}"
+                  }
+                },
+                "delete": {
+                  "routeId": "oracle.table.row.delete",
+                  "method": "DELETE",
+                  "params": {
+                    "id": "${resource.uid}"
+                  }
+                },
+                "emptyText": "No rows.",
+                "stagedEdits": true,
+                "exportable": true
+              }
+            },
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.table.columns",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "nullable",
+                    "label": "Nullable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "type": "number"
+                  },
+                  {
+                    "key": "comments",
+                    "label": "Comment"
+                  }
+                ],
+                "actionIds": [
+                  "oracle.column.add"
+                ],
+                "rowActionIds": [
+                  "oracle.column.alter",
+                  "oracle.column.rename",
+                  "oracle.column.drop"
+                ]
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "key-round"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.table.indexes",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "columns",
+                    "label": "Columns"
+                  },
+                  {
+                    "key": "unique",
+                    "label": "Unique",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status"
+                  }
+                ],
+                "actionIds": [
+                  "oracle.index.create"
+                ],
+                "rowActionIds": [
+                  "oracle.index.drop"
+                ]
+              }
+            },
+            {
+              "key": "constraints",
+              "label": "Constraints",
+              "icon": {
+                "type": "lucide",
+                "value": "shield-check"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.table.constraints",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Constraint",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "columns",
+                    "label": "Columns"
+                  },
+                  {
+                    "key": "referenced",
+                    "label": "Referenced"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status"
+                  }
+                ],
+                "actionIds": [
+                  "oracle.constraint.add"
+                ],
+                "rowActionIds": [
+                  "oracle.constraint.drop"
+                ]
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "oracle.query",
+                "method": "WS",
+                "params": {
+                  "schema": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "Oracle SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT * FROM ${resource.name} FETCH FIRST 100 ROWS ONLY",
+                "cancelRouteId": "oracle.query.cancel",
+                "completionRouteId": "oracle.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "view",
+        "title": "Views",
+        "list": {
+          "routeId": "oracle.views.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "View",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          },
+          {
+            "key": "modified",
+            "label": "Modified",
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "row": [
+            "oracle.view.drop"
+          ],
+          "detail": [
+            "oracle.view.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "oracle.view.rows",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "oracle.view.definition",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "oracle.query",
+                "method": "WS",
+                "params": {
+                  "schema": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "Oracle SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results.",
+                "initialQuery": "SELECT * FROM ${resource.name} FETCH FIRST 100 ROWS ONLY",
+                "cancelRouteId": "oracle.query.cancel",
+                "completionRouteId": "oracle.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "procedure",
+        "title": "Procedures",
+        "list": {
+          "routeId": "oracle.procedures.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Procedure",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type"
+          },
+          {
+            "key": "status",
+            "label": "Status"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          },
+          {
+            "key": "modified",
+            "label": "Modified",
+            "type": "datetime"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "oracle.object.definition",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "package",
+        "title": "Packages",
+        "list": {
+          "routeId": "oracle.packages.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Package",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          },
+          {
+            "key": "modified",
+            "label": "Modified",
+            "type": "datetime"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "spec",
+              "label": "Spec",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "oracle.package.spec",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            },
+            {
+              "key": "body",
+              "label": "Body",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "oracle.package.body",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "sequence",
+        "title": "Sequences",
+        "list": {
+          "routeId": "oracle.sequences.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Sequence",
+            "sortable": true
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "sortable": true
+          },
+          {
+            "key": "min_value",
+            "label": "Min",
+            "type": "number"
+          },
+          {
+            "key": "max_value",
+            "label": "Max",
+            "type": "number"
+          },
+          {
+            "key": "increment_by",
+            "label": "Increment",
+            "type": "number"
+          },
+          {
+            "key": "last_number",
+            "label": "Last",
+            "type": "number"
+          },
+          {
+            "key": "cache_size",
+            "label": "Cache",
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "oracle.sequence.overview",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "user",
+        "title": "Users",
+        "list": {
+          "routeId": "oracle.users.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "User",
+            "sortable": true
+          },
+          {
+            "key": "account_status",
+            "label": "Status"
+          },
+          {
+            "key": "default_tablespace",
+            "label": "Default tablespace"
+          },
+          {
+            "key": "temporary_tablespace",
+            "label": "Temporary tablespace"
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "row": [
+            "oracle.user.drop"
+          ],
+          "detail": [
+            "oracle.user.grant",
+            "oracle.user.lock",
+            "oracle.user.unlock",
+            "oracle.user.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "oracle.user.overview",
+                "params": {
+                  "user": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "tablespace",
+        "title": "Tablespaces",
+        "list": {
+          "routeId": "oracle.tablespaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Tablespace",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status"
+          },
+          {
+            "key": "contents",
+            "label": "Contents"
+          },
+          {
+            "key": "extent_management",
+            "label": "Extents"
+          },
+          {
+            "key": "bigfile",
+            "label": "Bigfile",
+            "type": "bool"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "oracle.tablespace.overview",
+                "params": {
+                  "tablespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "session",
+        "title": "Sessions",
+        "list": {
+          "routeId": "oracle.sessions.list"
+        },
+        "columns": [
+          {
+            "key": "sid",
+            "label": "SID",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "serial",
+            "label": "Serial",
+            "type": "number"
+          },
+          {
+            "key": "username",
+            "label": "User"
+          },
+          {
+            "key": "status",
+            "label": "Status"
+          },
+          {
+            "key": "machine",
+            "label": "Machine"
+          },
+          {
+            "key": "program",
+            "label": "Program"
+          },
+          {
+            "key": "logon_time",
+            "label": "Logon",
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "row": [
+            "oracle.session.kill"
+          ],
+          "detail": [
+            "oracle.session.kill"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "Session ${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "oracle.session.overview",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "oracle.schema.create",
+        "label": "Create schema",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-plus"
+        },
+        "routeId": "oracle.schema.create",
+        "method": "POST",
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Create this schema user? It can own objects and may receive database privileges.",
+        "input": {
+          "groups": [
+            {
+              "name": "Schema",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Schema (user) name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "password",
+                  "label": "Password",
+                  "type": "password",
+                  "required": true,
+                  "secret": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "schemas"
+        }
+      },
+      {
+        "id": "oracle.schema.drop",
+        "label": "Drop schema",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "oracle.schema.drop",
+        "method": "DELETE",
+        "params": {
+          "schema": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this schema (user)? The user and every object it owns are permanently deleted.",
+        "onSuccess": {
+          "selectTab": "schemas"
+        },
+        "bulk": true
+      },
+      {
+        "id": "oracle.table.create",
+        "label": "Create table",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "oracle.table.create",
+        "method": "POST",
+        "params": {
+          "schema": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Table",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Table name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "array",
+                  "required": true,
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "autocomplete",
+                        "required": true,
+                        "placeholder": "VARCHAR2(255)",
+                        "options": [
+                          {
+                            "label": "NUMBER",
+                            "value": "NUMBER"
+                          },
+                          {
+                            "label": "NUMBER(10,2)",
+                            "value": "NUMBER(10,2)"
+                          },
+                          {
+                            "label": "VARCHAR2(255)",
+                            "value": "VARCHAR2(255)"
+                          },
+                          {
+                            "label": "CHAR(1)",
+                            "value": "CHAR(1)"
+                          },
+                          {
+                            "label": "NVARCHAR2(255)",
+                            "value": "NVARCHAR2(255)"
+                          },
+                          {
+                            "label": "CLOB",
+                            "value": "CLOB"
+                          },
+                          {
+                            "label": "BLOB",
+                            "value": "BLOB"
+                          },
+                          {
+                            "label": "DATE",
+                            "value": "DATE"
+                          },
+                          {
+                            "label": "TIMESTAMP",
+                            "value": "TIMESTAMP"
+                          },
+                          {
+                            "label": "TIMESTAMP WITH TIME ZONE",
+                            "value": "TIMESTAMP WITH TIME ZONE"
+                          },
+                          {
+                            "label": "FLOAT",
+                            "value": "FLOAT"
+                          },
+                          {
+                            "label": "BINARY_FLOAT",
+                            "value": "BINARY_FLOAT"
+                          },
+                          {
+                            "label": "BINARY_DOUBLE",
+                            "value": "BINARY_DOUBLE"
+                          },
+                          {
+                            "label": "RAW(16)",
+                            "value": "RAW(16)"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "nullable",
+                        "label": "Nullable",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "primary",
+                        "label": "Primary key",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "unique",
+                        "label": "Unique",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "default",
+                        "label": "Default expression",
+                        "type": "text"
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Column"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "tables"
+        }
+      },
+      {
+        "id": "oracle.table.rename",
+        "label": "Rename table",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "oracle.table.rename",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "New table name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "oracle.column.add",
+        "label": "Add column",
+        "icon": {
+          "type": "lucide",
+          "value": "columns-3"
+        },
+        "routeId": "oracle.column.add",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Column",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Column name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "default": "VARCHAR2(255)"
+                },
+                {
+                  "key": "nullable",
+                  "label": "Nullable",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "default",
+                  "label": "Default expression",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "oracle.column.alter",
+        "label": "Modify column",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "oracle.column.alter",
+        "method": "POST",
+        "params": {
+          "id": "${record.id}",
+          "name": "${record.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Column",
+              "fields": [
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "text",
+                  "required": true,
+                  "default": "VARCHAR2(255)"
+                },
+                {
+                  "key": "nullable",
+                  "label": "Nullable",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "default",
+                  "label": "Default expression",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "oracle.column.rename",
+        "label": "Rename column",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil-line"
+        },
+        "routeId": "oracle.column.rename",
+        "method": "POST",
+        "params": {
+          "id": "${record.id}",
+          "name": "${record.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename",
+              "fields": [
+                {
+                  "key": "to",
+                  "label": "New column name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "oracle.column.drop",
+        "label": "Drop column",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "oracle.column.drop",
+        "method": "POST",
+        "params": {
+          "id": "${record.id}",
+          "name": "${record.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this column? Its data is permanently removed.",
+        "onSuccess": {
+          "selectTab": "columns"
+        },
+        "bulk": true
+      },
+      {
+        "id": "oracle.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "oracle.index.create",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "multiselect",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "oracle.table.columns",
+                    "params": {
+                      "id": "${resource.uid}"
+                    }
+                  }
+                },
+                {
+                  "key": "unique",
+                  "label": "Unique",
+                  "type": "toggle"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "oracle.index.drop",
+        "label": "Drop index",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "oracle.index.drop",
+        "method": "POST",
+        "params": {
+          "id": "${record.id}",
+          "name": "${record.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index?",
+        "onSuccess": {
+          "selectTab": "indexes"
+        },
+        "bulk": true
+      },
+      {
+        "id": "oracle.constraint.add",
+        "label": "Add constraint",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "oracle.constraint.add",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Constraint",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Constraint name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "select",
+                  "required": true,
+                  "default": "PRIMARY KEY",
+                  "options": [
+                    {
+                      "label": "Primary key",
+                      "value": "PRIMARY KEY"
+                    },
+                    {
+                      "label": "Unique",
+                      "value": "UNIQUE"
+                    },
+                    {
+                      "label": "Check",
+                      "value": "CHECK"
+                    },
+                    {
+                      "label": "Foreign key",
+                      "value": "FOREIGN KEY"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "multiselect",
+                  "help": "Required for primary key, unique, and foreign key.",
+                  "optionsSource": {
+                    "routeId": "oracle.table.columns",
+                    "params": {
+                      "id": "${resource.uid}"
+                    }
+                  }
+                },
+                {
+                  "key": "check",
+                  "label": "Check expression",
+                  "type": "text",
+                  "help": "e.g. AGE \u003e= 0. Required for a CHECK constraint."
+                },
+                {
+                  "key": "ref_table",
+                  "label": "Referenced table",
+                  "type": "text",
+                  "help": "Foreign key only: target table (optionally OWNER.TABLE)."
+                },
+                {
+                  "key": "ref_columns",
+                  "label": "Referenced columns",
+                  "type": "text",
+                  "help": "Foreign key only: comma-separated columns in the referenced table."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "constraints"
+        }
+      },
+      {
+        "id": "oracle.constraint.drop",
+        "label": "Drop constraint",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "oracle.constraint.drop",
+        "method": "POST",
+        "params": {
+          "id": "${record.id}",
+          "name": "${record.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this constraint?",
+        "onSuccess": {
+          "selectTab": "constraints"
+        },
+        "bulk": true
+      },
+      {
+        "id": "oracle.table.truncate",
+        "label": "Truncate",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "oracle.table.truncate",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Truncate this table? Every row will be deleted.",
+        "bulk": true
+      },
+      {
+        "id": "oracle.table.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "oracle.table.drop",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this table? The table definition and data will be permanently deleted.",
+        "bulk": true
+      },
+      {
+        "id": "oracle.view.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "oracle.view.drop",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this view?",
+        "bulk": true
+      },
+      {
+        "id": "oracle.session.kill",
+        "label": "Kill session",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-x"
+        },
+        "routeId": "oracle.session.kill",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Kill this session? In-flight work is rolled back and the connection is terminated immediately.",
+        "bulk": true
+      },
+      {
+        "id": "oracle.user.lock",
+        "label": "Lock account",
+        "icon": {
+          "type": "lucide",
+          "value": "lock"
+        },
+        "routeId": "oracle.user.lock",
+        "method": "POST",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false
+      },
+      {
+        "id": "oracle.user.unlock",
+        "label": "Unlock account",
+        "icon": {
+          "type": "lucide",
+          "value": "lock-open"
+        },
+        "routeId": "oracle.user.unlock",
+        "method": "POST",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false
+      },
+      {
+        "id": "oracle.user.grant",
+        "label": "Grant roles/privileges",
+        "icon": {
+          "type": "lucide",
+          "value": "shield-plus"
+        },
+        "routeId": "oracle.user.grant",
+        "method": "POST",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Grant roles or privileges to this user? This can expand access across schemas, objects, or administrative operations.",
+        "input": {
+          "groups": [
+            {
+              "name": "Grant",
+              "fields": [
+                {
+                  "key": "privileges",
+                  "label": "Roles / privileges",
+                  "type": "multiselect",
+                  "required": true,
+                  "help": "Each entry is a role or system privilege granted to the user.",
+                  "options": [
+                    {
+                      "label": "CONNECT",
+                      "value": "CONNECT"
+                    },
+                    {
+                      "label": "RESOURCE",
+                      "value": "RESOURCE"
+                    },
+                    {
+                      "label": "DBA",
+                      "value": "DBA"
+                    },
+                    {
+                      "label": "CREATE SESSION",
+                      "value": "CREATE SESSION"
+                    },
+                    {
+                      "label": "CREATE TABLE",
+                      "value": "CREATE TABLE"
+                    },
+                    {
+                      "label": "CREATE VIEW",
+                      "value": "CREATE VIEW"
+                    },
+                    {
+                      "label": "CREATE PROCEDURE",
+                      "value": "CREATE PROCEDURE"
+                    },
+                    {
+                      "label": "CREATE SEQUENCE",
+                      "value": "CREATE SEQUENCE"
+                    },
+                    {
+                      "label": "UNLIMITED TABLESPACE",
+                      "value": "UNLIMITED TABLESPACE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "oracle.user.drop",
+        "label": "Drop user",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "oracle.user.drop",
+        "method": "DELETE",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this user? The user and every object it owns are permanently deleted.",
+        "bulk": true
+      }
+    ],
+    "streams": [
+      {
+        "id": "oracle.query",
+        "kind": "query",
+        "routeId": "oracle.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
