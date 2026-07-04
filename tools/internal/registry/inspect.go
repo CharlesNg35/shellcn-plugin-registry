@@ -4,7 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"os"
 	"os/exec"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 
@@ -13,6 +16,11 @@ import (
 	"github.com/charlesng35/shellcn/sdk/gen/pluginv1"
 	"github.com/charlesng35/shellcn/sdk/grpcplugin"
 	"github.com/charlesng35/shellcn/sdk/plugin"
+)
+
+const (
+	SandboxNone  = "none"
+	SandboxBasic = "basic"
 )
 
 // Snapshot is what inspection captures from a verified binary: everything the
@@ -25,12 +33,24 @@ type Snapshot struct {
 	ProtocolVersion int             `json:"protocolVersion"`
 	Icon            plugin.Icon     `json:"icon"`
 	Projection      json.RawMessage `json:"projection"`
+	Inspection      Inspection      `json:"inspection,omitempty"`
+}
+
+// Inspection records how the binary was executed to capture the snapshot.
+type Inspection struct {
+	Sandbox string `json:"sandbox,omitempty"`
 }
 
 // Expect pins what a verified binary must present; empty fields are unchecked.
 type Expect struct {
 	Name    string
 	Version string
+}
+
+// InspectOptions controls binary inspection.
+type InspectOptions struct {
+	Expect  Expect
+	Sandbox string
 }
 
 // check fails when the binary's identity diverges from the registry manifest:
@@ -53,12 +73,26 @@ func (s *Snapshot) check(want Expect) error {
 // its manifest, validates it exactly as the gateway would, checks it against
 // want, and returns the snapshot. The subprocess is killed before returning.
 func Inspect(binary string, want Expect) (*Snapshot, error) {
+	return InspectWithOptions(binary, InspectOptions{Expect: want})
+}
+
+// InspectWithOptions runs a plugin binary through the real go-plugin handshake,
+// fetches its manifest, validates it exactly as the gateway would, checks it
+// against want, and returns the snapshot. The subprocess is killed before
+// returning.
+func InspectWithOptions(binary string, opts InspectOptions) (*Snapshot, error) {
+	cmd, cleanup, err := inspectCommand(binary, opts.Sandbox)
+	if err != nil {
+		return nil, err
+	}
+	defer cleanup()
 	client := goplugin.NewClient(&goplugin.ClientConfig{
 		HandshakeConfig:  grpcplugin.Handshake,
 		Plugins:          grpcplugin.Plugins(nil),
-		Cmd:              exec.Command(binary),
+		Cmd:              cmd,
 		AllowedProtocols: []goplugin.Protocol{goplugin.ProtocolGRPC},
 		AutoMTLS:         true,
+		SkipHostEnv:      true,
 		StartTimeout:     30 * time.Second,
 	})
 	defer client.Kill()
@@ -119,9 +153,53 @@ func Inspect(binary string, want Expect) (*Snapshot, error) {
 		ProtocolVersion: grpcplugin.ProtocolVersion,
 		Icon:            icon,
 		Projection:      projection,
+		Inspection:      Inspection{Sandbox: normalizeSandbox(opts.Sandbox)},
 	}
-	if err := snap.check(want); err != nil {
+	if err := snap.check(opts.Expect); err != nil {
 		return nil, err
 	}
 	return snap, nil
+}
+
+func inspectCommand(binary, sandbox string) (*exec.Cmd, func(), error) {
+	mode := normalizeSandbox(sandbox)
+	abs, err := filepath.Abs(binary)
+	if err != nil {
+		return nil, func() {}, err
+	}
+	if mode == SandboxNone {
+		cmd := exec.Command(abs)
+		return cmd, func() {}, nil
+	}
+	dir, err := os.MkdirTemp("", "regctl-plugin-sandbox-*")
+	if err != nil {
+		return nil, func() {}, err
+	}
+	cleanup := func() { _ = os.RemoveAll(dir) }
+	cmd := exec.Command(abs)
+	cmd.Dir = dir
+	cmd.Env = []string{
+		"HOME=" + dir,
+		"TMPDIR=" + dir,
+		"TEMP=" + dir,
+		"TMP=" + dir,
+		"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+		"SHELL=/bin/sh",
+		"USER=shellcn-registry",
+	}
+	if runtime.GOOS == "windows" {
+		cmd.Env = append(cmd.Env, "SystemRoot="+os.Getenv("SystemRoot"))
+	}
+	return cmd, cleanup, nil
+}
+
+func normalizeSandbox(mode string) string {
+	switch strings.ToLower(strings.TrimSpace(mode)) {
+	case "", SandboxNone:
+		return SandboxNone
+	case SandboxBasic, "true", "1", "yes":
+		return SandboxBasic
+	default:
+		return mode
+	}
 }

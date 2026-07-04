@@ -45,7 +45,7 @@ jobs:
             # pinned to the identity the manifest claims.
             bin=$(ls "$dir"/*linux-amd64* | head -1)
             chmod +x "$bin"
-            "$RUNNER_TEMP/regctl" inspect "$bin" -o snapshots \
+            "$RUNNER_TEMP/regctl" inspect "$bin" -o snapshots -sandbox \
               -expect-name "$name" -expect-version "$ver"
             (cd "$dir" && sha256sum * > checksums.txt)
             gh release create "$tag" \

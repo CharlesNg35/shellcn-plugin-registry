@@ -75,6 +75,52 @@ func TestManifestRejectsUnknownFields(t *testing.T) {
 	}
 }
 
+func TestManifestSourceAndSecurityClaimsDoNotVerifyTrust(t *testing.T) {
+	raw := strings.Replace(validManifest, "maintainers: [acme]\n", `maintainers: [acme]
+source:
+  repo: https://github.com/acme/shellcn-plugin-demo
+  commit: abcdef1234567890
+  tag: v0.2.0
+  workflow: .github/workflows/release.yml
+security:
+  review: external_verified
+  provenance: true
+  signatures: true
+  sbom: true
+`, 1)
+	m, err := Load(writeManifest(t, raw))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := m.Validate(); err != nil {
+		t.Fatalf("validate: %v", err)
+	}
+	trust, err := Policy(m, true)
+	if err == nil {
+		t.Fatal("strict policy must not accept contributor-declared security fields as verification")
+	}
+	if trust.Level != TrustExternalUnreviewed || !trust.SourceReviewed || trust.SignatureVerified || trust.ProvenanceVerified || trust.SBOMAvailable {
+		t.Fatalf("trust summary should not self-verify declarations: %+v", trust)
+	}
+}
+
+func TestStrictPolicyRejectsUnreviewedExternal(t *testing.T) {
+	m, err := Load(writeManifest(t, validManifest))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := m.Validate(); err != nil {
+		t.Fatal(err)
+	}
+	trust, err := Policy(m, true)
+	if err == nil {
+		t.Fatal("strict external policy should reject missing evidence")
+	}
+	if trust.Level != TrustExternalUnreviewed {
+		t.Fatalf("trust level = %q", trust.Level)
+	}
+}
+
 func TestNormalizeIcon(t *testing.T) {
 	ok := []plugin.Icon{
 		{Type: plugin.IconLucide, Value: "database"},
@@ -101,6 +147,37 @@ func TestNormalizeIcon(t *testing.T) {
 	for _, ic := range bad {
 		if _, err := NormalizeIcon(ic); err == nil {
 			t.Errorf("icon %.60v should be rejected", ic.Value)
+		}
+	}
+}
+
+func TestAuditSourceFlagsRiskyPatterns(t *testing.T) {
+	dir := t.TempDir()
+	src := `package demo
+
+import "os/exec"
+
+var started = exec.Command("sh", "-c", "true")
+
+func init() {}
+`
+	if err := os.WriteFile(filepath.Join(dir, "plugin.go"), []byte(src), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	findings, err := AuditSource(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := strings.Join(func() []string {
+		out := make([]string, 0, len(findings))
+		for _, f := range findings {
+			out = append(out, f.Message)
+		}
+		return out
+	}(), "\n")
+	for _, want := range []string{"import \"os/exec\"", "package-level function call", "init function"} {
+		if !strings.Contains(got, want) {
+			t.Fatalf("missing finding %q in:\n%s", want, got)
 		}
 	}
 }
@@ -139,6 +216,9 @@ func TestBuildIndexSkipsUnsnapshotted(t *testing.T) {
 	gotVersion := idx.Plugins[0].Versions[0]
 	if gotVersion.SnapshotURL != "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/demo/demo-v0.2.0.json" {
 		t.Fatalf("snapshot URL = %q", gotVersion.SnapshotURL)
+	}
+	if gotVersion.Trust.Level != TrustExternalUnreviewed || !gotVersion.Trust.ChecksumsVerified {
+		t.Fatalf("trust = %+v", gotVersion.Trust)
 	}
 	rawVersion, err := json.Marshal(gotVersion)
 	if err != nil {
