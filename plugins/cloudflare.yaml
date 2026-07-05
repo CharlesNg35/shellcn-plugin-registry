@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-linux-amd64
-        sha256: b3e4c5db511af5ac5813be73fd79a025505d495c42bbdec99b3f9453bcc757ce
+        sha256: 0dff853930942d4d11c37040826de8bfd6e434e88e522a919f0b36dcdac7491b
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-linux-arm64
-        sha256: 80ad8bd6b31c5bd0e48fd87748b8c55b09a05b9a975c5178e898500639cb34ad
+        sha256: 50dccec09ae059d9e126a94774e8d01368e39fc883dc4ccf8db5d24208854de8
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-darwin-amd64
-        sha256: fb7e956a6fbd67948082171635463cb3c0443044adccb71fb08ffcac1b075a9f
+        sha256: ea1f393be480de78f5a1238177d4fa874e372361660d3301a5b37ccd1f56118f
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-darwin-arm64
-        sha256: 7530e3963cef6a2e05f4f09a057bce84b7cb85288cbe320eee75e83b193b0253
+        sha256: 0dd663cd8b12aadce8841c75646948ecccee808e2d0e3de57dcf90c8b4f10860
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-windows-amd64.exe
-        sha256: 2ba4f5654a7e90033948ad0caa8c12be26105c72551ddc418f54fdfd6815422d
+        sha256: d0a0ef3dd645c8c15a3d341a816b522c7d5a4e3618db30f0c87055d35e644190
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cloudflare-v0.1.0/shellcn-plugin-cloudflare-windows-arm64.exe
-        sha256: 59230f8a2b6753ae88aa3a4d9bcbce7807959448253e26e42ca9572bcb39ac42
+        sha256: bab7b8d72c5c472c6facbca7b7f4181b4e553965434e09685388e1159f5ab26d
