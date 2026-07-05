@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-linux-amd64
-        sha256: 569de6721f836accc9decef29846a74814b24f1f8787db800cd417cc58cd25fb
+        sha256: 0fd8bd5bcb52685f6a3bef992d744bd028aa863ea1bd07c727bb7b941ad66f19
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-linux-arm64
-        sha256: dcccdc7e45b1fb71a7056e014c0a687657908cbb950d9a4f4421cfe5b625d08f
+        sha256: 0934d65761820f576d5c78ee81444a45ee6320374d19e7ddf7ca4625d2e7dc56
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-darwin-amd64
-        sha256: f3b473df8866b669d72e143bb3aca269509f98728735ca1823e7bfc49e083821
+        sha256: 8ee40ba3ce763dcccdda8f3c332f0b58612450f93f0b8a53f5768e531fe74d88
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-darwin-arm64
-        sha256: bf699f3a8e8a97964703b3559c39e474f33570f2cf59f01de5b1c6d01fb27eca
+        sha256: 58eada1b2deb5d44f9e02848cdb53f9e60a1e3a89b5e6fb1439a38d6e6098bd8
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-windows-amd64.exe
-        sha256: d1f794f305b178c5fc4601cefc6432c5d721736c8f25ba6a6a27801c0638afa5
+        sha256: a4d76b169a6a1dd86c2c200e4f328e22cf32359c29c61a1cfb18e20b1165a69a
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/cockroachdb-v0.1.0/shellcn-plugin-cockroachdb-windows-arm64.exe
-        sha256: e395896a3f957ebae4639743ae96062f5969c31f2fcb865996c45044a4c7bdb6
+        sha256: 911ad74984e9e5ae0cd2a89f309a8a08f683d0569ce395c7f88d715f2ee757a6
