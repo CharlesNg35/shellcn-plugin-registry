@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedBy": "mirror@39d07e8e3ff371b4f0dc846b9a201f85b53cf7d6",
+  "generatedBy": "mirror@0a9b5c6c9e406a57db99a781c86c5821f676f961",
   "plugins": [
     {
       "name": "cassandra",
@@ -282,42 +282,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "2d3eeb6d1da64b25e282353543c6d810086dfbbb08b6b7db349fbf753233c1d7",
+              "sha256": "4ce731b297a669a8eea7a2bf56ac77971a9b7f0fb54aeeab7d8d3eb38b816141",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "4d196bd13a4a5f668c0d490f0e78472ae9b4601306c940d9bacbe34c640d0845",
+              "sha256": "96abce5277c00b63b53f091f26fa3548187425243f6ddb0913651a43b20ce5d5",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "a9a06826a3c0b9fe2ebfed1ad8a2491539f372d1f14f7741e27581568af655f6",
+              "sha256": "3fb3026a77b833b643d63a4e877eaf14c7203a6e2a3cf3bfe9cdea9d67c0ab71",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "1f3bb41faa387dfd809c919eece43c26d0ae6b3b508ac9bd18b977dba3f91fc0",
+              "sha256": "868cbe3bbf92a2ee86df6b5aad4b47a12006c9e673caf51f4aea4dd95912491e",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "f6faad406db351813f38cdd8aeae907f2acd800afd6828d9ca4dfbb812b154ca",
+              "sha256": "60613d83c3c2b689e827c1ecf37f219e8acf5402353fada4db17449ad0d9783d",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "dab9e0301d62fb8929235840e4444a78490f0816fce2eb5a75ea1ce85c4a3408",
+              "sha256": "5601f51ebd5ccd5923b1ae551eb58b1f981deec1e0ee5e707472b74d2bfc8de0",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-arm64.exe"
@@ -1671,42 +1671,42 @@
           "protocolVersion": 1,
           "assets": {
             "darwin/amd64": {
-              "sha256": "3bfcc6d708ba8cf56f163f20eca2a11f34887c3a73ed84a93e989f54b6309a89",
+              "sha256": "61ec30b69b27cab042c1b9297a05dc47fe1c118ea63f257b2cdc0c2262898a79",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-amd64"
               ]
             },
             "darwin/arm64": {
-              "sha256": "fa7fc1de33df60654cd18eac2afca62c7d7d023041dfade6987b1c80240d2f36",
+              "sha256": "c3984ea8c913d99efcb2a6f815392a21f57fa7be43021dde864cf633f32ea750",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-arm64"
               ]
             },
             "linux/amd64": {
-              "sha256": "5898bd51a67c347d472f9fcf08791f49a790be59514203701a9b904e5a5c2014",
+              "sha256": "30981b6d6a88dafc50a0c1aaf5c57dedf066faddd7db9402e4691eee6f046b32",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-amd64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-amd64"
               ]
             },
             "linux/arm64": {
-              "sha256": "bc4c302dca1b1e0a6ec8f26a400eccd23d763639f0d80cb041509702d91f5f9d",
+              "sha256": "2d0ca8c9f7df5a3670431d3ba9fe21fb8f22be8bd94d3f0683a6ddd8dc5a55bc",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-arm64",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-arm64"
               ]
             },
             "windows/amd64": {
-              "sha256": "8abf751319f8b45e3c77a65fe88c7ccd3c3f6f0eafaeb123725ac536455c1f01",
+              "sha256": "9325e1331a9d27135746d8bcd8116bee4ab3bb57253143cadc7ff9038397bbdb",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-amd64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-amd64.exe"
               ]
             },
             "windows/arm64": {
-              "sha256": "cf15e3e858e0454ee788dc2cb528d5d0aa7afcbfd26bcbd916bc4c52eec72278",
+              "sha256": "56eac5c003554a2bd8f3168e3f972127462ff79e5bb5c17e6e5bb888aecc802f",
               "urls": [
                 "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-arm64.exe",
                 "https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-arm64.exe"
