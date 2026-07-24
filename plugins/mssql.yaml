@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-linux-amd64
-        sha256: 92d6b06b08be64a3a93fd53d9784c1e10c0f7bb1b3f5c191ec5333eb2f4139a9
+        sha256: accd43e42cf3e41d6861d2735dfc1f92d7514da838cfb9c8c65397d80a35c8f5
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-linux-arm64
-        sha256: 501ecc82c5ebf9e3eec786d67614b77ef2a842c2bda9c8fec959a4c1efd7e158
+        sha256: 2998aeaf82c39b523b958a5248ca1725eac83b4e91df92caccecdc22f7a2a912
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-darwin-amd64
-        sha256: 5350629ca27ace615a477e3825fe96fc7226dd325c9ff51a8bcddf4bc5105161
+        sha256: a3cbe3f0245b5f0edbdadc6b305f3bc35922edc3776b98c8730966d716c8c242
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-darwin-arm64
-        sha256: 8d81ce4a48d8328e0dda6af015c19a27324f35b68b682c8d2ab19a10e2da8f50
+        sha256: 40e6496aa25cd83c51a8ae565e098680bf693dfa75c124f468290b42bc565eab
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-windows-amd64.exe
-        sha256: ccde60cd5409510631922537a9cc842c185cfba9d82a99836f76827683f1302b
+        sha256: 4bfb06c80540a5e91f99ba2a7570c10455e8ec00e5fa612cab8552a43e5fd302
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mssql-v0.1.0/shellcn-plugin-mssql-windows-arm64.exe
-        sha256: 7fdf3612e08f354071e36a2c1f96322d1c34d5f87ce297cef591b2fe6b894bb4
+        sha256: e6c44e7b186e9e9fa1402594c0bf1ce222d0de1738b8738f3eff0e3ce234abcf

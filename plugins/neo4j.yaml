@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-amd64
-        sha256: 5cb0c4a6e669e7f1b028ba786cc8391feb7b4612f828a1c7c0e340fb16818863
+        sha256: 007f1a492c2c0ea0d269a6469d8464b7e8c5677b8fc44cac631e253bc8b5f725
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-linux-arm64
-        sha256: 423b1bf7f2fbdbf8f51c3d090bce08a39007bd9ef01037c191adb2f6db907831
+        sha256: 72acd320b87ccf9dee75d4217e1c9ee396f3780604e44faf9eb3dd0e7f3be19f
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-amd64
-        sha256: 89f36c9c5662210e9ed5903f98734d29ed88b3dea661324377e83f8963057f4f
+        sha256: fefb6b25c55dd8755bbd36335c1b84d62b2c4d17bd57476d8e96a8f6e14b697c
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-darwin-arm64
-        sha256: 4f070cecd885f39efe0daa6cd5a5764e37864760ba4cd92798ea092800532102
+        sha256: 9b8660a269948f09bafdc7b5c5ffd7faa3d4c851a1ee260f39f5d9e22cd0b045
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-amd64.exe
-        sha256: 620aaab1b68cb595d8a8fe1d664c6aece79ac3aaad1f455239845a6f269ae190
+        sha256: fcf8e6cd7765b9cd640707a278ba311c58d66673e21fbb1e6039dc9a4880377d
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/neo4j-v0.1.0/shellcn-plugin-neo4j-windows-arm64.exe
-        sha256: 352524a52c08f5f224d225556c3adb953d4cf304d66325c9f82f7e897fc18a62
+        sha256: 5051411bc30bdd9dbe99774c6b841a7fefc1d4868277b1ca75309fb2fc288c73

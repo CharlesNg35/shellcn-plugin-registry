@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-linux-amd64
-        sha256: 97e44299a023376a207bec1d2417c99de7b6b742b93a176700d00725462ec3c3
+        sha256: 72c1207520ff76a3d1127f82d3a20e6550bf99afd184055ab700532dc17932ec
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-linux-arm64
-        sha256: 80acbcbc1b97d55b3006a252df0f3142af307514d7486c262264778120afa000
+        sha256: 0f3d0034f077a03bb7733b0efd00d84ca32a2cd5364dd980f50a8228ada61b60
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-darwin-amd64
-        sha256: cff16b6ad5e7e9948054786f14734db367a4fb62f78483257dbaa8524e8f681e
+        sha256: 9a71ae5e746306e5d8b9b038a21d89e0634f1657c5e48ed0a8e19bc3b3e6229c
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-darwin-arm64
-        sha256: e99b79bfbf830a48a76a53cfe2d1796567e8ae0276948294db0c3e0241d1bd6f
+        sha256: 5cfdade471482fe5e68a9e64a9245fd976d0b80733a22ed677274e74c174cb2b
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-windows-amd64.exe
-        sha256: 9fdc9e3d8293869f996efe68d44bcc81c8eb227e857687348bf9b7219fdb7b5f
+        sha256: b6bbfde54f52d0991085facb3699c6877ad1b0f86ce4f061e1e04a8932bf1639
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nfs-v0.1.0/shellcn-plugin-nfs-windows-arm64.exe
-        sha256: 2cf08cc6bb73a9605b409c6f41bfa9d1919ead91fa83906be308e3528019c8d0
+        sha256: 1d13879e200508dc9a80e9325967dcac0aaac9542ae1245f4d4ecf5415d4bed8
