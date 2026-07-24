@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-linux-amd64
-        sha256: 39c960e8faeeb7c2861beee8816d97e286eb2ce0ba6e30b22c992f0be14d9edf
+        sha256: b6c8debeb2bfa3eca782ca58e9bf46945abb69c41d980a0266d19971c113f97c
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-linux-arm64
-        sha256: 1caf937716f26dc9c0e07457ffa299420c6d9bab63e1ae309a161462c2650709
+        sha256: 4450a3ff42b1e8684943552358d79d89d48c7bd1803539f0f10990eb0656ae90
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-darwin-amd64
-        sha256: 71e5e0d9031604cb15307df3838dad2ca413e454f6314541c556ee06c345316d
+        sha256: 648ea54ba9f023d0cef6b5df0ac1c884c7fa4a8614518fc67c3a764c1d524f3c
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-darwin-arm64
-        sha256: 918827e3ab558e615bb4d080883ce3ed9987af7bfaada6de0742300f4a37b3b8
+        sha256: 46ca80516c1951e4ca8bf509564fbb575e27db89bdaa605a5c96c630dda65dd1
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-windows-amd64.exe
-        sha256: 29d8dcb52ba2bd8d6ddf73f712039b692e1fc822c020cc80e12f1a847a5265dc
+        sha256: 9365dc0e1d6e6100682086db486bceaecd4579cd75f0cb23e03ec50c41674eaf
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/etcd-v0.1.0/shellcn-plugin-etcd-windows-arm64.exe
-        sha256: 8fba566b116edef1c7e16492046a003e1fd8f925c0affcacf9f0e707a70b2316
+        sha256: 41fd601f61dbd2d3429dd7b91927ed28983adb5da7c51c5c89f076ba83476468

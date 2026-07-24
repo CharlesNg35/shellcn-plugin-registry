@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-linux-amd64
-        sha256: fc86c78e8e1a696954f179eed09c2b04c9baad3233b99ced11a51c0eca9c2adb
+        sha256: 79cedc63b1ca9989faddff6c08b7236734f60ccc76e6d9af08661851ab2758cd
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-linux-arm64
-        sha256: 8bce446c64f4be6e961ef1db3c1000b5292d904a336a275859170019d6d8d32f
+        sha256: 380bc9aa2c77f01bfeecad7a711bdb5a8d3422b16bce808c48c0de54912c7082
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-darwin-amd64
-        sha256: d8412a328b8cef7fddbe3d5a7c7817724107eb12e773b4f671a8ef69185a4f22
+        sha256: 69106e18b9f91456f9c9bb4a9b6c99a2007a45401ca53939f3150cfedfc0dc61
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-darwin-arm64
-        sha256: 5e3169218ff32dec5413aadbd7ea10d6317bd4884b542b1fc874fe4fde257efa
+        sha256: 1be41b7ed66a77fd47427386c45d10eb28500572be68342bad1031d6a171f5ea
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-windows-amd64.exe
-        sha256: 2f78c98bc982b1707a07fe2a2f5bee7ae9ddbf2af1dde6b06e7864b7814b055d
+        sha256: b12f9cec6e0fe14ede8f6d9ec8609c15dc03f29fea565aa54f0c6b0e35c04aa0
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/oracle-v0.1.0/shellcn-plugin-oracle-windows-arm64.exe
-        sha256: 14aba1b3564ed9b1395683b854e41732fbbb6d82136f96d40a0a37f8830f6944
+        sha256: b807fffd76fa747b0620c7187f33cd1073cf06bfa0a05f654eb7a0ffdf222745
