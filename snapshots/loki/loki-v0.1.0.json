@@ -1,0 +1,2589 @@
+{
+  "name": "loki",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003clinearGradient id=\"a\" x1=\"485.057\" x2=\"485.057\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m139.6 464.9-40.8 6.3 6.3 40.8 40.8-6.3z\" style=\"fill:url(#a)\"/\u003e\u003clinearGradient id=\"b\" x1=\"749.438\" x2=\"749.438\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"M286.9 418.6 467 390.9l-6.3-40.8-180.1 27.7z\" style=\"fill:url(#b)\"/\u003e\u003clinearGradient id=\"c\" x1=\"614.329\" x2=\"614.329\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m216.7 387.6 6.3 40.8 40.8-6.2-6.3-40.9z\" style=\"fill:url(#c)\"/\u003e\u003clinearGradient id=\"d\" x1=\"549.698\" x2=\"549.698\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m209.8 495.9-6.3-40.8-40.8 6.3 6.2 40.8z\" style=\"fill:url(#d)\"/\u003e\u003clinearGradient id=\"e\" x1=\"485.065\" x2=\"485.065\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m95.2 448.1 40.8-6.3-6.2-40.8-40.8 6.3z\" style=\"fill:url(#e)\"/\u003e\u003clinearGradient id=\"f\" x1=\"749.433\" x2=\"749.433\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m470.6 414-180.2 27.7 6.3 40.8 180.1-27.7z\" style=\"fill:url(#f)\"/\u003e\u003clinearGradient id=\"g\" x1=\"614.338\" x2=\"614.338\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m226.6 451.5 6.2 40.8 40.8-6.2-6.2-40.9z\" style=\"fill:url(#g)\"/\u003e\u003clinearGradient id=\"h\" x1=\"549.702\" x2=\"549.702\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m159.1 438.3 40.8-6.3-6.2-40.8-40.9 6.3z\" style=\"fill:url(#h)\"/\u003e\u003clinearGradient id=\"i\" x1=\"473.159\" x2=\"473.159\" y1=\"-693.123\" y2=\"-94.853\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m85.4 384.2 17.2-2.6L52.4 55l-17.2 2.7z\" style=\"fill:url(#i)\"/\u003e\u003clinearGradient id=\"j\" x1=\"497.114\" x2=\"497.114\" y1=\"-709.717\" y2=\"-67.381\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m109.1 380.6 17.2-2.7L72.4 27.3 55.2 30z\" style=\"fill:url(#j)\"/\u003e\u003clinearGradient id=\"k\" x1=\"538.062\" x2=\"538.062\" y1=\"-724.295\" y2=\"-43.24\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m149.6 374.3 17.2-2.6L109.6 0 92.4 2.7z\" style=\"fill:url(#k)\"/\u003e\u003clinearGradient id=\"l\" x1=\"562.005\" x2=\"562.005\" y1=\"-701.646\" y2=\"-80.743\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m173.2 370.7 17.3-2.7-52.2-338.8-17.2 2.6z\" style=\"fill:url(#l)\"/\u003e\u003clinearGradient id=\"m\" x1=\"602.42\" x2=\"602.42\" y1=\"-675.539\" y2=\"-123.976\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m213.2 364.6 17.2-2.7-46.3-301-17.2 2.6z\" style=\"fill:url(#m)\"/\u003e\u003clinearGradient id=\"n\" x1=\"626.396\" x2=\"626.396\" y1=\"-683.496\" y2=\"-110.797\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m236.9 360.9 17.2-2.6L206 45.7l-17.2 2.6z\" style=\"fill:url(#n)\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "loki",
+    "version": "0.1.0",
+    "title": "Grafana Loki",
+    "description": "Loki log cockpit with labels, label values, streams, LogQL range queries, and build/status details.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003clinearGradient id=\"a\" x1=\"485.057\" x2=\"485.057\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m139.6 464.9-40.8 6.3 6.3 40.8 40.8-6.3z\" style=\"fill:url(#a)\"/\u003e\u003clinearGradient id=\"b\" x1=\"749.438\" x2=\"749.438\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"M286.9 418.6 467 390.9l-6.3-40.8-180.1 27.7z\" style=\"fill:url(#b)\"/\u003e\u003clinearGradient id=\"c\" x1=\"614.329\" x2=\"614.329\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m216.7 387.6 6.3 40.8 40.8-6.2-6.3-40.9z\" style=\"fill:url(#c)\"/\u003e\u003clinearGradient id=\"d\" x1=\"549.698\" x2=\"549.698\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m209.8 495.9-6.3-40.8-40.8 6.3 6.2 40.8z\" style=\"fill:url(#d)\"/\u003e\u003clinearGradient id=\"e\" x1=\"485.065\" x2=\"485.065\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m95.2 448.1 40.8-6.3-6.2-40.8-40.8 6.3z\" style=\"fill:url(#e)\"/\u003e\u003clinearGradient id=\"f\" x1=\"749.433\" x2=\"749.433\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m470.6 414-180.2 27.7 6.3 40.8 180.1-27.7z\" style=\"fill:url(#f)\"/\u003e\u003clinearGradient id=\"g\" x1=\"614.338\" x2=\"614.338\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m226.6 451.5 6.2 40.8 40.8-6.2-6.2-40.9z\" style=\"fill:url(#g)\"/\u003e\u003clinearGradient id=\"h\" x1=\"549.702\" x2=\"549.702\" y1=\"-705.376\" y2=\"-74.565\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m159.1 438.3 40.8-6.3-6.2-40.8-40.9 6.3z\" style=\"fill:url(#h)\"/\u003e\u003clinearGradient id=\"i\" x1=\"473.159\" x2=\"473.159\" y1=\"-693.123\" y2=\"-94.853\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m85.4 384.2 17.2-2.6L52.4 55l-17.2 2.7z\" style=\"fill:url(#i)\"/\u003e\u003clinearGradient id=\"j\" x1=\"497.114\" x2=\"497.114\" y1=\"-709.717\" y2=\"-67.381\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m109.1 380.6 17.2-2.7L72.4 27.3 55.2 30z\" style=\"fill:url(#j)\"/\u003e\u003clinearGradient id=\"k\" x1=\"538.062\" x2=\"538.062\" y1=\"-724.295\" y2=\"-43.24\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m149.6 374.3 17.2-2.6L109.6 0 92.4 2.7z\" style=\"fill:url(#k)\"/\u003e\u003clinearGradient id=\"l\" x1=\"562.005\" x2=\"562.005\" y1=\"-701.646\" y2=\"-80.743\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m173.2 370.7 17.3-2.7-52.2-338.8-17.2 2.6z\" style=\"fill:url(#l)\"/\u003e\u003clinearGradient id=\"m\" x1=\"602.42\" x2=\"602.42\" y1=\"-675.539\" y2=\"-123.976\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m213.2 364.6 17.2-2.7-46.3-301-17.2 2.6z\" style=\"fill:url(#m)\"/\u003e\u003clinearGradient id=\"n\" x1=\"626.396\" x2=\"626.396\" y1=\"-683.496\" y2=\"-110.797\" gradientTransform=\"scale(1 -1)rotate(8.748 -271.56 -2903.464)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop offset=\"0\" style=\"stop-color:#faed1e\"/\u003e\u003cstop offset=\"1\" style=\"stop-color:#f15b2b\"/\u003e\u003c/linearGradient\u003e\u003cpath d=\"m236.9 360.9 17.2-2.6L206 45.7l-17.2 2.6z\" style=\"fill:url(#n)\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "observability",
+      "label": "Observability",
+      "icon": {
+        "type": "lucide",
+        "value": "activity"
+      },
+      "order": 120
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "endpoint",
+              "label": "Endpoint",
+              "type": "text",
+              "required": true,
+              "default": "http://localhost:3100",
+              "placeholder": "https://loki.example.internal"
+            },
+            {
+              "key": "tenant_id",
+              "label": "Tenant ID",
+              "type": "text",
+              "help": "Optional X-Scope-OrgID value for multi-tenant Loki deployments."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Basic auth",
+                  "value": "basic"
+                },
+                {
+                  "label": "Bearer token",
+                  "value": "bearer"
+                },
+                {
+                  "label": "Stored basic auth",
+                  "value": "stored_basic"
+                },
+                {
+                  "label": "Stored bearer token",
+                  "value": "stored_bearer"
+                },
+                {
+                  "label": "Stored API token",
+                  "value": "stored_api_token"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_token",
+              "label": "Bearer token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "bearer"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_id",
+              "label": "Stored basic auth",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "loki"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "bearer_credential_id",
+              "label": "Stored bearer token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "bearer_token",
+                "protocols": [
+                  "loki"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_bearer"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "api_token_credential_id",
+              "label": "Stored API token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "loki"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_api_token"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks log deletion requests."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "logs",
+      "logql",
+      "labels",
+      "streams"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "overview",
+        "label": "Overview",
+        "icon": {
+          "type": "lucide",
+          "value": "layout-dashboard"
+        },
+        "ref": {
+          "kind": "server",
+          "name": "Loki",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "labels",
+        "label": "Labels",
+        "icon": {
+          "type": "lucide",
+          "value": "tag"
+        },
+        "source": {
+          "routeId": "loki.labels.tree"
+        },
+        "resourceKind": "label"
+      },
+      {
+        "key": "streams",
+        "label": "Streams",
+        "icon": {
+          "type": "lucide",
+          "value": "list-tree"
+        },
+        "resourceKind": "stream"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "server",
+        "title": "Loki",
+        "list": {
+          "routeId": "loki.overview"
+        },
+        "columns": null,
+        "actions": {
+          "detail": [
+            "loki.query.format",
+            "loki.delete.create"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "query",
+              "label": "LogQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "loki.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "plaintext",
+                "label": "LogQL",
+                "executeLabel": "Query",
+                "runningLabel": "Querying...",
+                "emptyText": "Run a LogQL range query. You can also send JSON with query, since, limit, and direction.",
+                "initialQuery": "{job=~\".+\"}",
+                "exportable": true
+              }
+            },
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-dashboard"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "loki.overview"
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "labels",
+              "label": "Labels",
+              "icon": {
+                "type": "lucide",
+                "value": "tag"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.labels.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Label",
+                    "sortable": true
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "streams",
+              "label": "Streams",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.streams.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Stream",
+                    "sortable": true
+                  },
+                  {
+                    "key": "labels",
+                    "label": "Labels",
+                    "type": "json"
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "stats",
+              "label": "Stats",
+              "icon": {
+                "type": "lucide",
+                "value": "chart-no-axes-combined"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "loki.stats.read"
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "volume",
+              "label": "Volume",
+              "icon": {
+                "type": "lucide",
+                "value": "chart-column"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.volume.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "metric",
+                    "label": "Labels",
+                    "type": "json"
+                  },
+                  {
+                    "key": "value",
+                    "label": "Bytes",
+                    "sortable": true,
+                    "type": "bytes"
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "rules",
+              "label": "Rules",
+              "icon": {
+                "type": "lucide",
+                "value": "list-checks"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.rules.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "group",
+                    "label": "Group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "name",
+                    "label": "Rule",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "query",
+                    "label": "Query"
+                  }
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "deletes",
+              "label": "Deletes",
+              "icon": {
+                "type": "lucide",
+                "value": "eraser"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.deletes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "request_id",
+                    "label": "Request ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "query",
+                    "label": "Query"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "start_time",
+                    "label": "Start",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "end_time",
+                    "label": "End",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "loki.delete.cancel"
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "label",
+        "title": "Labels",
+        "list": {
+          "routeId": "loki.labels.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Label",
+            "sortable": true
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "values",
+              "label": "Values",
+              "icon": {
+                "type": "lucide",
+                "value": "tags"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.label.values",
+                "params": {
+                  "label": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "value",
+                    "label": "Value",
+                    "sortable": true
+                  }
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "stream",
+        "title": "Streams",
+        "list": {
+          "routeId": "loki.streams.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Stream",
+            "sortable": true
+          },
+          {
+            "key": "labels",
+            "label": "Labels",
+            "type": "json"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "logs",
+              "label": "Logs",
+              "icon": {
+                "type": "lucide",
+                "value": "file-text"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "loki.stream.logs",
+                "params": {
+                  "stream": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "timestamp",
+                    "label": "Time",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "line",
+                    "label": "Line"
+                  },
+                  {
+                    "key": "labels",
+                    "label": "Labels",
+                    "type": "json"
+                  }
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "loki.query.format",
+        "label": "Format LogQL",
+        "icon": {
+          "type": "lucide",
+          "value": "wand-sparkles"
+        },
+        "routeId": "loki.query.format",
+        "method": "POST",
+        "risk": "safe",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Format LogQL",
+              "fields": [
+                {
+                  "key": "query",
+                  "label": "Query",
+                  "type": "textarea",
+                  "required": true,
+                  "default": "{job=~\".+\"}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "loki.delete.create",
+        "label": "Delete logs",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "loki.delete.create",
+        "method": "POST",
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Schedule a Loki delete request for matching logs?",
+        "input": {
+          "groups": [
+            {
+              "name": "Delete logs",
+              "fields": [
+                {
+                  "key": "query",
+                  "label": "LogQL stream selector",
+                  "type": "text",
+                  "required": true,
+                  "default": "{job=~\".+\"}"
+                },
+                {
+                  "key": "start",
+                  "label": "Start",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "2026-06-05T00:00:00Z"
+                },
+                {
+                  "key": "end",
+                  "label": "End",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "2026-06-05T01:00:00Z"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "loki.delete.cancel",
+        "label": "Cancel",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-x"
+        },
+        "routeId": "loki.delete.cancel",
+        "method": "DELETE",
+        "params": {
+          "request": "${record.request_id}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Cancel this Loki delete request?",
+        "input": {
+          "groups": [
+            {
+              "name": "Cancel delete",
+              "fields": [
+                {
+                  "key": "force",
+                  "label": "Force",
+                  "type": "toggle"
+                }
+              ]
+            }
+          ]
+        },
+        "bulk": true
+      }
+    ],
+    "streams": [
+      {
+        "id": "loki.query",
+        "kind": "query",
+        "routeId": "loki.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
