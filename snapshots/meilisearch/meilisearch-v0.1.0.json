@@ -1,0 +1,2958 @@
+{
+  "name": "meilisearch",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg fill=none height=24 id=Meilisearch--Streamline-Svg-Logos viewBox=\"0 0 96 96\"width=24 xmlns=http://www.w3.org/2000/svg\u003e\u003cdesc\u003eMeilisearch Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath d=\"m1 75.4083 17.3668-44.4339c2.4473-6.2617 8.4829-10.3828 15.2057-10.3828h10.4703L26.676 65.0255c-2.4473 6.2616-8.4829 10.3828-15.2058 10.3828H1Z\"fill=url(#a)\u003e\u003c/path\u003e\u003cpath d=\"m26.478 75.4083 17.3668-44.4339c2.4473-6.2617 8.4829-10.3828 15.2058-10.3828h10.4702L52.154 65.0255c-2.4473 6.2616-8.4829 10.3828-15.2058 10.3828H26.478Z\"fill=url(#b)\u003e\u003c/path\u003e\u003cpath d=\"m51.9575 75.4083 17.3668-44.4339c2.4473-6.2617 8.4825-10.3828 15.2054-10.3828h10.4707L77.6335 65.0255c-2.4477 6.2616-8.4829 10.3828-15.2058 10.3828H51.9575Z\"fill=url(#c)\u003e\u003c/path\u003e\u003cdefs\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=a x1=6621.87 x2=-45.829 y1=-398.113 y2=3368.77\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=b x1=5076.48 x2=-1591.21 y1=-398.126 y2=3368.75\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=c x1=3531.03 x2=-3136.69 y1=-398.126 y2=3368.77\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003c/defs\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "meilisearch",
+    "version": "0.1.0",
+    "title": "Meilisearch",
+    "description": "Meilisearch cockpit with indexes, documents, JSON search, settings, tasks, keys, dumps, and snapshots.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg fill=none height=24 id=Meilisearch--Streamline-Svg-Logos viewBox=\"0 0 96 96\"width=24 xmlns=http://www.w3.org/2000/svg\u003e\u003cdesc\u003eMeilisearch Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath d=\"m1 75.4083 17.3668-44.4339c2.4473-6.2617 8.4829-10.3828 15.2057-10.3828h10.4703L26.676 65.0255c-2.4473 6.2616-8.4829 10.3828-15.2058 10.3828H1Z\"fill=url(#a)\u003e\u003c/path\u003e\u003cpath d=\"m26.478 75.4083 17.3668-44.4339c2.4473-6.2617 8.4829-10.3828 15.2058-10.3828h10.4702L52.154 65.0255c-2.4473 6.2616-8.4829 10.3828-15.2058 10.3828H26.478Z\"fill=url(#b)\u003e\u003c/path\u003e\u003cpath d=\"m51.9575 75.4083 17.3668-44.4339c2.4473-6.2617 8.4825-10.3828 15.2054-10.3828h10.4707L77.6335 65.0255c-2.4477 6.2616-8.4829 10.3828-15.2058 10.3828H51.9575Z\"fill=url(#c)\u003e\u003c/path\u003e\u003cdefs\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=a x1=6621.87 x2=-45.829 y1=-398.113 y2=3368.77\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=b x1=5076.48 x2=-1591.21 y1=-398.126 y2=3368.75\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient gradientUnits=userSpaceOnUse id=c x1=3531.03 x2=-3136.69 y1=-398.126 y2=3368.77\u003e\u003cstop stop-color=#ff5caa\u003e\u003c/stop\u003e\u003cstop stop-color=#ff4e62 offset=1\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003c/defs\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "search",
+      "label": "Search",
+      "icon": {
+        "type": "lucide",
+        "value": "search"
+      },
+      "order": 130
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "endpoint",
+              "label": "Endpoint",
+              "type": "text",
+              "required": true,
+              "default": "http://localhost:7700",
+              "placeholder": "https://meilisearch.example.internal:7700"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "api_key",
+              "options": [
+                {
+                  "label": "API key",
+                  "value": "api_key"
+                },
+                {
+                  "label": "Stored API key",
+                  "value": "credential"
+                },
+                {
+                  "label": "None",
+                  "value": "none"
+                }
+              ]
+            },
+            {
+              "key": "api_key",
+              "label": "API key",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "api_key"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored API key",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "meilisearch"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks index, document, settings, task, key, dump, and snapshot writes."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "10s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "indexes",
+      "documents",
+      "search",
+      "settings",
+      "tasks",
+      "keys"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "indexes",
+        "label": "Indexes",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "meilisearch.indexes.tree"
+        },
+        "resourceKind": "index"
+      },
+      {
+        "key": "tasks",
+        "label": "Tasks",
+        "icon": {
+          "type": "lucide",
+          "value": "list-checks"
+        },
+        "resourceKind": "task"
+      },
+      {
+        "key": "keys",
+        "label": "API keys",
+        "icon": {
+          "type": "lucide",
+          "value": "key-round"
+        },
+        "source": {
+          "routeId": "meilisearch.keys.tree"
+        },
+        "resourceKind": "key"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "index",
+        "title": "Indexes",
+        "list": {
+          "routeId": "meilisearch.indexes.list"
+        },
+        "columns": [
+          {
+            "key": "uid",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "primaryKey",
+            "label": "Primary key",
+            "sortable": true
+          },
+          {
+            "key": "numberOfDocuments",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "isIndexing",
+            "label": "Indexing",
+            "type": "bool"
+          },
+          {
+            "key": "createdAt",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          },
+          {
+            "key": "updatedAt",
+            "label": "Updated",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "meilisearch.index.create",
+            "meilisearch.dump.create",
+            "meilisearch.snapshot.create"
+          ],
+          "row": [
+            "meilisearch.index.delete"
+          ],
+          "detail": [
+            "meilisearch.settings.update",
+            "meilisearch.index.update",
+            "meilisearch.documents.delete_all",
+            "meilisearch.index.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "meilisearch.index.overview",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "documents",
+              "label": "Documents",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "meilisearch.documents.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "_id",
+                    "label": "ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_index",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "_source",
+                    "label": "Document",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "meilisearch.document.upsert"
+                ],
+                "rowActionIds": [
+                  "meilisearch.document.delete"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "meilisearch.search.query",
+                "method": "WS",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "Meilisearch query",
+                "executeLabel": "Search",
+                "runningLabel": "Searching...",
+                "emptyText": "Run a Meilisearch JSON search to see hits.",
+                "initialQuery": "{\"q\":\"\",\"limit\":50}",
+                "completionRouteId": "meilisearch.completion",
+                "exportable": true
+              }
+            },
+            {
+              "key": "settings",
+              "label": "Settings",
+              "icon": {
+                "type": "lucide",
+                "value": "settings"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "meilisearch.settings.read",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "stats",
+              "label": "Stats",
+              "icon": {
+                "type": "lucide",
+                "value": "chart-column"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "meilisearch.index.stats",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "tasks",
+              "label": "Tasks",
+              "icon": {
+                "type": "lucide",
+                "value": "list-checks"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "meilisearch.tasks.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "uid",
+                    "label": "UID",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "canceled": "secondary",
+                      "enqueued": "info",
+                      "failed": "danger",
+                      "processing": "warn",
+                      "succeeded": "success"
+                    }
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "indexUid",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "duration",
+                    "label": "Duration"
+                  },
+                  {
+                    "key": "enqueuedAt",
+                    "label": "Enqueued",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "startedAt",
+                    "label": "Started",
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "finishedAt",
+                    "label": "Finished",
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "meilisearch.task.cancel",
+                  "meilisearch.task.delete"
+                ],
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "document",
+        "title": "Documents",
+        "list": {
+          "routeId": "meilisearch.documents.list"
+        },
+        "columns": [
+          {
+            "key": "_id",
+            "label": "ID",
+            "sortable": true
+          },
+          {
+            "key": "_index",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "_source",
+            "label": "Document",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "row": [
+            "meilisearch.document.delete"
+          ],
+          "detail": [
+            "meilisearch.document.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "defaultTab": "editor",
+          "tabs": [
+            {
+              "key": "document",
+              "label": "Document",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "meilisearch.document.read",
+                "params": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                }
+              }
+            },
+            {
+              "key": "editor",
+              "label": "Editor",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "meilisearch.document.read",
+                "params": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "meilisearch.document.update",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "id": "${resource.name}",
+                  "index": "${resource.namespace}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "task",
+        "title": "Tasks",
+        "list": {
+          "routeId": "meilisearch.tasks.list"
+        },
+        "columns": [
+          {
+            "key": "uid",
+            "label": "UID",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "canceled": "secondary",
+              "enqueued": "info",
+              "failed": "danger",
+              "processing": "warn",
+              "succeeded": "success"
+            }
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "indexUid",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "duration",
+            "label": "Duration"
+          },
+          {
+            "key": "enqueuedAt",
+            "label": "Enqueued",
+            "sortable": true,
+            "type": "relative_time"
+          },
+          {
+            "key": "startedAt",
+            "label": "Started",
+            "type": "relative_time"
+          },
+          {
+            "key": "finishedAt",
+            "label": "Finished",
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "meilisearch.task.delete"
+          ],
+          "detail": [
+            "meilisearch.task.cancel",
+            "meilisearch.task.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "Task ${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "canceled": "secondary",
+              "enqueued": "info",
+              "failed": "danger",
+              "processing": "warn",
+              "succeeded": "success"
+            }
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "meilisearch.task.read",
+                "params": {
+                  "task": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "key",
+        "title": "API keys",
+        "list": {
+          "routeId": "meilisearch.keys.list"
+        },
+        "columns": [
+          {
+            "key": "uid",
+            "label": "UID",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "sortable": true
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "actions",
+            "label": "Actions",
+            "type": "json"
+          },
+          {
+            "key": "indexes",
+            "label": "Indexes",
+            "type": "json"
+          },
+          {
+            "key": "expiresAt",
+            "label": "Expires",
+            "sortable": true,
+            "type": "datetime"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "meilisearch.key.create"
+          ],
+          "row": [
+            "meilisearch.key.delete"
+          ],
+          "detail": [
+            "meilisearch.key.update",
+            "meilisearch.key.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "key-round"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "meilisearch.key.read",
+                "params": {
+                  "key": "${resource.name}"
+                }
+              },
+              "config": {
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "meilisearch.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "meilisearch.index.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "uid",
+                  "label": "UID",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "primaryKey",
+                  "label": "Primary key",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "meilisearch.index.update",
+        "label": "Update primary key",
+        "icon": {
+          "type": "lucide",
+          "value": "key"
+        },
+        "routeId": "meilisearch.index.update",
+        "method": "PATCH",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Update this index primary key?",
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "primaryKey",
+                  "label": "Primary key",
+                  "type": "text",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "meilisearch.index.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "meilisearch.index.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this index and its documents?",
+        "bulk": true
+      },
+      {
+        "id": "meilisearch.settings.update",
+        "label": "Update settings",
+        "icon": {
+          "type": "lucide",
+          "value": "settings"
+        },
+        "routeId": "meilisearch.settings.read",
+        "method": "GET",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "safe",
+        "requiresConfirm": false,
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "saveRouteId": "meilisearch.settings.update",
+          "saveMethod": "PATCH",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "settings"
+        }
+      },
+      {
+        "id": "meilisearch.document.upsert",
+        "label": "Upsert document",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "meilisearch.document.upsert",
+        "method": "PUT",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Document",
+              "fields": [
+                {
+                  "key": "document",
+                  "label": "Document",
+                  "type": "json",
+                  "required": true
+                },
+                {
+                  "key": "primaryKey",
+                  "label": "Primary key",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"id\": \"example\"\n}",
+          "saveRouteId": "meilisearch.document.upsert",
+          "saveMethod": "PUT",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "document"
+        }
+      },
+      {
+        "id": "meilisearch.document.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "meilisearch.document.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.name}",
+          "index": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this document?",
+        "bulk": true
+      },
+      {
+        "id": "meilisearch.documents.delete_all",
+        "label": "Delete all documents",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "meilisearch.documents.delete_all",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete every document in this index?"
+      },
+      {
+        "id": "meilisearch.task.cancel",
+        "label": "Cancel",
+        "icon": {
+          "type": "lucide",
+          "value": "ban"
+        },
+        "routeId": "meilisearch.task.cancel",
+        "method": "POST",
+        "params": {
+          "task": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Cancel matching enqueued or processing tasks?",
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "in",
+              "value": [
+                "enqueued",
+                "processing"
+              ]
+            }
+          ]
+        },
+        "bulk": true
+      },
+      {
+        "id": "meilisearch.task.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "meilisearch.task.delete",
+        "method": "DELETE",
+        "params": {
+          "task": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this finished task from history?",
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "in",
+              "value": [
+                "succeeded",
+                "failed",
+                "canceled"
+              ]
+            }
+          ]
+        },
+        "bulk": true
+      },
+      {
+        "id": "meilisearch.key.create",
+        "label": "Create key",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "meilisearch.key.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Key",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "description",
+                  "label": "Description",
+                  "type": "textarea"
+                },
+                {
+                  "key": "actions",
+                  "label": "Actions",
+                  "type": "array",
+                  "required": true,
+                  "default": [
+                    "search"
+                  ],
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text"
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Action"
+                },
+                {
+                  "key": "indexes",
+                  "label": "Indexes",
+                  "type": "array",
+                  "required": true,
+                  "default": [
+                    "*"
+                  ],
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text"
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Index"
+                },
+                {
+                  "key": "expiresAt",
+                  "label": "Expires at",
+                  "type": "text",
+                  "placeholder": "2027-01-01T00:00:00Z or null"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "meilisearch.key.update",
+        "label": "Edit",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "meilisearch.key.update",
+        "method": "PATCH",
+        "params": {
+          "key": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Key",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "label": "Description",
+                  "type": "textarea"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "meilisearch.key.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "meilisearch.key.delete",
+        "method": "DELETE",
+        "params": {
+          "key": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this API key?",
+        "bulk": true
+      },
+      {
+        "id": "meilisearch.dump.create",
+        "label": "Create dump",
+        "icon": {
+          "type": "lucide",
+          "value": "archive"
+        },
+        "routeId": "meilisearch.dump.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Create a Meilisearch dump?"
+      },
+      {
+        "id": "meilisearch.snapshot.create",
+        "label": "Create snapshot",
+        "icon": {
+          "type": "lucide",
+          "value": "camera"
+        },
+        "routeId": "meilisearch.snapshot.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Create a Meilisearch snapshot?"
+      }
+    ],
+    "streams": [
+      {
+        "id": "meilisearch.search.query",
+        "kind": "query",
+        "routeId": "meilisearch.search.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

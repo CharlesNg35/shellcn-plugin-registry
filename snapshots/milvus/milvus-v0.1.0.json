@@ -1,0 +1,6063 @@
+{
+  "name": "milvus",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 600 600\"\u003e\u003cpath fill=\"#4FC4F9\" d=\"M135.8 155.5a203 203 0 0 1 288.1 0 204.6 204.6 0 0 1 0 289 203.3 203.3 0 0 1-288.1 0L5.8 313.8a19.7 19.7 0 0 1 0-27.8zM393.1 194a149.3 149.3 0 0 0-211.7 0l-95.6 95.8c-5.6 5.8-5.6 15 0 20.6l95.7 96a149.3 149.3 0 0 0 211.7 0 150.4 150.4 0 0 0-.1-212.4M288 197.7c55.4 0 100.3 45.9 100.3 102.5S343.4 402.7 288 402.7a101.4 101.4 0 0 1-100.3-102.5c0-56.6 44.9-102.5 100.3-102.5m306.3 88.5-57.2-58.5a4.8 4.8 0 0 0-8.1 4.5 315 315 0 0 1 0 136c-1 4.8 4.7 8 8 4.5l57.3-58.5a20 20 0 0 0 1.3-26.6z\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "milvus",
+    "version": "0.1.0",
+    "title": "Milvus",
+    "description": "Milvus vector database cockpit: collections, partitions, schema design, similarity search, embedding projection, index builds and RBAC.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 600 600\"\u003e\u003cpath fill=\"#4FC4F9\" d=\"M135.8 155.5a203 203 0 0 1 288.1 0 204.6 204.6 0 0 1 0 289 203.3 203.3 0 0 1-288.1 0L5.8 313.8a19.7 19.7 0 0 1 0-27.8zM393.1 194a149.3 149.3 0 0 0-211.7 0l-95.6 95.8c-5.6 5.8-5.6 15 0 20.6l95.7 96a149.3 149.3 0 0 0 211.7 0 150.4 150.4 0 0 0-.1-212.4M288 197.7c55.4 0 100.3 45.9 100.3 102.5S343.4 402.7 288 402.7a101.4 101.4 0 0 1-100.3-102.5c0-56.6 44.9-102.5 100.3-102.5m306.3 88.5-57.2-58.5a4.8 4.8 0 0 0-8.1 4.5 315 315 0 0 1 0 136c-1 4.8 4.7 8 8 4.5l57.3-58.5a20 20 0 0 0 1.3-26.6z\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "milvus.example.internal",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "$transport",
+                    "op": "eq",
+                    "value": "direct"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 19530,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "$transport",
+                    "op": "eq",
+                    "value": "direct"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "database",
+              "label": "Default database",
+              "type": "text",
+              "default": "default",
+              "help": "Database selected when the workspace opens.",
+              "validators": [
+                {
+                  "type": "regex",
+                  "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                  "message": "letters, digits and underscores, starting with a letter or underscore"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Username and password",
+                  "value": "password"
+                },
+                {
+                  "label": "API token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                },
+                {
+                  "label": "Stored API token",
+                  "value": "api_token"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "placeholder": "root",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token",
+              "label": "API token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "help": "Zilliz Cloud style token, or username:password.",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable credential providing the Milvus username and password.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "milvus"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_id",
+              "label": "Stored API token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "milvus"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "api_token"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional mTLS certificate and private key.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "milvus"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks every schema, entity, index and RBAC mutation."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page size",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 10
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "sample_limit",
+              "label": "Projection sample size",
+              "type": "number",
+              "default": 512,
+              "help": "Vectors sampled by the embedding projection explorer.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 32
+                },
+                {
+                  "type": "max",
+                  "value": 4096
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "collections",
+      "partitions",
+      "schema",
+      "vector-search",
+      "full-text-search",
+      "indexes",
+      "segments",
+      "metrics",
+      "rbac",
+      "saved-queries",
+      "embedding-projection"
+    ],
+    "supportedTransports": [
+      "direct",
+      "agent"
+    ],
+    "agent": {
+      "modes": [
+        "tcp"
+      ],
+      "riskNote": "privileged"
+    },
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "cluster",
+        "label": "Cluster",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "ref": {
+          "kind": "server",
+          "name": "Milvus",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "collections",
+        "label": "Collections",
+        "icon": {
+          "type": "lucide",
+          "value": "table-2"
+        },
+        "source": {
+          "routeId": "milvus.tree.collections"
+        },
+        "resourceKind": "collection"
+      },
+      {
+        "key": "databases",
+        "label": "Databases",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "resourceKind": "database"
+      },
+      {
+        "key": "users",
+        "label": "Users",
+        "icon": {
+          "type": "lucide",
+          "value": "users"
+        },
+        "resourceKind": "user"
+      },
+      {
+        "key": "roles",
+        "label": "Roles",
+        "icon": {
+          "type": "lucide",
+          "value": "shield"
+        },
+        "resourceKind": "role"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "server",
+        "title": "Cluster",
+        "list": {
+          "routeId": "milvus.overview"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Cluster"
+          },
+          {
+            "key": "version",
+            "label": "Version"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Milvus"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-dashboard"
+              },
+              "panel": "dashboard",
+              "config": {
+                "cells": [
+                  {
+                    "key": "stats",
+                    "label": "Cluster",
+                    "panel": "metrics",
+                    "source": {
+                      "routeId": "milvus.overview.metrics",
+                      "method": "WS"
+                    },
+                    "config": {
+                      "stats": [
+                        {
+                          "key": "collections",
+                          "label": "Collections"
+                        },
+                        {
+                          "key": "entities",
+                          "label": "Entities"
+                        },
+                        {
+                          "key": "partitions",
+                          "label": "Partitions"
+                        },
+                        {
+                          "key": "indexes",
+                          "label": "Indexes"
+                        },
+                        {
+                          "key": "databases",
+                          "label": "Databases"
+                        },
+                        {
+                          "key": "users",
+                          "label": "Users"
+                        }
+                      ],
+                      "usage": [
+                        {
+                          "key": "loaded_pct",
+                          "label": "Loaded collections",
+                          "type": "percent",
+                          "usage": {
+                            "percentKey": "loaded_pct",
+                            "usedKey": "loaded_collections",
+                            "totalKey": "collections",
+                            "usedType": "number",
+                            "totalType": "number",
+                            "unit": "collection(s)",
+                            "totalLabel": "of"
+                          }
+                        }
+                      ],
+                      "series": [
+                        {
+                          "key": "entities",
+                          "label": "Entities"
+                        },
+                        {
+                          "key": "loaded_pct",
+                          "label": "Loaded",
+                          "unit": "%"
+                        }
+                      ],
+                      "history": 60
+                    },
+                    "span": 2
+                  },
+                  {
+                    "key": "collections",
+                    "label": "Collections",
+                    "panel": "table",
+                    "source": {
+                      "routeId": "milvus.collections.list"
+                    },
+                    "config": {
+                      "columns": [
+                        {
+                          "key": "name",
+                          "label": "Collection",
+                          "sortable": true
+                        },
+                        {
+                          "key": "state",
+                          "label": "Load state",
+                          "sortable": true,
+                          "type": "badge",
+                          "severities": {
+                            "loaded": "success",
+                            "loading": "warn",
+                            "not_loaded": "secondary",
+                            "unavailable": "danger",
+                            "unknown": "secondary"
+                          }
+                        },
+                        {
+                          "key": "entities",
+                          "label": "Entities",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "field_count",
+                          "label": "Fields",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "partitions",
+                          "label": "Partitions",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "indexes",
+                          "label": "Indexes",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "consistency_level",
+                          "label": "Consistency",
+                          "sortable": true
+                        },
+                        {
+                          "key": "vector_fields",
+                          "label": "Vector fields",
+                          "type": "json"
+                        }
+                      ],
+                      "refreshIntervalMs": 15000,
+                      "defaultSort": {
+                        "field": "name"
+                      },
+                      "emptyText": "No collections in this database yet.",
+                      "exportable": true
+                    },
+                    "span": 2
+                  }
+                ]
+              }
+            },
+            {
+              "key": "server",
+              "label": "Server",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Server",
+                    "fields": [
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "copy": true
+                      },
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "database",
+                        "label": "Active database",
+                        "copy": true
+                      },
+                      {
+                        "key": "read_only",
+                        "label": "Read-only connection",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Inventory",
+                    "fields": [
+                      {
+                        "key": "databases",
+                        "label": "Databases",
+                        "type": "number"
+                      },
+                      {
+                        "key": "collections",
+                        "label": "Collections",
+                        "type": "number"
+                      },
+                      {
+                        "key": "loaded_pct",
+                        "label": "Loaded collections",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "loaded_pct",
+                          "usedKey": "loaded_collections",
+                          "totalKey": "collections",
+                          "usedType": "number",
+                          "totalType": "number",
+                          "unit": "collection(s)",
+                          "totalLabel": "of"
+                        }
+                      },
+                      {
+                        "key": "entities",
+                        "label": "Entities",
+                        "type": "number"
+                      },
+                      {
+                        "key": "partitions",
+                        "label": "Partitions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "indexes",
+                        "label": "Indexes",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Access control",
+                    "fields": [
+                      {
+                        "key": "users",
+                        "label": "Users",
+                        "type": "number"
+                      },
+                      {
+                        "key": "roles",
+                        "label": "Roles",
+                        "type": "number"
+                      },
+                      {
+                        "key": "resource_groups",
+                        "label": "Resource groups",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "databases",
+              "label": "Databases",
+              "icon": {
+                "type": "lucide",
+                "value": "database"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.databases.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Database",
+                    "sortable": true
+                  },
+                  {
+                    "key": "property_count",
+                    "label": "Properties",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "milvus.database.create"
+                ],
+                "rowActionIds": [
+                  "milvus.database.drop"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No databases.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "resource_groups",
+              "label": "Resource groups",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.resourcegroups.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Resource group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "capacity",
+                    "label": "Capacity",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "available_nodes",
+                    "label": "Available nodes",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "nodes",
+                    "label": "Nodes",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No resource groups."
+              }
+            },
+            {
+              "key": "saved_queries",
+              "label": "Saved queries",
+              "icon": {
+                "type": "lucide",
+                "value": "bookmark"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.queries.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Name",
+                    "sortable": true
+                  },
+                  {
+                    "key": "collection",
+                    "label": "Collection",
+                    "sortable": true
+                  },
+                  {
+                    "key": "query",
+                    "label": "Query"
+                  },
+                  {
+                    "key": "updated_at",
+                    "label": "Updated",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "actionIds": [
+                  "milvus.query.save"
+                ],
+                "rowActionIds": [
+                  "milvus.query.delete"
+                ],
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "Save a query from the console to reuse it here."
+              }
+            },
+            {
+              "key": "activity",
+              "label": "Activity",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "milvus.activity.list"
+              },
+              "config": {
+                "timestampField": "time",
+                "titleField": "operation",
+                "bodyField": "message",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "target",
+                "emptyText": "No operations performed on this connection yet.",
+                "refreshIntervalMs": 5000
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "database",
+        "title": "Databases",
+        "list": {
+          "routeId": "milvus.databases.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Database",
+            "sortable": true
+          },
+          {
+            "key": "property_count",
+            "label": "Properties",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.database.create"
+          ],
+          "row": [
+            "milvus.database.drop"
+          ],
+          "detail": [
+            "milvus.database.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.database.read",
+                "params": {
+                  "name": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Database",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "collection_count",
+                        "label": "Collections",
+                        "type": "number"
+                      },
+                      {
+                        "key": "collections",
+                        "label": "Collection names",
+                        "type": "json"
+                      },
+                      {
+                        "key": "properties",
+                        "label": "Properties",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "collection",
+        "title": "Collections",
+        "list": {
+          "routeId": "milvus.collections.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Collection",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "Load state",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "loaded": "success",
+              "loading": "warn",
+              "not_loaded": "secondary",
+              "unavailable": "danger",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "entities",
+            "label": "Entities",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "field_count",
+            "label": "Fields",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "partitions",
+            "label": "Partitions",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "indexes",
+            "label": "Indexes",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "consistency_level",
+            "label": "Consistency",
+            "sortable": true
+          },
+          {
+            "key": "vector_fields",
+            "label": "Vector fields",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.collection.create"
+          ],
+          "row": [
+            "milvus.collection.drop"
+          ],
+          "detail": [
+            "milvus.collection.load",
+            "milvus.collection.release",
+            "milvus.collection.flush",
+            "milvus.collection.compact",
+            "milvus.index.create",
+            "milvus.partition.create",
+            "milvus.alias.create",
+            "milvus.collection.field.add",
+            "milvus.collection.rename",
+            "milvus.collection.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "state",
+            "severities": {
+              "loaded": "success",
+              "loading": "warn",
+              "not_loaded": "secondary",
+              "unavailable": "danger",
+              "unknown": "secondary"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.collection.read",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Collection",
+                        "copy": true
+                      },
+                      {
+                        "key": "database",
+                        "label": "Database",
+                        "copy": true
+                      },
+                      {
+                        "key": "id",
+                        "label": "Collection id",
+                        "copy": true
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "state",
+                        "label": "Load state",
+                        "type": "badge",
+                        "severities": {
+                          "loaded": "success",
+                          "loading": "warn",
+                          "not_loaded": "secondary",
+                          "unavailable": "danger",
+                          "unknown": "secondary"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Schema",
+                    "fields": [
+                      {
+                        "key": "primary_key",
+                        "label": "Primary key",
+                        "copy": true
+                      },
+                      {
+                        "key": "auto_id",
+                        "label": "Auto id",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "dynamic_field",
+                        "label": "Dynamic field",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "field_count",
+                        "label": "Fields",
+                        "type": "number"
+                      },
+                      {
+                        "key": "vector_fields",
+                        "label": "Vector fields",
+                        "type": "json"
+                      },
+                      {
+                        "key": "functions",
+                        "label": "Functions",
+                        "type": "json"
+                      },
+                      {
+                        "key": "consistency_level",
+                        "label": "Consistency level"
+                      },
+                      {
+                        "key": "shards",
+                        "label": "Shards",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Storage",
+                    "fields": [
+                      {
+                        "key": "entities",
+                        "label": "Entities",
+                        "type": "number"
+                      },
+                      {
+                        "key": "partitions",
+                        "label": "Partitions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "indexes",
+                        "label": "Indexes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "aliases",
+                        "label": "Aliases",
+                        "type": "json"
+                      },
+                      {
+                        "key": "virtual_channels",
+                        "label": "Virtual channels",
+                        "type": "json"
+                      },
+                      {
+                        "key": "properties",
+                        "label": "Properties",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "milvus.collection.watch",
+                  "method": "WS",
+                  "params": {
+                    "collection": "${resource.name}",
+                    "database": "${resource.namespace}"
+                  }
+                }
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Load \u0026 segments",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "milvus.collection.metrics",
+                "method": "WS",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "entities",
+                    "label": "Entities"
+                  },
+                  {
+                    "key": "segments",
+                    "label": "Segments"
+                  },
+                  {
+                    "key": "flushedSegments",
+                    "label": "Flushed segments"
+                  },
+                  {
+                    "key": "partitions",
+                    "label": "Partitions"
+                  },
+                  {
+                    "key": "indexes",
+                    "label": "Indexes"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "loadProgress",
+                    "label": "Load progress",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "loadProgress",
+                      "unit": "%",
+                      "totalLabel": "of"
+                    }
+                  },
+                  {
+                    "key": "indexedPct",
+                    "label": "Indexed rows",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "indexedPct",
+                      "usedKey": "indexedRows",
+                      "totalKey": "indexTotalRows",
+                      "usedType": "number",
+                      "totalType": "number",
+                      "unit": "rows",
+                      "totalLabel": "of"
+                    }
+                  },
+                  {
+                    "key": "flushedPct",
+                    "label": "Flushed rows",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "flushedPct",
+                      "usedKey": "flushedRows",
+                      "totalKey": "segmentRows",
+                      "usedType": "number",
+                      "totalType": "number",
+                      "unit": "rows",
+                      "totalLabel": "of"
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "entities",
+                    "label": "Entities"
+                  },
+                  {
+                    "key": "indexedPct",
+                    "label": "Indexed",
+                    "unit": "%"
+                  }
+                ],
+                "history": 60
+              }
+            },
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.entities.list",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "milvus.entities.columns",
+                  "params": {
+                    "collection": "${resource.name}",
+                    "database": "${resource.namespace}"
+                  }
+                },
+                "editable": true,
+                "rowKey": [
+                  "_id"
+                ],
+                "insert": {
+                  "routeId": "milvus.entity.insert",
+                  "method": "POST",
+                  "params": {
+                    "collection": "${resource.name}",
+                    "database": "${resource.namespace}"
+                  }
+                },
+                "update": {
+                  "routeId": "milvus.entity.update",
+                  "method": "PATCH",
+                  "params": {
+                    "collection": "${resource.name}",
+                    "database": "${resource.namespace}"
+                  }
+                },
+                "delete": {
+                  "routeId": "milvus.entity.delete",
+                  "method": "DELETE",
+                  "params": {
+                    "collection": "${resource.name}",
+                    "database": "${resource.namespace}"
+                  }
+                },
+                "emptyText": "No entities. Load the collection, then insert or query rows.",
+                "stagedEdits": true,
+                "hiddenColumns": [
+                  "_id"
+                ],
+                "exportable": true
+              },
+              "variants": [
+                {
+                  "panel": "table",
+                  "config": {
+                    "columnsSource": {
+                      "routeId": "milvus.entities.columns",
+                      "params": {
+                        "collection": "${resource.name}",
+                        "database": "${resource.namespace}"
+                      }
+                    },
+                    "rowKey": [
+                      "_id"
+                    ],
+                    "emptyText": "No entities. Load the collection, then query rows.",
+                    "hiddenColumns": [
+                      "_id"
+                    ],
+                    "exportable": true
+                  },
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "read_only",
+                        "op": "eq",
+                        "value": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "key": "schema",
+              "label": "Schema",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.collection.schema",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Field",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "dim",
+                    "label": "Dim",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "max_length",
+                    "label": "Max length",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "primary",
+                    "label": "Primary",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "auto_id",
+                    "label": "Auto id",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "nullable",
+                    "label": "Nullable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "partition_key",
+                    "label": "Partition key",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "clustering_key",
+                    "label": "Clustering key",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "index",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "description",
+                    "label": "Description"
+                  }
+                ],
+                "actionIds": [
+                  "milvus.collection.field.add"
+                ],
+                "defaultSort": {
+                  "field": "id"
+                },
+                "emptyText": "This collection declares no fields.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "milvus.query",
+                "method": "WS",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "Milvus query",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running…",
+                "emptyText": "Lists entities from the loaded collection. Add \"vector\", \"text\", or \"ids\" for an ANN search, a full-text search, or a primary-key lookup.",
+                "initialQuery": "{\"filter\":\"\",\"limit\":20,\"output\":[\"*\"]}",
+                "completionRouteId": "milvus.query.complete",
+                "completionParams": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                },
+                "exportable": true
+              }
+            },
+            {
+              "key": "projection",
+              "label": "Vector space",
+              "icon": {
+                "type": "lucide",
+                "value": "scatter-chart"
+              },
+              "panel": "canvas",
+              "source": {
+                "routeId": "milvus.collection.projection",
+                "method": "WS",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "scaleMode": "resize",
+                "hidpi": true,
+                "interactive": true,
+                "keyboard": true,
+                "pointer": true,
+                "wheelMode": "modified",
+                "resizeEvents": true,
+                "focusOnPointer": true,
+                "ariaLabel": "Embedding projection explorer",
+                "instructions": "Two-dimensional projection of sampled vectors. Drag to lasso-select points, hover for id and payload. Press R to resample, P to switch between PCA and random projection, F to project the next vector field, C to clear the selection, 0 to reset the view, plus and minus to zoom, arrow keys to pan."
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-ordered"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.indexes.list",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "field_name",
+                    "label": "Field",
+                    "sortable": true
+                  },
+                  {
+                    "key": "index_type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "metric_type",
+                    "label": "Metric",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "failed": "danger",
+                      "finished": "success",
+                      "inprogress": "warn",
+                      "none": "secondary",
+                      "retry": "warn",
+                      "unissued": "info"
+                    }
+                  },
+                  {
+                    "key": "progress",
+                    "label": "Built",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "indexed_rows",
+                    "label": "Indexed rows",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "pending_rows",
+                    "label": "Pending rows",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "milvus.index.create"
+                ],
+                "rowActionIds": [
+                  "milvus.index.drop"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No indexes. Vector search needs at least one vector index.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "partitions",
+              "label": "Partitions",
+              "icon": {
+                "type": "lucide",
+                "value": "split"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.partitions.list",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Partition",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "Load state",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "loaded": "success",
+                      "loading": "warn",
+                      "not_loaded": "secondary",
+                      "unavailable": "danger",
+                      "unknown": "secondary"
+                    }
+                  },
+                  {
+                    "key": "entities",
+                    "label": "Entities",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "load_progress",
+                    "label": "Load progress",
+                    "sortable": true,
+                    "type": "percent"
+                  }
+                ],
+                "actionIds": [
+                  "milvus.partition.create"
+                ],
+                "rowActionIds": [
+                  "milvus.partition.drop"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "Only the default partition exists.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "segments",
+              "label": "Segments",
+              "icon": {
+                "type": "lucide",
+                "value": "layers"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.segments.list",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "id",
+                    "label": "Segment",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "dropped": "secondary",
+                      "flushed": "success",
+                      "flushing": "warn",
+                      "growing": "info",
+                      "importing": "info",
+                      "none": "secondary",
+                      "notexist": "secondary",
+                      "sealed": "warn"
+                    }
+                  },
+                  {
+                    "key": "rows",
+                    "label": "Rows",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "partition_id",
+                    "label": "Partition id",
+                    "sortable": true
+                  },
+                  {
+                    "key": "flushed",
+                    "label": "Flushed",
+                    "sortable": true,
+                    "type": "bool"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "id"
+                },
+                "emptyText": "No persistent segments yet. Flush the collection to seal growing data.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "aliases",
+              "label": "Aliases",
+              "icon": {
+                "type": "lucide",
+                "value": "tags"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.aliases.list",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "alias",
+                    "label": "Alias",
+                    "sortable": true
+                  },
+                  {
+                    "key": "collection",
+                    "label": "Collection",
+                    "sortable": true
+                  },
+                  {
+                    "key": "database",
+                    "label": "Database",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "milvus.alias.create"
+                ],
+                "rowActionIds": [
+                  "milvus.alias.drop"
+                ],
+                "defaultSort": {
+                  "field": "alias"
+                },
+                "emptyText": "No aliases point at this collection."
+              }
+            },
+            {
+              "key": "graph",
+              "label": "Map",
+              "icon": {
+                "type": "lucide",
+                "value": "workflow"
+              },
+              "panel": "graph",
+              "source": {
+                "routeId": "milvus.collection.graph",
+                "params": {
+                  "collection": "${resource.name}",
+                  "database": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "layout": "grid",
+                "fitView": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "partition",
+        "title": "Partitions",
+        "list": {
+          "routeId": "milvus.partitions.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Partition",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "Load state",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "loaded": "success",
+              "loading": "warn",
+              "not_loaded": "secondary",
+              "unavailable": "danger",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "entities",
+            "label": "Entities",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "load_progress",
+            "label": "Load progress",
+            "sortable": true,
+            "type": "percent"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.partition.create"
+          ],
+          "row": [
+            "milvus.partition.drop"
+          ],
+          "detail": [
+            "milvus.partition.load",
+            "milvus.partition.release",
+            "milvus.partition.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.scope} / ${resource.name}",
+            "statusField": "state",
+            "severities": {
+              "loaded": "success",
+              "loading": "warn",
+              "not_loaded": "secondary",
+              "unavailable": "danger",
+              "unknown": "secondary"
+            }
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.partition.read",
+                "params": {
+                  "collection": "${resource.scope}",
+                  "database": "${resource.namespace}",
+                  "partition": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Partition",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "collection",
+                        "label": "Collection",
+                        "copy": true
+                      },
+                      {
+                        "key": "state",
+                        "label": "Load state",
+                        "type": "badge",
+                        "severities": {
+                          "loaded": "success",
+                          "loading": "warn",
+                          "not_loaded": "secondary",
+                          "unavailable": "danger",
+                          "unknown": "secondary"
+                        }
+                      },
+                      {
+                        "key": "load_progress",
+                        "label": "Load progress",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "load_progress",
+                          "unit": "%",
+                          "totalLabel": "of"
+                        }
+                      },
+                      {
+                        "key": "entities",
+                        "label": "Entities",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.entities.list",
+                "params": {
+                  "collection": "${resource.scope}",
+                  "database": "${resource.namespace}",
+                  "partition": "${resource.name}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "milvus.entities.columns",
+                  "params": {
+                    "collection": "${resource.scope}",
+                    "database": "${resource.namespace}",
+                    "partition": "${resource.name}"
+                  }
+                },
+                "emptyText": "No entities in this partition.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "index",
+        "title": "Indexes",
+        "list": {
+          "routeId": "milvus.indexes.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "field_name",
+            "label": "Field",
+            "sortable": true
+          },
+          {
+            "key": "index_type",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "metric_type",
+            "label": "Metric",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "failed": "danger",
+              "finished": "success",
+              "inprogress": "warn",
+              "none": "secondary",
+              "retry": "warn",
+              "unissued": "info"
+            }
+          },
+          {
+            "key": "progress",
+            "label": "Built",
+            "sortable": true,
+            "type": "percent"
+          },
+          {
+            "key": "indexed_rows",
+            "label": "Indexed rows",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "pending_rows",
+            "label": "Pending rows",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.index.create"
+          ],
+          "row": [
+            "milvus.index.drop"
+          ],
+          "detail": [
+            "milvus.index.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.scope} / ${resource.name}",
+            "statusField": "state",
+            "severities": {
+              "failed": "danger",
+              "finished": "success",
+              "inprogress": "warn",
+              "none": "secondary",
+              "retry": "warn",
+              "unissued": "info"
+            }
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.index.read",
+                "params": {
+                  "collection": "${resource.scope}",
+                  "database": "${resource.namespace}",
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Index",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "field_name",
+                        "label": "Field",
+                        "copy": true
+                      },
+                      {
+                        "key": "index_type",
+                        "label": "Index type"
+                      },
+                      {
+                        "key": "metric_type",
+                        "label": "Metric type"
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "failed": "danger",
+                          "finished": "success",
+                          "inprogress": "warn",
+                          "none": "secondary",
+                          "retry": "warn",
+                          "unissued": "info"
+                        }
+                      },
+                      {
+                        "key": "progress",
+                        "label": "Indexed rows",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "progress",
+                          "usedKey": "indexed_rows",
+                          "totalKey": "total_rows",
+                          "usedType": "number",
+                          "totalType": "number",
+                          "unit": "rows",
+                          "totalLabel": "of"
+                        }
+                      },
+                      {
+                        "key": "pending_rows",
+                        "label": "Pending rows",
+                        "type": "number"
+                      },
+                      {
+                        "key": "params",
+                        "label": "Parameters",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "build",
+              "label": "Build progress",
+              "icon": {
+                "type": "lucide",
+                "value": "loader"
+              },
+              "panel": "task_progress",
+              "source": {
+                "routeId": "milvus.index.progress",
+                "method": "WS",
+                "params": {
+                  "collection": "${resource.scope}",
+                  "database": "${resource.namespace}",
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "title": "Index build",
+                "cancelRouteId": "milvus.index.drop"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "user",
+        "title": "Users",
+        "list": {
+          "routeId": "milvus.users.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "User",
+            "sortable": true
+          },
+          {
+            "key": "role_count",
+            "label": "Roles",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "roles",
+            "label": "Granted roles",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.user.create"
+          ],
+          "row": [
+            "milvus.user.delete"
+          ],
+          "detail": [
+            "milvus.user.role.grant",
+            "milvus.user.password",
+            "milvus.user.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "user"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.user.read",
+                "params": {
+                  "user": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "User",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Username",
+                        "copy": true
+                      },
+                      {
+                        "key": "role_count",
+                        "label": "Roles",
+                        "type": "number"
+                      },
+                      {
+                        "key": "roles",
+                        "label": "Granted roles",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "roles",
+              "label": "Roles",
+              "icon": {
+                "type": "lucide",
+                "value": "shield"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.user.roles",
+                "params": {
+                  "user": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "role",
+                    "label": "Role",
+                    "sortable": true
+                  },
+                  {
+                    "key": "user",
+                    "label": "Granted to",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "milvus.user.role.grant"
+                ],
+                "rowActionIds": [
+                  "milvus.user.role.revoke"
+                ],
+                "defaultSort": {
+                  "field": "role"
+                },
+                "emptyText": "This user holds no roles."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "role",
+        "title": "Roles",
+        "list": {
+          "routeId": "milvus.roles.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Role",
+            "sortable": true
+          },
+          {
+            "key": "privilege_count",
+            "label": "Privileges",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "milvus.role.create"
+          ],
+          "row": [
+            "milvus.role.delete"
+          ],
+          "detail": [
+            "milvus.role.privilege.grant",
+            "milvus.role.privilege.revoke",
+            "milvus.role.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "shield"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "milvus.role.read",
+                "params": {
+                  "role": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Role",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Role",
+                        "copy": true
+                      },
+                      {
+                        "key": "privilege_count",
+                        "label": "Privileges",
+                        "type": "number"
+                      },
+                      {
+                        "key": "users",
+                        "label": "Granted to",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "privileges",
+              "label": "Privileges",
+              "icon": {
+                "type": "lucide",
+                "value": "key"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "milvus.role.privileges",
+                "params": {
+                  "role": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "privilege",
+                    "label": "Privilege",
+                    "sortable": true
+                  },
+                  {
+                    "key": "object",
+                    "label": "Object",
+                    "sortable": true
+                  },
+                  {
+                    "key": "object_name",
+                    "label": "Object name",
+                    "sortable": true
+                  },
+                  {
+                    "key": "database",
+                    "label": "Database",
+                    "sortable": true
+                  },
+                  {
+                    "key": "grantor",
+                    "label": "Grantor",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "milvus.role.privilege.grant"
+                ],
+                "defaultSort": {
+                  "field": "privilege"
+                },
+                "emptyText": "This role holds no privileges.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "milvus.database.create",
+        "label": "Create database",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "milvus.database.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Database",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Database name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "map",
+                  "item": {
+                    "key": "value",
+                    "label": "Value",
+                    "type": "text"
+                  },
+                  "keyLabel": "Property"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "milvus.database.drop",
+        "label": "Drop database",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "milvus.database.drop",
+        "method": "DELETE",
+        "params": {
+          "name": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this database and every collection inside it? Vectors and indexes are deleted permanently.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.collection.create",
+        "label": "Create collection",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "milvus.collection.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Collection",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Collection name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                },
+                {
+                  "key": "description",
+                  "label": "Description",
+                  "type": "text"
+                },
+                {
+                  "key": "consistency_level",
+                  "label": "Consistency level",
+                  "type": "select",
+                  "default": "Bounded",
+                  "options": [
+                    {
+                      "label": "Strong",
+                      "value": "Strong"
+                    },
+                    {
+                      "label": "Bounded",
+                      "value": "Bounded"
+                    },
+                    {
+                      "label": "Session",
+                      "value": "Session"
+                    },
+                    {
+                      "label": "Eventually",
+                      "value": "Eventually"
+                    }
+                  ]
+                },
+                {
+                  "key": "shard_num",
+                  "label": "Shards",
+                  "type": "number",
+                  "default": 1,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 64
+                    }
+                  ]
+                },
+                {
+                  "key": "enable_dynamic_field",
+                  "label": "Enable dynamic field",
+                  "type": "toggle",
+                  "help": "Stores undeclared keys in the $meta JSON field."
+                }
+              ]
+            },
+            {
+              "name": "Schema",
+              "fields": [
+                {
+                  "key": "fields",
+                  "label": "Fields",
+                  "type": "array",
+                  "item": {
+                    "key": "field",
+                    "label": "Field",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Field name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                            "message": "letters, digits and underscores, starting with a letter or underscore"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Data type",
+                        "type": "select",
+                        "required": true,
+                        "default": "Int64",
+                        "options": [
+                          {
+                            "label": "Int64",
+                            "value": "Int64"
+                          },
+                          {
+                            "label": "Int32",
+                            "value": "Int32"
+                          },
+                          {
+                            "label": "Int16",
+                            "value": "Int16"
+                          },
+                          {
+                            "label": "Int8",
+                            "value": "Int8"
+                          },
+                          {
+                            "label": "Bool",
+                            "value": "Bool"
+                          },
+                          {
+                            "label": "Float",
+                            "value": "Float"
+                          },
+                          {
+                            "label": "Double",
+                            "value": "Double"
+                          },
+                          {
+                            "label": "VarChar",
+                            "value": "VarChar"
+                          },
+                          {
+                            "label": "JSON",
+                            "value": "JSON"
+                          },
+                          {
+                            "label": "Array",
+                            "value": "Array"
+                          },
+                          {
+                            "label": "Float vector",
+                            "value": "FloatVector"
+                          },
+                          {
+                            "label": "Binary vector",
+                            "value": "BinaryVector"
+                          },
+                          {
+                            "label": "Float16 vector",
+                            "value": "Float16Vector"
+                          },
+                          {
+                            "label": "BFloat16 vector",
+                            "value": "BFloat16Vector"
+                          },
+                          {
+                            "label": "Int8 vector",
+                            "value": "Int8Vector"
+                          },
+                          {
+                            "label": "Sparse float vector",
+                            "value": "SparseFloatVector"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "dim",
+                        "label": "Dimension",
+                        "type": "number",
+                        "required": true,
+                        "default": 128,
+                        "visibleWhen": {
+                          "allOf": [
+                            {
+                              "field": "type",
+                              "op": "in",
+                              "value": [
+                                "FloatVector",
+                                "BinaryVector",
+                                "Float16Vector",
+                                "BFloat16Vector",
+                                "Int8Vector"
+                              ]
+                            }
+                          ]
+                        },
+                        "validators": [
+                          {
+                            "type": "min",
+                            "value": 1
+                          },
+                          {
+                            "type": "max",
+                            "value": 32768
+                          }
+                        ]
+                      },
+                      {
+                        "key": "max_length",
+                        "label": "Max length",
+                        "type": "number",
+                        "default": 512,
+                        "visibleWhen": {
+                          "allOf": [
+                            {
+                              "field": "type",
+                              "op": "eq",
+                              "value": "VarChar"
+                            }
+                          ]
+                        },
+                        "validators": [
+                          {
+                            "type": "min",
+                            "value": 1
+                          },
+                          {
+                            "type": "max",
+                            "value": 65535
+                          }
+                        ]
+                      },
+                      {
+                        "key": "element_type",
+                        "label": "Element type",
+                        "type": "select",
+                        "default": "VarChar",
+                        "options": [
+                          {
+                            "label": "Int64",
+                            "value": "Int64"
+                          },
+                          {
+                            "label": "Int32",
+                            "value": "Int32"
+                          },
+                          {
+                            "label": "Bool",
+                            "value": "Bool"
+                          },
+                          {
+                            "label": "Float",
+                            "value": "Float"
+                          },
+                          {
+                            "label": "Double",
+                            "value": "Double"
+                          },
+                          {
+                            "label": "VarChar",
+                            "value": "VarChar"
+                          }
+                        ],
+                        "visibleWhen": {
+                          "allOf": [
+                            {
+                              "field": "type",
+                              "op": "eq",
+                              "value": "Array"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "key": "max_capacity",
+                        "label": "Max capacity",
+                        "type": "number",
+                        "default": 64,
+                        "visibleWhen": {
+                          "allOf": [
+                            {
+                              "field": "type",
+                              "op": "eq",
+                              "value": "Array"
+                            }
+                          ]
+                        },
+                        "validators": [
+                          {
+                            "type": "min",
+                            "value": 1
+                          },
+                          {
+                            "type": "max",
+                            "value": 4096
+                          }
+                        ]
+                      },
+                      {
+                        "key": "primary",
+                        "label": "Primary key",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "auto_id",
+                        "label": "Auto id",
+                        "type": "toggle",
+                        "help": "Only valid on an Int64 primary key."
+                      },
+                      {
+                        "key": "nullable",
+                        "label": "Nullable",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "partition_key",
+                        "label": "Partition key",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "clustering_key",
+                        "label": "Clustering key",
+                        "type": "toggle"
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description",
+                        "type": "text"
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Field",
+                  "addLabel": "Add field"
+                }
+              ]
+            },
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "auto_index",
+                  "label": "Build AUTOINDEX on vector fields",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "metric_type",
+                  "label": "Metric type",
+                  "type": "select",
+                  "default": "COSINE",
+                  "options": [
+                    {
+                      "label": "Cosine",
+                      "value": "COSINE"
+                    },
+                    {
+                      "label": "Inner product",
+                      "value": "IP"
+                    },
+                    {
+                      "label": "Euclidean (L2)",
+                      "value": "L2"
+                    },
+                    {
+                      "label": "Hamming",
+                      "value": "HAMMING"
+                    },
+                    {
+                      "label": "Jaccard",
+                      "value": "JACCARD"
+                    },
+                    {
+                      "label": "BM25",
+                      "value": "BM25"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "auto_index",
+                        "op": "eq",
+                        "value": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "load_after_create",
+                  "label": "Load collection after creation",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "milvus.collection.field.add",
+        "label": "Add field",
+        "icon": {
+          "type": "lucide",
+          "value": "list-plus"
+        },
+        "routeId": "milvus.collection.field.add",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Field",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Field name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Data type",
+                  "type": "select",
+                  "required": true,
+                  "default": "Int64",
+                  "options": [
+                    {
+                      "label": "Int64",
+                      "value": "Int64"
+                    },
+                    {
+                      "label": "Int32",
+                      "value": "Int32"
+                    },
+                    {
+                      "label": "Int16",
+                      "value": "Int16"
+                    },
+                    {
+                      "label": "Int8",
+                      "value": "Int8"
+                    },
+                    {
+                      "label": "Bool",
+                      "value": "Bool"
+                    },
+                    {
+                      "label": "Float",
+                      "value": "Float"
+                    },
+                    {
+                      "label": "Double",
+                      "value": "Double"
+                    },
+                    {
+                      "label": "VarChar",
+                      "value": "VarChar"
+                    },
+                    {
+                      "label": "JSON",
+                      "value": "JSON"
+                    },
+                    {
+                      "label": "Array",
+                      "value": "Array"
+                    },
+                    {
+                      "label": "Float vector",
+                      "value": "FloatVector"
+                    },
+                    {
+                      "label": "Binary vector",
+                      "value": "BinaryVector"
+                    },
+                    {
+                      "label": "Float16 vector",
+                      "value": "Float16Vector"
+                    },
+                    {
+                      "label": "BFloat16 vector",
+                      "value": "BFloat16Vector"
+                    },
+                    {
+                      "label": "Int8 vector",
+                      "value": "Int8Vector"
+                    },
+                    {
+                      "label": "Sparse float vector",
+                      "value": "SparseFloatVector"
+                    }
+                  ]
+                },
+                {
+                  "key": "dim",
+                  "label": "Dimension",
+                  "type": "number",
+                  "required": true,
+                  "default": 128,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "in",
+                        "value": [
+                          "FloatVector",
+                          "BinaryVector",
+                          "Float16Vector",
+                          "BFloat16Vector",
+                          "Int8Vector"
+                        ]
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 32768
+                    }
+                  ]
+                },
+                {
+                  "key": "max_length",
+                  "label": "Max length",
+                  "type": "number",
+                  "default": 512,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "VarChar"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 65535
+                    }
+                  ]
+                },
+                {
+                  "key": "element_type",
+                  "label": "Element type",
+                  "type": "select",
+                  "default": "VarChar",
+                  "options": [
+                    {
+                      "label": "Int64",
+                      "value": "Int64"
+                    },
+                    {
+                      "label": "Int32",
+                      "value": "Int32"
+                    },
+                    {
+                      "label": "Bool",
+                      "value": "Bool"
+                    },
+                    {
+                      "label": "Float",
+                      "value": "Float"
+                    },
+                    {
+                      "label": "Double",
+                      "value": "Double"
+                    },
+                    {
+                      "label": "VarChar",
+                      "value": "VarChar"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "Array"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "max_capacity",
+                  "label": "Max capacity",
+                  "type": "number",
+                  "default": 64,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "type",
+                        "op": "eq",
+                        "value": "Array"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 4096
+                    }
+                  ]
+                },
+                {
+                  "key": "description",
+                  "label": "Description",
+                  "type": "text"
+                },
+                {
+                  "key": "nullable",
+                  "label": "Nullable",
+                  "type": "toggle",
+                  "default": true,
+                  "help": "Added fields must be nullable or carry a default."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "schema"
+        },
+        "group": "Schema"
+      },
+      {
+        "id": "milvus.collection.rename",
+        "label": "Rename",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "milvus.collection.rename",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "New collection name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "group": "Schema"
+      },
+      {
+        "id": "milvus.collection.load",
+        "label": "Load",
+        "icon": {
+          "type": "lucide",
+          "value": "download"
+        },
+        "routeId": "milvus.collection.load",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "metrics"
+        },
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "state",
+              "op": "neq",
+              "value": "loaded"
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "milvus.collection.release",
+        "label": "Release",
+        "icon": {
+          "type": "lucide",
+          "value": "eject"
+        },
+        "routeId": "milvus.collection.release",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "metrics"
+        },
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "state",
+              "op": "eq",
+              "value": "loaded"
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "milvus.collection.flush",
+        "label": "Flush",
+        "icon": {
+          "type": "lucide",
+          "value": "save"
+        },
+        "routeId": "milvus.collection.flush",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Seal growing segments and persist them? Writes pause briefly while the flush runs.",
+        "onSuccess": {
+          "selectTab": "segments"
+        },
+        "group": "Maintenance"
+      },
+      {
+        "id": "milvus.collection.compact",
+        "label": "Compact",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "routeId": "milvus.collection.compact",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Start a compaction? It rewrites segments and consumes cluster I/O until it finishes.",
+        "onSuccess": {
+          "selectTab": "segments"
+        },
+        "group": "Maintenance"
+      },
+      {
+        "id": "milvus.collection.drop",
+        "label": "Drop collection",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "milvus.collection.drop",
+        "method": "DELETE",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this collection? Every entity, index and partition is deleted permanently.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.partition.create",
+        "label": "Create partition",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "milvus.partition.create",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Partition",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Partition name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "partitions"
+        }
+      },
+      {
+        "id": "milvus.partition.load",
+        "label": "Load partition",
+        "icon": {
+          "type": "lucide",
+          "value": "download"
+        },
+        "routeId": "milvus.partition.load",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.scope}",
+          "database": "${resource.namespace}",
+          "partition": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "overview"
+        },
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "state",
+              "op": "neq",
+              "value": "loaded"
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "milvus.partition.release",
+        "label": "Release partition",
+        "icon": {
+          "type": "lucide",
+          "value": "eject"
+        },
+        "routeId": "milvus.partition.release",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.scope}",
+          "database": "${resource.namespace}",
+          "partition": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "overview"
+        },
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "state",
+              "op": "eq",
+              "value": "loaded"
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "milvus.partition.drop",
+        "label": "Drop partition",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "milvus.partition.drop",
+        "method": "DELETE",
+        "params": {
+          "collection": "${resource.scope}",
+          "database": "${resource.namespace}",
+          "partition": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this partition? Its entities are deleted permanently.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "milvus.index.create",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "field_name",
+                  "label": "Field",
+                  "type": "select",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "milvus.collection.schema",
+                    "params": {
+                      "collection": "${resource.name}",
+                      "database": "${resource.namespace}"
+                    }
+                  }
+                },
+                {
+                  "key": "index_name",
+                  "label": "Index name",
+                  "type": "text",
+                  "help": "Defaults to the field name.",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^$|^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores"
+                    }
+                  ]
+                },
+                {
+                  "key": "index_type",
+                  "label": "Index type",
+                  "type": "select",
+                  "required": true,
+                  "default": "AUTOINDEX",
+                  "options": [
+                    {
+                      "label": "AUTOINDEX",
+                      "value": "AUTOINDEX"
+                    },
+                    {
+                      "label": "FLAT",
+                      "value": "FLAT"
+                    },
+                    {
+                      "label": "IVF_FLAT",
+                      "value": "IVF_FLAT"
+                    },
+                    {
+                      "label": "IVF_SQ8",
+                      "value": "IVF_SQ8"
+                    },
+                    {
+                      "label": "HNSW",
+                      "value": "HNSW"
+                    },
+                    {
+                      "label": "SCANN",
+                      "value": "SCANN"
+                    },
+                    {
+                      "label": "DISKANN",
+                      "value": "DISKANN"
+                    },
+                    {
+                      "label": "SPARSE_INVERTED_INDEX",
+                      "value": "SPARSE_INVERTED_INDEX"
+                    },
+                    {
+                      "label": "INVERTED (scalar)",
+                      "value": "INVERTED"
+                    },
+                    {
+                      "label": "BITMAP (scalar)",
+                      "value": "BITMAP"
+                    },
+                    {
+                      "label": "STL_SORT (scalar)",
+                      "value": "STL_SORT"
+                    },
+                    {
+                      "label": "Trie (scalar)",
+                      "value": "Trie"
+                    }
+                  ]
+                },
+                {
+                  "key": "metric_type",
+                  "label": "Metric type",
+                  "type": "select",
+                  "default": "COSINE",
+                  "options": [
+                    {
+                      "label": "Cosine",
+                      "value": "COSINE"
+                    },
+                    {
+                      "label": "Inner product",
+                      "value": "IP"
+                    },
+                    {
+                      "label": "Euclidean (L2)",
+                      "value": "L2"
+                    },
+                    {
+                      "label": "Hamming",
+                      "value": "HAMMING"
+                    },
+                    {
+                      "label": "Jaccard",
+                      "value": "JACCARD"
+                    },
+                    {
+                      "label": "BM25",
+                      "value": "BM25"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "index_type",
+                        "op": "nin",
+                        "value": [
+                          "INVERTED",
+                          "BITMAP",
+                          "STL_SORT",
+                          "Trie"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "nlist",
+                  "label": "nlist",
+                  "type": "number",
+                  "default": 128,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "index_type",
+                        "op": "in",
+                        "value": [
+                          "IVF_FLAT",
+                          "IVF_SQ8",
+                          "SCANN"
+                        ]
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 65536
+                    }
+                  ]
+                },
+                {
+                  "key": "m",
+                  "label": "M",
+                  "type": "number",
+                  "default": 16,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "index_type",
+                        "op": "eq",
+                        "value": "HNSW"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 2
+                    },
+                    {
+                      "type": "max",
+                      "value": 2048
+                    }
+                  ]
+                },
+                {
+                  "key": "ef_construction",
+                  "label": "efConstruction",
+                  "type": "number",
+                  "default": 200,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "index_type",
+                        "op": "eq",
+                        "value": "HNSW"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 8
+                    },
+                    {
+                      "type": "max",
+                      "value": 4096
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "milvus.index.drop",
+        "label": "Drop index",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "milvus.index.drop",
+        "method": "DELETE",
+        "params": {
+          "collection": "${resource.scope}",
+          "database": "${resource.namespace}",
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index? Vector search falls back to brute force until it is rebuilt.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.alias.create",
+        "label": "Create alias",
+        "icon": {
+          "type": "lucide",
+          "value": "tag"
+        },
+        "routeId": "milvus.alias.create",
+        "method": "POST",
+        "params": {
+          "collection": "${resource.name}",
+          "database": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Alias",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Alias",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "aliases"
+        }
+      },
+      {
+        "id": "milvus.alias.drop",
+        "label": "Drop alias",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "milvus.alias.drop",
+        "method": "DELETE",
+        "params": {
+          "alias": "${record.alias}",
+          "database": "${record.database}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this alias? Clients using it will stop resolving.",
+        "bulk": true
+      },
+      {
+        "id": "milvus.query.save",
+        "label": "Save query",
+        "icon": {
+          "type": "lucide",
+          "value": "bookmark"
+        },
+        "routeId": "milvus.query.save",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Saved query",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "collection",
+                  "label": "Collection",
+                  "type": "text"
+                },
+                {
+                  "key": "query",
+                  "label": "Query",
+                  "type": "textarea",
+                  "required": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "saved_queries"
+        }
+      },
+      {
+        "id": "milvus.query.delete",
+        "label": "Delete saved query",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "milvus.query.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${record.id}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this saved query?",
+        "bulk": true
+      },
+      {
+        "id": "milvus.user.create",
+        "label": "Create user",
+        "icon": {
+          "type": "lucide",
+          "value": "user-plus"
+        },
+        "routeId": "milvus.user.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "User",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Username",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                },
+                {
+                  "key": "password",
+                  "label": "Password",
+                  "type": "password",
+                  "required": true,
+                  "secret": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "milvus.user.password",
+        "label": "Change password",
+        "icon": {
+          "type": "lucide",
+          "value": "key"
+        },
+        "routeId": "milvus.user.password",
+        "method": "POST",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Password",
+              "fields": [
+                {
+                  "key": "old_password",
+                  "label": "Current password",
+                  "type": "password",
+                  "required": true,
+                  "secret": true
+                },
+                {
+                  "key": "new_password",
+                  "label": "New password",
+                  "type": "password",
+                  "required": true,
+                  "secret": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "overview"
+        }
+      },
+      {
+        "id": "milvus.user.role.grant",
+        "label": "Grant role",
+        "icon": {
+          "type": "lucide",
+          "value": "shield-plus"
+        },
+        "routeId": "milvus.user.role.grant",
+        "method": "POST",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Grant this role? The user immediately gains every privilege the role holds.",
+        "input": {
+          "groups": [
+            {
+              "name": "Role",
+              "fields": [
+                {
+                  "key": "role",
+                  "label": "Role",
+                  "type": "select",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "milvus.roles.list"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "roles"
+        }
+      },
+      {
+        "id": "milvus.user.role.revoke",
+        "label": "Revoke role",
+        "icon": {
+          "type": "lucide",
+          "value": "shield-minus"
+        },
+        "routeId": "milvus.user.role.revoke",
+        "method": "DELETE",
+        "params": {
+          "role": "${record.role}",
+          "user": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Revoke this role from the user?",
+        "onSuccess": {
+          "selectTab": "roles"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.user.delete",
+        "label": "Delete user",
+        "icon": {
+          "type": "lucide",
+          "value": "user-minus"
+        },
+        "routeId": "milvus.user.delete",
+        "method": "DELETE",
+        "params": {
+          "user": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this user? Their sessions stop working immediately.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "milvus.role.create",
+        "label": "Create role",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "milvus.role.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Role",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Role name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,254}$",
+                      "message": "letters, digits and underscores, starting with a letter or underscore"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "milvus.role.privilege.grant",
+        "label": "Grant privilege",
+        "icon": {
+          "type": "lucide",
+          "value": "key"
+        },
+        "routeId": "milvus.role.privilege.grant",
+        "method": "POST",
+        "params": {
+          "role": "${resource.name}"
+        },
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Grant this privilege? Every user holding the role gains it immediately.",
+        "input": {
+          "groups": [
+            {
+              "name": "Privilege",
+              "fields": [
+                {
+                  "key": "privilege",
+                  "label": "Privilege",
+                  "type": "autocomplete",
+                  "required": true,
+                  "help": "Privilege or privilege-group name.",
+                  "options": [
+                    {
+                      "label": "Search",
+                      "value": "Search"
+                    },
+                    {
+                      "label": "Query",
+                      "value": "Query"
+                    },
+                    {
+                      "label": "Insert",
+                      "value": "Insert"
+                    },
+                    {
+                      "label": "Delete",
+                      "value": "Delete"
+                    },
+                    {
+                      "label": "Load",
+                      "value": "Load"
+                    },
+                    {
+                      "label": "Release",
+                      "value": "Release"
+                    },
+                    {
+                      "label": "CreateIndex",
+                      "value": "CreateIndex"
+                    },
+                    {
+                      "label": "DropIndex",
+                      "value": "DropIndex"
+                    },
+                    {
+                      "label": "CreateCollection",
+                      "value": "CreateCollection"
+                    },
+                    {
+                      "label": "DropCollection",
+                      "value": "DropCollection"
+                    },
+                    {
+                      "label": "DescribeCollection",
+                      "value": "DescribeCollection"
+                    },
+                    {
+                      "label": "ShowCollections",
+                      "value": "ShowCollections"
+                    },
+                    {
+                      "label": "Flush",
+                      "value": "Flush"
+                    },
+                    {
+                      "label": "Compaction",
+                      "value": "Compaction"
+                    }
+                  ]
+                },
+                {
+                  "key": "collection",
+                  "label": "Collection",
+                  "type": "text",
+                  "default": "*",
+                  "help": "Use * for every collection in the database."
+                },
+                {
+                  "key": "db",
+                  "label": "Database",
+                  "type": "text",
+                  "help": "Defaults to the selected database."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "privileges"
+        }
+      },
+      {
+        "id": "milvus.role.privilege.revoke",
+        "label": "Revoke privilege",
+        "icon": {
+          "type": "lucide",
+          "value": "shield-minus"
+        },
+        "routeId": "milvus.role.privilege.revoke",
+        "method": "POST",
+        "params": {
+          "role": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Revoke this privilege from the role?",
+        "input": {
+          "groups": [
+            {
+              "name": "Privilege",
+              "fields": [
+                {
+                  "key": "privilege",
+                  "label": "Privilege",
+                  "type": "autocomplete",
+                  "required": true,
+                  "help": "Privilege or privilege-group name.",
+                  "options": [
+                    {
+                      "label": "Search",
+                      "value": "Search"
+                    },
+                    {
+                      "label": "Query",
+                      "value": "Query"
+                    },
+                    {
+                      "label": "Insert",
+                      "value": "Insert"
+                    },
+                    {
+                      "label": "Delete",
+                      "value": "Delete"
+                    },
+                    {
+                      "label": "Load",
+                      "value": "Load"
+                    },
+                    {
+                      "label": "Release",
+                      "value": "Release"
+                    },
+                    {
+                      "label": "CreateIndex",
+                      "value": "CreateIndex"
+                    },
+                    {
+                      "label": "DropIndex",
+                      "value": "DropIndex"
+                    },
+                    {
+                      "label": "CreateCollection",
+                      "value": "CreateCollection"
+                    },
+                    {
+                      "label": "DropCollection",
+                      "value": "DropCollection"
+                    },
+                    {
+                      "label": "DescribeCollection",
+                      "value": "DescribeCollection"
+                    },
+                    {
+                      "label": "ShowCollections",
+                      "value": "ShowCollections"
+                    },
+                    {
+                      "label": "Flush",
+                      "value": "Flush"
+                    },
+                    {
+                      "label": "Compaction",
+                      "value": "Compaction"
+                    }
+                  ]
+                },
+                {
+                  "key": "collection",
+                  "label": "Collection",
+                  "type": "text",
+                  "default": "*",
+                  "help": "Use * for every collection in the database."
+                },
+                {
+                  "key": "db",
+                  "label": "Database",
+                  "type": "text",
+                  "help": "Defaults to the selected database."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "privileges"
+        }
+      },
+      {
+        "id": "milvus.role.delete",
+        "label": "Delete role",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "milvus.role.delete",
+        "method": "DELETE",
+        "params": {
+          "role": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this role? Users lose every privilege it granted.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      }
+    ],
+    "scope": [
+      {
+        "param": "database",
+        "label": "Database",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "control": "select",
+        "disableSearch": true,
+        "optionsSource": {
+          "routeId": "milvus.databases.list"
+        },
+        "valueField": "value",
+        "labelField": "label",
+        "defaultValue": "default"
+      }
+    ],
+    "streams": [
+      {
+        "id": "milvus.overview.metrics",
+        "kind": "metrics",
+        "routeId": "milvus.overview.metrics"
+      },
+      {
+        "id": "milvus.collection.metrics",
+        "kind": "metrics",
+        "routeId": "milvus.collection.metrics"
+      },
+      {
+        "id": "milvus.collection.watch",
+        "kind": "resource",
+        "routeId": "milvus.collection.watch"
+      },
+      {
+        "id": "milvus.collection.projection",
+        "kind": "canvas",
+        "routeId": "milvus.collection.projection"
+      },
+      {
+        "id": "milvus.index.progress",
+        "kind": "task",
+        "routeId": "milvus.index.progress"
+      },
+      {
+        "id": "milvus.query",
+        "kind": "query",
+        "routeId": "milvus.query"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

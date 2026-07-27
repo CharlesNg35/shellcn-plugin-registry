@@ -1,0 +1,5835 @@
+{
+  "name": "couchbase",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" id=\"Couchbase--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003eCouchbase Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"#ed2226\" d=\"M12 0.25C5.521525 0.25 0.25 5.503775 0.25 12c0 6.478475 5.253775 11.75 11.75 11.75 6.478475 0 11.75 -5.253775 11.75 -11.75S18.478475 0.25 12 0.25Zm7.9339 13.8089c0 0.709975 -0.408225 1.3312 -1.206925 1.4732 -1.38445 0.2485 -4.295325 0.390475 -6.726975 0.390475 -2.43165 0 -5.342525 -0.141975 -6.726975 -0.390475 -0.7987 -0.142 -1.20695 -0.763225 -1.20695 -1.4732V9.4796c0 -0.70995 0.55025 -1.366675 1.20695 -1.473175 0.40825 -0.071 1.3667 -0.142 2.112175 -0.142 0.283975 0 0.514725 0.213 0.514725 0.550225v3.212625l4.117825 -0.08875 4.117825 0.08875V8.41465c0 -0.337225 0.23075 -0.550225 0.514725 -0.550225 0.745475 0 1.703925 0.071 2.112175 0.142 0.67445 0.1065 1.206925 0.763225 1.206925 1.473175 -0.0355 1.5087 -0.0355 3.052875 -0.0355 4.5793Z\" stroke-width=\"0.25\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "couchbase",
+    "version": "0.1.0",
+    "title": "Couchbase",
+    "description": "Couchbase Server cockpit: buckets, scopes and collections, JSON documents, SQL++ with an index advisor, live cluster and DCP metrics, a data map, and XDCR activity.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" id=\"Couchbase--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003eCouchbase Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"#ed2226\" d=\"M12 0.25C5.521525 0.25 0.25 5.503775 0.25 12c0 6.478475 5.253775 11.75 11.75 11.75 6.478475 0 11.75 -5.253775 11.75 -11.75S18.478475 0.25 12 0.25Zm7.9339 13.8089c0 0.709975 -0.408225 1.3312 -1.206925 1.4732 -1.38445 0.2485 -4.295325 0.390475 -6.726975 0.390475 -2.43165 0 -5.342525 -0.141975 -6.726975 -0.390475 -0.7987 -0.142 -1.20695 -0.763225 -1.20695 -1.4732V9.4796c0 -0.70995 0.55025 -1.366675 1.20695 -1.473175 0.40825 -0.071 1.3667 -0.142 2.112175 -0.142 0.283975 0 0.514725 0.213 0.514725 0.550225v3.212625l4.117825 -0.08875 4.117825 0.08875V8.41465c0 -0.337225 0.23075 -0.550225 0.514725 -0.550225 0.745475 0 1.703925 0.071 2.112175 0.142 0.67445 0.1065 1.206925 0.763225 1.206925 1.473175 -0.0355 1.5087 -0.0355 3.052875 -0.0355 4.5793Z\" stroke-width=\"0.25\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Cluster",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "couchbase.example.internal",
+              "help": "Any cluster node; the management API resolves the rest of the topology."
+            },
+            {
+              "key": "port",
+              "label": "Management port",
+              "type": "number",
+              "required": true,
+              "default": 8091,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "query_port",
+              "label": "Query port",
+              "type": "number",
+              "required": true,
+              "default": 8093,
+              "help": "SQL++ (N1QL) service port: 8093 plain, 18093 with TLS.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "bucket",
+              "label": "Default bucket",
+              "type": "text",
+              "help": "Pre-selects this bucket in the workspace bucket picker."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "password",
+              "options": [
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "default": "Administrator",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable Couchbase RBAC credential; its identity supplies the username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "couchbase"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "help": "TLS uses the secure ports (18091 / 18093).",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks bucket, scope, collection, document, and index mutations, and every mutating SQL++ statement."
+            },
+            {
+              "key": "require_write_confirmation",
+              "label": "Confirm write statements",
+              "type": "toggle",
+              "default": true,
+              "help": "The SQL++ editor asks for confirmation before running a mutating or administrative statement."
+            },
+            {
+              "key": "scan_consistency",
+              "label": "Query scan consistency",
+              "type": "select",
+              "required": true,
+              "default": "request_plus",
+              "help": "request_plus waits for the index to catch up with recent mutations before answering a SQL++ read.",
+              "options": [
+                {
+                  "label": "Read your own writes (request_plus)",
+                  "value": "request_plus"
+                },
+                {
+                  "label": "Fastest, possibly stale (not_bounded)",
+                  "value": "not_bounded"
+                }
+              ]
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "30s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "redact_fields",
+              "label": "Redacted fields",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for document fields and result columns that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "buckets",
+      "scopes",
+      "collections",
+      "documents",
+      "kv",
+      "sqlpp",
+      "n1ql",
+      "indexes",
+      "index-advisor",
+      "metrics",
+      "dcp",
+      "xdcr",
+      "web-console"
+    ],
+    "supportedTransports": [
+      "direct",
+      "agent"
+    ],
+    "agent": {
+      "modes": [
+        "tcp"
+      ],
+      "riskNote": "privileged"
+    },
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "cluster",
+        "label": "Cluster",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "ref": {
+          "kind": "cluster",
+          "name": "Cluster",
+          "uid": "cluster"
+        }
+      },
+      {
+        "key": "buckets",
+        "label": "Buckets",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "couchbase.tree.buckets"
+        },
+        "resourceKind": "bucket"
+      },
+      {
+        "key": "indexes",
+        "label": "Indexes",
+        "icon": {
+          "type": "lucide",
+          "value": "list-tree"
+        },
+        "resourceKind": "index"
+      },
+      {
+        "key": "xdcr",
+        "label": "XDCR",
+        "icon": {
+          "type": "lucide",
+          "value": "git-compare-arrows"
+        },
+        "resourceKind": "replication"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "cluster",
+        "title": "Cluster",
+        "list": {
+          "routeId": "couchbase.cluster.list"
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "kind": "cluster"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Cluster",
+            "sortable": true
+          },
+          {
+            "key": "health",
+            "label": "Health",
+            "type": "badge",
+            "severities": {
+              "degraded": "warn",
+              "down": "danger",
+              "healthy": "success",
+              "unbalanced": "warn",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "version",
+            "label": "Version"
+          },
+          {
+            "key": "edition",
+            "label": "Edition",
+            "type": "badge"
+          },
+          {
+            "key": "nodes",
+            "label": "Nodes",
+            "type": "number"
+          },
+          {
+            "key": "buckets",
+            "label": "Buckets",
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "health",
+            "severities": {
+              "degraded": "warn",
+              "down": "danger",
+              "healthy": "success",
+              "unbalanced": "warn",
+              "unknown": "secondary"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.cluster.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Cluster",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "health",
+                        "label": "Health",
+                        "type": "badge",
+                        "severities": {
+                          "degraded": "warn",
+                          "down": "danger",
+                          "healthy": "success",
+                          "unbalanced": "warn",
+                          "unknown": "secondary"
+                        }
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version"
+                      },
+                      {
+                        "key": "edition",
+                        "label": "Edition",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "services",
+                        "label": "Services"
+                      },
+                      {
+                        "key": "nodes",
+                        "label": "Nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "healthy_nodes",
+                        "label": "Healthy nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "balanced",
+                        "label": "Balanced",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "rebalance_status",
+                        "label": "Rebalance",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "building": "warn",
+                          "created": "success",
+                          "deleted": "secondary",
+                          "error": "danger",
+                          "failed": "danger",
+                          "healthy": "success",
+                          "inactiveadded": "secondary",
+                          "inactivefailed": "danger",
+                          "notrunning": "secondary",
+                          "offline": "danger",
+                          "online": "success",
+                          "paused": "warn",
+                          "pausing": "warn",
+                          "ready": "success",
+                          "replicating": "warn",
+                          "running": "success",
+                          "scheduled for creation": "warn",
+                          "unhealthy": "danger",
+                          "unknown": "secondary",
+                          "warmup": "warn"
+                        }
+                      },
+                      {
+                        "key": "alerts",
+                        "label": "Active alerts",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "quotaPct",
+                        "label": "Bucket RAM quota",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "quotaPct",
+                          "usedKey": "quotaUsed",
+                          "totalKey": "quotaTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 80,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "ramPct",
+                        "label": "Node memory",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "ramPct",
+                          "usedKey": "ramUsed",
+                          "totalKey": "ramTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 85,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "diskPct",
+                        "label": "Disk",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "diskPct",
+                          "usedKey": "diskUsed",
+                          "totalKey": "diskTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 80,
+                          "criticalAt": 92
+                        }
+                      },
+                      {
+                        "key": "data_memory_quota",
+                        "label": "Data service quota",
+                        "type": "number"
+                      },
+                      {
+                        "key": "index_memory_quota",
+                        "label": "Index service quota",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Workload",
+                    "fields": [
+                      {
+                        "key": "buckets",
+                        "label": "Buckets",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_buckets",
+                        "label": "Bucket limit",
+                        "type": "number"
+                      },
+                      {
+                        "key": "items",
+                        "label": "Documents",
+                        "type": "number"
+                      },
+                      {
+                        "key": "opsPerSec",
+                        "label": "Ops/s",
+                        "type": "number"
+                      },
+                      {
+                        "key": "cpuPct",
+                        "label": "CPU",
+                        "type": "percent"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Connection",
+                    "fields": [
+                      {
+                        "key": "management_endpoint",
+                        "label": "Management API",
+                        "copy": true
+                      },
+                      {
+                        "key": "query_endpoint",
+                        "label": "Query service",
+                        "copy": true
+                      },
+                      {
+                        "key": "read_only",
+                        "label": "Read-only mode",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "confirm_write_queries",
+                        "label": "Confirm write statements",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "couchbase.cluster.watch",
+                  "method": "WS"
+                }
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "couchbase.cluster.metrics",
+                "method": "WS"
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "buckets",
+                    "label": "Buckets"
+                  },
+                  {
+                    "key": "nodes",
+                    "label": "Nodes"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Documents"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s"
+                  },
+                  {
+                    "key": "diskFetches",
+                    "label": "Disk fetches/s"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "quotaPct",
+                    "label": "Bucket RAM quota",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "quotaPct",
+                      "usedKey": "quotaUsed",
+                      "totalKey": "quotaTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  },
+                  {
+                    "key": "diskPct",
+                    "label": "Disk",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "diskPct",
+                      "usedKey": "diskUsed",
+                      "totalKey": "diskTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 92
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s"
+                  },
+                  {
+                    "key": "cpuPct",
+                    "label": "CPU",
+                    "unit": "%"
+                  },
+                  {
+                    "key": "quotaPct",
+                    "label": "RAM quota",
+                    "unit": "%"
+                  }
+                ],
+                "history": 60
+              }
+            },
+            {
+              "key": "nodes",
+              "label": "Nodes",
+              "icon": {
+                "type": "lucide",
+                "value": "server"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.nodes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "hostname",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "building": "warn",
+                      "created": "success",
+                      "deleted": "secondary",
+                      "error": "danger",
+                      "failed": "danger",
+                      "healthy": "success",
+                      "inactiveadded": "secondary",
+                      "inactivefailed": "danger",
+                      "notrunning": "secondary",
+                      "offline": "danger",
+                      "online": "success",
+                      "paused": "warn",
+                      "pausing": "warn",
+                      "ready": "success",
+                      "replicating": "warn",
+                      "running": "success",
+                      "scheduled for creation": "warn",
+                      "unhealthy": "danger",
+                      "unknown": "secondary",
+                      "warmup": "warn"
+                    }
+                  },
+                  {
+                    "key": "services",
+                    "label": "Services"
+                  },
+                  {
+                    "key": "version",
+                    "label": "Version"
+                  },
+                  {
+                    "key": "cpuPct",
+                    "label": "CPU",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "ramPct",
+                    "label": "RAM",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "ramUsed",
+                    "label": "RAM used",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Items",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "uptime",
+                    "label": "Uptime",
+                    "sortable": true,
+                    "type": "duration"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "hostname"
+                },
+                "emptyText": "No nodes reported by this cluster.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "buckets",
+              "label": "Buckets",
+              "icon": {
+                "type": "lucide",
+                "value": "database"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.buckets.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Bucket",
+                    "sortable": true
+                  },
+                  {
+                    "key": "health",
+                    "label": "Health",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "degraded": "warn",
+                      "down": "danger",
+                      "healthy": "success",
+                      "unbalanced": "warn",
+                      "unknown": "secondary"
+                    }
+                  },
+                  {
+                    "key": "bucket_type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Documents",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "quotaPct",
+                    "label": "RAM quota used",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "memUsed",
+                    "label": "RAM used",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "diskUsed",
+                    "label": "Disk used",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "replicas",
+                    "label": "Replicas",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "couchbase.bucket.create"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No buckets yet. Create one to store documents.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "datamap",
+              "label": "Data map",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-dashboard"
+              },
+              "panel": "canvas",
+              "source": {
+                "routeId": "couchbase.datamap",
+                "method": "WS"
+              },
+              "config": {
+                "scaleMode": "resize",
+                "hidpi": true,
+                "interactive": true,
+                "keyboard": true,
+                "pointer": true,
+                "wheelMode": "none",
+                "resizeEvents": true,
+                "focusOnPointer": true,
+                "ariaLabel": "Bucket data map: scopes, collections, and document counts",
+                "instructions": "Use the arrow keys to move between collections, Home and End to jump to the first or last one. Each bar is one collection, sized by its share of the largest collection in the bucket."
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.indexes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "building": "warn",
+                      "created": "success",
+                      "deleted": "secondary",
+                      "error": "danger",
+                      "failed": "danger",
+                      "healthy": "success",
+                      "inactiveadded": "secondary",
+                      "inactivefailed": "danger",
+                      "notrunning": "secondary",
+                      "offline": "danger",
+                      "online": "success",
+                      "paused": "warn",
+                      "pausing": "warn",
+                      "ready": "success",
+                      "replicating": "warn",
+                      "running": "success",
+                      "scheduled for creation": "warn",
+                      "unhealthy": "danger",
+                      "unknown": "secondary",
+                      "warmup": "warn"
+                    }
+                  },
+                  {
+                    "key": "progress",
+                    "label": "Build",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "primary",
+                    "label": "Primary",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "replicas",
+                    "label": "Replicas",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "storage_mode",
+                    "label": "Storage",
+                    "sortable": true
+                  },
+                  {
+                    "key": "hosts",
+                    "label": "Hosts"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No global secondary indexes.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "users",
+              "label": "Users",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.users.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "id",
+                    "label": "User",
+                    "sortable": true
+                  },
+                  {
+                    "key": "name",
+                    "label": "Name",
+                    "sortable": true
+                  },
+                  {
+                    "key": "domain",
+                    "label": "Domain",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "role_count",
+                    "label": "Roles",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "roles",
+                    "label": "Granted roles"
+                  },
+                  {
+                    "key": "groups",
+                    "label": "Groups"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "id"
+                },
+                "emptyText": "No RBAC users are defined on this cluster."
+              }
+            },
+            {
+              "key": "events",
+              "label": "Events",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "couchbase.events.list"
+              },
+              "config": {
+                "timestampField": "time",
+                "titleField": "title",
+                "bodyField": "message",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "module",
+                "emptyText": "No cluster events recorded yet.",
+                "watch": {
+                  "routeId": "couchbase.events.watch",
+                  "method": "WS"
+                }
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL++",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL++",
+                "executeLabel": "Run",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running…",
+                "emptyText": "Run a SQL++ statement to see results.",
+                "initialQuery": "SELECT k.* FROM system:keyspaces k ORDER BY k.`path` LIMIT 25;",
+                "cancelRouteId": "couchbase.query.cancel",
+                "completionRouteId": "couchbase.query.complete",
+                "exportable": true
+              }
+            },
+            {
+              "key": "advisor",
+              "label": "Index advisor",
+              "icon": {
+                "type": "lucide",
+                "value": "lightbulb"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.advisor",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "Index advisor",
+                "executeLabel": "Analyse",
+                "runningLabel": "Analysing…",
+                "emptyText": "Paste a SELECT, UPDATE, DELETE, or MERGE statement to get index recommendations.",
+                "initialQuery": "SELECT k.* FROM system:keyspaces k LIMIT 25;",
+                "exportable": true
+              }
+            },
+            {
+              "key": "saved",
+              "label": "Saved queries",
+              "icon": {
+                "type": "lucide",
+                "value": "bookmark"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.queries.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Name",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "description",
+                    "label": "Description"
+                  },
+                  {
+                    "key": "statement",
+                    "label": "SQL++"
+                  },
+                  {
+                    "key": "updated_at",
+                    "label": "Updated",
+                    "sortable": true,
+                    "type": "datetime"
+                  }
+                ],
+                "actionIds": [
+                  "couchbase.query.save"
+                ],
+                "rowActionIds": [
+                  "couchbase.query.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No saved SQL++ statements for this connection yet."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "bucket",
+        "title": "Buckets",
+        "list": {
+          "routeId": "couchbase.buckets.list"
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "kind": "bucket"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Bucket",
+            "sortable": true
+          },
+          {
+            "key": "health",
+            "label": "Health",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "degraded": "warn",
+              "down": "danger",
+              "healthy": "success",
+              "unbalanced": "warn",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "bucket_type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "items",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "opsPerSec",
+            "label": "Ops/s",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "quotaPct",
+            "label": "RAM quota used",
+            "sortable": true,
+            "type": "percent"
+          },
+          {
+            "key": "memUsed",
+            "label": "RAM used",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "diskUsed",
+            "label": "Disk used",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "replicas",
+            "label": "Replicas",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "couchbase.bucket.create"
+          ],
+          "row": [
+            "couchbase.bucket.delete"
+          ],
+          "detail": [
+            "couchbase.scope.create",
+            "couchbase.bucket.update",
+            "couchbase.bucket.compact",
+            "couchbase.bucket.flush",
+            "couchbase.bucket.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "health",
+            "severities": {
+              "degraded": "warn",
+              "down": "danger",
+              "healthy": "success",
+              "unbalanced": "warn",
+              "unknown": "secondary"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.bucket.read",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Bucket",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "health",
+                        "label": "Health",
+                        "type": "badge",
+                        "severities": {
+                          "degraded": "warn",
+                          "down": "danger",
+                          "healthy": "success",
+                          "unbalanced": "warn",
+                          "unknown": "secondary"
+                        }
+                      },
+                      {
+                        "key": "bucket_type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "storage_backend",
+                        "label": "Storage engine",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "uuid",
+                        "label": "UUID",
+                        "copy": true
+                      },
+                      {
+                        "key": "eviction_policy",
+                        "label": "Eviction policy"
+                      },
+                      {
+                        "key": "durability",
+                        "label": "Minimum durability"
+                      },
+                      {
+                        "key": "conflict_res",
+                        "label": "Conflict resolution"
+                      },
+                      {
+                        "key": "compression",
+                        "label": "Compression"
+                      },
+                      {
+                        "key": "flush_enabled",
+                        "label": "Flush allowed",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "quotaPct",
+                        "label": "RAM quota",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "quotaPct",
+                          "usedKey": "memUsed",
+                          "totalKey": "quotaTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 80,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "diskUsed",
+                        "label": "Disk used",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "dataUsed",
+                        "label": "Data size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "items",
+                        "label": "Documents",
+                        "type": "number"
+                      },
+                      {
+                        "key": "non_resident",
+                        "label": "Non-resident items",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Topology",
+                    "fields": [
+                      {
+                        "key": "nodes",
+                        "label": "Nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "replica_topology",
+                        "label": "Serving nodes"
+                      },
+                      {
+                        "key": "replicas",
+                        "label": "Replicas",
+                        "type": "number"
+                      },
+                      {
+                        "key": "vbuckets",
+                        "label": "vBuckets",
+                        "type": "number"
+                      },
+                      {
+                        "key": "scopes",
+                        "label": "Scopes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "collections",
+                        "label": "Collections",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "couchbase.bucket.metrics",
+                "method": "WS",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "items",
+                    "label": "Documents"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s"
+                  },
+                  {
+                    "key": "diskFetches",
+                    "label": "Disk fetches/s"
+                  },
+                  {
+                    "key": "dcpRemaining",
+                    "label": "DCP items remaining"
+                  },
+                  {
+                    "key": "dcpSent",
+                    "label": "DCP items sent"
+                  },
+                  {
+                    "key": "queueSize",
+                    "label": "Disk queue"
+                  }
+                ],
+                "gauges": [
+                  {
+                    "key": "residentRatio",
+                    "label": "Resident ratio",
+                    "unit": "%"
+                  },
+                  {
+                    "key": "cacheMissRate",
+                    "label": "Cache miss",
+                    "unit": "%"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "quotaPct",
+                    "label": "RAM quota",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "quotaPct",
+                      "usedKey": "quotaUsed",
+                      "totalKey": "quotaTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s"
+                  },
+                  {
+                    "key": "cmdGet",
+                    "label": "Gets/s"
+                  },
+                  {
+                    "key": "cmdSet",
+                    "label": "Sets/s"
+                  },
+                  {
+                    "key": "dcpRemaining",
+                    "label": "DCP backlog"
+                  }
+                ],
+                "history": 60
+              }
+            },
+            {
+              "key": "scopes",
+              "label": "Scopes",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.scopes.list",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Scope",
+                    "sortable": true
+                  },
+                  {
+                    "key": "collections",
+                    "label": "Collections",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Documents",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memUsed",
+                    "label": "Resident",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "system",
+                    "label": "System",
+                    "sortable": true,
+                    "type": "bool"
+                  }
+                ],
+                "actionIds": [
+                  "couchbase.scope.create"
+                ],
+                "rowActionIds": [
+                  "couchbase.scope.delete"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This bucket has no scopes beyond the defaults.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "collections",
+              "label": "Collections",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.collections.list",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Collection",
+                    "sortable": true
+                  },
+                  {
+                    "key": "scope",
+                    "label": "Scope",
+                    "sortable": true
+                  },
+                  {
+                    "key": "items",
+                    "label": "Documents",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memUsed",
+                    "label": "Resident",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "dataSize",
+                    "label": "Data size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "max_ttl",
+                    "label": "Expiry",
+                    "sortable": true,
+                    "type": "duration"
+                  }
+                ],
+                "rowActionIds": [
+                  "couchbase.collection.delete"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This bucket has no collections yet.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "datamap",
+              "label": "Data map",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-dashboard"
+              },
+              "panel": "canvas",
+              "source": {
+                "routeId": "couchbase.datamap",
+                "method": "WS",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "scaleMode": "resize",
+                "hidpi": true,
+                "interactive": true,
+                "keyboard": true,
+                "pointer": true,
+                "wheelMode": "none",
+                "resizeEvents": true,
+                "focusOnPointer": true,
+                "ariaLabel": "Bucket data map: scopes, collections, and document counts",
+                "instructions": "Use the arrow keys to move between collections, Home and End to jump to the first or last one. Each bar is one collection, sized by its share of the largest collection in the bucket."
+              }
+            },
+            {
+              "key": "dcp",
+              "label": "DCP streams",
+              "icon": {
+                "type": "lucide",
+                "value": "radio"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.bucket.dcp",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "consumer",
+                    "label": "DCP consumer",
+                    "sortable": true
+                  },
+                  {
+                    "key": "count",
+                    "label": "Streams",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "producer_count",
+                    "label": "Producers",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "items_remaining",
+                    "label": "Items remaining",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "items_sent",
+                    "label": "Items sent",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "total_bytes",
+                    "label": "Bytes/s",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "backoff",
+                    "label": "Backoffs",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "refreshIntervalMs": 5000,
+                "defaultSort": {
+                  "field": "consumer"
+                },
+                "emptyText": "No DCP consumers are streaming from this bucket.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.indexes.list",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "building": "warn",
+                      "created": "success",
+                      "deleted": "secondary",
+                      "error": "danger",
+                      "failed": "danger",
+                      "healthy": "success",
+                      "inactiveadded": "secondary",
+                      "inactivefailed": "danger",
+                      "notrunning": "secondary",
+                      "offline": "danger",
+                      "online": "success",
+                      "paused": "warn",
+                      "pausing": "warn",
+                      "ready": "success",
+                      "replicating": "warn",
+                      "running": "success",
+                      "scheduled for creation": "warn",
+                      "unhealthy": "danger",
+                      "unknown": "secondary",
+                      "warmup": "warn"
+                    }
+                  },
+                  {
+                    "key": "progress",
+                    "label": "Build",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "primary",
+                    "label": "Primary",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "replicas",
+                    "label": "Replicas",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "storage_mode",
+                    "label": "Storage",
+                    "sortable": true
+                  },
+                  {
+                    "key": "hosts",
+                    "label": "Hosts"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No indexes on this bucket.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL++",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.query",
+                "method": "WS",
+                "params": {
+                  "bucket": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL++",
+                "executeLabel": "Run",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running…",
+                "emptyText": "Run a SQL++ statement to see results.",
+                "initialQuery": "SELECT k.* FROM system:keyspaces k WHERE IFMISSING(k.`bucket`, k.`id`) = \"${resource.name}\" ORDER BY k.`path` LIMIT 25;",
+                "cancelRouteId": "couchbase.query.cancel",
+                "completionRouteId": "couchbase.query.complete",
+                "completionParams": {
+                  "bucket": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "scope",
+        "title": "Scopes",
+        "list": {
+          "routeId": "couchbase.scopes.list",
+          "params": {
+            "bucket": "${resource.scope}"
+          }
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "bucket": "${resource.scope}",
+            "kind": "scope"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Scope",
+            "sortable": true
+          },
+          {
+            "key": "collections",
+            "label": "Collections",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "items",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "memUsed",
+            "label": "Resident",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "system",
+            "label": "System",
+            "sortable": true,
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "couchbase.collection.create"
+          ],
+          "row": [
+            "couchbase.scope.delete"
+          ],
+          "detail": [
+            "couchbase.collection.create",
+            "couchbase.scope.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.scope}.${resource.name}"
+          },
+          "defaultTab": "collections",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.scope.read",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Scope",
+                    "fields": [
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Scope",
+                        "copy": true
+                      },
+                      {
+                        "key": "bucket",
+                        "label": "Bucket"
+                      },
+                      {
+                        "key": "uid",
+                        "label": "Manifest UID"
+                      },
+                      {
+                        "key": "collections",
+                        "label": "Collections",
+                        "type": "number"
+                      },
+                      {
+                        "key": "collection_names",
+                        "label": "Collection names"
+                      },
+                      {
+                        "key": "items",
+                        "label": "Documents",
+                        "type": "number"
+                      },
+                      {
+                        "key": "memUsed",
+                        "label": "Resident",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "dataSize",
+                        "label": "Data size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "system",
+                        "label": "System scope",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "collections",
+              "label": "Collections",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.collections.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Collection",
+                    "sortable": true
+                  },
+                  {
+                    "key": "scope",
+                    "label": "Scope",
+                    "sortable": true
+                  },
+                  {
+                    "key": "items",
+                    "label": "Documents",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memUsed",
+                    "label": "Resident",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "dataSize",
+                    "label": "Data size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "opsPerSec",
+                    "label": "Ops/s",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "max_ttl",
+                    "label": "Expiry",
+                    "sortable": true,
+                    "type": "duration"
+                  }
+                ],
+                "actionIds": [
+                  "couchbase.collection.create"
+                ],
+                "rowActionIds": [
+                  "couchbase.collection.delete"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This scope has no collections yet.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL++",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.query",
+                "method": "WS",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL++",
+                "executeLabel": "Run",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running…",
+                "emptyText": "Run a SQL++ statement to see results.",
+                "initialQuery": "SELECT k.* FROM system:keyspaces k WHERE IFMISSING(k.`bucket`, k.`id`) = \"${resource.scope}\" AND IFMISSING(k.`scope`, \"_default\") = \"${resource.name}\" ORDER BY k.`path` LIMIT 25;",
+                "cancelRouteId": "couchbase.query.cancel",
+                "completionRouteId": "couchbase.query.complete",
+                "completionParams": {
+                  "keyspace": "${resource.uid}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "collection",
+        "title": "Collections",
+        "list": {
+          "routeId": "couchbase.collections.list",
+          "params": {
+            "bucket": "${resource.scope}"
+          }
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "bucket": "${resource.scope}",
+            "kind": "collection"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Collection",
+            "sortable": true
+          },
+          {
+            "key": "scope",
+            "label": "Scope",
+            "sortable": true
+          },
+          {
+            "key": "items",
+            "label": "Documents",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "memUsed",
+            "label": "Resident",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "dataSize",
+            "label": "Data size",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "opsPerSec",
+            "label": "Ops/s",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "max_ttl",
+            "label": "Expiry",
+            "sortable": true,
+            "type": "duration"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "couchbase.document.create"
+          ],
+          "row": [
+            "couchbase.collection.delete"
+          ],
+          "detail": [
+            "couchbase.document.create",
+            "couchbase.index.create",
+            "couchbase.collection.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "defaultTab": "documents",
+          "tabs": [
+            {
+              "key": "documents",
+              "label": "Documents",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.documents.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "couchbase.documents.columns",
+                  "params": {
+                    "keyspace": "${resource.uid}"
+                  }
+                },
+                "actionIds": [
+                  "couchbase.document.create"
+                ],
+                "rowActionIds": [
+                  "couchbase.document.delete.row"
+                ],
+                "defaultSort": {
+                  "field": "id"
+                },
+                "editable": true,
+                "rowKey": [
+                  "id"
+                ],
+                "insert": {
+                  "routeId": "couchbase.document.insert",
+                  "method": "POST",
+                  "params": {
+                    "keyspace": "${resource.uid}"
+                  }
+                },
+                "update": {
+                  "routeId": "couchbase.document.update",
+                  "method": "PUT",
+                  "params": {
+                    "keyspace": "${resource.uid}"
+                  }
+                },
+                "emptyText": "No documents in this collection yet.",
+                "stagedEdits": true,
+                "hiddenColumns": [
+                  "ref",
+                  "key",
+                  "flags"
+                ],
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "schema",
+              "label": "Schema",
+              "icon": {
+                "type": "lucide",
+                "value": "scan-text"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.collection.schema",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "field",
+                    "label": "Field",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "coverage",
+                    "label": "Documents",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "flavours",
+                    "label": "Shapes",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "samples",
+                    "label": "Sample values"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "field"
+                },
+                "emptyText": "No fields inferred; the collection may be empty.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.indexes.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "building": "warn",
+                      "created": "success",
+                      "deleted": "secondary",
+                      "error": "danger",
+                      "failed": "danger",
+                      "healthy": "success",
+                      "inactiveadded": "secondary",
+                      "inactivefailed": "danger",
+                      "notrunning": "secondary",
+                      "offline": "danger",
+                      "online": "success",
+                      "paused": "warn",
+                      "pausing": "warn",
+                      "ready": "success",
+                      "replicating": "warn",
+                      "running": "success",
+                      "scheduled for creation": "warn",
+                      "unhealthy": "danger",
+                      "unknown": "secondary",
+                      "warmup": "warn"
+                    }
+                  },
+                  {
+                    "key": "progress",
+                    "label": "Build",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "primary",
+                    "label": "Primary",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "replicas",
+                    "label": "Replicas",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "storage_mode",
+                    "label": "Storage",
+                    "sortable": true
+                  },
+                  {
+                    "key": "hosts",
+                    "label": "Hosts"
+                  }
+                ],
+                "actionIds": [
+                  "couchbase.index.create"
+                ],
+                "rowActionIds": [
+                  "couchbase.index.drop"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No indexes cover this collection; queries fall back to a primary scan.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.collection.read",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Collection",
+                    "fields": [
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace",
+                        "copy": true
+                      },
+                      {
+                        "key": "path",
+                        "label": "SQL++ path",
+                        "copy": true
+                      },
+                      {
+                        "key": "bucket",
+                        "label": "Bucket"
+                      },
+                      {
+                        "key": "scope",
+                        "label": "Scope"
+                      },
+                      {
+                        "key": "uid",
+                        "label": "Manifest UID"
+                      },
+                      {
+                        "key": "items",
+                        "label": "Documents",
+                        "type": "number"
+                      },
+                      {
+                        "key": "memUsed",
+                        "label": "Resident",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "dataSize",
+                        "label": "Data size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "opsPerSec",
+                        "label": "Ops/s",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_ttl",
+                        "label": "Expiry",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "history",
+                        "label": "Change history",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "indexes",
+                        "label": "Indexes",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "query",
+              "label": "SQL++",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.query",
+                "method": "WS",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL++",
+                "executeLabel": "Run",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running…",
+                "emptyText": "Run a SQL++ statement to see results.",
+                "initialQuery": "SELECT META(d).id AS id, d.* FROM `${resource.scope}`.`${resource.namespace}`.`${resource.name}` d LIMIT 25;",
+                "cancelRouteId": "couchbase.query.cancel",
+                "completionRouteId": "couchbase.query.complete",
+                "completionParams": {
+                  "keyspace": "${resource.uid}"
+                },
+                "exportable": true
+              }
+            },
+            {
+              "key": "advisor",
+              "label": "Index advisor",
+              "icon": {
+                "type": "lucide",
+                "value": "lightbulb"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "couchbase.advisor",
+                "method": "WS",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "Index advisor",
+                "executeLabel": "Analyse",
+                "runningLabel": "Analysing…",
+                "emptyText": "Paste a SELECT, UPDATE, DELETE, or MERGE statement to get index recommendations.",
+                "initialQuery": "SELECT META(d).id AS id, d.* FROM `${resource.scope}`.`${resource.namespace}`.`${resource.name}` d WHERE d.type = \"example\" LIMIT 25;",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "document",
+        "title": "Documents",
+        "list": {
+          "routeId": "couchbase.documents.list",
+          "params": {
+            "keyspace": "${resource.scope}"
+          }
+        },
+        "columns": [
+          {
+            "key": "id",
+            "label": "Document ID",
+            "sortable": true
+          },
+          {
+            "key": "cas",
+            "label": "CAS",
+            "type": "number"
+          },
+          {
+            "key": "expiration",
+            "label": "Expiry",
+            "type": "duration"
+          }
+        ],
+        "actions": {
+          "row": [
+            "couchbase.document.delete"
+          ],
+          "detail": [
+            "couchbase.document.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "content",
+          "tabs": [
+            {
+              "key": "content",
+              "label": "Document",
+              "icon": {
+                "type": "lucide",
+                "value": "file-json"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "couchbase.document.content",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "saveRouteId": "couchbase.document.save",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "id": "${resource.uid}"
+                },
+                "saveBodyKey": "value",
+                "refreshField": "content",
+                "saveToast": {
+                  "summary": "Document saved",
+                  "detail": "${response.id}",
+                  "severity": "success"
+                }
+              }
+            },
+            {
+              "key": "metadata",
+              "label": "Metadata",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.document.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Document",
+                    "fields": [
+                      {
+                        "key": "key",
+                        "label": "Document ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace",
+                        "copy": true
+                      },
+                      {
+                        "key": "cas",
+                        "label": "CAS",
+                        "type": "number",
+                        "copy": true
+                      },
+                      {
+                        "key": "expiration",
+                        "label": "Expiry",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "flags",
+                        "label": "Flags",
+                        "type": "number"
+                      },
+                      {
+                        "key": "encoding",
+                        "label": "Encoding",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "size",
+                        "label": "Size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "fields",
+                        "label": "Top-level fields",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "index",
+        "title": "Indexes",
+        "list": {
+          "routeId": "couchbase.indexes.list"
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "kind": "index"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "keyspace",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "active": "success",
+              "building": "warn",
+              "created": "success",
+              "deleted": "secondary",
+              "error": "danger",
+              "failed": "danger",
+              "healthy": "success",
+              "inactiveadded": "secondary",
+              "inactivefailed": "danger",
+              "notrunning": "secondary",
+              "offline": "danger",
+              "online": "success",
+              "paused": "warn",
+              "pausing": "warn",
+              "ready": "success",
+              "replicating": "warn",
+              "running": "success",
+              "scheduled for creation": "warn",
+              "unhealthy": "danger",
+              "unknown": "secondary",
+              "warmup": "warn"
+            }
+          },
+          {
+            "key": "progress",
+            "label": "Build",
+            "sortable": true,
+            "type": "percent"
+          },
+          {
+            "key": "primary",
+            "label": "Primary",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "replicas",
+            "label": "Replicas",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "storage_mode",
+            "label": "Storage",
+            "sortable": true
+          },
+          {
+            "key": "hosts",
+            "label": "Hosts"
+          }
+        ],
+        "actions": {
+          "row": [
+            "couchbase.index.drop"
+          ],
+          "detail": [
+            "couchbase.index.build",
+            "couchbase.index.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "active": "success",
+              "building": "warn",
+              "created": "success",
+              "deleted": "secondary",
+              "error": "danger",
+              "failed": "danger",
+              "healthy": "success",
+              "inactiveadded": "secondary",
+              "inactivefailed": "danger",
+              "notrunning": "secondary",
+              "offline": "danger",
+              "online": "success",
+              "paused": "warn",
+              "pausing": "warn",
+              "ready": "success",
+              "replicating": "warn",
+              "running": "success",
+              "scheduled for creation": "warn",
+              "unhealthy": "danger",
+              "unknown": "secondary",
+              "warmup": "warn"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.index.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Index",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "building": "warn",
+                          "created": "success",
+                          "deleted": "secondary",
+                          "error": "danger",
+                          "failed": "danger",
+                          "healthy": "success",
+                          "inactiveadded": "secondary",
+                          "inactivefailed": "danger",
+                          "notrunning": "secondary",
+                          "offline": "danger",
+                          "online": "success",
+                          "paused": "warn",
+                          "pausing": "warn",
+                          "ready": "success",
+                          "replicating": "warn",
+                          "running": "success",
+                          "scheduled for creation": "warn",
+                          "unhealthy": "danger",
+                          "unknown": "secondary",
+                          "warmup": "warn"
+                        }
+                      },
+                      {
+                        "key": "state",
+                        "label": "Catalog state",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "building": "warn",
+                          "created": "success",
+                          "deleted": "secondary",
+                          "error": "danger",
+                          "failed": "danger",
+                          "healthy": "success",
+                          "inactiveadded": "secondary",
+                          "inactivefailed": "danger",
+                          "notrunning": "secondary",
+                          "offline": "danger",
+                          "online": "success",
+                          "paused": "warn",
+                          "pausing": "warn",
+                          "ready": "success",
+                          "replicating": "warn",
+                          "running": "success",
+                          "scheduled for creation": "warn",
+                          "unhealthy": "danger",
+                          "unknown": "secondary",
+                          "warmup": "warn"
+                        }
+                      },
+                      {
+                        "key": "progress",
+                        "label": "Build progress",
+                        "type": "percent"
+                      },
+                      {
+                        "key": "primary",
+                        "label": "Primary",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "index_keys",
+                        "label": "Index keys"
+                      },
+                      {
+                        "key": "condition",
+                        "label": "Partial index condition"
+                      },
+                      {
+                        "key": "partition",
+                        "label": "Partitioning"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Placement",
+                    "fields": [
+                      {
+                        "key": "storage_mode",
+                        "label": "Storage engine",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "using",
+                        "label": "Indexer",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "hosts",
+                        "label": "Hosts"
+                      },
+                      {
+                        "key": "replicas",
+                        "label": "Replicas",
+                        "type": "number"
+                      },
+                      {
+                        "key": "replica_id",
+                        "label": "Replica id",
+                        "type": "number"
+                      },
+                      {
+                        "key": "stale",
+                        "label": "Stale",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "last_scan_time",
+                        "label": "Last scan"
+                      },
+                      {
+                        "key": "definition",
+                        "label": "Definition",
+                        "copy": true
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "file-code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "couchbase.index.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "replication",
+        "title": "XDCR",
+        "list": {
+          "routeId": "couchbase.replications.list"
+        },
+        "watch": {
+          "routeId": "couchbase.resource.watch",
+          "method": "WS",
+          "params": {
+            "kind": "replication"
+          }
+        },
+        "columns": [
+          {
+            "key": "id",
+            "label": "Replication",
+            "sortable": true
+          },
+          {
+            "key": "source",
+            "label": "Source",
+            "sortable": true
+          },
+          {
+            "key": "target",
+            "label": "Target",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "active": "success",
+              "building": "warn",
+              "created": "success",
+              "deleted": "secondary",
+              "error": "danger",
+              "failed": "danger",
+              "healthy": "success",
+              "inactiveadded": "secondary",
+              "inactivefailed": "danger",
+              "notrunning": "secondary",
+              "offline": "danger",
+              "online": "success",
+              "paused": "warn",
+              "pausing": "warn",
+              "ready": "success",
+              "replicating": "warn",
+              "running": "success",
+              "scheduled for creation": "warn",
+              "unhealthy": "danger",
+              "unknown": "secondary",
+              "warmup": "warn"
+            }
+          },
+          {
+            "key": "changes_left",
+            "label": "Changes left",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "docs_written",
+            "label": "Docs written",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "continuous",
+            "label": "Continuous",
+            "type": "bool"
+          },
+          {
+            "key": "errors",
+            "label": "Errors",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "active": "success",
+              "building": "warn",
+              "created": "success",
+              "deleted": "secondary",
+              "error": "danger",
+              "failed": "danger",
+              "healthy": "success",
+              "inactiveadded": "secondary",
+              "inactivefailed": "danger",
+              "notrunning": "secondary",
+              "offline": "danger",
+              "online": "success",
+              "paused": "warn",
+              "pausing": "warn",
+              "ready": "success",
+              "replicating": "warn",
+              "running": "success",
+              "scheduled for creation": "warn",
+              "unhealthy": "danger",
+              "unknown": "secondary",
+              "warmup": "warn"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "couchbase.replication.read",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Replication",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Replication id",
+                        "copy": true
+                      },
+                      {
+                        "key": "source",
+                        "label": "Source bucket"
+                      },
+                      {
+                        "key": "target",
+                        "label": "Target"
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "building": "warn",
+                          "created": "success",
+                          "deleted": "secondary",
+                          "error": "danger",
+                          "failed": "danger",
+                          "healthy": "success",
+                          "inactiveadded": "secondary",
+                          "inactivefailed": "danger",
+                          "notrunning": "secondary",
+                          "offline": "danger",
+                          "online": "success",
+                          "paused": "warn",
+                          "pausing": "warn",
+                          "ready": "success",
+                          "replicating": "warn",
+                          "running": "success",
+                          "scheduled for creation": "warn",
+                          "unhealthy": "danger",
+                          "unknown": "secondary",
+                          "warmup": "warn"
+                        }
+                      },
+                      {
+                        "key": "replication_type",
+                        "label": "Protocol",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "continuous",
+                        "label": "Continuous",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "filter",
+                        "label": "Filter expression"
+                      },
+                      {
+                        "key": "changes_left",
+                        "label": "Changes left",
+                        "type": "number"
+                      },
+                      {
+                        "key": "docs_checked",
+                        "label": "Docs checked",
+                        "type": "number"
+                      },
+                      {
+                        "key": "docs_written",
+                        "label": "Docs written",
+                        "type": "number"
+                      },
+                      {
+                        "key": "errors",
+                        "label": "Errors",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "remotes",
+              "label": "Remote clusters",
+              "icon": {
+                "type": "lucide",
+                "value": "globe"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "couchbase.remotes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Remote cluster",
+                    "sortable": true
+                  },
+                  {
+                    "key": "hostname",
+                    "label": "Hostname",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "building": "warn",
+                      "created": "success",
+                      "deleted": "secondary",
+                      "error": "danger",
+                      "failed": "danger",
+                      "healthy": "success",
+                      "inactiveadded": "secondary",
+                      "inactivefailed": "danger",
+                      "notrunning": "secondary",
+                      "offline": "danger",
+                      "online": "success",
+                      "paused": "warn",
+                      "pausing": "warn",
+                      "ready": "success",
+                      "replicating": "warn",
+                      "running": "success",
+                      "scheduled for creation": "warn",
+                      "unhealthy": "danger",
+                      "unknown": "secondary",
+                      "warmup": "warn"
+                    }
+                  },
+                  {
+                    "key": "username",
+                    "label": "User"
+                  },
+                  {
+                    "key": "encryption",
+                    "label": "Encryption",
+                    "type": "badge"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No remote cluster references are configured.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "activity",
+              "label": "Activity",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "couchbase.events.list",
+                "params": {
+                  "filter": "replication"
+                }
+              },
+              "config": {
+                "timestampField": "time",
+                "titleField": "title",
+                "bodyField": "message",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "module",
+                "emptyText": "No replication, rebalance, or failover events recorded yet.",
+                "watch": {
+                  "routeId": "couchbase.events.watch",
+                  "method": "WS",
+                  "params": {
+                    "filter": "replication"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "couchbase.bucket.create",
+        "label": "Create bucket",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "couchbase.bucket.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Bucket",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Bucket name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9][A-Za-z0-9._%\\-]{0,99}$",
+                      "message": "letters, digits, and . _ % -"
+                    }
+                  ]
+                },
+                {
+                  "key": "bucket_type",
+                  "label": "Bucket type",
+                  "type": "select",
+                  "required": true,
+                  "default": "couchbase",
+                  "options": [
+                    {
+                      "label": "Couchbase (persistent)",
+                      "value": "couchbase"
+                    },
+                    {
+                      "label": "Ephemeral (memory only)",
+                      "value": "ephemeral"
+                    }
+                  ]
+                },
+                {
+                  "key": "ram_quota_mb",
+                  "label": "RAM quota (MB)",
+                  "type": "number",
+                  "required": true,
+                  "default": 128,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 100
+                    },
+                    {
+                      "type": "max",
+                      "value": 1048576
+                    }
+                  ]
+                },
+                {
+                  "key": "replica_number",
+                  "label": "Replicas",
+                  "type": "stepper",
+                  "default": 0,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 3
+                    }
+                  ]
+                },
+                {
+                  "key": "eviction_policy",
+                  "label": "Eviction policy",
+                  "type": "select",
+                  "default": "valueOnly",
+                  "options": [
+                    {
+                      "label": "Value only",
+                      "value": "valueOnly"
+                    },
+                    {
+                      "label": "Full ejection",
+                      "value": "fullEviction"
+                    },
+                    {
+                      "label": "No eviction (ephemeral)",
+                      "value": "noEviction"
+                    },
+                    {
+                      "label": "NRU eviction (ephemeral)",
+                      "value": "nruEviction"
+                    }
+                  ]
+                },
+                {
+                  "key": "flush_enabled",
+                  "label": "Allow flush",
+                  "type": "toggle",
+                  "help": "Permits destroying every document in the bucket in one operation."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "buckets"
+        }
+      },
+      {
+        "id": "couchbase.bucket.update",
+        "label": "Edit bucket",
+        "icon": {
+          "type": "lucide",
+          "value": "settings-2"
+        },
+        "routeId": "couchbase.bucket.update",
+        "method": "PUT",
+        "params": {
+          "bucket": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Bucket",
+              "fields": [
+                {
+                  "key": "ram_quota_mb",
+                  "label": "RAM quota (MB)",
+                  "type": "number",
+                  "required": true,
+                  "default": "${record.ram_quota_mb}",
+                  "help": "Per-node memory quota; shrinking it below the resident working set forces ejections.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 100
+                    },
+                    {
+                      "type": "max",
+                      "value": 1048576
+                    }
+                  ]
+                },
+                {
+                  "key": "replica_number",
+                  "label": "Replicas",
+                  "type": "stepper",
+                  "default": "${record.replicas}",
+                  "help": "Changing the replica count triggers a rebalance before it takes effect.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 3
+                    }
+                  ]
+                },
+                {
+                  "key": "flush_enabled",
+                  "label": "Allow flush",
+                  "type": "toggle",
+                  "default": "${record.flush_enabled}",
+                  "help": "Permits destroying every document in the bucket in one operation."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "overview"
+        }
+      },
+      {
+        "id": "couchbase.bucket.compact",
+        "label": "Compact",
+        "icon": {
+          "type": "lucide",
+          "value": "archive-restore"
+        },
+        "routeId": "couchbase.bucket.compact",
+        "method": "POST",
+        "params": {
+          "bucket": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Start compaction now? It runs in the background and adds disk and CPU load.",
+        "group": "Maintenance"
+      },
+      {
+        "id": "couchbase.bucket.flush",
+        "label": "Flush",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "couchbase.bucket.flush",
+        "method": "POST",
+        "params": {
+          "bucket": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete every document in this bucket? The data cannot be recovered.",
+        "group": "Maintenance"
+      },
+      {
+        "id": "couchbase.bucket.delete",
+        "label": "Delete bucket",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.bucket.delete",
+        "method": "DELETE",
+        "params": {
+          "bucket": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this bucket with all of its scopes, collections, documents, and indexes?",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "couchbase.scope.create",
+        "label": "Create scope",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-plus"
+        },
+        "routeId": "couchbase.scope.create",
+        "method": "POST",
+        "params": {
+          "bucket": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Scope",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Scope name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_%\\-][A-Za-z0-9_%\\-]{0,250}$",
+                      "message": "letters, digits, and _ % -"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "scopes"
+        }
+      },
+      {
+        "id": "couchbase.scope.delete",
+        "label": "Drop scope",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.scope.delete",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this scope with every collection and document inside it?",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "couchbase.collection.create",
+        "label": "Create collection",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "couchbase.collection.create",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Collection",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Collection name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_%\\-][A-Za-z0-9_%\\-]{0,250}$",
+                      "message": "letters, digits, and _ % -"
+                    }
+                  ]
+                },
+                {
+                  "key": "max_ttl",
+                  "label": "Document expiry (seconds)",
+                  "type": "number",
+                  "default": 0,
+                  "help": "0 uses the bucket default; -1 disables expiry for this collection.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": -1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "collections"
+        }
+      },
+      {
+        "id": "couchbase.collection.delete",
+        "label": "Drop collection",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.collection.delete",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this collection and every document it holds?",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "couchbase.document.create",
+        "label": "New document",
+        "icon": {
+          "type": "lucide",
+          "value": "file-plus"
+        },
+        "routeId": "couchbase.document.insert",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Document",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Document ID",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "order::1001"
+                },
+                {
+                  "key": "value",
+                  "label": "Document",
+                  "type": "json",
+                  "required": true,
+                  "help": "A JSON object; Couchbase stores it verbatim under the document ID."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "documents"
+        }
+      },
+      {
+        "id": "couchbase.document.delete.row",
+        "label": "Delete document",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.document.remove",
+        "method": "DELETE",
+        "params": {
+          "id": "${record.ref.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete the selected document(s)? Couchbase cannot undo this.",
+        "bulk": true
+      },
+      {
+        "id": "couchbase.document.delete",
+        "label": "Delete document",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.document.remove",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this document? Couchbase cannot undo this.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "couchbase.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "couchbase.index.create",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z][A-Za-z0-9_\\-]{0,199}$",
+                      "message": "letters, digits, underscore, dash"
+                    }
+                  ]
+                },
+                {
+                  "key": "primary",
+                  "label": "Primary index",
+                  "type": "toggle",
+                  "help": "Indexes every document key in the collection."
+                },
+                {
+                  "key": "fields",
+                  "label": "Indexed fields",
+                  "type": "multiselect",
+                  "help": "Fields are indexed in the order chosen; the leading field drives the index scan.",
+                  "optionsSource": {
+                    "routeId": "couchbase.documents.columns",
+                    "params": {
+                      "keyspace": "${resource.uid}"
+                    }
+                  },
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "primary",
+                        "op": "neq",
+                        "value": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "deferred",
+                  "label": "Defer build",
+                  "type": "toggle",
+                  "help": "Creates the index definition without building it, so several indexes can be built together."
+                },
+                {
+                  "key": "num_replica",
+                  "label": "Index replicas",
+                  "type": "stepper",
+                  "default": 0,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "couchbase.index.build",
+        "label": "Build index",
+        "icon": {
+          "type": "lucide",
+          "value": "hammer"
+        },
+        "routeId": "couchbase.index.build",
+        "method": "POST",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "enabledWhen": {
+          "allOf": [
+            {
+              "field": "status",
+              "op": "neq",
+              "value": "ready"
+            }
+          ]
+        },
+        "group": "Maintenance"
+      },
+      {
+        "id": "couchbase.index.drop",
+        "label": "Drop index",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.index.drop",
+        "method": "DELETE",
+        "params": {
+          "id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index? Queries that relied on it fall back to a primary scan or fail.",
+        "bulk": true
+      },
+      {
+        "id": "couchbase.query.save",
+        "label": "Save query",
+        "icon": {
+          "type": "lucide",
+          "value": "bookmark"
+        },
+        "routeId": "couchbase.query.save",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Saved query",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "statement",
+                  "label": "SQL++",
+                  "type": "textarea",
+                  "required": true
+                },
+                {
+                  "key": "description",
+                  "label": "Description",
+                  "type": "text"
+                },
+                {
+                  "key": "keyspace",
+                  "label": "Keyspace",
+                  "type": "text",
+                  "placeholder": "bucket.scope.collection"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "saved"
+        }
+      },
+      {
+        "id": "couchbase.query.delete",
+        "label": "Delete saved query",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "couchbase.query.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${record.id}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete the selected saved statement(s)?",
+        "bulk": true
+      },
+      {
+        "id": "couchbase.console.open",
+        "label": "Web console",
+        "icon": {
+          "type": "lucide",
+          "value": "external-link"
+        },
+        "routeId": "couchbase.console.url",
+        "method": "GET",
+        "risk": "safe",
+        "requiresConfirm": false,
+        "open": "url"
+      }
+    ],
+    "headerActions": [
+      "couchbase.console.open"
+    ],
+    "scope": [
+      {
+        "param": "bucket",
+        "label": "Bucket",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "control": "select",
+        "optionsSource": {
+          "routeId": "couchbase.buckets.list"
+        },
+        "valueField": "name",
+        "labelField": "name"
+      }
+    ],
+    "streams": [
+      {
+        "id": "couchbase.query",
+        "kind": "query",
+        "routeId": "couchbase.query"
+      },
+      {
+        "id": "couchbase.advisor",
+        "kind": "query",
+        "routeId": "couchbase.advisor"
+      },
+      {
+        "id": "couchbase.cluster.metrics",
+        "kind": "metrics",
+        "routeId": "couchbase.cluster.metrics"
+      },
+      {
+        "id": "couchbase.bucket.metrics",
+        "kind": "metrics",
+        "routeId": "couchbase.bucket.metrics"
+      },
+      {
+        "id": "couchbase.cluster.watch",
+        "kind": "resource",
+        "routeId": "couchbase.cluster.watch"
+      },
+      {
+        "id": "couchbase.events.watch",
+        "kind": "resource",
+        "routeId": "couchbase.events.watch"
+      },
+      {
+        "id": "couchbase.resource.watch",
+        "kind": "resource",
+        "routeId": "couchbase.resource.watch"
+      },
+      {
+        "id": "couchbase.datamap",
+        "kind": "canvas",
+        "routeId": "couchbase.datamap"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

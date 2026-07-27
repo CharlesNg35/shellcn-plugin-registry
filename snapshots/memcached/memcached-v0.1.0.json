@@ -1,0 +1,3720 @@
+{
+  "name": "memcached",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 96 96\" id=\"Memcached--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003eMemcached Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"url(#a)\" d=\"M1 64.5135v-33.027C1 4.81081 4.80685 1 31.455 1h33.0901C91.1932 1 95 4.81081 95 31.4865v33.027C95 91.1892 91.1932 95 64.5451 95H31.455C4.80685 95 1 91.1892 1 64.5135Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#b)\" d=\"M21.2873 18.7168C16.6668 48 19.0842 75.4167 19.0842 75.4167h14.4427c-1.3743-7.3102-6.3042-40.7088-2.2031-40.819 2.1978.3488 12.2395 28.3346 12.2395 28.3346s2.2115-.2754 4.4369-.2754c2.2254 0 4.4368.2754 4.4368.2754s10.0418-27.9858 12.2396-28.3346c4.1011.1102-.8289 33.5088-2.2031 40.819h14.4427S79.3335 48 74.7131 18.7168H61.3413c-2.5451.0301-12.2284 17.013-13.3411 17.013-1.1127 0-10.796-16.9829-13.3412-17.013H21.2873Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#c)\" d=\"M45.1513 71.9985c0 1.8878-1.5304 3.4182-3.4182 3.4182-1.8878 0-3.4182-1.5304-3.4182-3.4182 0-1.8878 1.5304-3.4182 3.4182-3.4182 1.8878 0 3.4182 1.5304 3.4182 3.4182Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#d)\" d=\"M57.685 71.9985c0 1.8878-1.5304 3.4182-3.4182 3.4182-1.8878 0-3.4182-1.5304-3.4182-3.4182 0-1.8878 1.5304-3.4182 3.4182-3.4182 1.8878 0 3.4182 1.5304 3.4182 3.4182Z\"\u003e\u003c/path\u003e\u003cpath fill=\"#000000\" d=\"M74.0321 19.6849c2.0843 14.1081 2.5733 27.6481 2.535 37.7339-.0393 10.3163-.6303 17.0187-.6303 17.0187H63.7799l-1.3066.9792H76.916S79.3333 48 74.7129 18.7168l-.6808.9681Zm-38.2717-.3561c3.7941 4.2204 10.3564 15.4219 11.2604 15.4219-2.4057-3.0768-8.3149-12.8922-11.2604-15.4219Zm-5.416 14.2897c-4.1011.1103.8289 33.5088 2.2031 40.819H19.9397l-.8557.9792h14.4427c-1.3673-7.2732-6.2539-40.3752-2.2643-40.819-.3715-.558-.6924-.9434-.918-.9792Zm33.3529 0c-2.1979.3488-12.2396 28.3346-12.2396 28.3346s-2.2115-.2754-4.4369-.2754c-1.3167 0-2.4502.0812-3.2168.1526l-.2409 1.102s2.2115-.2754 4.4369-.2754c2.2254 0 4.4368.2754 4.4368.2754s9.9662-27.8022 12.209-28.3346c-.2417-.6123-.5403-.9682-.9485-.9792Z\" opacity=\".1\"\u003e\u003c/path\u003e\u003cpath fill=\"#ffffff\" d=\"M21.2873 18.7168C16.6668 48 19.0842 75.4167 19.0842 75.4167l.8504-.9559c-.4352-6.4684-1.5978-29.8595 2.3319-54.7648h13.3717c.2833.0033.6631.2354 1.1016.6119-.8756-.9739-1.6035-1.5855-2.0808-1.5911H21.2873Zm40.054 0c-2.5451.0301-12.2284 17.013-13.3411 17.013.4537.5803.8222.9792.9792.9792 1.1127 0 10.796-16.983 13.3411-17.013h11.8003l.5923-.9792H61.3413Zm-29.0996 16.86c3.2481 4.8782 11.3216 27.3555 11.3216 27.3555l.2363-1.0961c-1.9933-5.4657-9.5885-25.9565-11.4967-26.2594-.0208.0006-.0409-.0022-.0612 0Zm33.4141 0c2.1787 5.5568-1.9455 33.2607-3.1823 39.8399l1.3102-1.0227c1.6723-9.8119 5.6994-38.7142 1.8721-38.8172Z\" opacity=\".3\"\u003e\u003c/path\u003e\u003cdefs\u003e\u003cradialGradient id=\"c\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(321.384 360.55) scale(341.818)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#db7c7c\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#c83737\"\u003e\u003c/stop\u003e\u003c/radialGradient\u003e\u003cradialGradient id=\"d\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(353.5 360.55) scale(341.818)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#db7c7c\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#c83737\"\u003e\u003c/stop\u003e\u003c/radialGradient\u003e\u003clinearGradient id=\"a\" x1=\"4701\" x2=\"4701\" y1=\"9401\" y2=\".999\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#574c4a\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#80716d\"\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient id=\"b\" x1=\"5264.9\" x2=\"2015.86\" y1=\"5594.7\" y2=\"-586.8\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#268d83\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#2ea19e\"\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003c/defs\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "memcached",
+    "version": "0.1.0",
+    "title": "Memcached",
+    "description": "Memcached workspace with an LRU key browser, live cache metrics, a slab allocation map, segmented-LRU and connection statistics, a watcher activity feed, and an audited command console.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 96 96\" id=\"Memcached--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003eMemcached Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"url(#a)\" d=\"M1 64.5135v-33.027C1 4.81081 4.80685 1 31.455 1h33.0901C91.1932 1 95 4.81081 95 31.4865v33.027C95 91.1892 91.1932 95 64.5451 95H31.455C4.80685 95 1 91.1892 1 64.5135Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#b)\" d=\"M21.2873 18.7168C16.6668 48 19.0842 75.4167 19.0842 75.4167h14.4427c-1.3743-7.3102-6.3042-40.7088-2.2031-40.819 2.1978.3488 12.2395 28.3346 12.2395 28.3346s2.2115-.2754 4.4369-.2754c2.2254 0 4.4368.2754 4.4368.2754s10.0418-27.9858 12.2396-28.3346c4.1011.1102-.8289 33.5088-2.2031 40.819h14.4427S79.3335 48 74.7131 18.7168H61.3413c-2.5451.0301-12.2284 17.013-13.3411 17.013-1.1127 0-10.796-16.9829-13.3412-17.013H21.2873Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#c)\" d=\"M45.1513 71.9985c0 1.8878-1.5304 3.4182-3.4182 3.4182-1.8878 0-3.4182-1.5304-3.4182-3.4182 0-1.8878 1.5304-3.4182 3.4182-3.4182 1.8878 0 3.4182 1.5304 3.4182 3.4182Z\"\u003e\u003c/path\u003e\u003cpath fill=\"url(#d)\" d=\"M57.685 71.9985c0 1.8878-1.5304 3.4182-3.4182 3.4182-1.8878 0-3.4182-1.5304-3.4182-3.4182 0-1.8878 1.5304-3.4182 3.4182-3.4182 1.8878 0 3.4182 1.5304 3.4182 3.4182Z\"\u003e\u003c/path\u003e\u003cpath fill=\"#000000\" d=\"M74.0321 19.6849c2.0843 14.1081 2.5733 27.6481 2.535 37.7339-.0393 10.3163-.6303 17.0187-.6303 17.0187H63.7799l-1.3066.9792H76.916S79.3333 48 74.7129 18.7168l-.6808.9681Zm-38.2717-.3561c3.7941 4.2204 10.3564 15.4219 11.2604 15.4219-2.4057-3.0768-8.3149-12.8922-11.2604-15.4219Zm-5.416 14.2897c-4.1011.1103.8289 33.5088 2.2031 40.819H19.9397l-.8557.9792h14.4427c-1.3673-7.2732-6.2539-40.3752-2.2643-40.819-.3715-.558-.6924-.9434-.918-.9792Zm33.3529 0c-2.1979.3488-12.2396 28.3346-12.2396 28.3346s-2.2115-.2754-4.4369-.2754c-1.3167 0-2.4502.0812-3.2168.1526l-.2409 1.102s2.2115-.2754 4.4369-.2754c2.2254 0 4.4368.2754 4.4368.2754s9.9662-27.8022 12.209-28.3346c-.2417-.6123-.5403-.9682-.9485-.9792Z\" opacity=\".1\"\u003e\u003c/path\u003e\u003cpath fill=\"#ffffff\" d=\"M21.2873 18.7168C16.6668 48 19.0842 75.4167 19.0842 75.4167l.8504-.9559c-.4352-6.4684-1.5978-29.8595 2.3319-54.7648h13.3717c.2833.0033.6631.2354 1.1016.6119-.8756-.9739-1.6035-1.5855-2.0808-1.5911H21.2873Zm40.054 0c-2.5451.0301-12.2284 17.013-13.3411 17.013.4537.5803.8222.9792.9792.9792 1.1127 0 10.796-16.983 13.3411-17.013h11.8003l.5923-.9792H61.3413Zm-29.0996 16.86c3.2481 4.8782 11.3216 27.3555 11.3216 27.3555l.2363-1.0961c-1.9933-5.4657-9.5885-25.9565-11.4967-26.2594-.0208.0006-.0409-.0022-.0612 0Zm33.4141 0c2.1787 5.5568-1.9455 33.2607-3.1823 39.8399l1.3102-1.0227c1.6723-9.8119 5.6994-38.7142 1.8721-38.8172Z\" opacity=\".3\"\u003e\u003c/path\u003e\u003cdefs\u003e\u003cradialGradient id=\"c\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(321.384 360.55) scale(341.818)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#db7c7c\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#c83737\"\u003e\u003c/stop\u003e\u003c/radialGradient\u003e\u003cradialGradient id=\"d\" cx=\"0\" cy=\"0\" r=\"1\" gradientTransform=\"translate(353.5 360.55) scale(341.818)\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#db7c7c\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#c83737\"\u003e\u003c/stop\u003e\u003c/radialGradient\u003e\u003clinearGradient id=\"a\" x1=\"4701\" x2=\"4701\" y1=\"9401\" y2=\".999\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#574c4a\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#80716d\"\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003clinearGradient id=\"b\" x1=\"5264.9\" x2=\"2015.86\" y1=\"5594.7\" y2=\"-586.8\" gradientUnits=\"userSpaceOnUse\"\u003e\u003cstop stop-color=\"#268d83\"\u003e\u003c/stop\u003e\u003cstop offset=\"1\" stop-color=\"#2ea19e\"\u003e\u003c/stop\u003e\u003c/linearGradient\u003e\u003c/defs\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "cache.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 11211,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "help": "Token authentication requires memcached started with an -Y authfile.",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Token (username and password)",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable credential; its stored username is used as the memcached auth token username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "memcached"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "help": "Requires memcached built and started with --enable-ssl.",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional PEM containing the client certificate and private key for mTLS.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "memcached"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks stores, deletes, flushes, and every runtime tuning command."
+            },
+            {
+              "key": "timeout",
+              "label": "Command timeout",
+              "type": "duration",
+              "default": "5s"
+            },
+            {
+              "key": "idle_conns",
+              "label": "Idle connections",
+              "type": "number",
+              "default": 4,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 64
+                }
+              ]
+            },
+            {
+              "key": "page_limit",
+              "label": "Key page size",
+              "type": "number",
+              "default": 200,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 10
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "scan_limit",
+              "label": "Key scan cap",
+              "type": "number",
+              "default": 5000,
+              "help": "Maximum items the LRU crawler dump walks before the key browser stops and reports a truncated scan.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 100
+                },
+                {
+                  "type": "max",
+                  "value": 200000
+                }
+              ]
+            },
+            {
+              "key": "value_limit",
+              "label": "Value preview limit",
+              "type": "number",
+              "default": 65536,
+              "help": "Bytes of a value returned to the browser before it is truncated.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1024
+                },
+                {
+                  "type": "max",
+                  "value": 4194304
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Activity",
+          "fields": [
+            {
+              "key": "watch_streams",
+              "label": "Watcher feeds",
+              "type": "multiselect",
+              "default": [
+                "mutations",
+                "evictions",
+                "deletions",
+                "connevents"
+              ],
+              "help": "Feeds subscribed on the dedicated watcher connection that backs the Activity timeline.",
+              "options": [
+                {
+                  "label": "Mutations",
+                  "value": "mutations"
+                },
+                {
+                  "label": "Evictions",
+                  "value": "evictions"
+                },
+                {
+                  "label": "Deletions",
+                  "value": "deletions"
+                },
+                {
+                  "label": "Connection events",
+                  "value": "connevents"
+                },
+                {
+                  "label": "Fetchers (very noisy)",
+                  "value": "fetchers"
+                },
+                {
+                  "label": "Proxy events",
+                  "value": "proxyevents"
+                },
+                {
+                  "label": "Proxy user log",
+                  "value": "proxyuser"
+                }
+              ]
+            },
+            {
+              "key": "event_buffer",
+              "label": "Activity buffer",
+              "type": "number",
+              "default": 500,
+              "help": "Number of watcher events kept in memory for the Activity timeline.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 50
+                },
+                {
+                  "type": "max",
+                  "value": 5000
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "kv",
+      "keys",
+      "stats",
+      "slabs",
+      "lru",
+      "metrics",
+      "console",
+      "watch"
+    ],
+    "supportedTransports": [
+      "direct",
+      "agent"
+    ],
+    "agent": {
+      "modes": [
+        "tcp"
+      ],
+      "riskNote": "privileged"
+    },
+    "layout": "tabs",
+    "tabs": [
+      {
+        "key": "overview",
+        "label": "Overview",
+        "icon": {
+          "type": "lucide",
+          "value": "gauge"
+        },
+        "panel": "dashboard",
+        "config": {
+          "cells": [
+            {
+              "key": "live",
+              "label": "Cache activity",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "memcached.metrics",
+                "method": "WS"
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "currItems",
+                    "label": "Items"
+                  },
+                  {
+                    "key": "currConnections",
+                    "label": "Connections"
+                  },
+                  {
+                    "key": "evictions",
+                    "label": "Evictions"
+                  },
+                  {
+                    "key": "getsPerSec",
+                    "label": "Gets/sec"
+                  },
+                  {
+                    "key": "setsPerSec",
+                    "label": "Sets/sec"
+                  },
+                  {
+                    "key": "wastedBytes",
+                    "label": "Chunk slack",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "uptime",
+                    "label": "Uptime",
+                    "unit": "s"
+                  }
+                ],
+                "gauges": [
+                  {
+                    "key": "hitRatio",
+                    "label": "Lifetime hit ratio",
+                    "unit": "%"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "memoryPct",
+                    "label": "Cache memory",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "memoryPct",
+                      "usedKey": "memoryUsed",
+                      "totalKey": "memoryTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "totalLabel": "of",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  },
+                  {
+                    "key": "connectionsPct",
+                    "label": "Connection slots",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "connectionsPct",
+                      "usedKey": "connectionsUsed",
+                      "totalKey": "connectionsTotal",
+                      "usedType": "number",
+                      "totalType": "number",
+                      "unit": "connection(s)",
+                      "totalLabel": "of",
+                      "warnAt": 75,
+                      "criticalAt": 90
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "getsPerSec",
+                    "label": "Gets",
+                    "unit": "/s"
+                  },
+                  {
+                    "key": "setsPerSec",
+                    "label": "Sets",
+                    "unit": "/s"
+                  },
+                  {
+                    "key": "evictionsPerSec",
+                    "label": "Evictions",
+                    "unit": "/s"
+                  },
+                  {
+                    "key": "liveHitRatio",
+                    "label": "Hit ratio",
+                    "unit": "%"
+                  }
+                ],
+                "history": 120
+              },
+              "span": 2
+            },
+            {
+              "key": "server",
+              "label": "Server",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "memcached.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Server",
+                    "fields": [
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "ok": "success",
+                          "unreachable": "danger"
+                        }
+                      },
+                      {
+                        "key": "statusError",
+                        "label": "Last failure"
+                      },
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "copy": true
+                      },
+                      {
+                        "key": "pid",
+                        "label": "PID",
+                        "type": "number"
+                      },
+                      {
+                        "key": "uptime",
+                        "label": "Uptime",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "serverTime",
+                        "label": "Server time",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "threads",
+                        "label": "Worker threads",
+                        "type": "number"
+                      },
+                      {
+                        "key": "pointerSize",
+                        "label": "Pointer size",
+                        "type": "number"
+                      },
+                      {
+                        "key": "maxItemSize",
+                        "label": "Max item size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "readOnly",
+                        "label": "Read-only connection",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Memory",
+                    "fields": [
+                      {
+                        "key": "memoryPct",
+                        "label": "Cache memory",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "memoryPct",
+                          "usedKey": "bytes",
+                          "totalKey": "limitMaxBytes",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "totalLabel": "of",
+                          "warnAt": 80,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "wastedPct",
+                        "label": "Chunk slack",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "wastedPct",
+                          "usedKey": "wastedBytes",
+                          "totalKey": "bytes",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "totalLabel": "of",
+                          "warnAt": 20,
+                          "criticalAt": 40
+                        }
+                      },
+                      {
+                        "key": "totalMalloced",
+                        "label": "Slab pages allocated",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "activeSlabs",
+                        "label": "Active slab classes",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Items",
+                    "fields": [
+                      {
+                        "key": "currItems",
+                        "label": "Current items",
+                        "type": "number"
+                      },
+                      {
+                        "key": "totalItems",
+                        "label": "Items stored since start",
+                        "type": "number"
+                      },
+                      {
+                        "key": "evictions",
+                        "label": "Evictions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "reclaimed",
+                        "label": "Reclaimed expired slots",
+                        "type": "number"
+                      },
+                      {
+                        "key": "expiredUnfetched",
+                        "label": "Expired before first read",
+                        "type": "number"
+                      },
+                      {
+                        "key": "evictedUnfetched",
+                        "label": "Evicted before first read",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Traffic",
+                    "fields": [
+                      {
+                        "key": "hitRatio",
+                        "label": "Lifetime hit ratio",
+                        "type": "percent"
+                      },
+                      {
+                        "key": "cmdGet",
+                        "label": "Gets",
+                        "type": "number"
+                      },
+                      {
+                        "key": "cmdSet",
+                        "label": "Sets",
+                        "type": "number"
+                      },
+                      {
+                        "key": "cmdTouch",
+                        "label": "Touches",
+                        "type": "number"
+                      },
+                      {
+                        "key": "cmdFlush",
+                        "label": "Flushes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "getHits",
+                        "label": "Get hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "getMisses",
+                        "label": "Get misses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "getExpired",
+                        "label": "Gets that found expired items",
+                        "type": "number"
+                      },
+                      {
+                        "key": "bytesRead",
+                        "label": "Bytes read",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "bytesWritten",
+                        "label": "Bytes written",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Command outcomes",
+                    "fields": [
+                      {
+                        "key": "deleteHits",
+                        "label": "Delete hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "deleteMisses",
+                        "label": "Delete misses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "incrHits",
+                        "label": "Increment hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "incrMisses",
+                        "label": "Increment misses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "decrHits",
+                        "label": "Decrement hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "decrMisses",
+                        "label": "Decrement misses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "casHits",
+                        "label": "CAS hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "casMisses",
+                        "label": "CAS misses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "casBadval",
+                        "label": "CAS conflicts",
+                        "type": "number"
+                      },
+                      {
+                        "key": "touchHits",
+                        "label": "Touch hits",
+                        "type": "number"
+                      },
+                      {
+                        "key": "touchMisses",
+                        "label": "Touch misses",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Connections",
+                    "fields": [
+                      {
+                        "key": "connectionsPct",
+                        "label": "Connection slots",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "connectionsPct",
+                          "usedKey": "currConnections",
+                          "totalKey": "maxConnections",
+                          "usedType": "number",
+                          "totalType": "number",
+                          "unit": "connection(s)",
+                          "totalLabel": "of",
+                          "warnAt": 75,
+                          "criticalAt": 90
+                        }
+                      },
+                      {
+                        "key": "totalConnections",
+                        "label": "Connections since start",
+                        "type": "number"
+                      },
+                      {
+                        "key": "rejectedConnections",
+                        "label": "Rejected connections",
+                        "type": "number"
+                      },
+                      {
+                        "key": "lruCrawlerEnabled",
+                        "label": "LRU crawler enabled",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "casEnabled",
+                        "label": "CAS enabled",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "authEnabled",
+                        "label": "Authentication enabled",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "memcached.overview.watch",
+                  "method": "WS"
+                }
+              },
+              "span": 2
+            }
+          ]
+        }
+      },
+      {
+        "key": "keys",
+        "label": "Keys",
+        "icon": {
+          "type": "lucide",
+          "value": "key-round"
+        },
+        "panel": "kv",
+        "source": {
+          "routeId": "memcached.keys.list"
+        },
+        "config": {
+          "createRouteId": "memcached.key.write",
+          "readRouteId": "memcached.key.read",
+          "writeRouteId": "memcached.key.write",
+          "deleteRouteId": "memcached.key.delete",
+          "keyParam": "key",
+          "writable": true,
+          "valueTypes": [
+            "text",
+            "json",
+            "binary"
+          ],
+          "delimiter": ":"
+        }
+      },
+      {
+        "key": "slabs",
+        "label": "Slabs",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "panel": "split",
+        "config": {
+          "orientation": "vertical",
+          "panels": [
+            {
+              "key": "map",
+              "label": "Allocation map",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-grid"
+              },
+              "panel": "canvas",
+              "source": {
+                "routeId": "memcached.slabs.canvas",
+                "method": "WS"
+              },
+              "config": {
+                "scaleMode": "resize",
+                "hidpi": true,
+                "interactive": true,
+                "keyboard": true,
+                "pointer": true,
+                "wheelMode": "modified",
+                "resizeEvents": true,
+                "focusOnPointer": true,
+                "ariaLabel": "Memcached slab class allocation map",
+                "instructions": "Each row is one slab class. The bar shows allocated capacity, the filled part shows used chunks, and the amber part is memory lost to chunk rounding. Use Up and Down to select a class."
+              },
+              "size": 58,
+              "minSize": 30
+            },
+            {
+              "key": "table",
+              "label": "Slab classes",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "memcached.slabs.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "class",
+                    "label": "Class",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "chunkSize",
+                    "label": "Chunk size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "chunksPerPage",
+                    "label": "Chunks/page",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "totalPages",
+                    "label": "Pages",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "usedChunks",
+                    "label": "Used chunks",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "freeChunks",
+                    "label": "Free chunks",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "fillPct",
+                    "label": "Fill",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "allocatedBytes",
+                    "label": "Allocated",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "memRequested",
+                    "label": "Item payload",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "wastedBytes",
+                    "label": "Chunk slack",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "wastedPct",
+                    "label": "Slack",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "items",
+                    "label": "Items",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "age",
+                    "label": "Oldest item",
+                    "sortable": true,
+                    "type": "duration"
+                  },
+                  {
+                    "key": "evicted",
+                    "label": "Evicted",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "outOfMemory",
+                    "label": "Out of memory",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "getHits",
+                    "label": "Get hits",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "cmdSet",
+                    "label": "Sets",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "class"
+                },
+                "emptyText": "No slab pages allocated yet.",
+                "exportable": true,
+                "rowClick": "detail"
+              },
+              "size": 42,
+              "minSize": 20
+            }
+          ]
+        }
+      },
+      {
+        "key": "lru",
+        "label": "LRU",
+        "icon": {
+          "type": "lucide",
+          "value": "history"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "memcached.items.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "class",
+              "label": "Class",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "number",
+              "label": "Items",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "numberHot",
+              "label": "Hot",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "numberWarm",
+              "label": "Warm",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "numberCold",
+              "label": "Cold",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "numberTemp",
+              "label": "Temp",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "age",
+              "label": "Oldest item",
+              "sortable": true,
+              "type": "duration"
+            },
+            {
+              "key": "ageHot",
+              "label": "Oldest hot",
+              "sortable": true,
+              "type": "duration"
+            },
+            {
+              "key": "ageWarm",
+              "label": "Oldest warm",
+              "sortable": true,
+              "type": "duration"
+            },
+            {
+              "key": "evicted",
+              "label": "Evicted",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "evictedNonzero",
+              "label": "Evicted with TTL",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "evictedTime",
+              "label": "Since last eviction",
+              "sortable": true,
+              "type": "duration"
+            },
+            {
+              "key": "evictedUnfetched",
+              "label": "Evicted unread",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "expiredUnfetched",
+              "label": "Expired unread",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "outOfMemory",
+              "label": "Out of memory",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "reclaimed",
+              "label": "Reclaimed",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "crawlerReclaimed",
+              "label": "Crawler reclaimed",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "movesToCold",
+              "label": "Moves to cold",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "movesToWarm",
+              "label": "Moves to warm",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "directReclaims",
+              "label": "Direct reclaims",
+              "sortable": true,
+              "type": "number"
+            }
+          ],
+          "refreshIntervalMs": 10000,
+          "defaultSort": {
+            "field": "class"
+          },
+          "emptyText": "No slab class holds items yet.",
+          "exportable": true,
+          "rowClick": "detail"
+        }
+      },
+      {
+        "key": "connections",
+        "label": "Connections",
+        "icon": {
+          "type": "lucide",
+          "value": "plug"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "memcached.conns.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "fd",
+              "label": "FD",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "addr",
+              "label": "Peer",
+              "sortable": true
+            },
+            {
+              "key": "listenAddr",
+              "label": "Listener",
+              "sortable": true
+            },
+            {
+              "key": "state",
+              "label": "State",
+              "sortable": true,
+              "type": "badge",
+              "severities": {
+                "conn_closed": "danger",
+                "conn_closing": "warn",
+                "conn_listening": "info",
+                "conn_new_cmd": "success",
+                "conn_read": "success",
+                "conn_waiting": "info"
+              }
+            },
+            {
+              "key": "secsSinceLastCmd",
+              "label": "Idle",
+              "sortable": true,
+              "type": "duration"
+            }
+          ],
+          "refreshIntervalMs": 5000,
+          "defaultSort": {
+            "field": "fd"
+          },
+          "emptyText": "No client connections reported.",
+          "exportable": true,
+          "rowClick": "detail"
+        }
+      },
+      {
+        "key": "settings",
+        "label": "Settings",
+        "icon": {
+          "type": "lucide",
+          "value": "sliders-horizontal"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "memcached.settings.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "name",
+              "label": "Setting",
+              "sortable": true
+            },
+            {
+              "key": "value",
+              "label": "Value",
+              "sortable": true
+            }
+          ],
+          "defaultSort": {
+            "field": "name"
+          },
+          "emptyText": "No runtime settings reported.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "activity",
+        "label": "Activity",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "panel": "timeline",
+        "source": {
+          "routeId": "memcached.events.list"
+        },
+        "config": {
+          "timestampField": "time",
+          "titleField": "reason",
+          "bodyField": "message",
+          "severityField": "severity",
+          "iconField": "icon",
+          "resourceField": "resource",
+          "emptyText": "No watcher events yet. memcached only reports events that happen while this tab's watcher is attached.",
+          "watch": {
+            "routeId": "memcached.events.watch",
+            "method": "WS"
+          }
+        }
+      },
+      {
+        "key": "console",
+        "label": "Console",
+        "icon": {
+          "type": "lucide",
+          "value": "square-terminal"
+        },
+        "panel": "query_editor",
+        "source": {
+          "routeId": "memcached.console",
+          "method": "WS"
+        },
+        "config": {
+          "language": "plaintext",
+          "label": "memcached command",
+          "executeLabel": "Run",
+          "cancelLabel": "Cancel",
+          "runningLabel": "Running",
+          "emptyText": "Run a memcached command, for example \"stats slabs\" or \"mg mykey v t f\".",
+          "initialQuery": "stats",
+          "completionRouteId": "memcached.console.complete",
+          "exportable": true
+        }
+      },
+      {
+        "key": "commands",
+        "label": "Saved commands",
+        "icon": {
+          "type": "lucide",
+          "value": "bookmark"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "memcached.commands.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "name",
+              "label": "Name",
+              "sortable": true
+            },
+            {
+              "key": "command",
+              "label": "Command"
+            },
+            {
+              "key": "updatedAt",
+              "label": "Updated",
+              "sortable": true,
+              "type": "relative_time"
+            }
+          ],
+          "actionIds": [
+            "memcached.commands.save"
+          ],
+          "rowActionIds": [
+            "memcached.commands.delete"
+          ],
+          "defaultSort": {
+            "field": "name"
+          },
+          "emptyText": "No saved commands yet.",
+          "rowClick": "detail"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "memcached.key.store",
+        "label": "Store item",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "memcached.key.store",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Item",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "required": true,
+                  "default": "${record.key}",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[^\\s\\x00]{1,250}$",
+                      "message": "up to 250 bytes, no spaces or control characters"
+                    }
+                  ]
+                },
+                {
+                  "key": "mode",
+                  "label": "Mode",
+                  "type": "select",
+                  "required": true,
+                  "default": "set",
+                  "options": [
+                    {
+                      "label": "Set (store unconditionally)",
+                      "value": "set"
+                    },
+                    {
+                      "label": "Add (only if the key is absent)",
+                      "value": "add"
+                    },
+                    {
+                      "label": "Replace (only if the key exists)",
+                      "value": "replace"
+                    },
+                    {
+                      "label": "Append (to an existing value)",
+                      "value": "append"
+                    },
+                    {
+                      "label": "Prepend (to an existing value)",
+                      "value": "prepend"
+                    },
+                    {
+                      "label": "Compare and swap",
+                      "value": "cas"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Value type",
+                  "type": "select",
+                  "required": true,
+                  "default": "text",
+                  "options": [
+                    {
+                      "label": "Text",
+                      "value": "text"
+                    },
+                    {
+                      "label": "JSON",
+                      "value": "json"
+                    },
+                    {
+                      "label": "Binary (base64)",
+                      "value": "binary"
+                    }
+                  ]
+                },
+                {
+                  "key": "value",
+                  "label": "Value",
+                  "type": "textarea"
+                },
+                {
+                  "key": "ttl",
+                  "label": "TTL (seconds)",
+                  "type": "number",
+                  "default": 0,
+                  "help": "0 never expires. Values above 2592000 (30 days) are read by memcached as an absolute Unix timestamp.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "key": "flags",
+                  "label": "Client flags",
+                  "type": "number",
+                  "default": 0,
+                  "help": "Opaque 32-bit value clients use to tag the serialization format.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 4294967295
+                    }
+                  ]
+                },
+                {
+                  "key": "cas",
+                  "label": "CAS id",
+                  "type": "number",
+                  "default": 0,
+                  "help": "The CAS id read from the item; the store fails if the item changed since.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "mode",
+                        "op": "eq",
+                        "value": "cas"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "keys"
+        },
+        "group": "Key operations"
+      },
+      {
+        "id": "memcached.key.touch",
+        "label": "Touch TTL",
+        "icon": {
+          "type": "lucide",
+          "value": "timer"
+        },
+        "routeId": "memcached.key.touch",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "required": true,
+                  "default": "${record.key}"
+                },
+                {
+                  "key": "ttl",
+                  "label": "New TTL (seconds)",
+                  "type": "number",
+                  "required": true,
+                  "default": 300,
+                  "help": "0 removes the expiry.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Key operations"
+      },
+      {
+        "id": "memcached.key.incr",
+        "label": "Increment",
+        "icon": {
+          "type": "lucide",
+          "value": "trending-up"
+        },
+        "routeId": "memcached.key.incr",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "required": true,
+                  "default": "${record.key}"
+                },
+                {
+                  "key": "delta",
+                  "label": "Increment by",
+                  "type": "number",
+                  "required": true,
+                  "default": 1,
+                  "help": "The stored value must be an unsigned decimal number.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Key operations"
+      },
+      {
+        "id": "memcached.key.decr",
+        "label": "Decrement",
+        "icon": {
+          "type": "lucide",
+          "value": "trending-down"
+        },
+        "routeId": "memcached.key.decr",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "required": true,
+                  "default": "${record.key}"
+                },
+                {
+                  "key": "delta",
+                  "label": "Decrement by",
+                  "type": "number",
+                  "required": true,
+                  "default": 1,
+                  "help": "The stored value must be an unsigned decimal number.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Key operations"
+      },
+      {
+        "id": "memcached.server.crawl",
+        "label": "Run LRU crawler",
+        "icon": {
+          "type": "lucide",
+          "value": "broom"
+        },
+        "routeId": "memcached.server.crawl",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "classes",
+                  "label": "Slab classes",
+                  "type": "text",
+                  "default": "all",
+                  "help": "\"all\", or a comma separated list of slab class ids to reclaim expired items from."
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Server"
+      },
+      {
+        "id": "memcached.server.stats_reset",
+        "label": "Reset statistics",
+        "icon": {
+          "type": "lucide",
+          "value": "rotate-ccw"
+        },
+        "routeId": "memcached.server.stats_reset",
+        "method": "POST",
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Reset every counter on this memcached server? Hit ratios, eviction counts, and traffic totals restart from zero for all clients.",
+        "group": "Server"
+      },
+      {
+        "id": "memcached.server.memlimit",
+        "label": "Set memory limit",
+        "icon": {
+          "type": "lucide",
+          "value": "hard-drive"
+        },
+        "routeId": "memcached.server.memlimit",
+        "method": "POST",
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Change the cache memory limit at runtime? Lowering it can force memcached to evict live items.",
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "megabytes",
+                  "label": "Cache memory limit (MB)",
+                  "type": "number",
+                  "required": true,
+                  "default": 64,
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 1048576
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Server"
+      },
+      {
+        "id": "memcached.server.verbosity",
+        "label": "Set verbosity",
+        "icon": {
+          "type": "lucide",
+          "value": "scroll-text"
+        },
+        "routeId": "memcached.server.verbosity",
+        "method": "POST",
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Change server log verbosity? High verbosity can flood the memcached host's logs.",
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "level",
+                  "label": "Verbosity",
+                  "type": "select",
+                  "required": true,
+                  "default": 0,
+                  "options": [
+                    {
+                      "label": "0 — errors only",
+                      "value": 0
+                    },
+                    {
+                      "label": "1 — connection events",
+                      "value": 1
+                    },
+                    {
+                      "label": "2 — command detail",
+                      "value": 2
+                    },
+                    {
+                      "label": "3 — full trace",
+                      "value": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Server"
+      },
+      {
+        "id": "memcached.server.flush",
+        "label": "Flush cache",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "memcached.server.flush",
+        "method": "POST",
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Invalidate every item on this memcached server? All clients lose their cached data immediately and will fall through to the origin.",
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "delay",
+                  "label": "Delay (seconds)",
+                  "type": "number",
+                  "default": 0,
+                  "help": "0 invalidates immediately. A delay lets a pool of servers be flushed in staggered waves.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "group": "Server"
+      },
+      {
+        "id": "memcached.commands.save",
+        "label": "Save command",
+        "icon": {
+          "type": "lucide",
+          "value": "bookmark-plus"
+        },
+        "routeId": "memcached.commands.save",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "key": "command",
+                  "label": "Command",
+                  "type": "textarea",
+                  "required": true,
+                  "default": "stats slabs",
+                  "help": "Validated against the console allow-list before it is saved."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "commands"
+        }
+      },
+      {
+        "id": "memcached.commands.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "memcached.commands.delete",
+        "method": "DELETE",
+        "params": {
+          "id": "${record.id}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this saved command?",
+        "bulk": true
+      }
+    ],
+    "headerActions": [
+      "memcached.key.store",
+      "memcached.key.touch",
+      "memcached.key.incr",
+      "memcached.key.decr",
+      "memcached.server.crawl",
+      "memcached.server.stats_reset",
+      "memcached.server.memlimit",
+      "memcached.server.verbosity",
+      "memcached.server.flush"
+    ],
+    "scope": [
+      {
+        "param": "class",
+        "label": "Slab class",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "control": "select",
+        "optionsSource": {
+          "routeId": "memcached.slabs.options"
+        },
+        "valueField": "value",
+        "labelField": "label",
+        "defaultValue": "all"
+      }
+    ],
+    "streams": [
+      {
+        "id": "memcached.metrics",
+        "kind": "metrics",
+        "routeId": "memcached.metrics"
+      },
+      {
+        "id": "memcached.overview.watch",
+        "kind": "resource",
+        "routeId": "memcached.overview.watch"
+      },
+      {
+        "id": "memcached.slabs.canvas",
+        "kind": "canvas",
+        "routeId": "memcached.slabs.canvas"
+      },
+      {
+        "id": "memcached.events.watch",
+        "kind": "resource",
+        "routeId": "memcached.events.watch"
+      },
+      {
+        "id": "memcached.console",
+        "kind": "query",
+        "routeId": "memcached.console"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

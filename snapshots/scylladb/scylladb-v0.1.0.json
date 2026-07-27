@@ -1,0 +1,6161 @@
+{
+  "name": "scylladb",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg height=\"2500\" viewBox=\"53.6 9 219.8 272.2\" width=\"1579\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cpath d=\"m162.6 11.3c-62.7 0-107.3 39.6-107.3 95.7 0 26.9 28 158 28 158 1.8 7.8 9.4 13.1 17.4 11.8 1.8-.3 3.4-.9 4.9-1.7l1.2-.1c2.8 1.6 6 2.4 9.5 2 2.8-.3 5.3-1.4 7.4-3l3.4-.2c2.8 2.2 6.4 3.4 10.2 3.2 3.9-.2 7.3-1.9 9.9-4.4l6-.4c2.7 2.8 6.4 4.7 10.6 4.8 4.5.1 8.5-1.7 11.4-4.7l6.2.4c2.3 2.3 5.4 3.8 8.9 4.2 4.1.5 8-.7 11-3.1l3.8.2c1.8 1.3 3.9 2.3 6.2 2.7 3.3.6 6.5.1 9.3-1.3 1.2.6 2.6 1 4 1.2 8 1.3 15.6-3.9 17.4-11.8 0 0 28-131.2 28-158-.2-55.8-44.7-95.5-107.4-95.5z\" fill=\"#57d1e5\"/\u003e\u003ccircle cx=\"127.9\" cy=\"97.3\" fill=\"#fff\" r=\"47.9\"/\u003e\u003cpath d=\"m127.9 147.7c-27.8 0-50.5-22.6-50.5-50.5s22.6-50.5 50.5-50.5 50.5 22.6 50.5 50.5-22.7 50.5-50.5 50.5zm0-95.7c-25 0-45.3 20.3-45.3 45.3s20.3 45.3 45.3 45.3 45.3-20.3 45.3-45.3-20.4-45.3-45.3-45.3z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m137.8 65.9c-8.3 1.7-9.9 19.8-5 24.8 3.3 3.3 9.9 4.3 9.9 6.6s-6.6 3.3-9.9 6.6c-5 5-3.3 23.1 5 24.8 9.8 2 24.8-9.9 24.8-31.4s-15-33.4-24.8-31.4z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m104.4 162.5c1.7 5 7 14.4 13.6 12.7 3.2-.8 5-5 5-11.6m24.7-5.3c1.7 6.6 3.3 11.6 8.3 11.6s11.6-6.6 9.9-18.2\" fill=\"#fff\"/\u003e\u003cg fill=\"#3a2d55\"\u003e\u003cpath d=\"m189.3 135.5c-2.1-2.3-5-4-8.2-4.6h-.4c-1.4-.1-2.7 1-2.8 2.4s1 2.7 2.4 2.8 2.8.5 4 1.2a126 126 0 0 1 -41.8 18.3c-15.5 3.7-31.6 4.4-47.4 2.1-1.2-.2-2.3.6-2.5 1.8s.6 2.3 1.8 2.5c2.4.4 4.9.7 7.3.9 0 .1 0 .2.1.3 2.1 6.3 7.5 14.7 14.5 14.7.7 0 1.4-.1 2.2-.3 2.6-.6 6.9-3.3 6.9-14.1 0-.2-.1-.3-.1-.5 6.1-.5 12.2-1.5 18.2-2.8.6-.1 1.2-.3 1.7-.4 1.4 5.6 3.5 12.6 10.5 12.6 2.9 0 6-1.6 8.4-4.3 2-2.3 5.2-7.5 4.2-16.2 6.9-3.1 13.5-6.8 19.7-11 .6 1 1.1 2.1 1.3 3.3.2.9 1 1.5 1.9 1.4 1-.1 1.7-.9 1.6-1.9-.1-2.9-1.4-5.8-3.5-8.2zm-69 28.1c0 5-1.2 8.6-3 9-3.9 1-7.9-4.8-9.8-9.2 4.3.2 8.5.2 12.8 0 .1.1 0 .2 0 .2zm40.1 1.2c-1.3 1.5-3 2.5-4.4 2.5-2.4 0-3.8-2.1-5.5-8.7 4.4-1.3 8.8-2.8 13-4.5.2 4.3-.9 8.1-3.1 10.7z\"/\u003e\u003cpath d=\"m242.4 36.5c-19.9-17.7-47.9-27.5-78.9-27.5s-59 9.8-78.9 27.5c-20 17.8-31 43-31 70.8s26.9 153.2 28 158.6c1.9 8.3 9.2 14 17.4 14 1 0 1.9-.1 2.9-.2 1.7-.3 3.3-.8 4.9-1.6 3.4 1.5 7.2 2.1 10.9 1.4 2.8-.5 5.4-1.7 7.6-3.5 1.9 1.5 4.2 2.7 6.6 3.3 3.9 1 8.1.7 11.8-1 2.6-1.2 4.8-3 6.5-5.1 1.3 1.6 2.8 3 4.6 4.1 1.4.9 2.9 1.5 4.5 2s3.2.7 4.8.7 3.3-.3 4.8-.7c1.6-.5 3.1-1.1 4.5-2s2.7-1.9 3.8-3.1c.3-.3.6-.6.8-.9 2.8 3.4 6.9 5.8 11.3 6.4 4.4.7 9-.4 12.6-2.9.4-.2.7-.5 1-.8 2.1 1.7 4.6 2.9 7.2 3.4 1.9.4 3.8.5 5.7.3 1.7-.2 3.3-.6 4.9-1.3 1.4.6 2.8 1 4.3 1.3 9.3 1.5 18.3-4.5 20.3-13.8 1.1-5.4 28-131.7 28-158.6.1-27.8-10.9-52.9-30.9-70.8zm-2.1 228.3c-1.4 6.3-7.4 10.5-13.8 9.8 1.2-1.2 2.3-2.6 3.1-4.1.9-1.7 1.6-3.5 1.9-5.3l.8-4.8 3.1-19.1c1-6.4 2-12.8 2.8-19.2.1-.9-.5-1.7-1.3-1.9-.9-.2-1.9.4-2.1 1.3-1.4 6.3-2.7 12.7-4 19l-3.7 19-.9 4.7c-.3 1.3-.8 2.6-1.4 3.7-.6 1.2-1.5 2.2-2.5 3.1s-2.1 1.7-3.3 2.2-2.5.9-3.8 1.1-2.7 0-4-.2c-1.7-.3-3.3-1.1-4.7-2 1.2-1.8 2.2-3.8 2.7-6 .2-.5.2-1.1.3-1.6 0-.3.1-.6.1-.8l.1-.7.3-2.8.6-5.6 1.1-11.2c.7-7.5 1.4-15 1.9-22.5.1-.9-.6-1.7-1.5-1.8s-1.8.5-2 1.5c-1.1 7.4-2.1 14.9-3.1 22.3l-1.4 11.2-.7 5.6c-.2 1.8-.4 3.9-.8 5.2-.7 3-2.7 5.7-5.3 7.4s-5.8 2.4-8.8 1.9c-3.1-.4-5.9-2.1-7.9-4.5-.5-.6-.9-1.2-1.3-1.9.3-.8.5-1.6.7-2.3.4-1.6.4-3.3.4-4.6l.1-8.3c.1-5.5.2-11.1.2-16.6.1-5.5.1-11.1 0-16.6 0-.9-.7-1.7-1.6-1.7-1-.1-1.8.7-1.8 1.6-.3 5.5-.7 11.1-.9 16.6-.3 5.5-.5 11.1-.8 16.6l-.4 8.3c0 .7 0 1.4-.1 2 0 .6-.1 1.1-.2 1.7-.3 1.1-.6 2.2-1.2 3.2-2.1 4.1-6.6 6.8-11.2 6.7-1.1 0-2.3-.1-3.4-.5-1.1-.3-2.1-.8-3.1-1.3-2-1.2-3.6-2.9-4.7-4.9-.6-1-.9-2.1-1.2-3.2s-.3-2.2-.4-3.7l-.4-8.3c-.2-5.5-.5-11.1-.8-16.6s-.6-11.1-.9-16.6c-.1-.9-.8-1.6-1.7-1.6-1 0-1.7.8-1.7 1.7v16.6c0 5.5.1 11.1.2 16.6l.1 8.3c0 1.3.1 3 .4 4.6.2.8.4 1.6.7 2.4-1.4 2.3-3.4 4.2-5.9 5.3-2.6 1.2-5.5 1.4-8.2.7s-5.2-2.3-6.9-4.6c-.9-1.1-1.6-2.4-2-3.7-.2-.7-.4-1.4-.5-2.1-.1-.3-.1-.8-.2-1.2l-.2-1.3-2.6-20.3c-.9-6.8-1.8-13.6-2.9-20.3-.1-.9-.9-1.5-1.8-1.5-1 .1-1.7.9-1.6 1.9.5 6.8 1.1 13.6 1.7 20.4l2 20.4.1 1.3c0 .4.1.8.2 1.4.1 1 .4 2 .7 2.9.5 1.7 1.4 3.3 2.4 4.8-1.5 1-3.2 1.8-5 2.1-2.6.5-5.3.1-7.7-1-2.4-1.2-4.4-3-5.7-5.4-.6-1.2-1.1-2.4-1.4-3.7l-.9-4.7-3.7-18.9c-1.3-6.3-2.6-12.6-4-18.9-.2-.9-1-1.5-1.9-1.3-.9.1-1.6 1-1.5 2 .9 6.4 1.8 12.7 2.8 19.1l3.1 19 .8 4.8c.3 1.9 1 3.7 1.8 5.3.8 1.5 1.8 2.9 3.1 4.1-.2 0-.3.1-.5.1-6.6 1.1-12.9-3.2-14.4-9.7-.3-1.3-27.9-131.2-27.9-157.5s10.4-50.1 29.2-67c18.9-16.9 45.7-26.2 75.4-26.2s56.5 9.3 75.4 26.2c18.9 16.8 29.2 40.6 29.2 67 .6 26.3-27 156.2-27.3 157.4z\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "scylladb",
+    "version": "0.1.0",
+    "title": "ScyllaDB",
+    "description": "ScyllaDB cockpit: keyspaces and tables, editable CQL grids, a CQL console, a live token-ring and shard-per-core topology map, per-table compaction/cache/latency metrics, nodetool-style cluster status, and a CQL tracing viewer.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg height=\"2500\" viewBox=\"53.6 9 219.8 272.2\" width=\"1579\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cpath d=\"m162.6 11.3c-62.7 0-107.3 39.6-107.3 95.7 0 26.9 28 158 28 158 1.8 7.8 9.4 13.1 17.4 11.8 1.8-.3 3.4-.9 4.9-1.7l1.2-.1c2.8 1.6 6 2.4 9.5 2 2.8-.3 5.3-1.4 7.4-3l3.4-.2c2.8 2.2 6.4 3.4 10.2 3.2 3.9-.2 7.3-1.9 9.9-4.4l6-.4c2.7 2.8 6.4 4.7 10.6 4.8 4.5.1 8.5-1.7 11.4-4.7l6.2.4c2.3 2.3 5.4 3.8 8.9 4.2 4.1.5 8-.7 11-3.1l3.8.2c1.8 1.3 3.9 2.3 6.2 2.7 3.3.6 6.5.1 9.3-1.3 1.2.6 2.6 1 4 1.2 8 1.3 15.6-3.9 17.4-11.8 0 0 28-131.2 28-158-.2-55.8-44.7-95.5-107.4-95.5z\" fill=\"#57d1e5\"/\u003e\u003ccircle cx=\"127.9\" cy=\"97.3\" fill=\"#fff\" r=\"47.9\"/\u003e\u003cpath d=\"m127.9 147.7c-27.8 0-50.5-22.6-50.5-50.5s22.6-50.5 50.5-50.5 50.5 22.6 50.5 50.5-22.7 50.5-50.5 50.5zm0-95.7c-25 0-45.3 20.3-45.3 45.3s20.3 45.3 45.3 45.3 45.3-20.3 45.3-45.3-20.4-45.3-45.3-45.3z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m137.8 65.9c-8.3 1.7-9.9 19.8-5 24.8 3.3 3.3 9.9 4.3 9.9 6.6s-6.6 3.3-9.9 6.6c-5 5-3.3 23.1 5 24.8 9.8 2 24.8-9.9 24.8-31.4s-15-33.4-24.8-31.4z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m104.4 162.5c1.7 5 7 14.4 13.6 12.7 3.2-.8 5-5 5-11.6m24.7-5.3c1.7 6.6 3.3 11.6 8.3 11.6s11.6-6.6 9.9-18.2\" fill=\"#fff\"/\u003e\u003cg fill=\"#3a2d55\"\u003e\u003cpath d=\"m189.3 135.5c-2.1-2.3-5-4-8.2-4.6h-.4c-1.4-.1-2.7 1-2.8 2.4s1 2.7 2.4 2.8 2.8.5 4 1.2a126 126 0 0 1 -41.8 18.3c-15.5 3.7-31.6 4.4-47.4 2.1-1.2-.2-2.3.6-2.5 1.8s.6 2.3 1.8 2.5c2.4.4 4.9.7 7.3.9 0 .1 0 .2.1.3 2.1 6.3 7.5 14.7 14.5 14.7.7 0 1.4-.1 2.2-.3 2.6-.6 6.9-3.3 6.9-14.1 0-.2-.1-.3-.1-.5 6.1-.5 12.2-1.5 18.2-2.8.6-.1 1.2-.3 1.7-.4 1.4 5.6 3.5 12.6 10.5 12.6 2.9 0 6-1.6 8.4-4.3 2-2.3 5.2-7.5 4.2-16.2 6.9-3.1 13.5-6.8 19.7-11 .6 1 1.1 2.1 1.3 3.3.2.9 1 1.5 1.9 1.4 1-.1 1.7-.9 1.6-1.9-.1-2.9-1.4-5.8-3.5-8.2zm-69 28.1c0 5-1.2 8.6-3 9-3.9 1-7.9-4.8-9.8-9.2 4.3.2 8.5.2 12.8 0 .1.1 0 .2 0 .2zm40.1 1.2c-1.3 1.5-3 2.5-4.4 2.5-2.4 0-3.8-2.1-5.5-8.7 4.4-1.3 8.8-2.8 13-4.5.2 4.3-.9 8.1-3.1 10.7z\"/\u003e\u003cpath d=\"m242.4 36.5c-19.9-17.7-47.9-27.5-78.9-27.5s-59 9.8-78.9 27.5c-20 17.8-31 43-31 70.8s26.9 153.2 28 158.6c1.9 8.3 9.2 14 17.4 14 1 0 1.9-.1 2.9-.2 1.7-.3 3.3-.8 4.9-1.6 3.4 1.5 7.2 2.1 10.9 1.4 2.8-.5 5.4-1.7 7.6-3.5 1.9 1.5 4.2 2.7 6.6 3.3 3.9 1 8.1.7 11.8-1 2.6-1.2 4.8-3 6.5-5.1 1.3 1.6 2.8 3 4.6 4.1 1.4.9 2.9 1.5 4.5 2s3.2.7 4.8.7 3.3-.3 4.8-.7c1.6-.5 3.1-1.1 4.5-2s2.7-1.9 3.8-3.1c.3-.3.6-.6.8-.9 2.8 3.4 6.9 5.8 11.3 6.4 4.4.7 9-.4 12.6-2.9.4-.2.7-.5 1-.8 2.1 1.7 4.6 2.9 7.2 3.4 1.9.4 3.8.5 5.7.3 1.7-.2 3.3-.6 4.9-1.3 1.4.6 2.8 1 4.3 1.3 9.3 1.5 18.3-4.5 20.3-13.8 1.1-5.4 28-131.7 28-158.6.1-27.8-10.9-52.9-30.9-70.8zm-2.1 228.3c-1.4 6.3-7.4 10.5-13.8 9.8 1.2-1.2 2.3-2.6 3.1-4.1.9-1.7 1.6-3.5 1.9-5.3l.8-4.8 3.1-19.1c1-6.4 2-12.8 2.8-19.2.1-.9-.5-1.7-1.3-1.9-.9-.2-1.9.4-2.1 1.3-1.4 6.3-2.7 12.7-4 19l-3.7 19-.9 4.7c-.3 1.3-.8 2.6-1.4 3.7-.6 1.2-1.5 2.2-2.5 3.1s-2.1 1.7-3.3 2.2-2.5.9-3.8 1.1-2.7 0-4-.2c-1.7-.3-3.3-1.1-4.7-2 1.2-1.8 2.2-3.8 2.7-6 .2-.5.2-1.1.3-1.6 0-.3.1-.6.1-.8l.1-.7.3-2.8.6-5.6 1.1-11.2c.7-7.5 1.4-15 1.9-22.5.1-.9-.6-1.7-1.5-1.8s-1.8.5-2 1.5c-1.1 7.4-2.1 14.9-3.1 22.3l-1.4 11.2-.7 5.6c-.2 1.8-.4 3.9-.8 5.2-.7 3-2.7 5.7-5.3 7.4s-5.8 2.4-8.8 1.9c-3.1-.4-5.9-2.1-7.9-4.5-.5-.6-.9-1.2-1.3-1.9.3-.8.5-1.6.7-2.3.4-1.6.4-3.3.4-4.6l.1-8.3c.1-5.5.2-11.1.2-16.6.1-5.5.1-11.1 0-16.6 0-.9-.7-1.7-1.6-1.7-1-.1-1.8.7-1.8 1.6-.3 5.5-.7 11.1-.9 16.6-.3 5.5-.5 11.1-.8 16.6l-.4 8.3c0 .7 0 1.4-.1 2 0 .6-.1 1.1-.2 1.7-.3 1.1-.6 2.2-1.2 3.2-2.1 4.1-6.6 6.8-11.2 6.7-1.1 0-2.3-.1-3.4-.5-1.1-.3-2.1-.8-3.1-1.3-2-1.2-3.6-2.9-4.7-4.9-.6-1-.9-2.1-1.2-3.2s-.3-2.2-.4-3.7l-.4-8.3c-.2-5.5-.5-11.1-.8-16.6s-.6-11.1-.9-16.6c-.1-.9-.8-1.6-1.7-1.6-1 0-1.7.8-1.7 1.7v16.6c0 5.5.1 11.1.2 16.6l.1 8.3c0 1.3.1 3 .4 4.6.2.8.4 1.6.7 2.4-1.4 2.3-3.4 4.2-5.9 5.3-2.6 1.2-5.5 1.4-8.2.7s-5.2-2.3-6.9-4.6c-.9-1.1-1.6-2.4-2-3.7-.2-.7-.4-1.4-.5-2.1-.1-.3-.1-.8-.2-1.2l-.2-1.3-2.6-20.3c-.9-6.8-1.8-13.6-2.9-20.3-.1-.9-.9-1.5-1.8-1.5-1 .1-1.7.9-1.6 1.9.5 6.8 1.1 13.6 1.7 20.4l2 20.4.1 1.3c0 .4.1.8.2 1.4.1 1 .4 2 .7 2.9.5 1.7 1.4 3.3 2.4 4.8-1.5 1-3.2 1.8-5 2.1-2.6.5-5.3.1-7.7-1-2.4-1.2-4.4-3-5.7-5.4-.6-1.2-1.1-2.4-1.4-3.7l-.9-4.7-3.7-18.9c-1.3-6.3-2.6-12.6-4-18.9-.2-.9-1-1.5-1.9-1.3-.9.1-1.6 1-1.5 2 .9 6.4 1.8 12.7 2.8 19.1l3.1 19 .8 4.8c.3 1.9 1 3.7 1.8 5.3.8 1.5 1.8 2.9 3.1 4.1-.2 0-.3.1-.5.1-6.6 1.1-12.9-3.2-14.4-9.7-.3-1.3-27.9-131.2-27.9-157.5s10.4-50.1 29.2-67c18.9-16.9 45.7-26.2 75.4-26.2s56.5 9.3 75.4 26.2c18.9 16.8 29.2 40.6 29.2 67 .6 26.3-27 156.2-27.3 157.4z\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Cluster",
+          "fields": [
+            {
+              "key": "hosts",
+              "label": "Contact points",
+              "type": "textarea",
+              "required": true,
+              "placeholder": "10.0.0.10\n10.0.0.11",
+              "help": "Comma or newline separated ScyllaDB contact points."
+            },
+            {
+              "key": "port",
+              "label": "CQL port",
+              "type": "number",
+              "required": true,
+              "default": 9042,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "keyspace",
+              "label": "Default keyspace",
+              "type": "text",
+              "placeholder": "app"
+            },
+            {
+              "key": "local_dc",
+              "label": "Local datacenter",
+              "type": "text",
+              "help": "Enables datacenter-aware, token-aware, shard-aware routing when set."
+            },
+            {
+              "key": "consistency",
+              "label": "Consistency",
+              "type": "select",
+              "required": true,
+              "default": "LOCAL_QUORUM",
+              "options": [
+                {
+                  "label": "LOCAL_QUORUM",
+                  "value": "LOCAL_QUORUM"
+                },
+                {
+                  "label": "LOCAL_ONE",
+                  "value": "LOCAL_ONE"
+                },
+                {
+                  "label": "ONE",
+                  "value": "ONE"
+                },
+                {
+                  "label": "QUORUM",
+                  "value": "QUORUM"
+                },
+                {
+                  "label": "EACH_QUORUM",
+                  "value": "EACH_QUORUM"
+                },
+                {
+                  "label": "ALL",
+                  "value": "ALL"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable ScyllaDB password. The credential identity can also supply the username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "scylladb"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional PEM containing the client certificate and private key for mTLS.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "scylladb"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Shard awareness",
+          "fields": [
+            {
+              "key": "connections_per_host",
+              "label": "Connections per host",
+              "type": "number",
+              "default": 4,
+              "help": "Set at least one connection per shard so every core is reachable without the shard-aware port.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 64
+                }
+              ]
+            },
+            {
+              "key": "shard_aware_port",
+              "label": "Use the shard-aware port",
+              "type": "toggle",
+              "help": "Connects to the node's shard-aware port (CQL port + 10000) to land one connection on every shard deterministically. The gateway egress policy must allow that extra port."
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks INSERT, UPDATE, DELETE, BATCH, DDL, TRUNCATE, and privilege changes."
+            },
+            {
+              "key": "require_destructive_confirmation",
+              "label": "Confirm destructive statements",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires explicit confirmation before writes, DDL, batches, truncates, and privilege changes execute."
+            },
+            {
+              "key": "query_timeout",
+              "label": "Query timeout",
+              "type": "duration",
+              "default": "30s"
+            },
+            {
+              "key": "page_size",
+              "label": "Page size",
+              "type": "number",
+              "default": 200,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "row_limit",
+              "label": "Row limit",
+              "type": "number",
+              "default": 500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "redact_columns",
+              "label": "Redacted columns",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for result columns that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "cql",
+      "schema",
+      "tables",
+      "query_editor",
+      "cluster",
+      "topology",
+      "metrics",
+      "tracing"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "keyspaces",
+        "label": "Keyspaces",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "scylladb.keyspaces.tree"
+        },
+        "ref": {
+          "kind": "server",
+          "name": "Keyspaces",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "cluster",
+        "label": "Cluster",
+        "icon": {
+          "type": "lucide",
+          "value": "orbit"
+        },
+        "ref": {
+          "kind": "cluster",
+          "name": "Cluster",
+          "uid": "cluster"
+        }
+      },
+      {
+        "key": "nodes",
+        "label": "Nodes",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "source": {
+          "routeId": "scylladb.nodes.tree"
+        },
+        "resourceKind": "node"
+      },
+      {
+        "key": "traces",
+        "label": "Tracing",
+        "icon": {
+          "type": "lucide",
+          "value": "route"
+        },
+        "resourceKind": "trace"
+      },
+      {
+        "key": "types",
+        "label": "Types",
+        "icon": {
+          "type": "lucide",
+          "value": "braces"
+        },
+        "source": {
+          "routeId": "scylladb.types.tree"
+        },
+        "resourceKind": "type"
+      },
+      {
+        "key": "functions",
+        "label": "Functions",
+        "icon": {
+          "type": "lucide",
+          "value": "function-square"
+        },
+        "source": {
+          "routeId": "scylladb.functions.tree"
+        },
+        "resourceKind": "function"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "server",
+        "title": "Keyspaces",
+        "list": {
+          "routeId": "scylladb.keyspaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "replication",
+            "label": "Replication"
+          },
+          {
+            "key": "durable_writes",
+            "label": "Durable writes",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "tables",
+            "label": "Tables",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "views",
+            "label": "Views",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "estimated_bytes",
+            "label": "Data (est.)",
+            "sortable": true,
+            "type": "bytes"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "scylladb.keyspace.create"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "Keyspaces"
+          },
+          "tabs": [
+            {
+              "key": "keyspaces",
+              "label": "Keyspaces",
+              "icon": {
+                "type": "lucide",
+                "value": "database"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.keyspaces.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "replication",
+                    "label": "Replication"
+                  },
+                  {
+                    "key": "durable_writes",
+                    "label": "Durable writes",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "tables",
+                    "label": "Tables",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "views",
+                    "label": "Views",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "estimated_bytes",
+                    "label": "Data (est.)",
+                    "sortable": true,
+                    "type": "bytes"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.keyspace.create"
+                ],
+                "rowActionIds": [
+                  "scylladb.keyspace.drop"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No user keyspaces yet.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "console",
+              "label": "CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "scylladb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "CQL",
+                "executeLabel": "Run CQL",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running...",
+                "emptyText": "Run a CQL statement to see results. Prefix a statement with TRACING ON; to capture a server-side trace.",
+                "initialQuery": "SELECT keyspace_name, durable_writes, replication FROM system_schema.keyspaces LIMIT 25;",
+                "cancelRouteId": "scylladb.query.cancel",
+                "completionRouteId": "scylladb.completion",
+                "exportable": true
+              }
+            },
+            {
+              "key": "saved",
+              "label": "Saved CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "bookmark"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.queries.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Name",
+                    "sortable": true
+                  },
+                  {
+                    "key": "query",
+                    "label": "CQL"
+                  },
+                  {
+                    "key": "scope",
+                    "label": "Scope",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "connection": "info",
+                      "user": "secondary"
+                    }
+                  },
+                  {
+                    "key": "updated_at",
+                    "label": "Updated",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.query.save"
+                ],
+                "rowActionIds": [
+                  "scylladb.query.delete"
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No saved CQL yet. Use Save CQL to keep a statement for this connection."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "cluster",
+        "title": "Cluster",
+        "list": {
+          "routeId": "scylladb.cluster.list"
+        },
+        "watch": {
+          "routeId": "scylladb.cluster.watch",
+          "method": "WS"
+        },
+        "columns": [
+          {
+            "key": "cluster_name",
+            "label": "Cluster",
+            "sortable": true
+          },
+          {
+            "key": "release_version",
+            "label": "ScyllaDB"
+          },
+          {
+            "key": "nodes_up",
+            "label": "Nodes up",
+            "type": "number"
+          },
+          {
+            "key": "nodes_total",
+            "label": "Nodes",
+            "type": "number"
+          },
+          {
+            "key": "shards_total",
+            "label": "Shards",
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "detail": [
+            "scylladb.trace.run"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "health",
+            "severities": {
+              "degraded": "warn",
+              "down": "danger",
+              "healthy": "success"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "layout-dashboard"
+              },
+              "panel": "dashboard",
+              "config": {
+                "cells": [
+                  {
+                    "key": "cluster-live",
+                    "label": "Live",
+                    "icon": {
+                      "type": "lucide",
+                      "value": "activity"
+                    },
+                    "panel": "metrics",
+                    "source": {
+                      "routeId": "scylladb.cluster.metrics",
+                      "method": "WS"
+                    },
+                    "config": {
+                      "stats": [
+                        {
+                          "key": "nodesUp",
+                          "label": "Nodes up"
+                        },
+                        {
+                          "key": "shardsTotal",
+                          "label": "Shards"
+                        },
+                        {
+                          "key": "driverConnections",
+                          "label": "Driver connections"
+                        },
+                        {
+                          "key": "clientConnections",
+                          "label": "CQL clients"
+                        },
+                        {
+                          "key": "cacheRequestsPerSec",
+                          "label": "Cache reads",
+                          "unit": "/s"
+                        },
+                        {
+                          "key": "compactionBytesPerSec",
+                          "label": "Compaction write",
+                          "unit": "bytes/s"
+                        }
+                      ],
+                      "usage": [
+                        {
+                          "key": "memoryPct",
+                          "label": "Node memory",
+                          "type": "percent",
+                          "usage": {
+                            "percentKey": "memoryPct",
+                            "usedKey": "memoryUsed",
+                            "totalKey": "memoryTotal",
+                            "usedType": "bytes",
+                            "totalType": "bytes",
+                            "warnAt": 80,
+                            "criticalAt": 95
+                          }
+                        },
+                        {
+                          "key": "cachePct",
+                          "label": "Row cache",
+                          "type": "percent",
+                          "usage": {
+                            "percentKey": "cachePct",
+                            "usedKey": "cacheUsed",
+                            "totalKey": "cacheTotal",
+                            "usedType": "bytes",
+                            "totalType": "bytes",
+                            "warnAt": 85,
+                            "criticalAt": 95
+                          }
+                        },
+                        {
+                          "key": "storagePct",
+                          "label": "Storage",
+                          "type": "percent",
+                          "usage": {
+                            "percentKey": "storagePct",
+                            "usedKey": "storageUsed",
+                            "totalKey": "storageTotal",
+                            "usedType": "bytes",
+                            "totalType": "bytes",
+                            "warnAt": 70,
+                            "criticalAt": 90
+                          }
+                        }
+                      ],
+                      "series": [
+                        {
+                          "key": "cacheHitRate",
+                          "label": "Cache hit rate",
+                          "unit": "%"
+                        },
+                        {
+                          "key": "memoryPct",
+                          "label": "Memory",
+                          "unit": "%"
+                        },
+                        {
+                          "key": "probeLatencyMs",
+                          "label": "Client round-trip",
+                          "unit": "ms"
+                        },
+                        {
+                          "key": "coordinatorLatencyMs",
+                          "label": "Coordinator latency",
+                          "unit": "ms"
+                        }
+                      ],
+                      "history": 90
+                    },
+                    "span": 2
+                  },
+                  {
+                    "key": "cluster-status",
+                    "label": "Cluster status",
+                    "icon": {
+                      "type": "lucide",
+                      "value": "server"
+                    },
+                    "panel": "table",
+                    "source": {
+                      "routeId": "scylladb.nodes.list"
+                    },
+                    "config": {
+                      "columns": [
+                        {
+                          "key": "address",
+                          "label": "Address",
+                          "sortable": true
+                        },
+                        {
+                          "key": "status",
+                          "label": "Status",
+                          "sortable": true,
+                          "type": "badge",
+                          "severities": {
+                            "?N": "secondary",
+                            "DJ": "danger",
+                            "DL": "danger",
+                            "DN": "danger",
+                            "UJ": "warn",
+                            "UL": "warn",
+                            "UM": "warn",
+                            "UN": "success"
+                          }
+                        },
+                        {
+                          "key": "data_center",
+                          "label": "Datacenter",
+                          "sortable": true
+                        },
+                        {
+                          "key": "rack",
+                          "label": "Rack",
+                          "sortable": true
+                        },
+                        {
+                          "key": "shards",
+                          "label": "Shards",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "tokens",
+                          "label": "Tokens",
+                          "sortable": true,
+                          "type": "number"
+                        },
+                        {
+                          "key": "owns_pct",
+                          "label": "Owns",
+                          "sortable": true,
+                          "type": "percent"
+                        },
+                        {
+                          "key": "load_bytes",
+                          "label": "Load",
+                          "sortable": true,
+                          "type": "bytes"
+                        },
+                        {
+                          "key": "release_version",
+                          "label": "Version"
+                        }
+                      ],
+                      "watch": {
+                        "routeId": "scylladb.nodes.watch",
+                        "method": "WS"
+                      },
+                      "defaultSort": {
+                        "field": "address"
+                      },
+                      "emptyText": "No nodes reported by system.cluster_status."
+                    },
+                    "span": 2
+                  },
+                  {
+                    "key": "cluster-facts",
+                    "label": "Cluster",
+                    "icon": {
+                      "type": "lucide",
+                      "value": "info"
+                    },
+                    "panel": "object_detail",
+                    "source": {
+                      "routeId": "scylladb.cluster.overview"
+                    },
+                    "config": {
+                      "sections": [
+                        {
+                          "title": "Cluster",
+                          "fields": [
+                            {
+                              "key": "cluster_name",
+                              "label": "Cluster name",
+                              "copy": true
+                            },
+                            {
+                              "key": "release_version",
+                              "label": "ScyllaDB version"
+                            },
+                            {
+                              "key": "build_mode",
+                              "label": "Build"
+                            },
+                            {
+                              "key": "cql_version",
+                              "label": "CQL version"
+                            },
+                            {
+                              "key": "partitioner",
+                              "label": "Partitioner"
+                            },
+                            {
+                              "key": "snitch",
+                              "label": "Snitch"
+                            },
+                            {
+                              "key": "tablets_enabled",
+                              "label": "Tablets",
+                              "type": "bool"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Topology",
+                          "fields": [
+                            {
+                              "key": "nodes_total",
+                              "label": "Nodes",
+                              "type": "number"
+                            },
+                            {
+                              "key": "nodes_up",
+                              "label": "Nodes up",
+                              "type": "number"
+                            },
+                            {
+                              "key": "shards_total",
+                              "label": "Shards (cores)",
+                              "type": "number"
+                            },
+                            {
+                              "key": "datacenters",
+                              "label": "Datacenters",
+                              "type": "number"
+                            },
+                            {
+                              "key": "racks",
+                              "label": "Racks",
+                              "type": "number"
+                            },
+                            {
+                              "key": "tokens_total",
+                              "label": "Tokens",
+                              "type": "number"
+                            },
+                            {
+                              "key": "sharding_algorithm",
+                              "label": "Sharding algorithm"
+                            },
+                            {
+                              "key": "schema_agreement",
+                              "label": "Schema agreement",
+                              "type": "bool"
+                            }
+                          ]
+                        },
+                        {
+                          "title": "Driver",
+                          "fields": [
+                            {
+                              "key": "driver_connections",
+                              "label": "Connections",
+                              "type": "number"
+                            },
+                            {
+                              "key": "driver_shard_connections",
+                              "label": "Shards covered",
+                              "type": "number"
+                            },
+                            {
+                              "key": "shard_aware_port",
+                              "label": "Shard-aware port",
+                              "type": "number"
+                            },
+                            {
+                              "key": "shard_aware_enabled",
+                              "label": "Shard-aware dialing",
+                              "type": "bool"
+                            },
+                            {
+                              "key": "in_flight",
+                              "label": "In-flight requests",
+                              "type": "number"
+                            }
+                          ]
+                        }
+                      ],
+                      "rawToggle": true,
+                      "watch": {
+                        "routeId": "scylladb.cluster.watch",
+                        "method": "WS"
+                      }
+                    },
+                    "span": 2
+                  }
+                ]
+              }
+            },
+            {
+              "key": "topology",
+              "label": "Token ring",
+              "icon": {
+                "type": "lucide",
+                "value": "orbit"
+              },
+              "panel": "canvas",
+              "source": {
+                "routeId": "scylladb.topology",
+                "method": "WS"
+              },
+              "config": {
+                "scaleMode": "resize",
+                "hidpi": true,
+                "interactive": true,
+                "keyboard": true,
+                "pointer": true,
+                "wheelMode": "none",
+                "resizeEvents": true,
+                "focusOnPointer": true,
+                "ariaLabel": "ScyllaDB token ring and shard-per-core map",
+                "instructions": "The outer ring shows token ranges coloured by owning node; the inner wheel shows the selected node's shards with their live client connections. Click a ring segment or press the left and right arrow keys to select a node; press Home to select the coordinator."
+              }
+            },
+            {
+              "key": "nodes",
+              "label": "Nodes",
+              "icon": {
+                "type": "lucide",
+                "value": "server"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.nodes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "address",
+                    "label": "Address",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "?N": "secondary",
+                      "DJ": "danger",
+                      "DL": "danger",
+                      "DN": "danger",
+                      "UJ": "warn",
+                      "UL": "warn",
+                      "UM": "warn",
+                      "UN": "success"
+                    }
+                  },
+                  {
+                    "key": "data_center",
+                    "label": "Datacenter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "rack",
+                    "label": "Rack",
+                    "sortable": true
+                  },
+                  {
+                    "key": "shards",
+                    "label": "Shards",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "tokens",
+                    "label": "Tokens",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "owns_pct",
+                    "label": "Owns",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "load_bytes",
+                    "label": "Load",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "release_version",
+                    "label": "Version"
+                  }
+                ],
+                "watch": {
+                  "routeId": "scylladb.nodes.watch",
+                  "method": "WS"
+                },
+                "defaultSort": {
+                  "field": "address"
+                },
+                "emptyText": "No nodes reported by system.cluster_status.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "compactions",
+              "label": "Compactions",
+              "icon": {
+                "type": "lucide",
+                "value": "layers"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "scylladb.compactions.list"
+              },
+              "config": {
+                "timestampField": "compacted_at",
+                "titleField": "title",
+                "bodyField": "detail",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "target",
+                "emptyText": "No compactions recorded yet.",
+                "watch": {
+                  "routeId": "scylladb.compactions.watch",
+                  "method": "WS"
+                }
+              }
+            },
+            {
+              "key": "clients",
+              "label": "Clients",
+              "icon": {
+                "type": "lucide",
+                "value": "plug"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.clients.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "address",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "shard_id",
+                    "label": "Shard",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "connection_stage",
+                    "label": "Stage",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "AUTHENTICATING": "warn",
+                      "ESTABLISHED": "info",
+                      "READY": "success"
+                    }
+                  },
+                  {
+                    "key": "driver_name",
+                    "label": "Driver",
+                    "sortable": true
+                  },
+                  {
+                    "key": "driver_version",
+                    "label": "Driver version"
+                  },
+                  {
+                    "key": "username",
+                    "label": "User",
+                    "sortable": true
+                  },
+                  {
+                    "key": "ssl_enabled",
+                    "label": "TLS",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "scheduling_group",
+                    "label": "Scheduling group"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "address"
+                },
+                "emptyText": "No CQL clients connected."
+              }
+            },
+            {
+              "key": "slowlog",
+              "label": "Slow queries",
+              "icon": {
+                "type": "lucide",
+                "value": "timer"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.slowlog.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "start_time",
+                    "label": "Started",
+                    "sortable": true,
+                    "type": "datetime"
+                  },
+                  {
+                    "key": "duration_us",
+                    "label": "Duration",
+                    "sortable": true,
+                    "type": "duration"
+                  },
+                  {
+                    "key": "command",
+                    "label": "Statement"
+                  },
+                  {
+                    "key": "tables",
+                    "label": "Tables"
+                  },
+                  {
+                    "key": "node_ip",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "shard",
+                    "label": "Shard",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "username",
+                    "label": "User",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "duration_us",
+                  "desc": true
+                },
+                "emptyText": "No slow queries recorded. Enable the slow-query log on the node to populate system_traces.node_slow_log.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "config",
+              "label": "Configuration",
+              "icon": {
+                "type": "lucide",
+                "value": "sliders-horizontal"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.config.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Parameter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "value",
+                    "label": "Value"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "source",
+                    "label": "Source",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "cli": "warn",
+                      "config": "info",
+                      "cql": "warn",
+                      "default": "secondary",
+                      "internal": "secondary"
+                    }
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No configuration reported by system.config.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "console",
+              "label": "CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "scylladb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "CQL",
+                "executeLabel": "Run CQL",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running...",
+                "emptyText": "Run a CQL statement to see results. Prefix a statement with TRACING ON; to capture a server-side trace.",
+                "initialQuery": "SELECT peer, dc, rack, status, up, load, owns, tokens FROM system.cluster_status LIMIT 25;",
+                "cancelRouteId": "scylladb.query.cancel",
+                "completionRouteId": "scylladb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "keyspace",
+        "title": "Keyspaces",
+        "list": {
+          "routeId": "scylladb.keyspaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "replication",
+            "label": "Replication"
+          },
+          {
+            "key": "durable_writes",
+            "label": "Durable writes",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "tables",
+            "label": "Tables",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "views",
+            "label": "Views",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "estimated_bytes",
+            "label": "Data (est.)",
+            "sortable": true,
+            "type": "bytes"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "scylladb.keyspace.create"
+          ],
+          "row": [
+            "scylladb.keyspace.drop"
+          ],
+          "detail": [
+            "scylladb.keyspace.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "scylladb.keyspace.overview",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Keyspace",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "replication",
+                        "label": "Replication"
+                      },
+                      {
+                        "key": "durable_writes",
+                        "label": "Durable writes",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "tables",
+                        "label": "Tables",
+                        "type": "number"
+                      },
+                      {
+                        "key": "views",
+                        "label": "Materialized views",
+                        "type": "number"
+                      },
+                      {
+                        "key": "types",
+                        "label": "User types",
+                        "type": "number"
+                      },
+                      {
+                        "key": "partitions",
+                        "label": "Partitions (est.)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "estimated_bytes",
+                        "label": "Estimated data",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "token_ranges",
+                        "label": "Token ranges",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "tables",
+              "label": "Tables",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.tables.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "compaction_strategy",
+                    "label": "Compaction",
+                    "sortable": true
+                  },
+                  {
+                    "key": "caching",
+                    "label": "Caching"
+                  },
+                  {
+                    "key": "partitions",
+                    "label": "Partitions (est.)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "estimated_bytes",
+                    "label": "Data (est.)",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "gc_grace_seconds",
+                    "label": "GC grace",
+                    "sortable": true,
+                    "type": "duration"
+                  },
+                  {
+                    "key": "bloom_filter_fp_chance",
+                    "label": "Bloom FP",
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.table.create"
+                ],
+                "rowActionIds": [
+                  "scylladb.table.truncate",
+                  "scylladb.table.drop"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No tables in this keyspace.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "views",
+              "label": "Materialized views",
+              "icon": {
+                "type": "lucide",
+                "value": "panel-top"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.views.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "View",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "base_table",
+                    "label": "Base table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "where_clause",
+                    "label": "Where"
+                  }
+                ],
+                "rowActionIds": [
+                  "scylladb.view.drop"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No materialized views in this keyspace."
+              }
+            },
+            {
+              "key": "ring",
+              "label": "Token ranges",
+              "icon": {
+                "type": "lucide",
+                "value": "circle-dot"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.tokenring.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "start_token",
+                    "label": "Start token",
+                    "sortable": true
+                  },
+                  {
+                    "key": "end_token",
+                    "label": "End token",
+                    "sortable": true
+                  },
+                  {
+                    "key": "endpoint",
+                    "label": "Replica",
+                    "sortable": true
+                  },
+                  {
+                    "key": "shard",
+                    "label": "Shard",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "data_center",
+                    "label": "Datacenter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "rack",
+                    "label": "Rack"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "start_token"
+                },
+                "emptyText": "No token ranges reported for this keyspace.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "types",
+              "label": "Types",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.types.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Type",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "fields",
+                    "label": "Fields"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.type.create"
+                ],
+                "rowActionIds": [
+                  "scylladb.type.drop"
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No user-defined types in this keyspace."
+              }
+            },
+            {
+              "key": "functions",
+              "label": "Functions",
+              "icon": {
+                "type": "lucide",
+                "value": "function-square"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.functions.list",
+                "params": {
+                  "keyspace": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Function",
+                    "sortable": true
+                  },
+                  {
+                    "key": "keyspace",
+                    "label": "Keyspace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "arguments",
+                    "label": "Arguments"
+                  },
+                  {
+                    "key": "return_type",
+                    "label": "Returns"
+                  },
+                  {
+                    "key": "language",
+                    "label": "Language",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No user-defined functions in this keyspace."
+              }
+            },
+            {
+              "key": "query",
+              "label": "CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "scylladb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "CQL",
+                "executeLabel": "Run CQL",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running...",
+                "emptyText": "Run a CQL statement to see results. Prefix a statement with TRACING ON; to capture a server-side trace.",
+                "initialQuery": "SELECT table_name, comment, compaction, default_time_to_live FROM system_schema.tables WHERE keyspace_name = '${resource.name}' LIMIT 25;",
+                "cancelRouteId": "scylladb.query.cancel",
+                "completionRouteId": "scylladb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "table",
+        "title": "Tables",
+        "list": {
+          "routeId": "scylladb.tables.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Table",
+            "sortable": true
+          },
+          {
+            "key": "keyspace",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "compaction_strategy",
+            "label": "Compaction",
+            "sortable": true
+          },
+          {
+            "key": "caching",
+            "label": "Caching"
+          },
+          {
+            "key": "partitions",
+            "label": "Partitions (est.)",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "estimated_bytes",
+            "label": "Data (est.)",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "gc_grace_seconds",
+            "label": "GC grace",
+            "sortable": true,
+            "type": "duration"
+          },
+          {
+            "key": "bloom_filter_fp_chance",
+            "label": "Bloom FP",
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "row": [
+            "scylladb.table.truncate",
+            "scylladb.table.drop"
+          ],
+          "detail": [
+            "scylladb.partition.locate",
+            "scylladb.trace.run",
+            "scylladb.table.truncate",
+            "scylladb.table.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.rows",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "scylladb.table.columns",
+                  "params": {
+                    "keyspace": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "editable": true,
+                "insert": {
+                  "routeId": "scylladb.table.row.insert",
+                  "method": "POST",
+                  "params": {
+                    "keyspace": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "update": {
+                  "routeId": "scylladb.table.row.update",
+                  "method": "PATCH",
+                  "params": {
+                    "keyspace": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "delete": {
+                  "routeId": "scylladb.table.row.delete",
+                  "method": "DELETE",
+                  "params": {
+                    "keyspace": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "emptyText": "No rows.",
+                "stagedEdits": true,
+                "hiddenColumns": [
+                  "_key",
+                  "_token"
+                ],
+                "exportable": true
+              }
+            },
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.columns",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "column_name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "kind",
+                    "label": "Kind",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "clustering": "warn",
+                      "partition_key": "danger",
+                      "regular": "secondary",
+                      "static": "info"
+                    }
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.column.add"
+                ],
+                "rowActionIds": [
+                  "scylladb.column.drop"
+                ],
+                "refreshIntervalMs": 60000,
+                "emptyText": "No columns."
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.indexes",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "index_name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "kind",
+                    "label": "Kind",
+                    "sortable": true
+                  },
+                  {
+                    "key": "target",
+                    "label": "Target"
+                  },
+                  {
+                    "key": "options",
+                    "label": "Options"
+                  }
+                ],
+                "actionIds": [
+                  "scylladb.index.create"
+                ],
+                "rowActionIds": [
+                  "scylladb.index.drop"
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "index_name"
+                },
+                "emptyText": "No secondary indexes on this table."
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Live",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "scylladb.table.metrics",
+                "method": "WS",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "partitions",
+                    "label": "Partitions (est.)"
+                  },
+                  {
+                    "key": "meanPartitionSize",
+                    "label": "Mean partition",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "estimatedBytes",
+                    "label": "Estimated data",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "largePartitions",
+                    "label": "Large partitions"
+                  },
+                  {
+                    "key": "compactionsLastHour",
+                    "label": "Compactions / hour"
+                  },
+                  {
+                    "key": "compactionBytesPerSec",
+                    "label": "Compaction write",
+                    "unit": "bytes/s"
+                  }
+                ],
+                "gauges": [
+                  {
+                    "key": "compactionRatio",
+                    "label": "Compaction size ratio",
+                    "unit": "%"
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "readLatencyMs",
+                    "label": "Client read latency",
+                    "unit": "ms"
+                  },
+                  {
+                    "key": "coordinatorLatencyMs",
+                    "label": "Coordinator latency",
+                    "unit": "ms"
+                  },
+                  {
+                    "key": "cacheHitRate",
+                    "label": "Node cache hit rate",
+                    "unit": "%"
+                  }
+                ],
+                "history": 90
+              }
+            },
+            {
+              "key": "storage",
+              "label": "Storage",
+              "icon": {
+                "type": "lucide",
+                "value": "hard-drive"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.estimates",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "range_start",
+                    "label": "Range start",
+                    "sortable": true
+                  },
+                  {
+                    "key": "range_end",
+                    "label": "Range end",
+                    "sortable": true
+                  },
+                  {
+                    "key": "partitions_count",
+                    "label": "Partitions",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "mean_partition_size",
+                    "label": "Mean partition",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "estimated_bytes",
+                    "label": "Estimated data",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "shard",
+                    "label": "Shard",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "partitions_count",
+                  "desc": true
+                },
+                "emptyText": "No size estimates for this table yet; they are refreshed periodically by the node.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "large",
+              "label": "Large partitions",
+              "icon": {
+                "type": "lucide",
+                "value": "triangle-alert"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.large",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "partition_key",
+                    "label": "Partition key",
+                    "sortable": true
+                  },
+                  {
+                    "key": "partition_size",
+                    "label": "Size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "rows",
+                    "label": "Rows",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "dead_rows",
+                    "label": "Dead rows",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "range_tombstones",
+                    "label": "Range tombstones",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "sstable_name",
+                    "label": "SSTable"
+                  },
+                  {
+                    "key": "compaction_time",
+                    "label": "Detected",
+                    "sortable": true,
+                    "type": "datetime"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "partition_size",
+                  "desc": true
+                },
+                "emptyText": "No partitions crossed the large-partition threshold.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "compactions",
+              "label": "Compactions",
+              "icon": {
+                "type": "lucide",
+                "value": "layers"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "scylladb.compactions.list",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "timestampField": "compacted_at",
+                "titleField": "title",
+                "bodyField": "detail",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "target",
+                "emptyText": "No compactions recorded yet.",
+                "watch": {
+                  "routeId": "scylladb.compactions.watch",
+                  "method": "WS"
+                }
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "scylladb.table.definition",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "query",
+              "label": "CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "scylladb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "CQL",
+                "executeLabel": "Run CQL",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running...",
+                "emptyText": "Run a CQL statement to see results. Prefix a statement with TRACING ON; to capture a server-side trace.",
+                "initialQuery": "SELECT * FROM \"${resource.namespace}\".\"${resource.name}\" LIMIT 25;",
+                "cancelRouteId": "scylladb.query.cancel",
+                "completionRouteId": "scylladb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "view",
+        "title": "Materialized views",
+        "list": {
+          "routeId": "scylladb.views.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "View",
+            "sortable": true
+          },
+          {
+            "key": "keyspace",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "base_table",
+            "label": "Base table",
+            "sortable": true
+          },
+          {
+            "key": "where_clause",
+            "label": "Where"
+          }
+        ],
+        "actions": {
+          "row": [
+            "scylladb.view.drop"
+          ],
+          "detail": [
+            "scylladb.view.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.table.columns",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "column_name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "kind",
+                    "label": "Kind",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "clustering": "warn",
+                      "partition_key": "danger",
+                      "regular": "secondary",
+                      "static": "info"
+                    }
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "emptyText": "No columns."
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "scylladb.view.definition",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "query",
+              "label": "CQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "scylladb.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "CQL",
+                "executeLabel": "Run CQL",
+                "cancelLabel": "Cancel",
+                "runningLabel": "Running...",
+                "emptyText": "Run a CQL statement to see results. Prefix a statement with TRACING ON; to capture a server-side trace.",
+                "initialQuery": "SELECT * FROM \"${resource.namespace}\".\"${resource.name}\" LIMIT 25;",
+                "cancelRouteId": "scylladb.query.cancel",
+                "completionRouteId": "scylladb.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "type",
+        "title": "Types",
+        "list": {
+          "routeId": "scylladb.types.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Type",
+            "sortable": true
+          },
+          {
+            "key": "keyspace",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "fields",
+            "label": "Fields"
+          }
+        ],
+        "actions": {
+          "row": [
+            "scylladb.type.drop"
+          ],
+          "detail": [
+            "scylladb.type.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "type-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "scylladb.type.overview",
+                "params": {
+                  "keyspace": "${resource.namespace}",
+                  "name": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Type",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace"
+                      },
+                      {
+                        "key": "fields",
+                        "label": "Fields"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "function",
+        "title": "Functions",
+        "list": {
+          "routeId": "scylladb.functions.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Function",
+            "sortable": true
+          },
+          {
+            "key": "keyspace",
+            "label": "Keyspace",
+            "sortable": true
+          },
+          {
+            "key": "arguments",
+            "label": "Arguments"
+          },
+          {
+            "key": "return_type",
+            "label": "Returns"
+          },
+          {
+            "key": "language",
+            "label": "Language",
+            "sortable": true
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "function-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "scylladb.function.overview",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Function",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "keyspace",
+                        "label": "Keyspace"
+                      },
+                      {
+                        "key": "arguments",
+                        "label": "Arguments"
+                      },
+                      {
+                        "key": "return_type",
+                        "label": "Returns"
+                      },
+                      {
+                        "key": "language",
+                        "label": "Language"
+                      },
+                      {
+                        "key": "body",
+                        "label": "Body"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Nodes",
+        "list": {
+          "routeId": "scylladb.nodes.list"
+        },
+        "watch": {
+          "routeId": "scylladb.nodes.watch",
+          "method": "WS"
+        },
+        "columns": [
+          {
+            "key": "address",
+            "label": "Address",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "?N": "secondary",
+              "DJ": "danger",
+              "DL": "danger",
+              "DN": "danger",
+              "UJ": "warn",
+              "UL": "warn",
+              "UM": "warn",
+              "UN": "success"
+            }
+          },
+          {
+            "key": "data_center",
+            "label": "Datacenter",
+            "sortable": true
+          },
+          {
+            "key": "rack",
+            "label": "Rack",
+            "sortable": true
+          },
+          {
+            "key": "shards",
+            "label": "Shards",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "tokens",
+            "label": "Tokens",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "owns_pct",
+            "label": "Owns",
+            "sortable": true,
+            "type": "percent"
+          },
+          {
+            "key": "load_bytes",
+            "label": "Load",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "release_version",
+            "label": "Version"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "?N": "secondary",
+              "DJ": "danger",
+              "DL": "danger",
+              "DN": "danger",
+              "UJ": "warn",
+              "UL": "warn",
+              "UM": "warn",
+              "UN": "success"
+            }
+          },
+          "tabs": [
+            {
+              "key": "node-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "scylladb.node.overview",
+                "params": {
+                  "address": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Node",
+                    "fields": [
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "host_id",
+                        "label": "Host ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "?N": "secondary",
+                          "DJ": "danger",
+                          "DL": "danger",
+                          "DN": "danger",
+                          "UJ": "warn",
+                          "UL": "warn",
+                          "UM": "warn",
+                          "UN": "success"
+                        }
+                      },
+                      {
+                        "key": "state",
+                        "label": "State"
+                      },
+                      {
+                        "key": "up",
+                        "label": "Up",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "data_center",
+                        "label": "Datacenter"
+                      },
+                      {
+                        "key": "rack",
+                        "label": "Rack"
+                      },
+                      {
+                        "key": "release_version",
+                        "label": "Version"
+                      },
+                      {
+                        "key": "schema_version",
+                        "label": "Schema version"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Shards and ring",
+                    "fields": [
+                      {
+                        "key": "shards",
+                        "label": "Shards (cores)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "tokens",
+                        "label": "Tokens",
+                        "type": "number"
+                      },
+                      {
+                        "key": "owns_pct",
+                        "label": "Ring ownership",
+                        "type": "percent"
+                      },
+                      {
+                        "key": "shard_aware_port",
+                        "label": "Shard-aware port",
+                        "type": "number"
+                      },
+                      {
+                        "key": "sharding_algorithm",
+                        "label": "Sharding algorithm"
+                      },
+                      {
+                        "key": "driver_connections",
+                        "label": "Driver connections",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Load",
+                    "fields": [
+                      {
+                        "key": "load_bytes",
+                        "label": "Load",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "storage_pct",
+                        "label": "Storage",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "storage_pct",
+                          "usedKey": "storage_used",
+                          "totalKey": "storage_total",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 70,
+                          "criticalAt": 90
+                        }
+                      },
+                      {
+                        "key": "tablets_allocated",
+                        "label": "Tablets",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "node-runtime",
+              "label": "Runtime",
+              "icon": {
+                "type": "lucide",
+                "value": "gauge"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.node.runtime",
+                "params": {
+                  "address": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "group",
+                    "label": "Group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "item",
+                    "label": "Counter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "value",
+                    "label": "Value"
+                  }
+                ],
+                "refreshIntervalMs": 5000,
+                "defaultSort": {
+                  "field": "group"
+                },
+                "emptyText": "No runtime counters reported by system.runtime_info.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "node-clients",
+              "label": "Clients",
+              "icon": {
+                "type": "lucide",
+                "value": "plug"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "scylladb.clients.list",
+                "params": {
+                  "address": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "address",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "shard_id",
+                    "label": "Shard",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "connection_stage",
+                    "label": "Stage",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "AUTHENTICATING": "warn",
+                      "ESTABLISHED": "info",
+                      "READY": "success"
+                    }
+                  },
+                  {
+                    "key": "driver_name",
+                    "label": "Driver",
+                    "sortable": true
+                  },
+                  {
+                    "key": "driver_version",
+                    "label": "Driver version"
+                  },
+                  {
+                    "key": "username",
+                    "label": "User",
+                    "sortable": true
+                  },
+                  {
+                    "key": "ssl_enabled",
+                    "label": "TLS",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "scheduling_group",
+                    "label": "Scheduling group"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "shard_id"
+                },
+                "emptyText": "No CQL clients connected to this node."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "trace",
+        "title": "CQL traces",
+        "list": {
+          "routeId": "scylladb.traces.list"
+        },
+        "columns": [
+          {
+            "key": "started_at",
+            "label": "Started",
+            "sortable": true,
+            "type": "datetime"
+          },
+          {
+            "key": "duration_us",
+            "label": "Duration",
+            "sortable": true,
+            "type": "duration"
+          },
+          {
+            "key": "request",
+            "label": "Request"
+          },
+          {
+            "key": "command",
+            "label": "Command",
+            "sortable": true
+          },
+          {
+            "key": "coordinator",
+            "label": "Coordinator",
+            "sortable": true
+          },
+          {
+            "key": "request_size",
+            "label": "Request",
+            "type": "bytes"
+          },
+          {
+            "key": "response_size",
+            "label": "Response",
+            "type": "bytes"
+          },
+          {
+            "key": "username",
+            "label": "User",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "scylladb.trace.run"
+          ],
+          "detail": [
+            "scylladb.trace.run"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "trace-events",
+          "tabs": [
+            {
+              "key": "trace-events",
+              "label": "Timeline",
+              "icon": {
+                "type": "lucide",
+                "value": "route"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "scylladb.trace.events",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "timestampField": "time",
+                "titleField": "activity",
+                "bodyField": "detail",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "source",
+                "emptyText": "No trace events recorded for this session."
+              }
+            },
+            {
+              "key": "trace-overview",
+              "label": "Session",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "scylladb.trace.overview",
+                "params": {
+                  "id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Session",
+                    "fields": [
+                      {
+                        "key": "session_id",
+                        "label": "Session",
+                        "copy": true
+                      },
+                      {
+                        "key": "request",
+                        "label": "Request"
+                      },
+                      {
+                        "key": "command",
+                        "label": "Command"
+                      },
+                      {
+                        "key": "coordinator",
+                        "label": "Coordinator",
+                        "copy": true
+                      },
+                      {
+                        "key": "started_at",
+                        "label": "Started",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "duration_us",
+                        "label": "Duration",
+                        "type": "duration"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Payload",
+                    "fields": [
+                      {
+                        "key": "request_size",
+                        "label": "Request size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "response_size",
+                        "label": "Response size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "client",
+                        "label": "Client"
+                      },
+                      {
+                        "key": "username",
+                        "label": "User"
+                      },
+                      {
+                        "key": "events",
+                        "label": "Events",
+                        "type": "number"
+                      },
+                      {
+                        "key": "parameters",
+                        "label": "Parameters",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "scylladb.keyspace.create",
+        "label": "Create keyspace",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "scylladb.keyspace.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Keyspace",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Keyspace name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "replication_class",
+                  "label": "Replication class",
+                  "type": "select",
+                  "required": true,
+                  "default": "NetworkTopologyStrategy",
+                  "help": "ScyllaDB rejects SimpleStrategy for tablet-replicated keyspaces; prefer NetworkTopologyStrategy.",
+                  "options": [
+                    {
+                      "label": "NetworkTopologyStrategy",
+                      "value": "NetworkTopologyStrategy"
+                    },
+                    {
+                      "label": "SimpleStrategy",
+                      "value": "SimpleStrategy"
+                    }
+                  ]
+                },
+                {
+                  "key": "replication_factor",
+                  "label": "Replication factor",
+                  "type": "number",
+                  "default": 1,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "replication_class",
+                        "op": "eq",
+                        "value": "SimpleStrategy"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 20
+                    }
+                  ]
+                },
+                {
+                  "key": "datacenter_replication",
+                  "label": "Datacenter replication",
+                  "type": "map",
+                  "required": true,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "replication_class",
+                        "op": "eq",
+                        "value": "NetworkTopologyStrategy"
+                      }
+                    ]
+                  },
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "number",
+                    "default": 1,
+                    "validators": [
+                      {
+                        "type": "min",
+                        "value": 1
+                      },
+                      {
+                        "type": "max",
+                        "value": 20
+                      }
+                    ]
+                  },
+                  "addLabel": "Add datacenter",
+                  "keyPlaceholder": "datacenter"
+                },
+                {
+                  "key": "durable_writes",
+                  "label": "Durable writes",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "tablets",
+                  "label": "Tablets",
+                  "type": "select",
+                  "default": "default",
+                  "help": "Tablets let ScyllaDB rebalance data per table instead of per node.",
+                  "options": [
+                    {
+                      "label": "Cluster default",
+                      "value": "default"
+                    },
+                    {
+                      "label": "Enabled",
+                      "value": "enabled"
+                    },
+                    {
+                      "label": "Disabled (vnodes)",
+                      "value": "disabled"
+                    }
+                  ]
+                },
+                {
+                  "key": "initial_tablets",
+                  "label": "Initial tablets",
+                  "type": "number",
+                  "help": "Leave empty to let ScyllaDB pick the initial tablet count.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "tablets",
+                        "op": "eq",
+                        "value": "enabled"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 4096
+                    }
+                  ]
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "keyspaces"
+        }
+      },
+      {
+        "id": "scylladb.keyspace.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "scylladb.keyspace.drop",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this keyspace? Every table, view, type, and all data within it will be permanently deleted.",
+        "bulk": true
+      },
+      {
+        "id": "scylladb.type.create",
+        "label": "Create type",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "scylladb.type.create",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Type",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Type name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "fields",
+                  "label": "Fields",
+                  "type": "array",
+                  "required": true,
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "autocomplete",
+                        "required": true,
+                        "placeholder": "text",
+                        "options": [
+                          {
+                            "label": "ascii",
+                            "value": "ascii"
+                          },
+                          {
+                            "label": "bigint",
+                            "value": "bigint"
+                          },
+                          {
+                            "label": "blob",
+                            "value": "blob"
+                          },
+                          {
+                            "label": "boolean",
+                            "value": "boolean"
+                          },
+                          {
+                            "label": "counter",
+                            "value": "counter"
+                          },
+                          {
+                            "label": "date",
+                            "value": "date"
+                          },
+                          {
+                            "label": "decimal",
+                            "value": "decimal"
+                          },
+                          {
+                            "label": "double",
+                            "value": "double"
+                          },
+                          {
+                            "label": "duration",
+                            "value": "duration"
+                          },
+                          {
+                            "label": "float",
+                            "value": "float"
+                          },
+                          {
+                            "label": "inet",
+                            "value": "inet"
+                          },
+                          {
+                            "label": "int",
+                            "value": "int"
+                          },
+                          {
+                            "label": "smallint",
+                            "value": "smallint"
+                          },
+                          {
+                            "label": "text",
+                            "value": "text"
+                          },
+                          {
+                            "label": "time",
+                            "value": "time"
+                          },
+                          {
+                            "label": "timestamp",
+                            "value": "timestamp"
+                          },
+                          {
+                            "label": "timeuuid",
+                            "value": "timeuuid"
+                          },
+                          {
+                            "label": "tinyint",
+                            "value": "tinyint"
+                          },
+                          {
+                            "label": "uuid",
+                            "value": "uuid"
+                          },
+                          {
+                            "label": "varchar",
+                            "value": "varchar"
+                          },
+                          {
+                            "label": "varint",
+                            "value": "varint"
+                          },
+                          {
+                            "label": "list\u003ctext\u003e",
+                            "value": "list\u003ctext\u003e"
+                          },
+                          {
+                            "label": "set\u003ctext\u003e",
+                            "value": "set\u003ctext\u003e"
+                          },
+                          {
+                            "label": "map\u003ctext, text\u003e",
+                            "value": "map\u003ctext, text\u003e"
+                          },
+                          {
+                            "label": "frozen\u003clist\u003ctext\u003e\u003e",
+                            "value": "frozen\u003clist\u003ctext\u003e\u003e"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Field"
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "types"
+        }
+      },
+      {
+        "id": "scylladb.type.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "scylladb.type.drop",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "name": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this type? Tables and columns that use it must already be gone.",
+        "bulk": true
+      },
+      {
+        "id": "scylladb.table.create",
+        "label": "Create table",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "scylladb.table.create",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Table",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Table name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "array",
+                  "required": true,
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "autocomplete",
+                        "required": true,
+                        "placeholder": "text",
+                        "options": [
+                          {
+                            "label": "ascii",
+                            "value": "ascii"
+                          },
+                          {
+                            "label": "bigint",
+                            "value": "bigint"
+                          },
+                          {
+                            "label": "blob",
+                            "value": "blob"
+                          },
+                          {
+                            "label": "boolean",
+                            "value": "boolean"
+                          },
+                          {
+                            "label": "counter",
+                            "value": "counter"
+                          },
+                          {
+                            "label": "date",
+                            "value": "date"
+                          },
+                          {
+                            "label": "decimal",
+                            "value": "decimal"
+                          },
+                          {
+                            "label": "double",
+                            "value": "double"
+                          },
+                          {
+                            "label": "duration",
+                            "value": "duration"
+                          },
+                          {
+                            "label": "float",
+                            "value": "float"
+                          },
+                          {
+                            "label": "inet",
+                            "value": "inet"
+                          },
+                          {
+                            "label": "int",
+                            "value": "int"
+                          },
+                          {
+                            "label": "smallint",
+                            "value": "smallint"
+                          },
+                          {
+                            "label": "text",
+                            "value": "text"
+                          },
+                          {
+                            "label": "time",
+                            "value": "time"
+                          },
+                          {
+                            "label": "timestamp",
+                            "value": "timestamp"
+                          },
+                          {
+                            "label": "timeuuid",
+                            "value": "timeuuid"
+                          },
+                          {
+                            "label": "tinyint",
+                            "value": "tinyint"
+                          },
+                          {
+                            "label": "uuid",
+                            "value": "uuid"
+                          },
+                          {
+                            "label": "varchar",
+                            "value": "varchar"
+                          },
+                          {
+                            "label": "varint",
+                            "value": "varint"
+                          },
+                          {
+                            "label": "list\u003ctext\u003e",
+                            "value": "list\u003ctext\u003e"
+                          },
+                          {
+                            "label": "set\u003ctext\u003e",
+                            "value": "set\u003ctext\u003e"
+                          },
+                          {
+                            "label": "map\u003ctext, text\u003e",
+                            "value": "map\u003ctext, text\u003e"
+                          },
+                          {
+                            "label": "frozen\u003clist\u003ctext\u003e\u003e",
+                            "value": "frozen\u003clist\u003ctext\u003e\u003e"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Column"
+                },
+                {
+                  "key": "primary_key",
+                  "label": "Primary key",
+                  "type": "text",
+                  "required": true,
+                  "help": "CQL primary key expression, for example id or ((tenant_id, bucket), created_at)."
+                },
+                {
+                  "key": "compaction_strategy",
+                  "label": "Compaction strategy",
+                  "type": "select",
+                  "default": "",
+                  "options": [
+                    {
+                      "label": "Table default",
+                      "value": ""
+                    },
+                    {
+                      "label": "Incremental (ICS)",
+                      "value": "IncrementalCompactionStrategy"
+                    },
+                    {
+                      "label": "Size tiered (STCS)",
+                      "value": "SizeTieredCompactionStrategy"
+                    },
+                    {
+                      "label": "Leveled (LCS)",
+                      "value": "LeveledCompactionStrategy"
+                    },
+                    {
+                      "label": "Time window (TWCS)",
+                      "value": "TimeWindowCompactionStrategy"
+                    }
+                  ]
+                },
+                {
+                  "key": "default_time_to_live",
+                  "label": "Default TTL",
+                  "type": "number",
+                  "help": "Seconds. 0 keeps rows forever.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 630720000
+                    }
+                  ]
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "tables"
+        }
+      },
+      {
+        "id": "scylladb.column.add",
+        "label": "Add column",
+        "icon": {
+          "type": "lucide",
+          "value": "columns-3"
+        },
+        "routeId": "scylladb.column.add",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Column",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Column name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "type",
+                  "label": "Type",
+                  "type": "autocomplete",
+                  "required": true,
+                  "default": "text",
+                  "options": [
+                    {
+                      "label": "ascii",
+                      "value": "ascii"
+                    },
+                    {
+                      "label": "bigint",
+                      "value": "bigint"
+                    },
+                    {
+                      "label": "blob",
+                      "value": "blob"
+                    },
+                    {
+                      "label": "boolean",
+                      "value": "boolean"
+                    },
+                    {
+                      "label": "counter",
+                      "value": "counter"
+                    },
+                    {
+                      "label": "date",
+                      "value": "date"
+                    },
+                    {
+                      "label": "decimal",
+                      "value": "decimal"
+                    },
+                    {
+                      "label": "double",
+                      "value": "double"
+                    },
+                    {
+                      "label": "duration",
+                      "value": "duration"
+                    },
+                    {
+                      "label": "float",
+                      "value": "float"
+                    },
+                    {
+                      "label": "inet",
+                      "value": "inet"
+                    },
+                    {
+                      "label": "int",
+                      "value": "int"
+                    },
+                    {
+                      "label": "smallint",
+                      "value": "smallint"
+                    },
+                    {
+                      "label": "text",
+                      "value": "text"
+                    },
+                    {
+                      "label": "time",
+                      "value": "time"
+                    },
+                    {
+                      "label": "timestamp",
+                      "value": "timestamp"
+                    },
+                    {
+                      "label": "timeuuid",
+                      "value": "timeuuid"
+                    },
+                    {
+                      "label": "tinyint",
+                      "value": "tinyint"
+                    },
+                    {
+                      "label": "uuid",
+                      "value": "uuid"
+                    },
+                    {
+                      "label": "varchar",
+                      "value": "varchar"
+                    },
+                    {
+                      "label": "varint",
+                      "value": "varint"
+                    },
+                    {
+                      "label": "list\u003ctext\u003e",
+                      "value": "list\u003ctext\u003e"
+                    },
+                    {
+                      "label": "set\u003ctext\u003e",
+                      "value": "set\u003ctext\u003e"
+                    },
+                    {
+                      "label": "map\u003ctext, text\u003e",
+                      "value": "map\u003ctext, text\u003e"
+                    },
+                    {
+                      "label": "frozen\u003clist\u003ctext\u003e\u003e",
+                      "value": "frozen\u003clist\u003ctext\u003e\u003e"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "columns"
+        }
+      },
+      {
+        "id": "scylladb.column.drop",
+        "label": "Drop column",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "scylladb.column.drop",
+        "method": "POST",
+        "params": {
+          "keyspace": "${record.keyspace}",
+          "name": "${record.column_name}",
+          "table": "${record.table}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this column? Its data is permanently removed.",
+        "onSuccess": {
+          "selectTab": "columns"
+        },
+        "bulk": true
+      },
+      {
+        "id": "scylladb.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "scylladb.index.create",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Index name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "column",
+                  "label": "Column",
+                  "type": "select",
+                  "required": true,
+                  "help": "A ScyllaDB secondary index covers a single column.",
+                  "optionsSource": {
+                    "routeId": "scylladb.table.columns",
+                    "params": {
+                      "keyspace": "${resource.namespace}",
+                      "table": "${resource.name}"
+                    }
+                  }
+                },
+                {
+                  "key": "local",
+                  "label": "Local index",
+                  "type": "toggle",
+                  "help": "Restricts the index to each partition, avoiding a global index materialized view."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        }
+      },
+      {
+        "id": "scylladb.index.drop",
+        "label": "Drop index",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "scylladb.index.drop",
+        "method": "POST",
+        "params": {
+          "keyspace": "${record.keyspace}",
+          "name": "${record.index_name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this index? Queries relying on it will start failing.",
+        "onSuccess": {
+          "selectTab": "indexes"
+        },
+        "bulk": true
+      },
+      {
+        "id": "scylladb.table.truncate",
+        "label": "Truncate",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "scylladb.table.truncate",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Truncate this table? Every partition and row will be deleted on every replica.",
+        "bulk": true
+      },
+      {
+        "id": "scylladb.table.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "scylladb.table.drop",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this table? The table definition and data will be permanently deleted.",
+        "bulk": true
+      },
+      {
+        "id": "scylladb.view.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "scylladb.view.drop",
+        "method": "DELETE",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "view": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this materialized view? It will stop being maintained and its data is removed.",
+        "bulk": true
+      },
+      {
+        "id": "scylladb.partition.locate",
+        "label": "Locate partition",
+        "icon": {
+          "type": "lucide",
+          "value": "crosshair"
+        },
+        "routeId": "scylladb.partition.locate",
+        "method": "POST",
+        "params": {
+          "keyspace": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "safe",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Partition",
+              "fields": [
+                {
+                  "key": "partition_key",
+                  "label": "Partition key",
+                  "type": "map",
+                  "required": true,
+                  "help": "One entry per partition-key column. Values are bound as CQL parameters and the coordinator computes the token.",
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text"
+                  },
+                  "addLabel": "Add key column",
+                  "keyPlaceholder": "column"
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "effects": [
+            {
+              "type": "open_panel",
+              "openPanel": {
+                "open": "dialog",
+                "panel": "object_detail",
+                "title": "Partition ${response.token}",
+                "icon": {
+                  "type": "lucide",
+                  "value": "crosshair"
+                },
+                "source": {
+                  "routeId": "scylladb.partition.owner",
+                  "params": {
+                    "keyspace": "${response.keyspace}",
+                    "table": "${response.table}",
+                    "token": "${response.token}"
+                  }
+                },
+                "config": {
+                  "sections": [
+                    {
+                      "title": "Partition",
+                      "fields": [
+                        {
+                          "key": "token",
+                          "label": "Token",
+                          "copy": true
+                        },
+                        {
+                          "key": "keyspace",
+                          "label": "Keyspace"
+                        },
+                        {
+                          "key": "table",
+                          "label": "Table"
+                        },
+                        {
+                          "key": "range_start",
+                          "label": "Range start"
+                        },
+                        {
+                          "key": "range_end",
+                          "label": "Range end"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Placement",
+                      "fields": [
+                        {
+                          "key": "primary_replica",
+                          "label": "Primary replica",
+                          "copy": true
+                        },
+                        {
+                          "key": "shard",
+                          "label": "Shard (core)",
+                          "type": "number"
+                        },
+                        {
+                          "key": "data_center",
+                          "label": "Datacenter"
+                        },
+                        {
+                          "key": "rack",
+                          "label": "Rack"
+                        },
+                        {
+                          "key": "replicas",
+                          "label": "All replicas",
+                          "type": "json"
+                        },
+                        {
+                          "key": "replica_count",
+                          "label": "Replica count",
+                          "type": "number"
+                        }
+                      ]
+                    }
+                  ],
+                  "rawToggle": true
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "scylladb.trace.run",
+        "label": "Trace a statement",
+        "icon": {
+          "type": "lucide",
+          "value": "route"
+        },
+        "routeId": "scylladb.trace.run",
+        "method": "POST",
+        "risk": "privileged",
+        "requiresConfirm": true,
+        "confirmText": "Run this statement on the cluster with server-side tracing enabled? Tracing adds load and writes rows to system_traces.",
+        "input": {
+          "groups": [
+            {
+              "name": "Traced statement",
+              "fields": [
+                {
+                  "key": "query",
+                  "label": "CQL",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "SELECT * FROM ks.table WHERE id = 1;",
+                  "help": "The statement runs once on the cluster with server-side tracing enabled."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "effects": [
+            {
+              "type": "open_panel",
+              "openPanel": {
+                "open": "dialog",
+                "panel": "timeline",
+                "title": "Trace ${response.session_id}",
+                "icon": {
+                  "type": "lucide",
+                  "value": "route"
+                },
+                "source": {
+                  "routeId": "scylladb.trace.events",
+                  "params": {
+                    "id": "${response.session_id}"
+                  }
+                },
+                "config": {
+                  "timestampField": "time",
+                  "titleField": "activity",
+                  "bodyField": "detail",
+                  "severityField": "severity",
+                  "iconField": "icon",
+                  "resourceField": "source",
+                  "emptyText": "The coordinator has not flushed this trace yet."
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "scylladb.query.save",
+        "label": "Save CQL",
+        "icon": {
+          "type": "lucide",
+          "value": "bookmark-plus"
+        },
+        "routeId": "scylladb.query.save",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Saved CQL",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "max",
+                      "value": 120
+                    }
+                  ]
+                },
+                {
+                  "key": "query",
+                  "label": "CQL",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "SELECT * FROM ks.table LIMIT 100;"
+                },
+                {
+                  "key": "scope",
+                  "label": "Scope",
+                  "type": "select",
+                  "required": true,
+                  "default": "connection",
+                  "options": [
+                    {
+                      "label": "This connection",
+                      "value": "connection"
+                    },
+                    {
+                      "label": "All my ScyllaDB connections",
+                      "value": "user"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "saved"
+        }
+      },
+      {
+        "id": "scylladb.query.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "scylladb.query.delete",
+        "method": "DELETE",
+        "params": {
+          "key": "${record.key}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this saved CQL statement?",
+        "onSuccess": {
+          "selectTab": "saved"
+        },
+        "bulk": true
+      }
+    ],
+    "streams": [
+      {
+        "id": "scylladb.query",
+        "kind": "query",
+        "routeId": "scylladb.query"
+      },
+      {
+        "id": "scylladb.cluster.metrics",
+        "kind": "metrics",
+        "routeId": "scylladb.cluster.metrics"
+      },
+      {
+        "id": "scylladb.table.metrics",
+        "kind": "metrics",
+        "routeId": "scylladb.table.metrics"
+      },
+      {
+        "id": "scylladb.topology",
+        "kind": "canvas",
+        "routeId": "scylladb.topology"
+      },
+      {
+        "id": "scylladb.cluster.watch",
+        "kind": "resource",
+        "routeId": "scylladb.cluster.watch"
+      },
+      {
+        "id": "scylladb.nodes.watch",
+        "kind": "resource",
+        "routeId": "scylladb.nodes.watch"
+      },
+      {
+        "id": "scylladb.compactions.watch",
+        "kind": "resource",
+        "routeId": "scylladb.compactions.watch"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
