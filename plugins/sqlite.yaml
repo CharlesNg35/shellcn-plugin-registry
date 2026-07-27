@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-amd64
-        sha256: 485a56dac3bb3a46c54300aa54fd2e0a9645d6a91fc63976f5a51306e8782758
+        sha256: 4695a171259e1780a92ad8dd4ebfb907227641d0fcb2a8c6c4d7f7b01a8625cc
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-linux-arm64
-        sha256: 9105c55175d9eda8929d0cefa3682e1d174cfa69488353034ce7c1ebbbfeefa4
+        sha256: d14f5afdafa910e48e6a0903dbbde24508aac9bf9dd94428c998efffaee68a48
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-amd64
-        sha256: eec5b9d90a0c973d1d1e5806ce92c190530905c2fb25d78e5278ab298f106e83
+        sha256: 1cb141b3c2a2f9ca90955709372f617d4d6758d708d3d269257ac886ae881507
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-darwin-arm64
-        sha256: 2bb18c3668afa80910cb70b7d8419991f793c56cced354722ce73d2d9229aabd
+        sha256: 77c3566cb382295a890f36f5544169cf6b5282c0ffeace47eb574eb8b50b7e1d
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-amd64.exe
-        sha256: bb33f8cb2c345c438ccc25f816391f1b65dfcad2f5cf7d9d1065697fd1cc2086
+        sha256: 142f82ac6e8beab95251a32edd6b06992c464cc6ee3eac50ed5f9c62faf786ad
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/sqlite-v0.1.0/shellcn-plugin-sqlite-windows-arm64.exe
-        sha256: ee87077f96e9cc71b7593afb43a4405bb56b938adedb6e2cf47bddfcc7bf5d68
+        sha256: e140c8cdcf4bf1011e451dc4b7b92138178d3316db2ce4853feaed95b6104335

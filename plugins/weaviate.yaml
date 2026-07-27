@@ -1,0 +1,27 @@
+name: weaviate
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://weaviate.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-linux-amd64
+        sha256: be8dac5a0185a68cdfef56f8c384bf8eddbb1d23ce7aeec82a4f4bce8f1a7dd9
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-linux-arm64
+        sha256: 79084070d14d99cc7e85823965441b31d4b0cd4793d9271798b03f5c80bf4cbd
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-darwin-amd64
+        sha256: b49304257bf6b9976876cea4eed9d067276efb6b57e753536ffe708730c40a40
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-darwin-arm64
+        sha256: 588914b7adc93d6f80bb83270ebfc22de043a717c1436f9266dc5e35e9f9256b
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-windows-amd64.exe
+        sha256: 74ccd64066b86bbc042e1e03902d27a947cfedba0d5da958feafe57dddd263db
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/weaviate-v0.1.0/shellcn-plugin-weaviate-windows-arm64.exe
+        sha256: b53dd3c46203374b434b121e25f21a4b1c5d7b55b89f83e88869ae9a26ed70dd

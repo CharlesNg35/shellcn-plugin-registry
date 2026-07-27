@@ -1,0 +1,27 @@
+name: couchdb
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://couchdb.apache.org
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-linux-amd64
+        sha256: 80f2cb3d6e611753f273dd9739d263371c41c681ddb67097ff32cbe8e8b25c26
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-linux-arm64
+        sha256: efada908849bc9a78d9c2cbe9b6a9c087346ed5d24baafe9ae5aba6aab420abd
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-darwin-amd64
+        sha256: d6ab1c009b55e33adfadb50679da6e5d04321409a17c7e40c45ea091401572c6
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-darwin-arm64
+        sha256: 3efc562db31c8e84142d3d45b3bb0645c0f35f076650ef537cd653fecdc071f1
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-windows-amd64.exe
+        sha256: 3c0ef6604a9ee9cad0e92effb11f8888a27cb9c71ecad435755dd757777d9eea
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchdb-v0.1.0/shellcn-plugin-couchdb-windows-arm64.exe
+        sha256: 6c32beb2b20ff7c5a4338c50abddde23b2fb5bfb9ea0bb862782dcd9057ff1cc

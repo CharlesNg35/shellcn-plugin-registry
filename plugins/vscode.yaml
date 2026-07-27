@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-linux-amd64
-        sha256: aac51b26a265e26481fde73cd5af5480c16c0b3b8c0b5d787dbc133416cce63c
+        sha256: 553c3dd87bf21f44757564d5756714065a33dd4cd22967a41e76bf6f1a61feb3
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-linux-arm64
-        sha256: 2ea106cdad942ddc9f1caeb92d889143c6b9cf8a18ca5d41d7e90d0f8ff3de09
+        sha256: 90d02fa618b8047b4da61bcb7a050ba487599ad8d3e4e219884f6dcee2f530f7
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-darwin-amd64
-        sha256: 4e978b425b934dc5c3fc19c98913bc69ced07df4a1cba32a4c25b81af9d8d536
+        sha256: 2a9cd05239edf1e814294761461aeaaf52182d594cb6827cc23c339f1fe57f68
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-darwin-arm64
-        sha256: d2cc11f1a42a979d72422822fe9657a2357001a382918d73871a97444985fa1a
+        sha256: d1ba53405758d3adea3df7e461997f80ec7849c63eb99b4fdea56ec5acc1cbdd
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-windows-amd64.exe
-        sha256: 90240df5a7656f70233f0c968e1d47114a1feee026b47c787c135aee33e13e55
+        sha256: 86e865d8aaa1856c79d984e90db9505c7c15282cf08aa27a54afbfa3e3784986
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vscode-v0.1.0/shellcn-plugin-vscode-windows-arm64.exe
-        sha256: 5f4efb8be183eefe414cec767b49f6509054d708479803970bbe34e302a45217
+        sha256: 6fe849bd62d8d920c39b52db1277031b0a1f4c3a290fb3c2dcbc03887116ccf4

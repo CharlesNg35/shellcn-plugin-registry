@@ -1,0 +1,27 @@
+name: memcached
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://memcached.org
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-linux-amd64
+        sha256: ac7731d491b8e97f56b3546a8757b4fc4391027ab58466e538eed6031c6d56c3
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-linux-arm64
+        sha256: e37bd1ce4d99b21360fcdb15e0c20b834e79f0f0fa7a56daf50ca02b9783e683
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-darwin-amd64
+        sha256: 53ec3279174568fa423f13075ff309a8dee8fa1718d5fac6184e0b83ff0b46d2
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-darwin-arm64
+        sha256: 83f39b0b1ff1a313ba2a0744e3f5b9cfab589034b453a3a03d896cfbf2504261
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-windows-amd64.exe
+        sha256: 2222198e8ebcb7980f8d4c421da8606e68437274edcd4945d099fc0ea81efd46
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/memcached-v0.1.0/shellcn-plugin-memcached-windows-arm64.exe
+        sha256: 68d729ed3997be5f8acf9b165fd3744208c9d8efc38297abcda00a217420dbe1

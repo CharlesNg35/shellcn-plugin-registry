@@ -1,0 +1,27 @@
+name: arangodb
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://arangodb.com
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-linux-amd64
+        sha256: f08fdf3b41c2056ecf7110dda013dfa4c9d8b634295e32fc660d350f40603c92
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-linux-arm64
+        sha256: 893eb07cde28e810d10bbd1bc8ee723bd2f6c4de773198abd2fde8a8a0b6cb64
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-darwin-amd64
+        sha256: 95d421e7a9767594562bdfb531ad329b842be329d90fa4cd1b5f95d1c5e85a5b
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-darwin-arm64
+        sha256: 65c55741c6b5e70b556d0986d17b2a30851b7771f3065655c3b71d857cf5b622
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-windows-amd64.exe
+        sha256: fc8d160aed56fd676484b32e536ff58e80e61601391bbcf7abec9c4a212ceb8f
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/arangodb-v0.1.0/shellcn-plugin-arangodb-windows-arm64.exe
+        sha256: 462fed6a7f6f07790b807cada91477eb184fba6f49221fead8b92aa90ddf0da6

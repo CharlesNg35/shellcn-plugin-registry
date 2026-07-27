@@ -1,0 +1,27 @@
+name: scylladb
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.scylladb.com
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-linux-amd64
+        sha256: 771521ae71b66931ada2e6269eb0e34eacff34cb08c07d90361c3e65e82dc46e
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-linux-arm64
+        sha256: 1b841f97f1eae87e47c10ac06237a9d4439dd72f00f900228ad287c0bfc6adf5
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-darwin-amd64
+        sha256: 6117ccc0b58b8a2879b76ef9fdd38557e8213dd3bd2e9ce651c066386e1e3e28
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-darwin-arm64
+        sha256: e812eee8ccc057eca88d694810411a4de448963a1df6678149afb0454b1508e3
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-windows-amd64.exe
+        sha256: fc4c845e6a983c3f048ee2011d679e4575134e3324f5d6025fa04b4dbbedd78e
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/scylladb-v0.1.0/shellcn-plugin-scylladb-windows-arm64.exe
+        sha256: 85668884c8ef667545b4f189d40caa18931e67ee38e3818b9caa66ecdf35a902
