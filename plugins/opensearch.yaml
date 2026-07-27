@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-amd64
-        sha256: 5ef5b39f641a109a6a50a7e09952e65a777f5213b75f7f25f6b277f587484e7b
+        sha256: f5b0e55692f5576cd9f11dff69196f43ee22711f0bc152faf3e86d2dbb4f0c6f
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-linux-arm64
-        sha256: ffdbe15852a43dba0890ad96c5eba7484947fb4688ade657bfb219f55bca79a6
+        sha256: 5569dc4cff06fb1ecfe972fc70f8a8108336e3ed6e4eca33146627fd717368be
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-amd64
-        sha256: 1aa9b88684c414a14fe77d812fc12033ed80e48fa30ccc038b769b6e56ddeff2
+        sha256: bcfe66d97ce4626a8bec8422585878f6c86944723a10506e1010fe8c0d161eca
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-darwin-arm64
-        sha256: e3a4545bb8893b9875945ab63f8f402bbbb45ac0ad12758dab995b8ca5dd639f
+        sha256: 6451ca3d50f4b1bc1175adcafad3410877bff9a0c7aa52b57b8289996e711159
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-amd64.exe
-        sha256: 9347c481b895d447f19adc293273f5e4257784611d857c31cdebcb55c23f7646
+        sha256: 908d8f0a3cd04aa8fdb9565acfa644e20ddc904b4a6186d1eec9530a729dd9bc
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/opensearch-v0.1.0/shellcn-plugin-opensearch-windows-arm64.exe
-        sha256: 6ea59872e44418d9a210305ce7b0a839be5a3e6cd307431e2be025707a12ecea
+        sha256: 0e9639469a68ae9f82af0db24569c321365cfc82c807ac22059b482403e746ac

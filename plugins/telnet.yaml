@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-linux-amd64
-        sha256: a5e7e399bce8a1bed02490d130845d87905b5049ce49a7fd9c8eb5db889cf3a4
+        sha256: 85b54b10b5f42c1207c39810dd92f7cf129d063fed5f7f4b9315302ccbfc5763
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-linux-arm64
-        sha256: 5774fcd604e64911c7716784847b5490201c6108f296ab2aa6ec80946434fc4b
+        sha256: 8f9b8a4c7bf3622284588671d18ed277561313a8bf49754fa203dd61be3e6b1d
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-darwin-amd64
-        sha256: 43e309cb3c447d6464e45db114a1ca726a2f12fdf28fd0ca90c3b2c70a17489a
+        sha256: 3ad4f1f971b20e261a0af8472e3fb265ed1577adcb882751b580f22f6caac0b7
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-darwin-arm64
-        sha256: c15b681d8c46ca1bea1a103cc9c8356febfba0e2134f4716f5833d51513d9c95
+        sha256: 0a193c8ed684afe8f975023576df27a55dbfe01885dfa636ebf800ed4f17dcfa
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-windows-amd64.exe
-        sha256: 93471c55d70fbe24222ba2c303e30a1131e9b42cfaaee4f41aa4ca9a965b6f3d
+        sha256: bdff2396bf9c5802d01fdbde16533d29a51b6d0e2ae5f23c945ea7f641938abc
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/telnet-v0.1.0/shellcn-plugin-telnet-windows-arm64.exe
-        sha256: 88f83824b07d52911a3d7ccce42e2e4af9bf1af1abfa7bd92d3b414202dd8801
+        sha256: e2f3797d8c10c4e8c1ee462c80dfa99e6b67bdf9e4735d1a8a81847f6fbd27af

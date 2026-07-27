@@ -1,0 +1,27 @@
+name: couchbase
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.couchbase.com
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-linux-amd64
+        sha256: ca5ea91288bf8ecc6f620266902d756f094de93cb0e202edaa0ed82fd2bb4af9
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-linux-arm64
+        sha256: ff232fa246313aed61cc7ad6bef6a1860816adbf1d123fc83a444a49e5266a68
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-darwin-amd64
+        sha256: eb24cf0dab5e4c7bd046fbeb8e884d1f57ba2165c993811d1cc3c37434705d18
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-darwin-arm64
+        sha256: c181924847c26ba2623f1613eb25e86c65c01ba60efc45d300db4e6a598cf42c
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-windows-amd64.exe
+        sha256: 752d3199c61ad12ae850315deaf16604357bb293d8a41b70593f492349bb09b4
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/couchbase-v0.1.0/shellcn-plugin-couchbase-windows-arm64.exe
+        sha256: 7b8d641b26f0b653d84e1f0ac162af0bb3b8ee609ea3f58e6dc7c1ae669284c6

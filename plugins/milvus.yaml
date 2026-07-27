@@ -1,0 +1,27 @@
+name: milvus
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://milvus.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-linux-amd64
+        sha256: 509c36f8083e09b1151513179745a58d5392ac0f14168c8577bf020276987342
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-linux-arm64
+        sha256: 2bc9a330c00c5e5cc089730b654590c0a025b689e34699dc920bccdc52aeed88
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-darwin-amd64
+        sha256: 56a1c7c8f370a1070b4ba2b7efdc6ead9705f47baba36621b77915aabeb9b026
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-darwin-arm64
+        sha256: 3f28b5bbcbee16c0df234753b89abdc49385e1baf8f17dcff926f6ed1fafbfa6
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-windows-amd64.exe
+        sha256: 675a43d51d8cefeb048728b98e95a0142b10302d98fe6776fd16a59a3de86239
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/milvus-v0.1.0/shellcn-plugin-milvus-windows-arm64.exe
+        sha256: e46c02fe38cea22520ae76ce7d0d59ffe41a18a651c2d8b1623c18932b822bd4

@@ -1,0 +1,27 @@
+name: chroma
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.trychroma.com
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-linux-amd64
+        sha256: 66d58c7fc9e663ffc407220b0a0375fd19611140d55cbc9b3f93c6095d041cde
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-linux-arm64
+        sha256: 468bfd95874106e652667c533039e5eb4557918da7a7989e0decd2f6e9f8eb47
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-darwin-amd64
+        sha256: 2278eac669730736cf744e4e3d47f503d47eea95cbdbd17974b57f2ebb49e5f6
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-darwin-arm64
+        sha256: 75149d8bb6e0a124562688f8553cb707d81e7d05b8b7670a7af2112d0f8ea5b6
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-windows-amd64.exe
+        sha256: 2aa5def5d10ede9964d92587d59d9bea25d5a3d74098572453310e56dfdb9e0d
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/chroma-v0.1.0/shellcn-plugin-chroma-windows-arm64.exe
+        sha256: 06654121240fee82ac488d4575f37c56964e3352738b037889cf40745a46df41

@@ -8,19 +8,19 @@ versions:
     assets:
       linux/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-amd64
-        sha256: 76ac64c4787cd6e5d0ecc513963cba9f29c95f7d86bc8d2ce9ec4c884ed0b047
+        sha256: 6adab98e4a185c4b68ca420650a335b837757c02ebbbb67420b0bd9480bc031c
       linux/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-linux-arm64
-        sha256: c9cc65892601ead091c22fc2dd640126d553f516592f2c7969a1c0628d14cb51
+        sha256: 0d057d959d8dea06b6dc54f08df289fbc8ee30396b34588297f8da32d78bea7d
       darwin/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-amd64
-        sha256: 0848760758f7ea047f3381169c8bb48870dbdeeb29924d3920e1cc1ee381da91
+        sha256: dc3c8970b879c73efcf82d883e1cff659ab4ed2b606594e5bb0f163227c8e568
       darwin/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-darwin-arm64
-        sha256: 83ca0edbe056c34b8a0a0e8e059965fd654c5dde823b5610fc1963c5fb0a4505
+        sha256: 0c1b11397b8bcb973817a7f126a55fc27d3d3337ad9128db4236004ff7ee0140
       windows/amd64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-amd64.exe
-        sha256: ebe40962f353f6ac04ef6bf2700ae55e1c5d576ecf6ae495a7842b14d0941fe8
+        sha256: dead6ffa7e69b94d47582ea6194b1099e7b81963bd48e077f6a7ab600beffdc5
       windows/arm64:
         url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/duckdb-v0.1.0/shellcn-plugin-duckdb-windows-arm64.exe
-        sha256: cb333530658262fa16092de40f7bb7ef342e50837385260e6ce93310051d3bc0
+        sha256: 2bd22f1f295055fa303e1b82779bea0700277d94309d6d1929a2a402fa293bde
