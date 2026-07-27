@@ -1,0 +1,27 @@
+name: mqtt
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://mqtt.org
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-amd64
+        sha256: b5d5ada8f9eb712f98446665aab2fa89ca58e5f6fe08c84a5976b72bfc40e6cc
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-arm64
+        sha256: b488c6741948582fb3695c0c6e007c8ebda040f854e32c9910aebb9446d27bfb
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-amd64
+        sha256: fec5e993b09b97c14150076577c2dde0e26eff79cbb1bd732d6c7fae852c066f
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-arm64
+        sha256: 444180b47841434c2b9bf7962b1aa96272725d65a69b555be54ded86f1b5ac2c
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-amd64.exe
+        sha256: 1a20e535f971f9f91be8527cdf30362e670b3e0a50324dbb7e0f2040a83832da
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-arm64.exe
+        sha256: eae86ecdbf3f7ebcf6920b9497341d2062d3fb11a584dbcf7f72efd5fdd88e00

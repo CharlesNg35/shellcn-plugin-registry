@@ -1,0 +1,27 @@
+name: snowflake
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.snowflake.com
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-amd64
+        sha256: 763932f489fd5fe35bc65449efa58320617e37147ff9a7e768c3870408e860c8
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-arm64
+        sha256: 78407c9bdd569e10db1f852d9a19c9ad6ef2fa12ede1b6e50c5ad51b8bc80ba4
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-amd64
+        sha256: 45dcac842c300599e5f9ac6648bd5ccaca93de376ff794747517ea78894be14b
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-arm64
+        sha256: e9cd4b24451fb6edabcd0a6b602de35d9a8d06cec81241d7405891040fe2a770
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-amd64.exe
+        sha256: 79305e92d311621751071c0af31fdb34f80eee2ebbb5227b109d34d15d97de3b
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-arm64.exe
+        sha256: 0787e422b4be8b9c037dc24a41d3e122fa22c1ae2fa1fe14e852184744da37d3

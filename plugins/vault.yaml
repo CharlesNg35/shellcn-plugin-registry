@@ -1,0 +1,27 @@
+name: vault
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.vaultproject.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-amd64
+        sha256: 3abbcb02050a703fb09afb70be7fd1ea1405a8c80ed67e2befe78dce246855c3
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-arm64
+        sha256: f4b54c20c09955daa262aa1d90676b677335639dedbfa074b8e886cb74852c33
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-amd64
+        sha256: a6760cb39fa73bf9edbc7ec4a5a391e1e95a7533e99d92e32fdcba16941e8a5c
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-arm64
+        sha256: 07eceb36f3f00c10f64cd479a86b929376e53c076363c4631f07eb52914b53bb
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-amd64.exe
+        sha256: b6878d5be7cf2ddedd328b50906b39e4a4c5ddd40b081da10550a9cb5d334ff9
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-arm64.exe
+        sha256: d85c8def7182390b682297aa0d45d491e8dacddd0413de3279b7cbe45906b2bd

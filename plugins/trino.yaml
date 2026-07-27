@@ -1,0 +1,27 @@
+name: trino
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://trino.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-amd64
+        sha256: efcd395b24e59304498199f34706b087d5c7b410e12a529879e4dbf94afa487b
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-arm64
+        sha256: b308aa649163d413642f33ad7a79f68a6cf873692107ca255afb18472411017d
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-amd64
+        sha256: ee13734bc3704e59d7a829e221a668c46b916bf111f44f3129ac0c3e3bccab7e
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-arm64
+        sha256: 93c68f421aad29116a801018a757ce8e9c9cf3dec0e4b61a862e1c4d5682d2bd
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-amd64.exe
+        sha256: 6a9a45e93d9eb0ccc89c2d4a82e5e4aa96b66323870ad9297cc70d6421f75996
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-arm64.exe
+        sha256: 2611a93b26a6e39b17247152ccb8e3b28a0b80c3e65148bd19a5c5f7d1b3dbc3
