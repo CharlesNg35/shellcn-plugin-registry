@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedBy": "mirror@948e2a956025c778d9f5ead6db94474b4a1f30d7",
+  "generatedBy": "mirror@3aee3c30e8ac10c5a56e92194b16105573cd40d1",
   "plugins": [
     {
       "name": "arangodb",
@@ -397,6 +397,73 @@
             "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 31.82 32\" width=\"2486\" height=\"2500\"\u003e\u003ctitle\u003eCL\u003c/title\u003e\u003cpath d=\"M19.42 9.17a15.39 15.39 0 0 1-3.51.4 15.46 15.46 0 0 1-3.51-.4 15.63 15.63 0 0 1 3.51-3.91 15.71 15.71 0 0 1 3.51 3.91zM30 .57A17.22 17.22 0 0 0 25.59 0a17.4 17.4 0 0 0-9.68 2.93A17.38 17.38 0 0 0 6.23 0a17.22 17.22 0 0 0-4.44.57A16.22 16.22 0 0 0 0 1.13a.07.07 0 0 0 0 .09 17.32 17.32 0 0 0 .83 1.57.07.07 0 0 0 .08 0 16.39 16.39 0 0 1 1.81-.54 15.65 15.65 0 0 1 11.59 1.88 17.52 17.52 0 0 0-3.78 4.48c-.2.32-.37.65-.55 1s-.22.45-.33.69-.31.72-.44 1.08a17.46 17.46 0 0 0 4.29 18.7c.26.25.53.49.81.73s.44.37.67.54.59.44.89.64a.07.07 0 0 0 .08 0c.3-.21.6-.42.89-.64s.45-.35.67-.54.55-.48.81-.73a17.45 17.45 0 0 0 5.38-12.61 17.39 17.39 0 0 0-1.09-6.09c-.14-.37-.29-.73-.45-1.09s-.22-.47-.33-.69-.35-.66-.55-1a17.61 17.61 0 0 0-3.78-4.48 15.65 15.65 0 0 1 11.6-1.84 16.13 16.13 0 0 1 1.81.54.07.07 0 0 0 .08 0q.44-.76.82-1.56a.07.07 0 0 0 0-.09A16.89 16.89 0 0 0 30 .57z\" fill=\"#151f34\"/\u003e\u003cpath d=\"M21.82 17.47a15.51 15.51 0 0 1-4.25 10.69 15.66 15.66 0 0 1-.72-4.68 15.5 15.5 0 0 1 4.25-10.69 15.62 15.62 0 0 1 .72 4.68\" fill=\"#348540\"/\u003e\u003cpath d=\"M15 23.48a15.55 15.55 0 0 1-.72 4.68 15.54 15.54 0 0 1-3.53-15.37A15.5 15.5 0 0 1 15 23.48\" fill=\"#7dbc42\"/\u003e\u003c/svg\u003e"
           },
           "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/cockroachdb/cockroachdb-v0.1.0.json"
+        }
+      ]
+    },
+    {
+      "name": "consul",
+      "displayName": "Consul",
+      "description": "HashiCorp Consul cockpit: hierarchical KV browsing and editing, catalog services and nodes, health checks, sessions, prepared queries, service-mesh intentions, and ACL tokens, policies, and roles.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://www.consul.io",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "a4c4bfb2d487bbcfe76515eb005d23be96f01c049e1a250370c465bc521aa90f",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "6dd30aaabe12c4378c0e725d4dd2fec6e931a363eb203d2e8da52f0e633aa913",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "0303abcbac58fff795dd79613e35e40f44b3c0402e13c71696d77e81cd97d1f9",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "e0bf4620ee0dd8b80ab3685a9049c8b6845c36e75dbee0d72c9c0e0497addfa4",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "e317d35cab7980d673126b4ffafe4814362d9f4dd593b1fee38d833b1738508c",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "aac73af2dff12f561e1d6f14417e716ee4aa37b931857470e8e3ea382b69a3c2",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" id=\"Logos\" x=\"0\" y=\"0\" version=\"1.1\" viewBox=\"0 0 512 512\"\u003e\u003cstyle\u003e.st0{fill:#e03875}\u003c/style\u003e\u003cpath d=\"M258.6 512c-41.7 0-82.7-10.1-119.5-29.6-36.9-19.4-68.4-47.5-92-81.9S8.8 326.5 4 285.2c-4.7-41.4.6-83.3 15.8-122.1s39.5-73.4 71-100.6S160 16 200.6 6.6s82.8-8.8 123.1 1.9 77.4 30.9 108 59.1l-60.8 63.5c-24.2-21.8-54.1-36.1-86.2-41.2s-65.1-.8-94.8 12.4-55 34.8-72.7 62C99.5 191.6 90 223.5 90 256.1s9.4 64.4 27.2 91.7c17.7 27.3 43 48.8 72.7 62s62.7 17.5 94.8 12.4 62.1-19.4 86.2-41.2l60.8 63.5c-47.2 43.4-109 67.6-173.1 67.5m206-128c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.2 6-14.8 6.1\" class=\"st0\"/\u003e\u003cpath d=\"M257 311.4c-10.9 0-21.7-3.2-30.8-9.2-9.1-6.1-16.3-14.7-20.5-24.8s-5.4-21.3-3.3-32c2.1-10.8 7.4-20.7 15.1-28.5 7.8-7.8 17.6-13 28.4-15.2s21.9-1.1 32.1 3.1c10.1 4.2 18.8 11.3 24.9 20.4s9.3 19.9 9.3 30.8c0 14.7-5.8 28.7-16.2 39.1-10.3 10.4-24.3 16.3-39 16.3m231.6 1c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8c2.9-2.9 6.7-4.9 10.8-5.7s8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8s-9.2 6.1-14.8 6.1m-62.3-2.6c-4.2 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.5c-1.6-3.8-2-8.1-1.2-12.1.8-4.1 2.8-7.8 5.8-10.8 2.9-2.9 6.8-4.9 10.8-5.7 4.1-.8 8.3-.4 12.1 1.3 3.8 1.6 7.1 4.4 9.4 7.8s3.5 7.6 3.4 11.7c0 5.6-2.3 10.8-6.2 14.7s-9.1 6.1-14.6 6.2m62.3-68.1c-4.1 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.9-9.2 6-14.8 6.1m-62.3 2.4c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.9-3.8 3.8-9.2 6-14.8 6m39.5-72.9c-4.1 0-8.2-1.2-11.7-3.5s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.1 6-14.8 6\" class=\"st0\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/consul/consul-v0.1.0.json"
         }
       ]
     },
@@ -1331,6 +1398,73 @@
       ]
     },
     {
+      "name": "mqtt",
+      "displayName": "MQTT",
+      "description": "MQTT broker client with live subscriptions, publishing, retained-message browsing, a topic tree, $SYS metrics, and EMQX management tables.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://mqtt.org",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "fec5e993b09b97c14150076577c2dde0e26eff79cbb1bd732d6c7fae852c066f",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "444180b47841434c2b9bf7962b1aa96272725d65a69b555be54ded86f1b5ac2c",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "b5d5ada8f9eb712f98446665aab2fa89ca58e5f6fe08c84a5976b72bfc40e6cc",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "b488c6741948582fb3695c0c6e007c8ebda040f854e32c9910aebb9446d27bfb",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "1a20e535f971f9f91be8527cdf30362e670b3e0a50324dbb7e0f2040a83832da",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "eae86ecdbf3f7ebcf6920b9497341d2062d3fb11a584dbcf7f72efd5fdd88e00",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/mqtt-v0.1.0/shellcn-plugin-mqtt-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M1.5 290.2H0V486c0 14.1 11.6 25.7 25.7 25.7h201.6C225.6 389.4 125.2 290.2 1.5 290.2m0-161.5H0V212c166.3.8 301.5 134.5 303.3 299.8h86.3C388.1 300.3 214.7 128.7 1.5 128.7M512 486.3V309.4C453.5 166 335.6 52.7 189 0H25.7C11.6 0 0 11.6 0 25.7v25c255.9.8 464.1 206.9 465.6 461.3h20.7c14.3-.3 25.7-11.6 25.7-25.7M444.6 71.4c23.7 23.7 47.9 53.7 67.4 80.2V25.5c0-14-11.3-25.4-25.3-25.5H356.5c30.3 20.9 61.6 44.9 88.1 71.4\" style=\"fill:#606\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/mqtt/mqtt-v0.1.0.json"
+        }
+      ]
+    },
+    {
       "name": "mssql",
       "displayName": "Microsoft SQL Server",
       "description": "SQL Server cockpit with databases, schemas, table data, views, procedures, users, jobs, T-SQL editor, DDL helpers, and safety controls.",
@@ -1595,6 +1729,73 @@
       ]
     },
     {
+      "name": "nomad",
+      "displayName": "Nomad",
+      "description": "HashiCorp Nomad workload orchestrator: jobs, allocations, clients, deployments, live logs, and exec.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://www.nomadproject.io",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "31aaf2010aa801f1b92139ed4faf0f4cd66e75cf4a0c363dad485225c4c36b7d",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "80bbe53c39bf7b3c4e3d307a4363ed57cac7627e564d143479d2fd2740b9f945",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "f3cb6582ddcb3dd05ef79380d1af402b181446138e4e014f0016457658258f4e",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "1ec32b2c4fcf1cdb52ff74cb5c8d10f6d75d2b413f27592109954359e0c41b72",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "47e0bf2a9d56cf3d989f917b6b095457ae90db89ee8f6fad500322ca3f079d29",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "442b8610072d0e8b32c12ca3cedf52e7b0f5917561abe8ba3f2075732931fea9",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M256 0 33.8 128v256L256 512l222.2-128V127.1zm98.7 280.9-59.6 33.8-71.1-39.1v81.8L156.4 400V229.3l53.3-32.9 73.8 39.1v-82.7l71.1-42.7v170.8z\" style=\"fill:#00ca8e\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/nomad/nomad-v0.1.0.json"
+        }
+      ]
+    },
+    {
       "name": "notebook",
       "displayName": "Notebook",
       "description": "Agent-hosted Docker sandbox running JupyterLab through a connection-scoped web proxy.",
@@ -1793,6 +1994,73 @@
       ]
     },
     {
+      "name": "pinecone",
+      "displayName": "Pinecone",
+      "description": "Pinecone cockpit: serverless and pod indexes, index configuration and stats, namespaces, vector browsing and CRUD, metadata-filtered similarity search, and backup collections.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://www.pinecone.io",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "5e3e15e6a529c68d139e94c1faa7ff0b5f4d2953b3bc20fff6dbbd49f42e3c4e",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "c3d357af22f58f4c4a92e7b8f439f71331230d8f0a5b72a2b33532e4bdf0c08f",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "57b0e786e941d40fa983cfdc51123e4d020a9fca93a205185e326f561444eea1",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "c4a951fc72de1588ce81a93edf068ad142f1794034fcbc35a1a89de304135b63",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "377f92d0e4502cc33441a91bb36293eba3f7ee97518bafc788000120af105006",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "e9da6e5bd8ad6d2e3b4d46bca22062a637abaed81dda25ed6d5620447b27f934",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" id=\"Pinecone-Icon--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003ePinecone Icon Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"#002bff\" d=\"M10.415975 21.060525c0.742675 0 1.34475 0.60205 1.34475 1.344725 0 0.7427 -0.602075 1.34475 -1.34475 1.34475 -0.742675 0 -1.344725 -0.60205 -1.344725 -1.34475 0 -0.742675 0.60205 -1.344725 1.344725 -1.344725Zm7.460625 -2.45355 1.328875 0.393725 -1.05485 3.560175c-0.092175 0.3111 -0.38785 0.516575 -0.71155 0.494525l-0.325825 -0.02235 -0.007975 0.006575 -3.385325 -0.237575 0.0942 -1.382775 2.27445 0.15435 -1.489025 -2.148 1.139025 -0.7897 1.490975 2.15065 0.647025 -2.1796Zm-14.463625 -2.46115 1.382525 0.097925 -0.161925 2.2741 2.144075 -1.490925 0.791475 1.13775 -2.146875 1.4925 2.19135 0.6457 -0.3917 1.329475 -3.576975 -1.053825c-0.312275 -0.092 -0.518425 -0.388975 -0.4954 -0.713725l0.26345 -3.718975Zm8.926525 -1.9365 2.495225 3.012525 -1.124575 0.931475 -1.485 -1.79285 -0.481425 2.7565 -1.43845 -0.25145 0.481925 -2.760775 -1.999175 1.178725 -0.7412 -1.25815 3.3598 -1.979325c0.308875 -0.181975 0.7042 -0.112775 0.932875 0.163325Zm6.9811 -2.02115 1.24645 -0.67815 1.815825 3.33745c0.159075 0.292375 0.093525 0.656 -0.157625 0.874425l-0.2569 0.221975 -2.621425 2.281375 -0.9312 -1.0707 1.762375 -1.53325 -2.625075 -0.472925 0.251825 -1.39645 2.623225 0.47265 -1.107475 -2.0364ZM4.621 8.698925l0.93895 1.0639 -1.738175 1.533025 2.630075 0.459175 -0.243775 1.3979 -2.632975 -0.45955 1.13095 2.044575 -1.241675 0.686875 -1.84492 -3.33505c-0.16108 -0.291175 -0.098145 -0.6552 0.1513525 -0.8754L4.621 8.698925Zm8.89015 -1.0976 2.486775 3.004425 -1.124875 0.931075 -1.48465 -1.793625 -0.48145 2.757325 -1.438425 -0.25145 0.48025 -2.750075 -1.9915 1.16745 -0.738375 -1.259825 3.05905 -1.79355 0.003025 -0.01165 0.013475 0.00175 0.285075 -0.166225c0.30885 -0.181 0.703375 -0.1114 0.931625 0.164375Zm3.204525 -1.477575 0.543875 -1.310625 3.51805 1.459925c0.30705 0.127425 0.484475 0.451 0.4268 0.7784l-0.058575 0.325675 -0.60075 3.4173 -1.397475 -0.246175 0.402675 -2.28755 -2.334 1.28995 -0.6859 -1.2422 2.338475 -1.291025 -2.153175 -0.893675ZM10.01385 3.54105l0.060475 1.4177 -2.323925 0.099325 1.75275 2.003025 -1.0679 0.934425 -1.7557 -2.00605 -0.40905 2.290225 -1.396825 -0.24985 0.669425 -3.742625c0.0585 -0.3271 0.336175 -0.569775 0.668175 -0.58395l0.32885 -0.0147 0.007375 -0.00535 3.46635 -0.142175ZM14.767625 0.517615 17.24315 3.541l-1.129825 0.9251 -1.469275 -1.79475 -0.495575 2.753675 -1.43715 -0.258625 0.4964 -2.759865 -2.006025 1.172865 -0.736725 -1.2607775L13.83435 0.349775c0.310025 -0.18116675 0.705775 -0.1099955 0.933275 0.16784Z\" stroke-width=\"0.25\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/pinecone/pinecone-v0.1.0.json"
+        }
+      ]
+    },
+    {
       "name": "prometheus",
       "displayName": "Prometheus",
       "description": "Prometheus cockpit with PromQL query, targets, alerts, rules, labels, metric metadata, series, status, live overview metrics, and gated admin operations.",
@@ -1855,6 +2123,73 @@
             "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003cpath d=\"M63.66 2.477c33.477.007 60.957 27.296 60.914 60.5-.043 33.703-27.41 60.617-61.613 60.593-33.441-.023-60.477-27.343-60.453-61.086C2.53 29.488 30.066 2.47 63.66 2.477zm-18.504 21.25c.766 3.777.024 7.3-1.113 10.765-.785 2.399-1.871 4.711-2.52 7.145-1.07 4.008-2.28 8.039-2.726 12.136-.64 5.895 1.676 11.086 5.64 16.25l-18.222-3.835c.031.574 0 .792.062.976 1.727 5.074 4.766 9.348 8.172 13.379.36.426 1.18.644 1.79.644 18.167.036 36.335.032 54.503.008.563 0 1.317-.105 1.66-.468 3.895-4.094 6.871-8.758 8.735-14.63l-19.29 3.778c1.274-2.496 2.723-4.688 3.56-7.098 2.855-8.242 1.671-16.21-2.427-23.726-3.289-6.031-6.324-12.035-4.683-19.305-3.473 3.434-4.809 7.8-5.656 12.3-.832 4.434-1.325 8.93-1.97 13.43-.093-.136-.21-.238-.23-.355a13.317 13.317 0 01-.168-1.422c-.394-7.367-1.832-14.465-4.87-21.246-1.786-3.988-3.758-8.07-1.915-12.832-1.246.66-2.375 1.313-3.183 2.246-2.41 2.785-3.407 6.13-3.664 9.793-.22 3.13-.52 6.274-1.102 9.352-.61 3.234-1.574 6.402-3.75 9.375-.875-6.348-.973-12.63-6.633-16.66zM92 86.75H35.016v9.898H92zm-45.684 15.016c-.046 8.242 8.348 14.382 18.723 13.937 8.602-.371 16.211-7.137 15.559-13.937zm0 0\" fill=\"#e75225\"/\u003e\u003c/svg\u003e"
           },
           "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/prometheus/prometheus-v0.1.0.json"
+        }
+      ]
+    },
+    {
+      "name": "pulsar",
+      "displayName": "Apache Pulsar",
+      "description": "Pulsar browser for tenants, namespaces, topics, subscriptions, producers, consumers, schemas, message browsing, live tailing, and publishing.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://pulsar.apache.org",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "6b0513f46feeb2c047292a4254ffcde388a84825b97d4da3f24263bdef005be2",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "5110561d4d3be80a8019f10de16d2cc4eba7af21679454af218bf71495b40b17",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "39188807721b2ad6dc3a7104068037fc0be2bb929678cb32895686f72f3a6f90",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "018356a128060c9d6e073e4b4fe936385d4902610a373700a0f1f05ae28bf714",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "2771550e6fe4ac5acbb2e1f6fcca2be24e9d3dd4a223f1b12488228ef1bf9bb0",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "6c1cdefa7d780aed6151d51cfa42fb2c88dca7c5291a128812ff1c54ccd95019",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg fill=\"#188fff\" viewBox=\"0 0 24 24\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cg id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_iconCarrier\"\u003e\u003cpath d=\"M24 8.925h-5.866c-1.586-3.041-3.262-5.402-5.544-5.402-2.97 0-4.367 2.593-5.717 5.115l-.118.22H0v1.5h3.934c1.39 0 1.673.468 1.673.468-1.09 1.691-2.4 3.363-4.584 3.363H0v1.574h1.03c4.234 0 6.083-3.434 7.567-6.193 1.361-2.541 2.31-4.08 3.993-4.08 1.747 0 3.584 3.801 5.201 7.157.237.488.477.988.72 1.483-6.2.197-9.155 1.649-11.559 2.833-1.759.866-3.147 1.94-5.433 1.94H0v1.574h1.507c2.754 0 4.47-.85 6.295-1.751 2.53-1.243 5.398-2.652 12.157-2.652h3.907V14.5H21.66a1.18 1.18 0 0 1-.972-.393 70.83 70.83 0 0 1-1.133-2.321l-.511-1.047s.366-.393 1.38-.393H24z\"\u003e\u003c/path\u003e\u003c/g\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/pulsar/pulsar-v0.1.0.json"
         }
       ]
     },
@@ -2055,6 +2390,73 @@
             "value": "\u003csvg height=\"2500\" viewBox=\"53.6 9 219.8 272.2\" width=\"1579\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cpath d=\"m162.6 11.3c-62.7 0-107.3 39.6-107.3 95.7 0 26.9 28 158 28 158 1.8 7.8 9.4 13.1 17.4 11.8 1.8-.3 3.4-.9 4.9-1.7l1.2-.1c2.8 1.6 6 2.4 9.5 2 2.8-.3 5.3-1.4 7.4-3l3.4-.2c2.8 2.2 6.4 3.4 10.2 3.2 3.9-.2 7.3-1.9 9.9-4.4l6-.4c2.7 2.8 6.4 4.7 10.6 4.8 4.5.1 8.5-1.7 11.4-4.7l6.2.4c2.3 2.3 5.4 3.8 8.9 4.2 4.1.5 8-.7 11-3.1l3.8.2c1.8 1.3 3.9 2.3 6.2 2.7 3.3.6 6.5.1 9.3-1.3 1.2.6 2.6 1 4 1.2 8 1.3 15.6-3.9 17.4-11.8 0 0 28-131.2 28-158-.2-55.8-44.7-95.5-107.4-95.5z\" fill=\"#57d1e5\"/\u003e\u003ccircle cx=\"127.9\" cy=\"97.3\" fill=\"#fff\" r=\"47.9\"/\u003e\u003cpath d=\"m127.9 147.7c-27.8 0-50.5-22.6-50.5-50.5s22.6-50.5 50.5-50.5 50.5 22.6 50.5 50.5-22.7 50.5-50.5 50.5zm0-95.7c-25 0-45.3 20.3-45.3 45.3s20.3 45.3 45.3 45.3 45.3-20.3 45.3-45.3-20.4-45.3-45.3-45.3z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m137.8 65.9c-8.3 1.7-9.9 19.8-5 24.8 3.3 3.3 9.9 4.3 9.9 6.6s-6.6 3.3-9.9 6.6c-5 5-3.3 23.1 5 24.8 9.8 2 24.8-9.9 24.8-31.4s-15-33.4-24.8-31.4z\" fill=\"#3a2d55\"/\u003e\u003cpath d=\"m104.4 162.5c1.7 5 7 14.4 13.6 12.7 3.2-.8 5-5 5-11.6m24.7-5.3c1.7 6.6 3.3 11.6 8.3 11.6s11.6-6.6 9.9-18.2\" fill=\"#fff\"/\u003e\u003cg fill=\"#3a2d55\"\u003e\u003cpath d=\"m189.3 135.5c-2.1-2.3-5-4-8.2-4.6h-.4c-1.4-.1-2.7 1-2.8 2.4s1 2.7 2.4 2.8 2.8.5 4 1.2a126 126 0 0 1 -41.8 18.3c-15.5 3.7-31.6 4.4-47.4 2.1-1.2-.2-2.3.6-2.5 1.8s.6 2.3 1.8 2.5c2.4.4 4.9.7 7.3.9 0 .1 0 .2.1.3 2.1 6.3 7.5 14.7 14.5 14.7.7 0 1.4-.1 2.2-.3 2.6-.6 6.9-3.3 6.9-14.1 0-.2-.1-.3-.1-.5 6.1-.5 12.2-1.5 18.2-2.8.6-.1 1.2-.3 1.7-.4 1.4 5.6 3.5 12.6 10.5 12.6 2.9 0 6-1.6 8.4-4.3 2-2.3 5.2-7.5 4.2-16.2 6.9-3.1 13.5-6.8 19.7-11 .6 1 1.1 2.1 1.3 3.3.2.9 1 1.5 1.9 1.4 1-.1 1.7-.9 1.6-1.9-.1-2.9-1.4-5.8-3.5-8.2zm-69 28.1c0 5-1.2 8.6-3 9-3.9 1-7.9-4.8-9.8-9.2 4.3.2 8.5.2 12.8 0 .1.1 0 .2 0 .2zm40.1 1.2c-1.3 1.5-3 2.5-4.4 2.5-2.4 0-3.8-2.1-5.5-8.7 4.4-1.3 8.8-2.8 13-4.5.2 4.3-.9 8.1-3.1 10.7z\"/\u003e\u003cpath d=\"m242.4 36.5c-19.9-17.7-47.9-27.5-78.9-27.5s-59 9.8-78.9 27.5c-20 17.8-31 43-31 70.8s26.9 153.2 28 158.6c1.9 8.3 9.2 14 17.4 14 1 0 1.9-.1 2.9-.2 1.7-.3 3.3-.8 4.9-1.6 3.4 1.5 7.2 2.1 10.9 1.4 2.8-.5 5.4-1.7 7.6-3.5 1.9 1.5 4.2 2.7 6.6 3.3 3.9 1 8.1.7 11.8-1 2.6-1.2 4.8-3 6.5-5.1 1.3 1.6 2.8 3 4.6 4.1 1.4.9 2.9 1.5 4.5 2s3.2.7 4.8.7 3.3-.3 4.8-.7c1.6-.5 3.1-1.1 4.5-2s2.7-1.9 3.8-3.1c.3-.3.6-.6.8-.9 2.8 3.4 6.9 5.8 11.3 6.4 4.4.7 9-.4 12.6-2.9.4-.2.7-.5 1-.8 2.1 1.7 4.6 2.9 7.2 3.4 1.9.4 3.8.5 5.7.3 1.7-.2 3.3-.6 4.9-1.3 1.4.6 2.8 1 4.3 1.3 9.3 1.5 18.3-4.5 20.3-13.8 1.1-5.4 28-131.7 28-158.6.1-27.8-10.9-52.9-30.9-70.8zm-2.1 228.3c-1.4 6.3-7.4 10.5-13.8 9.8 1.2-1.2 2.3-2.6 3.1-4.1.9-1.7 1.6-3.5 1.9-5.3l.8-4.8 3.1-19.1c1-6.4 2-12.8 2.8-19.2.1-.9-.5-1.7-1.3-1.9-.9-.2-1.9.4-2.1 1.3-1.4 6.3-2.7 12.7-4 19l-3.7 19-.9 4.7c-.3 1.3-.8 2.6-1.4 3.7-.6 1.2-1.5 2.2-2.5 3.1s-2.1 1.7-3.3 2.2-2.5.9-3.8 1.1-2.7 0-4-.2c-1.7-.3-3.3-1.1-4.7-2 1.2-1.8 2.2-3.8 2.7-6 .2-.5.2-1.1.3-1.6 0-.3.1-.6.1-.8l.1-.7.3-2.8.6-5.6 1.1-11.2c.7-7.5 1.4-15 1.9-22.5.1-.9-.6-1.7-1.5-1.8s-1.8.5-2 1.5c-1.1 7.4-2.1 14.9-3.1 22.3l-1.4 11.2-.7 5.6c-.2 1.8-.4 3.9-.8 5.2-.7 3-2.7 5.7-5.3 7.4s-5.8 2.4-8.8 1.9c-3.1-.4-5.9-2.1-7.9-4.5-.5-.6-.9-1.2-1.3-1.9.3-.8.5-1.6.7-2.3.4-1.6.4-3.3.4-4.6l.1-8.3c.1-5.5.2-11.1.2-16.6.1-5.5.1-11.1 0-16.6 0-.9-.7-1.7-1.6-1.7-1-.1-1.8.7-1.8 1.6-.3 5.5-.7 11.1-.9 16.6-.3 5.5-.5 11.1-.8 16.6l-.4 8.3c0 .7 0 1.4-.1 2 0 .6-.1 1.1-.2 1.7-.3 1.1-.6 2.2-1.2 3.2-2.1 4.1-6.6 6.8-11.2 6.7-1.1 0-2.3-.1-3.4-.5-1.1-.3-2.1-.8-3.1-1.3-2-1.2-3.6-2.9-4.7-4.9-.6-1-.9-2.1-1.2-3.2s-.3-2.2-.4-3.7l-.4-8.3c-.2-5.5-.5-11.1-.8-16.6s-.6-11.1-.9-16.6c-.1-.9-.8-1.6-1.7-1.6-1 0-1.7.8-1.7 1.7v16.6c0 5.5.1 11.1.2 16.6l.1 8.3c0 1.3.1 3 .4 4.6.2.8.4 1.6.7 2.4-1.4 2.3-3.4 4.2-5.9 5.3-2.6 1.2-5.5 1.4-8.2.7s-5.2-2.3-6.9-4.6c-.9-1.1-1.6-2.4-2-3.7-.2-.7-.4-1.4-.5-2.1-.1-.3-.1-.8-.2-1.2l-.2-1.3-2.6-20.3c-.9-6.8-1.8-13.6-2.9-20.3-.1-.9-.9-1.5-1.8-1.5-1 .1-1.7.9-1.6 1.9.5 6.8 1.1 13.6 1.7 20.4l2 20.4.1 1.3c0 .4.1.8.2 1.4.1 1 .4 2 .7 2.9.5 1.7 1.4 3.3 2.4 4.8-1.5 1-3.2 1.8-5 2.1-2.6.5-5.3.1-7.7-1-2.4-1.2-4.4-3-5.7-5.4-.6-1.2-1.1-2.4-1.4-3.7l-.9-4.7-3.7-18.9c-1.3-6.3-2.6-12.6-4-18.9-.2-.9-1-1.5-1.9-1.3-.9.1-1.6 1-1.5 2 .9 6.4 1.8 12.7 2.8 19.1l3.1 19 .8 4.8c.3 1.9 1 3.7 1.8 5.3.8 1.5 1.8 2.9 3.1 4.1-.2 0-.3.1-.5.1-6.6 1.1-12.9-3.2-14.4-9.7-.3-1.3-27.9-131.2-27.9-157.5s10.4-50.1 29.2-67c18.9-16.9 45.7-26.2 75.4-26.2s56.5 9.3 75.4 26.2c18.9 16.8 29.2 40.6 29.2 67 .6 26.3-27 156.2-27.3 157.4z\"/\u003e\u003c/g\u003e\u003c/svg\u003e"
           },
           "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/scylladb/scylladb-v0.1.0.json"
+        }
+      ]
+    },
+    {
+      "name": "snowflake",
+      "displayName": "Snowflake",
+      "description": "Snowflake cockpit with databases, schemas, tables, views, warehouses, roles, grants, users, stages, pipes, tasks, streams, query history, credit metrics, and a SQL editor.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://www.snowflake.com",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "45dcac842c300599e5f9ac6648bd5ccaca93de376ff794747517ea78894be14b",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "e9cd4b24451fb6edabcd0a6b602de35d9a8d06cec81241d7405891040fe2a770",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "763932f489fd5fe35bc65449efa58320617e37147ff9a7e768c3870408e860c8",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "78407c9bdd569e10db1f852d9a19c9ad6ef2fa12ede1b6e50c5ad51b8bc80ba4",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "79305e92d311621751071c0af31fdb34f80eee2ebbb5227b109d34d15d97de3b",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "0787e422b4be8b9c037dc24a41d3e122fa22c1ae2fa1fe14e852184744da37d3",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/snowflake-v0.1.0/shellcn-plugin-snowflake-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg height=\"1em\" style=\"flex:none;line-height:1\" viewBox=\"0 0 24 24\" width=\"1em\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003ctitle\u003eSnowflake\u003c/title\u003e\u003cpath clip-rule=\"evenodd\" d=\"M23.252 10.365l-2.843 1.636 2.843 1.631a1.47 1.47 0 01.697.903 1.492 1.492 0 01-.15 1.135c-.202.342-.53.591-.912.693a1.498 1.498 0 01-1.132-.15l-5.09-2.924a1.473 1.473 0 01-.68-.851 1.446 1.446 0 01-.068-.485 1.5 1.5 0 01.745-1.248l5.09-2.921a1.496 1.496 0 012.044.547 1.479 1.479 0 01-.544 2.034zm-2.692 7.927l-5.087-2.92a1.477 1.477 0 00-.867-.195 1.478 1.478 0 00-.982.468c-.257.276-.4.639-.403 1.017v5.847A1.49 1.49 0 0014.718 24c.828 0 1.497-.668 1.497-1.491v-3.27l2.849 1.636a1.493 1.493 0 002.044-.544 1.49 1.49 0 00-.548-2.04zm-5.87-5.719l-2.116 2.102a.42.42 0 01-.265.112h-.621a.427.427 0 01-.265-.112l-2.115-2.102a.42.42 0 01-.11-.262v-.62a.43.43 0 01.11-.265l2.114-2.102a.426.426 0 01.264-.11h.623a.422.422 0 01.265.11l2.116 2.102a.43.43 0 01.109.265v.62a.428.428 0 01-.11.262zM13 11.99a.442.442 0 00-.113-.266l-.612-.607a.431.431 0 00-.266-.11h-.024a.426.426 0 00-.264.11l-.612.607a.436.436 0 00-.107.266v.024c0 .085.047.202.107.262l.612.61c.061.06.179.11.264.11h.024a.434.434 0 00.266-.11l.612-.61a.429.429 0 00.112-.262v-.024zM3.436 5.704l5.089 2.924c.274.157.578.219.868.195.375-.026.726-.194.983-.47.256-.275.4-.64.403-1.017V1.489C10.78.667 10.11 0 9.284 0c-.829 0-1.498.667-1.498 1.49v3.27l-2.85-1.639a1.496 1.496 0 00-2.045.546 1.489 1.489 0 00.546 2.037zm11.17 3.119c.29.024.594-.038.866-.195l5.087-2.923a1.474 1.474 0 00.697-.903 1.496 1.496 0 00-.149-1.135 1.496 1.496 0 00-2.044-.545L16.215 4.76V1.489C16.215.667 15.546 0 14.718 0c-.83 0-1.497.667-1.497 1.49v5.845a1.491 1.491 0 001.385 1.487zm-5.213 6.354a1.479 1.479 0 00-.868.194l-5.089 2.92a1.476 1.476 0 00-.696.905 1.498 1.498 0 00.148 1.135 1.496 1.496 0 002.044.543l2.851-1.636v3.27c0 .825.67 1.491 1.498 1.491.826 0 1.496-.667 1.496-1.49v-5.847a1.5 1.5 0 00-.401-1.017 1.477 1.477 0 00-.982-.468zm-1.38-2.74c.05-.156.072-.32.068-.484a1.497 1.497 0 00-.751-1.248l-5.084-2.92a1.499 1.499 0 00-2.045.547 1.481 1.481 0 00.549 2.034l2.841 1.636L.75 13.633a1.47 1.47 0 00-.698.903 1.492 1.492 0 00.15 1.135c.202.343.53.592.912.693.382.102.789.048 1.132-.15l5.086-2.924c.345-.195.577-.505.684-.852z\" fill=\"#249EDC\" fill-rule=\"evenodd\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/snowflake/snowflake-v0.1.0.json"
         }
       ]
     },
@@ -2323,6 +2725,73 @@
       ]
     },
     {
+      "name": "trino",
+      "displayName": "Trino",
+      "description": "Trino cockpit with catalogs, schemas, tables and views, bounded data grids, SQL editor with live query stats, cluster nodes, running queries with kill, and session properties.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://trino.io",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "ee13734bc3704e59d7a829e221a668c46b916bf111f44f3129ac0c3e3bccab7e",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "93c68f421aad29116a801018a757ce8e9c9cf3dec0e4b61a862e1c4d5682d2bd",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "efcd395b24e59304498199f34706b087d5c7b410e12a529879e4dbf94afa487b",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "b308aa649163d413642f33ad7a79f68a6cf873692107ca255afb18472411017d",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "6a9a45e93d9eb0ccc89c2d4a82e5e4aa96b66323870ad9297cc70d6421f75996",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "2611a93b26a6e39b17247152ccb8e3b28a0b80c3e65148bd19a5c5f7d1b3dbc3",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/trino-v0.1.0/shellcn-plugin-trino-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 42.1 62.45\"\u003e\u003cdefs\u003e\u003cstyle\u003e.cls-1{fill:#fff}.cls-2{fill:#dd00a1}.cls-3{fill:#f9d8d2}.cls-4{fill:#10110e}.cls-5{fill:#e5e5e5}.cls-6{fill:#8accce;opacity:.2;isolation:isolate}.cls-7{fill:#515151}\u003c/style\u003e\u003c/defs\u003e\u003cpath class=\"cls-1\" d=\"M14.24,55.36c.92-.61-1.49-.38-1.69-.79a15,15,0,0,1-2.82-.51C8,53.62,3.9,50.85,3.47,48.25s0-7.65,1.83-10.61A17,17,0,0,1,9.73,33S6.16,24.51,5.85,18.1,6,.21,10.24,0s3.49,10.48,2.82,17.43a89.47,89.47,0,0,0-.21,13.89,19.45,19.45,0,0,1,5.51-.92,21.2,21.2,0,0,1,4.9.46S24.58,21,29,14.86,38,2.4,41,4.19s-.81,8.19-3.46,11.52-7.25,8.33-8.78,11a47.26,47.26,0,0,0-2.65,5.51,15,15,0,0,1,6.4,6.32c2.07,4.28,2.27,9.59,1.15,11.83a8.1,8.1,0,0,1-5.61,4c-1.32.1-6.91,1.48-6.91,1.48Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M24,30.94s3.33-8.7,6.32-13.6,7-8.59,8.26-7.84S36,14.85,32.66,19.32a112.3,112.3,0,0,0-7.44,12.37Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M10.64,32.44l.95-.75s-.13-8.7,0-14S12,5.78,10.23,5.85,7.23,11,7.92,18.23A86.92,86.92,0,0,0,10.64,32.44Z\" transform=\"translate(0 0)\"/\u003e\u003ccircle class=\"cls-3\" cx=\"7.65\" cy=\"49.17\" r=\"1.94\"/\u003e\u003ccircle class=\"cls-3\" cx=\"30.57\" cy=\"49.17\" r=\"1.94\"/\u003e\u003cpath class=\"cls-4\" d=\"M22.33,49a.19.19,0,0,0-.25,0h0s-.57,1-1.41,1.06a2.11,2.11,0,0,1-1.5-.7V48c.54-.29,1.41-1.19,1.41-1.5a1.4,1.4,0,0,0-1.5-1.09c-1,0-1.7.65-1.7,1.19s1.1,1.23,1.41,1.44v1.45a1.77,1.77,0,0,1-1.3.7c-.8,0-1.4-1.08-1.4-1.09a.19.19,0,0,0-.25-.08h0a.18.18,0,0,0-.08.23h0c0,.06.71,1.29,1.73,1.29a2.07,2.07,0,0,0,1.5-.72,2.46,2.46,0,0,0,1.59.73h.14a2.47,2.47,0,0,0,1.71-1.25.18.18,0,0,0,0-.25A.24.24,0,0,0,22.33,49Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M9.73,33S7,26,6.42,22.29s-1-9.78-.3-13.85A46.3,46.3,0,0,1,7.31,2.85S6,12.34,6.49,16.49,9.73,33,9.73,33Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M23.26,30.85s2-10.59,4.91-14.76S34.73,6.9,36.52,5.62l1.82-1.28S31,12,28.17,18.34,23.26,30.85,23.26,30.85Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M11.6,42.85a1.52,1.52,0,1,0,1.52,1.52h0a1.52,1.52,0,0,0-1.5-1.52Zm.4,1.41a.42.42,0,1,1,.42-.42h0a.42.42,0,0,1-.41.43h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M26.55,42.85a1.52,1.52,0,1,0,1.51,1.53h0a1.52,1.52,0,0,0-1.51-1.53ZM27,44.26a.42.42,0,0,1-.43-.41h0a.43.43,0,0,1,.41-.43.42.42,0,0,1,.43.41h0a.41.41,0,0,1-.4.42h0Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-6\" cx=\"19.36\" cy=\"44.95\" rx=\"14.1\" ry=\"10.16\"/\u003e\u003cpath class=\"cls-1\" d=\"M36.43,39.3V32.58a2.46,2.46,0,0,0,1.91-2.29,2.65,2.65,0,0,0-5.27,0A2.48,2.48,0,0,0,35,32.58v6.55h-.2c-2-6.94-7.91-11.28-15.63-11.28S5.51,32.15,3.55,39.13H2.88A2.76,2.76,0,0,0,0,41.71v5.14a2.75,2.75,0,0,0,2.88,2.59h.91a13,13,0,0,0,3.59,5.11L6.09,55.72A.78.78,0,0,0,6,56.82l0,0H6c2.93,3.53,7.72,5.6,13.13,5.6s10.21-2,13.14-5.6a.79.79,0,0,0-.09-1.11h0l-1.3-1.19a13,13,0,0,0,3.59-5.08h1a2.74,2.74,0,0,0,2.87-2.6V41.71A2.58,2.58,0,0,0,36.43,39.3Zm-17.26-4c7.14,0,12.94,4.7,12.94,10.47,0,6.25-6.51,9-12.94,9S6.23,52,6.23,45.72C6.23,40,12,35.25,19.17,35.25Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M36.91,45.16H35v-1a18.61,18.61,0,0,0-.39-3.79h.82a1.35,1.35,0,0,1,1.44,1.25h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M35.47,48.18h-1A16.13,16.13,0,0,0,34.89,46h2v.85a1.34,1.34,0,0,1-1.36,1.32h-.06Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M19.17,61.1c-4.79,0-9.06-1.72-11.74-4.78l1.3-1.21a17.87,17.87,0,0,0,10.4,3,17.73,17.73,0,0,0,10.4-3l1.35,1.21C28.23,59.38,24,61.1,19.17,61.1Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M2.88,40.42h.85a19.33,19.33,0,0,0-.38,3.79,8.34,8.34,0,0,0,0,1H1.49v-3.5a1.27,1.27,0,0,1,1.24-1.29Z\" transform=\"translate(0 0)\"/\u003e\u003cpath d=\"M19.17,34.39a17.66,17.66,0,0,0-4.79.69V29.85a17.23,17.23,0,0,1,4.79-.64,17.3,17.3,0,0,1,4.8.64v5.26A15.91,15.91,0,0,0,19.17,34.39Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M1.44,46h2a17.56,17.56,0,0,0,.43,2.16h-1a1.35,1.35,0,0,1-1.44-1.25h0V46Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-7\" cx=\"35.71\" cy=\"30.29\" rx=\"1.2\" ry=\"1.08\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/trino/trino-v0.1.0.json"
+        }
+      ]
+    },
+    {
       "name": "typesense",
       "displayName": "Typesense",
       "description": "Typesense cockpit with collections, schemas, documents, search, aliases, synonyms, overrides, keys, metrics, and stats.",
@@ -2385,6 +2854,73 @@
             "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"256\" height=\"256\" viewBox=\"0 0 256 255\"\u003e\u003cpath fill=\"#1035BC\" d=\"M75.104 80.303c.551 2.751.826 5.41.826 7.979c0 2.384-.275 4.951-.826 7.702l-34.938-.275v92.437c0 7.703 3.576 11.554 10.729 11.554h20.908c1.284 3.118 1.926 6.236 1.926 9.354c0 3.118-.184 5.044-.55 5.777c-8.437 1.1-17.149 1.65-26.135 1.65c-17.79 0-26.686-7.61-26.686-22.833V95.709l-19.533.275C.275 93.234 0 90.666 0 88.282c0-2.568.275-5.228.825-7.979l19.533.275V51.692c0-4.952.734-8.437 2.2-10.454c1.468-2.201 4.31-3.302 8.53-3.302h7.427l1.65 1.651v41.267l34.94-.551Zm10.477 125.255c.178-4.02 1.275-8.405 3.286-13.156c2.194-4.934 4.661-8.771 7.401-11.512c14.436 7.857 27.134 11.786 38.1 11.786c6.026 0 10.87-1.188 14.524-3.563c3.837-2.376 5.759-5.573 5.759-9.594c0-6.395-4.935-11.511-14.803-15.349l-15.35-5.755c-23.022-8.406-34.534-21.836-34.534-40.292c0-6.578 1.186-12.425 3.564-17.541c2.557-5.3 6.026-9.776 10.415-13.43c4.567-3.838 9.958-6.761 16.173-8.771c6.21-2.01 13.154-3.016 20.829-3.016c3.47 0 7.307.275 11.511.823c4.384.548 8.772 1.37 13.155 2.467c4.388.913 8.588 2.01 12.609 3.289c4.02 1.279 7.49 2.65 10.415 4.111c0 4.568-.914 9.319-2.74 14.253c-1.827 4.934-4.295 8.588-7.402 10.963c-14.436-6.395-26.95-9.593-37.548-9.593c-4.75 0-8.499 1.188-11.239 3.564c-2.74 2.192-4.11 5.116-4.11 8.77c0 5.665 4.567 10.142 13.706 13.43l16.719 6.03c12.057 4.203 21.013 9.96 26.86 17.268c5.848 7.31 8.772 15.806 8.772 25.49c0 12.974-4.845 23.39-14.53 31.246c-9.685 7.675-23.57 11.513-41.659 11.513c-17.726 0-34.356-4.478-49.883-13.431Zm150.807 48.031V.83c2.762-.554 5.894-.83 9.396-.83c3.682 0 7.09.276 10.216.829v252.76c-3.127.552-6.534.83-10.216.83c-3.502 0-6.634-.278-9.396-.83Z\"/\u003e\u003c/svg\u003e"
           },
           "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/typesense/typesense-v0.1.0.json"
+        }
+      ]
+    },
+    {
+      "name": "vault",
+      "displayName": "HashiCorp Vault",
+      "description": "Vault browser for secret engines, KV v1 and v2 secrets with versions and metadata, auth methods, policies, tokens, leases, namespaces, and audit devices.",
+      "repo": "github.com/CharlesNg35/shellcn-contrib",
+      "homepage": "https://www.vaultproject.io",
+      "license": "GPL-3.0",
+      "maintainers": [
+        "CharlesNg35"
+      ],
+      "versions": [
+        {
+          "version": "0.1.0",
+          "apiVersion": 1,
+          "protocolVersion": 1,
+          "assets": {
+            "darwin/amd64": {
+              "sha256": "a6760cb39fa73bf9edbc7ec4a5a391e1e95a7533e99d92e32fdcba16941e8a5c",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-amd64"
+              ]
+            },
+            "darwin/arm64": {
+              "sha256": "07eceb36f3f00c10f64cd479a86b929376e53c076363c4631f07eb52914b53bb",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-darwin-arm64"
+              ]
+            },
+            "linux/amd64": {
+              "sha256": "3abbcb02050a703fb09afb70be7fd1ea1405a8c80ed67e2befe78dce246855c3",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-amd64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-amd64"
+              ]
+            },
+            "linux/arm64": {
+              "sha256": "f4b54c20c09955daa262aa1d90676b677335639dedbfa074b8e886cb74852c33",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-arm64",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-linux-arm64"
+              ]
+            },
+            "windows/amd64": {
+              "sha256": "b6878d5be7cf2ddedd328b50906b39e4a4c5ddd40b081da10550a9cb5d334ff9",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-amd64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-amd64.exe"
+              ]
+            },
+            "windows/arm64": {
+              "sha256": "d85c8def7182390b682297aa0d45d491e8dacddd0413de3279b7cbe45906b2bd",
+              "urls": [
+                "https://github.com/CharlesNg35/shellcn-plugin-registry/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-arm64.exe",
+                "https://github.com/CharlesNg35/shellcn-contrib/releases/download/vault-v0.1.0/shellcn-plugin-vault-windows-arm64.exe"
+              ]
+            }
+          },
+          "icon": {
+            "type": "svg",
+            "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003cpath fill=\"#ffd814\" d=\"m0 1.953 63.76 124.094L128 1.953Zm53.841 49.254H43.684V41.06H53.84zm0-15.227H43.684V25.822H53.84ZM69.08 66.444H58.97V56.286h10.108zm0-15.237H58.97V41.06h10.108zm0-15.227H58.97V25.822h10.108Zm15.147 15.227H74.027V41.06h10.159ZM74.027 35.98V25.822h10.159V35.98z\"/\u003e\u003c/svg\u003e"
+          },
+          "snapshotUrl": "https://raw.githubusercontent.com/CharlesNg35/shellcn-plugin-registry/main/snapshots/vault/vault-v0.1.0.json"
         }
       ]
     },

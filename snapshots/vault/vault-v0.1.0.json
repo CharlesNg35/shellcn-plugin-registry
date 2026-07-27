@@ -1,0 +1,3905 @@
+{
+  "name": "vault",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003cpath fill=\"#ffd814\" d=\"m0 1.953 63.76 124.094L128 1.953Zm53.841 49.254H43.684V41.06H53.84zm0-15.227H43.684V25.822H53.84ZM69.08 66.444H58.97V56.286h10.108zm0-15.237H58.97V41.06h10.108zm0-15.227H58.97V25.822h10.108Zm15.147 15.227H74.027V41.06h10.159ZM74.027 35.98V25.822h10.159V35.98z\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "vault",
+    "version": "0.1.0",
+    "title": "HashiCorp Vault",
+    "description": "Vault browser for secret engines, KV v1 and v2 secrets with versions and metadata, auth methods, policies, tokens, leases, namespaces, and audit devices.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 128 128\"\u003e\u003cpath fill=\"#ffd814\" d=\"m0 1.953 63.76 124.094L128 1.953Zm53.841 49.254H43.684V41.06H53.84zm0-15.227H43.684V25.822H53.84ZM69.08 66.444H58.97V56.286h10.108zm0-15.237H58.97V41.06h10.108zm0-15.227H58.97V25.822h10.108Zm15.147 15.227H74.027V41.06h10.159ZM74.027 35.98V25.822h10.159V35.98z\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "security",
+      "label": "Security",
+      "icon": {
+        "type": "lucide",
+        "value": "shield"
+      },
+      "order": 100
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Server",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "vault.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 8200,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "namespace",
+              "label": "Namespace",
+              "type": "text",
+              "placeholder": "admin/team",
+              "help": "Vault Enterprise namespace this connection starts in. Leave empty for the root namespace."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "token_credential",
+              "options": [
+                {
+                  "label": "Stored token",
+                  "value": "token_credential"
+                },
+                {
+                  "label": "Token",
+                  "value": "token"
+                },
+                {
+                  "label": "AppRole",
+                  "value": "approle"
+                }
+              ]
+            },
+            {
+              "key": "token_credential_id",
+              "label": "Stored token",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable Vault token.",
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "vault"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token_credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token",
+              "label": "Token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "approle_credential_id",
+              "label": "AppRole credential",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable AppRole role ID and secret ID; the plugin logs in at connect time.",
+              "credential": {
+                "kind": "vault_approle",
+                "protocols": [
+                  "vault"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "approle"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "approle_path",
+              "label": "AppRole mount",
+              "type": "text",
+              "default": "approle",
+              "help": "Auth mount path the AppRole method is enabled at.",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "approle"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "verify-full",
+              "options": [
+                {
+                  "label": "Disable (http)",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks secret writes, policy changes, token creation, and every revoke or destroy operation."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "secrets",
+      "kv",
+      "kv-v2",
+      "policies",
+      "tokens",
+      "leases",
+      "namespaces",
+      "audit"
+    ],
+    "credentialKinds": [
+      {
+        "kind": "vault_approle",
+        "label": "Vault AppRole",
+        "fields": [
+          {
+            "key": "role_id",
+            "label": "Role ID",
+            "type": "text",
+            "required": true,
+            "public": true
+          },
+          {
+            "key": "secret_id",
+            "label": "Secret ID",
+            "type": "password",
+            "required": true,
+            "secret": true
+          }
+        ]
+      }
+    ],
+    "supportedTransports": [
+      "direct",
+      "agent"
+    ],
+    "agent": {
+      "modes": [
+        "tcp"
+      ],
+      "riskNote": "privileged"
+    },
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "server",
+        "label": "Server",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "ref": {
+          "kind": "system",
+          "name": "Vault",
+          "uid": "server"
+        }
+      },
+      {
+        "key": "engines",
+        "label": "Secret engines",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "source": {
+          "routeId": "vault.tree.mounts"
+        },
+        "resourceKind": "mount"
+      },
+      {
+        "key": "auth",
+        "label": "Auth methods",
+        "icon": {
+          "type": "lucide",
+          "value": "key-round"
+        },
+        "source": {
+          "routeId": "vault.tree.auth"
+        },
+        "resourceKind": "auth"
+      },
+      {
+        "key": "policies",
+        "label": "Policies",
+        "icon": {
+          "type": "lucide",
+          "value": "scroll-text"
+        },
+        "resourceKind": "policy"
+      },
+      {
+        "key": "tokens",
+        "label": "Tokens",
+        "icon": {
+          "type": "lucide",
+          "value": "ticket"
+        },
+        "resourceKind": "token"
+      },
+      {
+        "key": "leases",
+        "label": "Leases",
+        "icon": {
+          "type": "lucide",
+          "value": "timer"
+        },
+        "resourceKind": "lease"
+      },
+      {
+        "key": "namespaces",
+        "label": "Namespaces",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "resourceKind": "namespace"
+      },
+      {
+        "key": "audit",
+        "label": "Audit devices",
+        "icon": {
+          "type": "lucide",
+          "value": "file-clock"
+        },
+        "resourceKind": "audit"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "system",
+        "title": "Server",
+        "list": {
+          "routeId": "vault.system.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Server",
+            "sortable": true
+          },
+          {
+            "key": "version",
+            "label": "Version"
+          },
+          {
+            "key": "cluster_name",
+            "label": "Cluster"
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "type": "badge",
+            "severities": {
+              "active": "success",
+              "sealed": "danger",
+              "standby": "info",
+              "uninitialized": "warn",
+              "unsealed": "success"
+            }
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Vault",
+            "statusField": "state",
+            "severities": {
+              "active": "success",
+              "sealed": "danger",
+              "standby": "info",
+              "uninitialized": "warn",
+              "unsealed": "success"
+            }
+          },
+          "tabs": [
+            {
+              "key": "health",
+              "label": "Health",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.system.health"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Status",
+                    "fields": [
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "sealed": "danger",
+                          "standby": "info",
+                          "uninitialized": "warn",
+                          "unsealed": "success"
+                        }
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "copy": true
+                      },
+                      {
+                        "key": "enterprise",
+                        "label": "Enterprise",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "initialized",
+                        "label": "Initialized",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "sealed",
+                        "label": "Sealed",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "standby",
+                        "label": "Standby",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "performance_standby",
+                        "label": "Performance standby",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cluster",
+                    "fields": [
+                      {
+                        "key": "cluster_name",
+                        "label": "Cluster name",
+                        "copy": true
+                      },
+                      {
+                        "key": "cluster_id",
+                        "label": "Cluster ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "replication_performance_mode",
+                        "label": "Replication (performance)"
+                      },
+                      {
+                        "key": "replication_dr_mode",
+                        "label": "Replication (DR)"
+                      },
+                      {
+                        "key": "server_time_utc",
+                        "label": "Server time",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace",
+                        "copy": true
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "seal",
+              "label": "Seal",
+              "icon": {
+                "type": "lucide",
+                "value": "lock"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.system.seal"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Seal",
+                    "fields": [
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "sealed": "danger",
+                          "standby": "info",
+                          "uninitialized": "warn",
+                          "unsealed": "success"
+                        }
+                      },
+                      {
+                        "key": "type",
+                        "label": "Seal type"
+                      },
+                      {
+                        "key": "sealed",
+                        "label": "Sealed",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "initialized",
+                        "label": "Initialized",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "recovery_seal",
+                        "label": "Recovery seal",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "threshold",
+                        "label": "Unseal threshold",
+                        "type": "number"
+                      },
+                      {
+                        "key": "shares",
+                        "label": "Key shares",
+                        "type": "number"
+                      },
+                      {
+                        "key": "progress",
+                        "label": "Unseal progress",
+                        "type": "number"
+                      },
+                      {
+                        "key": "storage_type",
+                        "label": "Storage"
+                      },
+                      {
+                        "key": "migration",
+                        "label": "Seal migration",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "warnings",
+                        "label": "Warnings",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "mount",
+        "title": "Secret engines",
+        "list": {
+          "routeId": "vault.mounts.list"
+        },
+        "columns": [
+          {
+            "key": "path",
+            "label": "Path",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "kv_version",
+            "label": "KV",
+            "type": "number"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "accessor",
+            "label": "Accessor"
+          },
+          {
+            "key": "running_version",
+            "label": "Version"
+          },
+          {
+            "key": "local",
+            "label": "Local",
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "vault.secret.put"
+          ],
+          "detail": [
+            "vault.secret.put"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.mount.read",
+                "params": {
+                  "mount": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Mount",
+                    "fields": [
+                      {
+                        "key": "path",
+                        "label": "Path",
+                        "copy": true
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "kv_version",
+                        "label": "KV version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "accessor",
+                        "label": "Accessor",
+                        "copy": true
+                      },
+                      {
+                        "key": "uuid",
+                        "label": "UUID",
+                        "copy": true
+                      },
+                      {
+                        "key": "local",
+                        "label": "Local",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "seal_wrap",
+                        "label": "Seal wrap",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "external_entropy_access",
+                        "label": "External entropy",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "running_version",
+                        "label": "Running version"
+                      },
+                      {
+                        "key": "plugin_version",
+                        "label": "Plugin version"
+                      },
+                      {
+                        "key": "deprecation_status",
+                        "label": "Deprecation status",
+                        "type": "badge",
+                        "severities": {
+                          "deprecated": "warn",
+                          "pending removal": "danger",
+                          "removed": "danger",
+                          "supported": "success"
+                        }
+                      },
+                      {
+                        "key": "options",
+                        "label": "Options",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "secrets",
+              "label": "Secrets",
+              "icon": {
+                "type": "lucide",
+                "value": "key-round"
+              },
+              "panel": "kv",
+              "source": {
+                "routeId": "vault.secrets.list",
+                "params": {
+                  "mount": "${resource.uid}"
+                }
+              },
+              "config": {
+                "createRouteId": "vault.secret.write",
+                "readRouteId": "vault.secret.read",
+                "writeRouteId": "vault.secret.write",
+                "deleteRouteId": "vault.secret.delete",
+                "keyParam": "key",
+                "writable": true,
+                "valueTypes": [
+                  "json",
+                  "string"
+                ],
+                "delimiter": "/"
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "kv",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            },
+            {
+              "key": "tune",
+              "label": "Configuration",
+              "icon": {
+                "type": "lucide",
+                "value": "sliders-horizontal"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.mount.config",
+                "params": {
+                  "mount": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Tune",
+                    "fields": [
+                      {
+                        "key": "default_lease_ttl",
+                        "label": "Default lease TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "max_lease_ttl",
+                        "label": "Max lease TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "force_no_cache",
+                        "label": "Disable cache",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "listing_visibility",
+                        "label": "Listing visibility"
+                      },
+                      {
+                        "key": "token_type",
+                        "label": "Token type"
+                      },
+                      {
+                        "key": "audit_non_hmac_request_keys",
+                        "label": "Audit non-HMAC request keys",
+                        "type": "json"
+                      },
+                      {
+                        "key": "audit_non_hmac_response_keys",
+                        "label": "Audit non-HMAC response keys",
+                        "type": "json"
+                      },
+                      {
+                        "key": "passthrough_request_headers",
+                        "label": "Passthrough request headers",
+                        "type": "json"
+                      },
+                      {
+                        "key": "allowed_response_headers",
+                        "label": "Allowed response headers",
+                        "type": "json"
+                      },
+                      {
+                        "key": "allowed_managed_keys",
+                        "label": "Allowed managed keys",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "auth",
+        "title": "Auth methods",
+        "list": {
+          "routeId": "vault.auth.list"
+        },
+        "columns": [
+          {
+            "key": "path",
+            "label": "Path",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "accessor",
+            "label": "Accessor"
+          },
+          {
+            "key": "running_version",
+            "label": "Version"
+          },
+          {
+            "key": "local",
+            "label": "Local",
+            "type": "bool"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.auth.read",
+                "params": {
+                  "mount": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Auth mount",
+                    "fields": [
+                      {
+                        "key": "path",
+                        "label": "Path",
+                        "copy": true
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "accessor",
+                        "label": "Accessor",
+                        "copy": true
+                      },
+                      {
+                        "key": "uuid",
+                        "label": "UUID",
+                        "copy": true
+                      },
+                      {
+                        "key": "local",
+                        "label": "Local",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "running_version",
+                        "label": "Running version"
+                      },
+                      {
+                        "key": "deprecation_status",
+                        "label": "Deprecation status",
+                        "type": "badge",
+                        "severities": {
+                          "deprecated": "warn",
+                          "pending removal": "danger",
+                          "removed": "danger",
+                          "supported": "success"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Tune",
+                    "fields": [
+                      {
+                        "key": "default_lease_ttl",
+                        "label": "Default lease TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "max_lease_ttl",
+                        "label": "Max lease TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "token_type",
+                        "label": "Token type"
+                      },
+                      {
+                        "key": "listing_visibility",
+                        "label": "Listing visibility"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "secret",
+        "title": "Secrets",
+        "list": {
+          "routeId": "vault.secrets.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Name",
+            "sortable": true
+          },
+          {
+            "key": "key",
+            "label": "Path",
+            "sortable": true
+          },
+          {
+            "key": "mount",
+            "label": "Engine"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "vault.secret.put"
+          ],
+          "row": [
+            "vault.secret.delete"
+          ],
+          "detail": [
+            "vault.secret.put",
+            "vault.secret.delete",
+            "vault.secret.versions.delete",
+            "vault.secret.undelete",
+            "vault.secret.destroy",
+            "vault.secret.purge"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.uid}"
+          },
+          "defaultTab": "data",
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.secret.read",
+                "params": {
+                  "key": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Secret",
+                    "fields": [
+                      {
+                        "key": "key",
+                        "label": "Key",
+                        "copy": true
+                      },
+                      {
+                        "key": "mount",
+                        "label": "Engine",
+                        "copy": true
+                      },
+                      {
+                        "key": "kv_version",
+                        "label": "KV version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "created_time",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "deletion_time",
+                        "label": "Deleted",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "destroyed",
+                        "label": "Destroyed",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "value",
+                        "label": "Data",
+                        "type": "json"
+                      },
+                      {
+                        "key": "custom_metadata",
+                        "label": "Custom metadata",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "versions",
+              "label": "Versions",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "vault.secret.versions",
+                "params": {
+                  "key": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "version",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "deleted": "warn",
+                      "destroyed": "danger"
+                    }
+                  },
+                  {
+                    "key": "created_time",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "deletion_time",
+                    "label": "Deleted",
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "destroyed",
+                    "label": "Destroyed",
+                    "type": "bool"
+                  }
+                ],
+                "defaultSort": {
+                  "field": "version",
+                  "desc": true
+                },
+                "emptyText": "This engine does not keep secret versions."
+              }
+            },
+            {
+              "key": "metadata",
+              "label": "Metadata",
+              "icon": {
+                "type": "lucide",
+                "value": "tags"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.secret.metadata",
+                "params": {
+                  "key": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Metadata",
+                    "fields": [
+                      {
+                        "key": "current_version",
+                        "label": "Current version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "oldest_version",
+                        "label": "Oldest version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_versions",
+                        "label": "Max versions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "cas_required",
+                        "label": "CAS required",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "delete_version_after",
+                        "label": "Delete version after",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "created_time",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "updated_time",
+                        "label": "Updated",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "custom_metadata",
+                        "label": "Custom metadata",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "policy",
+        "title": "Policies",
+        "list": {
+          "routeId": "vault.policies.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Policy",
+            "sortable": true
+          },
+          {
+            "key": "builtin",
+            "label": "Built-in",
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "vault.policy.create"
+          ],
+          "row": [
+            "vault.policy.delete"
+          ],
+          "detail": [
+            "vault.policy.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "hcl",
+              "label": "Policy",
+              "icon": {
+                "type": "lucide",
+                "value": "scroll-text"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "vault.policy.read",
+                "params": {
+                  "name": "${resource.uid}"
+                }
+              },
+              "config": {
+                "language": "hcl",
+                "saveRouteId": "vault.policy.write",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "name": "${resource.uid}"
+                },
+                "refreshField": "content",
+                "saveToast": {
+                  "summary": "Policy saved",
+                  "detail": "${response.name} updated",
+                  "severity": "success"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "token",
+        "title": "Tokens",
+        "list": {
+          "routeId": "vault.tokens.list"
+        },
+        "columns": [
+          {
+            "key": "accessor",
+            "label": "Accessor",
+            "sortable": true
+          },
+          {
+            "key": "display_name",
+            "label": "Display name"
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "type": "badge"
+          },
+          {
+            "key": "policies",
+            "label": "Policies",
+            "type": "json"
+          },
+          {
+            "key": "ttl",
+            "label": "TTL",
+            "type": "duration"
+          },
+          {
+            "key": "expire_time",
+            "label": "Expires",
+            "type": "relative_time"
+          },
+          {
+            "key": "orphan",
+            "label": "Orphan",
+            "type": "bool"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "vault.token.create"
+          ],
+          "row": [
+            "vault.token.revoke"
+          ],
+          "detail": [
+            "vault.token.revoke"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.token.read",
+                "params": {
+                  "accessor": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Token",
+                    "fields": [
+                      {
+                        "key": "accessor",
+                        "label": "Accessor",
+                        "copy": true
+                      },
+                      {
+                        "key": "display_name",
+                        "label": "Display name"
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "policies",
+                        "label": "Policies",
+                        "type": "json"
+                      },
+                      {
+                        "key": "identity_policies",
+                        "label": "Identity policies",
+                        "type": "json"
+                      },
+                      {
+                        "key": "ttl",
+                        "label": "TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "explicit_max_ttl",
+                        "label": "Explicit max TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "creation_ttl",
+                        "label": "Creation TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "num_uses",
+                        "label": "Remaining uses",
+                        "type": "number"
+                      },
+                      {
+                        "key": "renewable",
+                        "label": "Renewable",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "orphan",
+                        "label": "Orphan",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "issue_time",
+                        "label": "Issued",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "expire_time",
+                        "label": "Expires",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "entity_id",
+                        "label": "Entity ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "path",
+                        "label": "Auth path",
+                        "copy": true
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Metadata",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "lease",
+        "title": "Leases",
+        "list": {
+          "routeId": "vault.leases.list"
+        },
+        "columns": [
+          {
+            "key": "id",
+            "label": "Lease ID",
+            "sortable": true
+          },
+          {
+            "key": "ttl",
+            "label": "TTL",
+            "type": "duration"
+          },
+          {
+            "key": "renewable",
+            "label": "Renewable",
+            "type": "bool"
+          },
+          {
+            "key": "issue_time",
+            "label": "Issued",
+            "type": "relative_time"
+          },
+          {
+            "key": "expire_time",
+            "label": "Expires",
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "vault.lease.revoke"
+          ],
+          "detail": [
+            "vault.lease.revoke"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.uid}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.lease.read",
+                "params": {
+                  "lease_id": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Lease",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Lease ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "ttl",
+                        "label": "TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "renewable",
+                        "label": "Renewable",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "issue_time",
+                        "label": "Issued",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "expire_time",
+                        "label": "Expires",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "last_renewal",
+                        "label": "Last renewal",
+                        "type": "datetime"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "namespace",
+        "title": "Namespaces",
+        "list": {
+          "routeId": "vault.namespaces.list"
+        },
+        "columns": [
+          {
+            "key": "path",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "ID"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.uid}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.namespace.read",
+                "params": {
+                  "path": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Namespace",
+                    "fields": [
+                      {
+                        "key": "path",
+                        "label": "Path",
+                        "copy": true
+                      },
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "custom_metadata",
+                        "label": "Custom metadata",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "audit",
+        "title": "Audit devices",
+        "list": {
+          "routeId": "vault.audit.list"
+        },
+        "columns": [
+          {
+            "key": "path",
+            "label": "Path",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "local",
+            "label": "Local",
+            "type": "bool"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "vault.audit.read",
+                "params": {
+                  "path": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Audit device",
+                    "fields": [
+                      {
+                        "key": "path",
+                        "label": "Path",
+                        "copy": true
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "local",
+                        "label": "Local",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "options",
+                        "label": "Options",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "vault.secret.put",
+        "label": "Write secret",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "vault.secret.put",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Secret",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Path",
+                  "type": "text",
+                  "required": true,
+                  "default": "${resource.uid}",
+                  "help": "Full path including the secrets engine mount, for example secret/team/app."
+                },
+                {
+                  "key": "data",
+                  "label": "Data",
+                  "type": "json",
+                  "required": true,
+                  "help": "JSON object of key/value pairs stored at this path."
+                },
+                {
+                  "key": "cas",
+                  "label": "Check-and-set version",
+                  "type": "number",
+                  "help": "KV v2 only. Write only when the current version matches; 0 requires the secret to be new.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "data"
+        }
+      },
+      {
+        "id": "vault.secret.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "vault.secret.delete",
+        "method": "DELETE",
+        "params": {
+          "key": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this secret? KV v2 keeps the versions until they are destroyed; KV v1 removes the value immediately.",
+        "bulk": true
+      },
+      {
+        "id": "vault.secret.versions.delete",
+        "label": "Delete versions",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "vault.secret.versions.delete",
+        "method": "POST",
+        "params": {
+          "key": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete these versions? They keep their data and can be undeleted until they are destroyed.",
+        "input": {
+          "groups": [
+            {
+              "name": "Versions",
+              "fields": [
+                {
+                  "key": "versions",
+                  "label": "Versions to delete",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "3,4",
+                  "help": "Comma-separated KV v2 version numbers. A deleted version keeps its data until it is destroyed."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "versions"
+        }
+      },
+      {
+        "id": "vault.secret.undelete",
+        "label": "Undelete versions",
+        "icon": {
+          "type": "lucide",
+          "value": "undo-2"
+        },
+        "routeId": "vault.secret.undelete",
+        "method": "POST",
+        "params": {
+          "key": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Versions",
+              "fields": [
+                {
+                  "key": "versions",
+                  "label": "Versions to undelete",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "3,4",
+                  "help": "Comma-separated KV v2 version numbers."
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "versions"
+        }
+      },
+      {
+        "id": "vault.secret.destroy",
+        "label": "Destroy versions",
+        "icon": {
+          "type": "lucide",
+          "value": "bomb"
+        },
+        "routeId": "vault.secret.destroy",
+        "method": "POST",
+        "params": {
+          "key": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Permanently destroy these versions? The data cannot be recovered.",
+        "input": {
+          "groups": [
+            {
+              "name": "Versions",
+              "fields": [
+                {
+                  "key": "versions",
+                  "label": "Versions to destroy",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "3,4",
+                  "help": "Comma-separated KV v2 version numbers. Destroyed data cannot be recovered."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "vault.secret.purge",
+        "label": "Destroy secret",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "vault.secret.purge",
+        "method": "DELETE",
+        "params": {
+          "key": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Permanently destroy every version and the metadata of this secret?",
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "vault.policy.create",
+        "label": "Create policy",
+        "icon": {
+          "type": "lucide",
+          "value": "file-plus"
+        },
+        "routeId": "vault.policy.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Policy",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "app-readonly"
+                },
+                {
+                  "key": "policy",
+                  "label": "HCL",
+                  "type": "textarea",
+                  "required": true,
+                  "placeholder": "path \"secret/data/app/*\" {\n  capabilities = [\"read\"]\n}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "vault.policy.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "vault.policy.delete",
+        "method": "DELETE",
+        "params": {
+          "name": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this ACL policy? Tokens that reference it lose those capabilities.",
+        "bulk": true
+      },
+      {
+        "id": "vault.token.create",
+        "label": "Create token",
+        "icon": {
+          "type": "lucide",
+          "value": "ticket-plus"
+        },
+        "routeId": "vault.token.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Token",
+              "fields": [
+                {
+                  "key": "display_name",
+                  "label": "Display name",
+                  "type": "text",
+                  "placeholder": "ci-runner"
+                },
+                {
+                  "key": "policies",
+                  "label": "Policies",
+                  "type": "text",
+                  "placeholder": "default,app-readonly",
+                  "help": "Comma-separated ACL policy names."
+                },
+                {
+                  "key": "ttl",
+                  "label": "TTL",
+                  "type": "duration",
+                  "placeholder": "1h"
+                },
+                {
+                  "key": "explicit_max_ttl",
+                  "label": "Explicit max TTL",
+                  "type": "duration"
+                },
+                {
+                  "key": "num_uses",
+                  "label": "Use limit",
+                  "type": "number",
+                  "default": 0,
+                  "help": "0 means unlimited uses.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "key": "token_type",
+                  "label": "Token type",
+                  "type": "select",
+                  "default": "service",
+                  "options": [
+                    {
+                      "label": "Service",
+                      "value": "service"
+                    },
+                    {
+                      "label": "Batch",
+                      "value": "batch"
+                    }
+                  ]
+                },
+                {
+                  "key": "renewable",
+                  "label": "Renewable",
+                  "type": "toggle",
+                  "default": true
+                },
+                {
+                  "key": "no_parent",
+                  "label": "Orphan token",
+                  "type": "toggle",
+                  "default": false,
+                  "help": "Orphan tokens survive revocation of the creating token."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "vault.token.revoke",
+        "label": "Revoke",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "vault.token.revoke",
+        "method": "DELETE",
+        "params": {
+          "accessor": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Revoke this token? Every secret and lease it created is revoked with it.",
+        "bulk": true
+      },
+      {
+        "id": "vault.lease.revoke",
+        "label": "Revoke",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "vault.lease.revoke",
+        "method": "POST",
+        "params": {
+          "lease_id": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Revoke this lease? The credential it issued stops working immediately.",
+        "bulk": true
+      }
+    ],
+    "scope": [
+      {
+        "param": "namespace",
+        "label": "Namespace",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "control": "autocomplete",
+        "allowCustom": true,
+        "optionsSource": {
+          "routeId": "vault.namespaces.list"
+        },
+        "valueField": "path",
+        "labelField": "path",
+        "allLabel": "Connection namespace"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

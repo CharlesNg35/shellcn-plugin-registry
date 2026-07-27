@@ -1,0 +1,5957 @@
+{
+  "name": "nomad",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M256 0 33.8 128v256L256 512l222.2-128V127.1zm98.7 280.9-59.6 33.8-71.1-39.1v81.8L156.4 400V229.3l53.3-32.9 73.8 39.1v-82.7l71.1-42.7v170.8z\" style=\"fill:#00ca8e\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "nomad",
+    "version": "0.1.0",
+    "title": "Nomad",
+    "description": "HashiCorp Nomad workload orchestrator: jobs, allocations, clients, deployments, live logs, and exec.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M256 0 33.8 128v256L256 512l222.2-128V127.1zm98.7 280.9-59.6 33.8-71.1-39.1v81.8L156.4 400V229.3l53.3-32.9 73.8 39.1v-82.7l71.1-42.7v170.8z\" style=\"fill:#00ca8e\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "orchestration",
+      "label": "Orchestration",
+      "icon": {
+        "type": "lucide",
+        "value": "ship-wheel"
+      },
+      "order": 70
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Cluster",
+          "fields": [
+            {
+              "key": "address",
+              "label": "HTTP API address",
+              "type": "text",
+              "required": true,
+              "default": "http://localhost:4646",
+              "placeholder": "https://nomad.example.internal:4646",
+              "help": "Base URL of a Nomad server or client agent."
+            },
+            {
+              "key": "region",
+              "label": "Region",
+              "type": "text",
+              "placeholder": "global",
+              "help": "Leave empty to use the agent's own region."
+            },
+            {
+              "key": "namespace",
+              "label": "Default namespace",
+              "type": "text",
+              "default": "default",
+              "placeholder": "default"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None (ACLs disabled)",
+                  "value": "none"
+                },
+                {
+                  "label": "ACL token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored ACL token",
+                  "value": "stored_token"
+                }
+              ]
+            },
+            {
+              "key": "token",
+              "label": "ACL token",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_id",
+              "label": "Stored ACL token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "nomad"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_token"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "placeholder": "-----BEGIN CERTIFICATE-----",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_certificate_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Required when the cluster enforces mutual TLS.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "nomad"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks job submit, stop, restart, drain, and every other write."
+            },
+            {
+              "key": "allow_exec",
+              "label": "Allow allocation exec",
+              "type": "toggle",
+              "default": false,
+              "help": "Opens interactive shells inside running tasks."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "log_lines",
+              "label": "Log tail size",
+              "type": "number",
+              "default": 200,
+              "help": "Bytes-equivalent tail depth used when a log stream starts.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 10000
+                }
+              ]
+            },
+            {
+              "key": "scan_limit",
+              "label": "Search scan limit",
+              "type": "number",
+              "default": 1000,
+              "help": "How many rows one sorted or searched listing walks before it reports a truncated scan.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 500
+                },
+                {
+                  "type": "max",
+                  "value": 20000
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "jobs",
+      "allocations",
+      "nodes",
+      "deployments",
+      "evaluations",
+      "volumes",
+      "logs",
+      "exec",
+      "metrics"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "cluster",
+        "label": "Cluster",
+        "icon": {
+          "type": "lucide",
+          "value": "ship-wheel"
+        },
+        "ref": {
+          "kind": "cluster",
+          "name": "cluster",
+          "uid": "cluster"
+        }
+      },
+      {
+        "key": "namespaces",
+        "label": "Namespaces",
+        "icon": {
+          "type": "lucide",
+          "value": "folders"
+        },
+        "source": {
+          "routeId": "nomad.tree.namespaces"
+        }
+      },
+      {
+        "key": "jobs",
+        "label": "Jobs",
+        "icon": {
+          "type": "lucide",
+          "value": "briefcase"
+        },
+        "resourceKind": "job"
+      },
+      {
+        "key": "allocations",
+        "label": "Allocations",
+        "icon": {
+          "type": "lucide",
+          "value": "boxes"
+        },
+        "resourceKind": "allocation"
+      },
+      {
+        "key": "clients",
+        "label": "Clients",
+        "icon": {
+          "type": "lucide",
+          "value": "hard-drive"
+        },
+        "resourceKind": "node"
+      },
+      {
+        "key": "deployments",
+        "label": "Deployments",
+        "icon": {
+          "type": "lucide",
+          "value": "rocket"
+        },
+        "resourceKind": "deployment"
+      },
+      {
+        "key": "evaluations",
+        "label": "Evaluations",
+        "icon": {
+          "type": "lucide",
+          "value": "list-checks"
+        },
+        "resourceKind": "evaluation"
+      },
+      {
+        "key": "csi-volumes",
+        "label": "CSI volumes",
+        "icon": {
+          "type": "lucide",
+          "value": "database"
+        },
+        "resourceKind": "volume"
+      },
+      {
+        "key": "host-volumes",
+        "label": "Host volumes",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-tree"
+        },
+        "resourceKind": "host_volume"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "cluster",
+        "title": "Cluster",
+        "list": {
+          "routeId": "nomad.cluster.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Cluster"
+          },
+          {
+            "key": "leader",
+            "label": "Leader"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Cluster"
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.cluster.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Cluster",
+                    "fields": [
+                      {
+                        "key": "address",
+                        "label": "API address",
+                        "copy": true
+                      },
+                      {
+                        "key": "leader",
+                        "label": "Leader",
+                        "copy": true
+                      },
+                      {
+                        "key": "version",
+                        "label": "Nomad version"
+                      },
+                      {
+                        "key": "region",
+                        "label": "Region"
+                      },
+                      {
+                        "key": "datacenter",
+                        "label": "Datacenter"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Default namespace"
+                      },
+                      {
+                        "key": "nodeName",
+                        "label": "Agent node"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Topology",
+                    "fields": [
+                      {
+                        "key": "serverCount",
+                        "label": "Servers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "peers",
+                        "label": "Server peers",
+                        "type": "json"
+                      },
+                      {
+                        "key": "clientCount",
+                        "label": "Clients",
+                        "type": "number"
+                      },
+                      {
+                        "key": "clientsReady",
+                        "label": "Clients ready",
+                        "type": "number"
+                      },
+                      {
+                        "key": "clientCountPartial",
+                        "label": "Client counts capped by scan limit",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "regions",
+                        "label": "Regions",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Connection",
+                    "fields": [
+                      {
+                        "key": "readOnly",
+                        "label": "Read-only",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "execAllowed",
+                        "label": "Exec allowed",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "servers",
+              "label": "Servers",
+              "icon": {
+                "type": "lucide",
+                "value": "server"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.members.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Server",
+                    "sortable": true
+                  },
+                  {
+                    "key": "leader",
+                    "label": "Leader",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "type": "badge",
+                    "severities": {
+                      "alive": "success",
+                      "failed": "danger",
+                      "leaving": "warn",
+                      "left": "secondary"
+                    }
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "type": "number"
+                  },
+                  {
+                    "key": "region",
+                    "label": "Region",
+                    "sortable": true
+                  },
+                  {
+                    "key": "datacenter",
+                    "label": "Datacenter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "build",
+                    "label": "Build"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No server members reported.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "cluster-namespaces",
+              "label": "Namespaces",
+              "icon": {
+                "type": "lucide",
+                "value": "folders"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.namespaces.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "description",
+                    "label": "Description"
+                  },
+                  {
+                    "key": "quota",
+                    "label": "Quota"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No namespaces are readable with this token.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "cluster-regions",
+              "label": "Regions",
+              "icon": {
+                "type": "lucide",
+                "value": "globe"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.regions.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Region",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No federated regions."
+              }
+            },
+            {
+              "key": "cluster-datacenters",
+              "label": "Datacenters",
+              "icon": {
+                "type": "lucide",
+                "value": "map-pin"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.datacenters.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Datacenter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "clients",
+                    "label": "Clients",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "ready",
+                    "label": "Ready",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "eligible",
+                    "label": "Eligible",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "draining",
+                    "label": "Draining",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "nodePools",
+                    "label": "Node pools",
+                    "type": "json"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU (MHz)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No client has declared a datacenter.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "job",
+        "title": "Jobs",
+        "list": {
+          "routeId": "nomad.jobs.list"
+        },
+        "watch": {
+          "routeId": "nomad.resources.watch",
+          "method": "WS",
+          "params": {
+            "kind": "job"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Job",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "type": "badge",
+            "severities": {
+              "batch": "secondary",
+              "service": "info",
+              "sysbatch": "secondary",
+              "system": "warn"
+            }
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "severities": {
+              "dead": "secondary",
+              "pending": "warn",
+              "running": "success"
+            }
+          },
+          {
+            "key": "priority",
+            "label": "Priority",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "running",
+            "label": "Running",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "queued",
+            "label": "Queued",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "failed",
+            "label": "Failed",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "submitTime",
+            "label": "Submitted",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "nomad.job.submit",
+            "nomad.job.plan"
+          ],
+          "row": [
+            "nomad.job.stop",
+            "nomad.job.purge"
+          ],
+          "detail": [
+            "nomad.job.evaluate",
+            "nomad.job.periodic",
+            "nomad.job.restart",
+            "nomad.job.stop",
+            "nomad.job.purge"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "dead": "secondary",
+              "pending": "warn",
+              "running": "success"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.job.overview",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Job ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "dead": "secondary",
+                          "pending": "warn",
+                          "running": "success"
+                        }
+                      },
+                      {
+                        "key": "statusDescription",
+                        "label": "Status detail"
+                      },
+                      {
+                        "key": "priority",
+                        "label": "Priority",
+                        "type": "number"
+                      },
+                      {
+                        "key": "region",
+                        "label": "Region"
+                      },
+                      {
+                        "key": "nodePool",
+                        "label": "Node pool"
+                      },
+                      {
+                        "key": "datacenters",
+                        "label": "Datacenters",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Allocations",
+                    "fields": [
+                      {
+                        "key": "running",
+                        "label": "Running",
+                        "type": "number"
+                      },
+                      {
+                        "key": "starting",
+                        "label": "Starting",
+                        "type": "number"
+                      },
+                      {
+                        "key": "queued",
+                        "label": "Queued",
+                        "type": "number"
+                      },
+                      {
+                        "key": "complete",
+                        "label": "Complete",
+                        "type": "number"
+                      },
+                      {
+                        "key": "failed",
+                        "label": "Failed",
+                        "type": "number"
+                      },
+                      {
+                        "key": "lost",
+                        "label": "Lost",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Version",
+                    "fields": [
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "stable",
+                        "label": "Stable",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "stopped",
+                        "label": "Stopped",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "periodic",
+                        "label": "Periodic",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "parameterized",
+                        "label": "Parameterized",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "multiregion",
+                        "label": "Multiregion",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "latestDeployment",
+                        "label": "Latest deployment",
+                        "copy": true
+                      },
+                      {
+                        "key": "deploymentStatus",
+                        "label": "Deployment status",
+                        "type": "badge",
+                        "severities": {
+                          "cancelled": "secondary",
+                          "failed": "danger",
+                          "paused": "warn",
+                          "running": "info",
+                          "successful": "success"
+                        }
+                      },
+                      {
+                        "key": "submitTime",
+                        "label": "Submitted",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "jobModifyIndex",
+                        "label": "Job modify index",
+                        "type": "number"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Meta",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "nomad.job.watch",
+                  "method": "WS",
+                  "params": {
+                    "job": "${resource.name}",
+                    "ns": "${resource.namespace}"
+                  }
+                }
+              }
+            },
+            {
+              "key": "groups",
+              "label": "Task groups",
+              "icon": {
+                "type": "lucide",
+                "value": "layers"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.job.groups",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Task group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "count",
+                    "label": "Count",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "tasks",
+                    "label": "Tasks",
+                    "type": "json"
+                  },
+                  {
+                    "key": "drivers",
+                    "label": "Drivers",
+                    "type": "json"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU (MHz)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "disk",
+                    "label": "Disk (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "services",
+                    "label": "Services",
+                    "type": "number"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.job.scale"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This job declares no task groups.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "allocations",
+              "label": "Allocations",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.allocs.list",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "name",
+                    "label": "Allocation",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "taskGroup",
+                    "label": "Task group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "clientStatus",
+                    "label": "Client status",
+                    "type": "badge",
+                    "severities": {
+                      "complete": "secondary",
+                      "failed": "danger",
+                      "lost": "danger",
+                      "pending": "warn",
+                      "running": "success",
+                      "starting": "warn",
+                      "unknown": "warn"
+                    }
+                  },
+                  {
+                    "key": "desiredStatus",
+                    "label": "Desired",
+                    "type": "badge",
+                    "severities": {
+                      "evict": "danger",
+                      "run": "success",
+                      "stop": "secondary"
+                    }
+                  },
+                  {
+                    "key": "nodeName",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "jobVersion",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "modifyTime",
+                    "label": "Modified",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.alloc.stop"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "modifyTime",
+                  "desc": true
+                },
+                "emptyText": "No allocations here yet.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "deployments",
+              "label": "Deployments",
+              "icon": {
+                "type": "lucide",
+                "value": "rocket"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.deployments.list",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "jobId",
+                    "label": "Job",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "jobVersion",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "type": "badge",
+                    "severities": {
+                      "cancelled": "secondary",
+                      "failed": "danger",
+                      "paused": "warn",
+                      "running": "info",
+                      "successful": "success"
+                    }
+                  },
+                  {
+                    "key": "progress",
+                    "label": "Healthy",
+                    "sortable": true,
+                    "type": "percent"
+                  },
+                  {
+                    "key": "desired",
+                    "label": "Desired",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "placed",
+                    "label": "Placed",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "unhealthy",
+                    "label": "Unhealthy",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "createTime",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "createTime",
+                  "desc": true
+                },
+                "emptyText": "This job has never rolled out.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "evaluations",
+              "label": "Evaluations",
+              "icon": {
+                "type": "lucide",
+                "value": "list-checks"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.evals.list",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "jobId",
+                    "label": "Job",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "type": "badge",
+                    "severities": {
+                      "blocked": "warn",
+                      "canceled": "secondary",
+                      "complete": "success",
+                      "failed": "danger",
+                      "pending": "warn"
+                    }
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "triggeredBy",
+                    "label": "Triggered by",
+                    "sortable": true
+                  },
+                  {
+                    "key": "priority",
+                    "label": "Priority",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "failedGroups",
+                    "label": "Blocked groups",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "createTime",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "createTime",
+                  "desc": true
+                },
+                "emptyText": "No evaluations for this job.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "versions",
+              "label": "Versions",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.job.versions",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "version",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "stable",
+                    "label": "Stable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "tag",
+                    "label": "Tag"
+                  },
+                  {
+                    "key": "changes",
+                    "label": "Changes",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "submitTime",
+                    "label": "Submitted",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.job.revert"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "version",
+                  "desc": true
+                },
+                "emptyText": "Only one version has been submitted.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "spec",
+              "label": "Specification",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "code_editor",
+              "source": {
+                "routeId": "nomad.job.spec",
+                "params": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "language": "hcl",
+                "saveRouteId": "nomad.job.spec.save",
+                "saveMethod": "PUT",
+                "saveParams": {
+                  "job": "${resource.name}",
+                  "ns": "${resource.namespace}"
+                },
+                "refreshField": "content",
+                "saveToast": {
+                  "summary": "Job updated",
+                  "detail": "Evaluation ${response.evalId} created",
+                  "severity": "success"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "allocation",
+        "title": "Allocations",
+        "list": {
+          "routeId": "nomad.allocs.list"
+        },
+        "watch": {
+          "routeId": "nomad.resources.watch",
+          "method": "WS",
+          "params": {
+            "kind": "allocation"
+          }
+        },
+        "columns": [
+          {
+            "key": "shortId",
+            "label": "ID",
+            "width": "9rem"
+          },
+          {
+            "key": "name",
+            "label": "Allocation",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "taskGroup",
+            "label": "Task group",
+            "sortable": true
+          },
+          {
+            "key": "clientStatus",
+            "label": "Client status",
+            "type": "badge",
+            "severities": {
+              "complete": "secondary",
+              "failed": "danger",
+              "lost": "danger",
+              "pending": "warn",
+              "running": "success",
+              "starting": "warn",
+              "unknown": "warn"
+            }
+          },
+          {
+            "key": "desiredStatus",
+            "label": "Desired",
+            "type": "badge",
+            "severities": {
+              "evict": "danger",
+              "run": "success",
+              "stop": "secondary"
+            }
+          },
+          {
+            "key": "nodeName",
+            "label": "Client",
+            "sortable": true
+          },
+          {
+            "key": "jobVersion",
+            "label": "Version",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "cpu",
+            "label": "CPU",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "memory",
+            "label": "Memory (MB)",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "modifyTime",
+            "label": "Modified",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "nomad.alloc.stop"
+          ],
+          "detail": [
+            "nomad.alloc.restart",
+            "nomad.alloc.signal",
+            "nomad.alloc.stop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "clientStatus",
+            "severities": {
+              "complete": "secondary",
+              "failed": "danger",
+              "lost": "danger",
+              "pending": "warn",
+              "running": "success",
+              "starting": "warn",
+              "unknown": "warn"
+            }
+          },
+          "defaultTab": "alloc-overview",
+          "tabs": [
+            {
+              "key": "alloc-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.alloc.overview",
+                "params": {
+                  "alloc": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Allocation ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "jobId",
+                        "label": "Job",
+                        "copy": true
+                      },
+                      {
+                        "key": "taskGroup",
+                        "label": "Task group"
+                      },
+                      {
+                        "key": "tasks",
+                        "label": "Tasks",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Status",
+                    "fields": [
+                      {
+                        "key": "clientStatus",
+                        "label": "Client status",
+                        "type": "badge",
+                        "severities": {
+                          "complete": "secondary",
+                          "failed": "danger",
+                          "lost": "danger",
+                          "pending": "warn",
+                          "running": "success",
+                          "starting": "warn",
+                          "unknown": "warn"
+                        }
+                      },
+                      {
+                        "key": "clientDescription",
+                        "label": "Client detail"
+                      },
+                      {
+                        "key": "desiredStatus",
+                        "label": "Desired status",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "desiredDescription",
+                        "label": "Desired detail"
+                      },
+                      {
+                        "key": "deploymentHealthy",
+                        "label": "Deployment healthy",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "canary",
+                        "label": "Canary",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "failedTasks",
+                        "label": "Failed tasks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "restarts",
+                        "label": "Restarts",
+                        "type": "number"
+                      },
+                      {
+                        "key": "rescheduleAttempts",
+                        "label": "Reschedule attempts",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Placement",
+                    "fields": [
+                      {
+                        "key": "nodeName",
+                        "label": "Client"
+                      },
+                      {
+                        "key": "nodeId",
+                        "label": "Client ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "evalId",
+                        "label": "Evaluation",
+                        "copy": true
+                      },
+                      {
+                        "key": "deploymentId",
+                        "label": "Deployment",
+                        "copy": true
+                      },
+                      {
+                        "key": "previousAllocation",
+                        "label": "Previous allocation",
+                        "copy": true
+                      },
+                      {
+                        "key": "nextAllocation",
+                        "label": "Next allocation",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Resources",
+                    "fields": [
+                      {
+                        "key": "cpu",
+                        "label": "CPU reserved",
+                        "type": "number"
+                      },
+                      {
+                        "key": "memory",
+                        "label": "Memory reserved (MB)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "disk",
+                        "label": "Ephemeral disk (MB)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "createTime",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "modifyTime",
+                        "label": "Modified",
+                        "type": "relative_time"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "nomad.alloc.watch",
+                  "method": "WS",
+                  "params": {
+                    "alloc": "${resource.uid}",
+                    "ns": "${resource.namespace}"
+                  }
+                }
+              }
+            },
+            {
+              "key": "alloc-events",
+              "label": "Task events",
+              "icon": {
+                "type": "lucide",
+                "value": "history"
+              },
+              "panel": "timeline",
+              "source": {
+                "routeId": "nomad.alloc.events",
+                "params": {
+                  "alloc": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "timestampField": "time",
+                "titleField": "reason",
+                "bodyField": "message",
+                "severityField": "severity",
+                "iconField": "icon",
+                "resourceField": "resource",
+                "emptyText": "No task events recorded yet.",
+                "refreshIntervalMs": 10000
+              }
+            },
+            {
+              "key": "alloc-logs",
+              "label": "Logs",
+              "icon": {
+                "type": "lucide",
+                "value": "scroll-text"
+              },
+              "panel": "log_stream",
+              "source": {
+                "routeId": "nomad.alloc.logs",
+                "method": "WS",
+                "params": {
+                  "alloc": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "controls": [
+                  {
+                    "param": "task",
+                    "label": "Task",
+                    "optionsSource": {
+                      "routeId": "nomad.alloc.tasks",
+                      "params": {
+                        "alloc": "${resource.uid}",
+                        "ns": "${resource.namespace}"
+                      }
+                    }
+                  },
+                  {
+                    "param": "type",
+                    "label": "Stream",
+                    "optionsSource": {
+                      "routeId": "nomad.log.types"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "alloc-exec",
+              "label": "Exec",
+              "icon": {
+                "type": "lucide",
+                "value": "terminal"
+              },
+              "panel": "terminal",
+              "source": {
+                "routeId": "nomad.alloc.exec",
+                "method": "WS",
+                "params": {
+                  "alloc": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "zoom": true,
+                "search": true,
+                "controls": [
+                  {
+                    "param": "task",
+                    "label": "Task",
+                    "optionsSource": {
+                      "routeId": "nomad.alloc.tasks",
+                      "params": {
+                        "alloc": "${resource.uid}",
+                        "ns": "${resource.namespace}"
+                      }
+                    }
+                  }
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "clientStatus",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "alloc-metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "nomad.alloc.metrics",
+                "method": "WS",
+                "params": {
+                  "alloc": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "cpuTicks",
+                    "label": "CPU",
+                    "unit": "MHz"
+                  },
+                  {
+                    "key": "memoryUsed",
+                    "label": "Memory",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "tasks",
+                    "label": "Tasks"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "cpuPercent",
+                    "label": "CPU usage",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "cpuPercent",
+                      "usedKey": "cpuUsed",
+                      "totalKey": "cpuTotal",
+                      "usedType": "number",
+                      "totalType": "number",
+                      "unit": "MHz",
+                      "totalLabel": "of",
+                      "warnAt": 75,
+                      "criticalAt": 90
+                    }
+                  },
+                  {
+                    "key": "memoryPercent",
+                    "label": "Memory usage",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "memoryPercent",
+                      "usedKey": "memoryUsed",
+                      "totalKey": "memoryTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "cpuPercent",
+                    "label": "CPU",
+                    "unit": "%"
+                  },
+                  {
+                    "key": "memoryPercent",
+                    "label": "Memory",
+                    "unit": "%"
+                  }
+                ],
+                "history": 60
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "clientStatus",
+                    "op": "eq",
+                    "value": "running"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Clients",
+        "list": {
+          "routeId": "nomad.nodes.list"
+        },
+        "watch": {
+          "routeId": "nomad.resources.watch",
+          "method": "WS",
+          "params": {
+            "kind": "node"
+          }
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Client",
+            "sortable": true
+          },
+          {
+            "key": "shortId",
+            "label": "ID",
+            "width": "9rem"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "severities": {
+              "disconnected": "warn",
+              "down": "danger",
+              "initializing": "warn",
+              "ready": "success"
+            }
+          },
+          {
+            "key": "eligibility",
+            "label": "Eligibility",
+            "type": "badge",
+            "severities": {
+              "eligible": "success",
+              "ineligible": "warn"
+            }
+          },
+          {
+            "key": "drain",
+            "label": "Draining",
+            "type": "bool"
+          },
+          {
+            "key": "datacenter",
+            "label": "Datacenter",
+            "sortable": true
+          },
+          {
+            "key": "nodePool",
+            "label": "Node pool",
+            "sortable": true
+          },
+          {
+            "key": "nodeClass",
+            "label": "Class",
+            "sortable": true
+          },
+          {
+            "key": "cpu",
+            "label": "CPU (MHz)",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "memory",
+            "label": "Memory (MB)",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "version",
+            "label": "Version",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "detail": [
+            "nomad.node.drain",
+            "nomad.node.drain.cancel",
+            "nomad.node.eligibility"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "disconnected": "warn",
+              "down": "danger",
+              "initializing": "warn",
+              "ready": "success"
+            }
+          },
+          "defaultTab": "node-overview",
+          "tabs": [
+            {
+              "key": "node-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.node.overview",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Client"
+                      },
+                      {
+                        "key": "id",
+                        "label": "Client ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "address",
+                        "label": "HTTP address",
+                        "copy": true
+                      },
+                      {
+                        "key": "datacenter",
+                        "label": "Datacenter"
+                      },
+                      {
+                        "key": "nodePool",
+                        "label": "Node pool"
+                      },
+                      {
+                        "key": "nodeClass",
+                        "label": "Class"
+                      },
+                      {
+                        "key": "version",
+                        "label": "Nomad version"
+                      },
+                      {
+                        "key": "os",
+                        "label": "Operating system"
+                      },
+                      {
+                        "key": "kernel",
+                        "label": "Kernel"
+                      },
+                      {
+                        "key": "arch",
+                        "label": "Architecture"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Scheduling",
+                    "fields": [
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "disconnected": "warn",
+                          "down": "danger",
+                          "initializing": "warn",
+                          "ready": "success"
+                        }
+                      },
+                      {
+                        "key": "statusDescription",
+                        "label": "Status detail"
+                      },
+                      {
+                        "key": "eligibility",
+                        "label": "Eligibility",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "drain",
+                        "label": "Draining",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "drainDeadline",
+                        "label": "Drain deadline",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "drainIgnoresSystemJobs",
+                        "label": "Drain keeps system jobs",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "lastDrainStatus",
+                        "label": "Last drain",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "lastDrainAt",
+                        "label": "Last drain at",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "maxAllocs",
+                        "label": "Max allocations",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "cpuPercent",
+                        "label": "CPU usage",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "cpuPercent",
+                          "totalKey": "cpu",
+                          "totalType": "number",
+                          "unit": "MHz",
+                          "totalLabel": "of",
+                          "warnAt": 75,
+                          "criticalAt": 90
+                        }
+                      },
+                      {
+                        "key": "memoryPercent",
+                        "label": "Memory usage",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "memoryPercent",
+                          "usedKey": "memoryUsed",
+                          "totalKey": "memoryTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 80,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "diskPercent",
+                        "label": "Alloc disk usage",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "diskPercent",
+                          "usedKey": "diskUsed",
+                          "totalKey": "diskTotal",
+                          "usedType": "bytes",
+                          "totalType": "bytes",
+                          "warnAt": 80,
+                          "criticalAt": 95
+                        }
+                      },
+                      {
+                        "key": "memory",
+                        "label": "Schedulable memory (MB)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "disk",
+                        "label": "Schedulable disk (MB)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "reservedCpu",
+                        "label": "Reserved CPU (MHz)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "reservedMemory",
+                        "label": "Reserved memory (MB)",
+                        "type": "number"
+                      },
+                      {
+                        "key": "drivers",
+                        "label": "Healthy drivers",
+                        "type": "json"
+                      },
+                      {
+                        "key": "hostVolumes",
+                        "label": "Host volumes",
+                        "type": "json"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Meta",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true,
+                "watch": {
+                  "routeId": "nomad.node.watch",
+                  "method": "WS",
+                  "params": {
+                    "node": "${resource.uid}"
+                  }
+                }
+              }
+            },
+            {
+              "key": "allocations",
+              "label": "Allocations",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.allocs.list",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "name",
+                    "label": "Allocation",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "taskGroup",
+                    "label": "Task group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "clientStatus",
+                    "label": "Client status",
+                    "type": "badge",
+                    "severities": {
+                      "complete": "secondary",
+                      "failed": "danger",
+                      "lost": "danger",
+                      "pending": "warn",
+                      "running": "success",
+                      "starting": "warn",
+                      "unknown": "warn"
+                    }
+                  },
+                  {
+                    "key": "desiredStatus",
+                    "label": "Desired",
+                    "type": "badge",
+                    "severities": {
+                      "evict": "danger",
+                      "run": "success",
+                      "stop": "secondary"
+                    }
+                  },
+                  {
+                    "key": "nodeName",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "jobVersion",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "modifyTime",
+                    "label": "Modified",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.alloc.stop"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "modifyTime",
+                  "desc": true
+                },
+                "emptyText": "No allocations here yet.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "node-metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "nomad.node.metrics",
+                "method": "WS",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "cpuTicks",
+                    "label": "CPU",
+                    "unit": "MHz"
+                  },
+                  {
+                    "key": "memoryUsed",
+                    "label": "Memory",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "uptime",
+                    "label": "Uptime",
+                    "unit": "s"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "cpuPercent",
+                    "label": "CPU usage",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "cpuPercent",
+                      "usedKey": "cpuUsed",
+                      "totalKey": "cpuTotal",
+                      "usedType": "number",
+                      "totalType": "number",
+                      "unit": "MHz",
+                      "totalLabel": "of",
+                      "warnAt": 75,
+                      "criticalAt": 90
+                    }
+                  },
+                  {
+                    "key": "memoryPercent",
+                    "label": "Memory usage",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "memoryPercent",
+                      "usedKey": "memoryUsed",
+                      "totalKey": "memoryTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  },
+                  {
+                    "key": "diskPercent",
+                    "label": "Alloc disk usage",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "diskPercent",
+                      "usedKey": "diskUsed",
+                      "totalKey": "diskTotal",
+                      "usedType": "bytes",
+                      "totalType": "bytes",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "cpuPercent",
+                    "label": "CPU",
+                    "unit": "%"
+                  },
+                  {
+                    "key": "memoryPercent",
+                    "label": "Memory",
+                    "unit": "%"
+                  }
+                ],
+                "history": 60
+              }
+            },
+            {
+              "key": "node-volumes",
+              "label": "Host volumes",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.hostvolumes.list",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Volume",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "type": "badge",
+                    "severities": {
+                      "pending": "warn",
+                      "ready": "success",
+                      "unavailable": "danger"
+                    }
+                  },
+                  {
+                    "key": "pluginId",
+                    "label": "Plugin",
+                    "sortable": true
+                  },
+                  {
+                    "key": "nodePool",
+                    "label": "Node pool",
+                    "sortable": true
+                  },
+                  {
+                    "key": "nodeId",
+                    "label": "Client",
+                    "width": "18rem"
+                  },
+                  {
+                    "key": "capacity",
+                    "label": "Capacity",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "createTime",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No dynamic host volumes on this client.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "deployment",
+        "title": "Deployments",
+        "list": {
+          "routeId": "nomad.deployments.list"
+        },
+        "watch": {
+          "routeId": "nomad.resources.watch",
+          "method": "WS",
+          "params": {
+            "kind": "deployment"
+          }
+        },
+        "columns": [
+          {
+            "key": "shortId",
+            "label": "ID",
+            "width": "9rem"
+          },
+          {
+            "key": "jobId",
+            "label": "Job",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "jobVersion",
+            "label": "Version",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "severities": {
+              "cancelled": "secondary",
+              "failed": "danger",
+              "paused": "warn",
+              "running": "info",
+              "successful": "success"
+            }
+          },
+          {
+            "key": "progress",
+            "label": "Healthy",
+            "sortable": true,
+            "type": "percent"
+          },
+          {
+            "key": "desired",
+            "label": "Desired",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "placed",
+            "label": "Placed",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "unhealthy",
+            "label": "Unhealthy",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "createTime",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "detail": [
+            "nomad.deployment.promote",
+            "nomad.deployment.pause",
+            "nomad.deployment.unblock",
+            "nomad.deployment.fail"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "cancelled": "secondary",
+              "failed": "danger",
+              "paused": "warn",
+              "running": "info",
+              "successful": "success"
+            }
+          },
+          "defaultTab": "rollout",
+          "tabs": [
+            {
+              "key": "rollout",
+              "label": "Rollout",
+              "icon": {
+                "type": "lucide",
+                "value": "rocket"
+              },
+              "panel": "task_progress",
+              "source": {
+                "routeId": "nomad.deployment.progress",
+                "method": "WS",
+                "params": {
+                  "deployment": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "title": "Deployment rollout",
+                "cancelRouteId": "nomad.deployment.fail"
+              }
+            },
+            {
+              "key": "deployment-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.deployment.overview",
+                "params": {
+                  "deployment": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Rollout",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Deployment ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "jobId",
+                        "label": "Job",
+                        "copy": true
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "jobVersion",
+                        "label": "Job version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "cancelled": "secondary",
+                          "failed": "danger",
+                          "paused": "warn",
+                          "running": "info",
+                          "successful": "success"
+                        }
+                      },
+                      {
+                        "key": "statusDescription",
+                        "label": "Status detail"
+                      },
+                      {
+                        "key": "multiregion",
+                        "label": "Multiregion",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Progress",
+                    "fields": [
+                      {
+                        "key": "progress",
+                        "label": "Healthy allocations",
+                        "type": "percent",
+                        "usage": {
+                          "percentKey": "progress",
+                          "usedKey": "healthy",
+                          "totalKey": "desired",
+                          "usedType": "number",
+                          "totalType": "number",
+                          "unit": "allocation(s)",
+                          "totalLabel": "of",
+                          "warnAt": 50,
+                          "criticalAt": 25
+                        }
+                      },
+                      {
+                        "key": "placed",
+                        "label": "Placed",
+                        "type": "number"
+                      },
+                      {
+                        "key": "unhealthy",
+                        "label": "Unhealthy",
+                        "type": "number"
+                      },
+                      {
+                        "key": "canaries",
+                        "label": "Canaries",
+                        "type": "number"
+                      },
+                      {
+                        "key": "groups",
+                        "label": "Task groups",
+                        "type": "json"
+                      },
+                      {
+                        "key": "createTime",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "modifyTime",
+                        "label": "Modified",
+                        "type": "relative_time"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "allocations",
+              "label": "Allocations",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.allocs.list",
+                "params": {
+                  "deployment": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "name",
+                    "label": "Allocation",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "taskGroup",
+                    "label": "Task group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "clientStatus",
+                    "label": "Client status",
+                    "type": "badge",
+                    "severities": {
+                      "complete": "secondary",
+                      "failed": "danger",
+                      "lost": "danger",
+                      "pending": "warn",
+                      "running": "success",
+                      "starting": "warn",
+                      "unknown": "warn"
+                    }
+                  },
+                  {
+                    "key": "desiredStatus",
+                    "label": "Desired",
+                    "type": "badge",
+                    "severities": {
+                      "evict": "danger",
+                      "run": "success",
+                      "stop": "secondary"
+                    }
+                  },
+                  {
+                    "key": "nodeName",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "jobVersion",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "modifyTime",
+                    "label": "Modified",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.alloc.stop"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "modifyTime",
+                  "desc": true
+                },
+                "emptyText": "No allocations here yet.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "evaluation",
+        "title": "Evaluations",
+        "list": {
+          "routeId": "nomad.evals.list"
+        },
+        "watch": {
+          "routeId": "nomad.resources.watch",
+          "method": "WS",
+          "params": {
+            "kind": "evaluation"
+          }
+        },
+        "columns": [
+          {
+            "key": "shortId",
+            "label": "ID",
+            "width": "9rem"
+          },
+          {
+            "key": "jobId",
+            "label": "Job",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "type": "badge",
+            "severities": {
+              "blocked": "warn",
+              "canceled": "secondary",
+              "complete": "success",
+              "failed": "danger",
+              "pending": "warn"
+            }
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "type": "badge"
+          },
+          {
+            "key": "triggeredBy",
+            "label": "Triggered by",
+            "sortable": true
+          },
+          {
+            "key": "priority",
+            "label": "Priority",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "failedGroups",
+            "label": "Blocked groups",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "createTime",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "blocked": "warn",
+              "canceled": "secondary",
+              "complete": "success",
+              "failed": "danger",
+              "pending": "warn"
+            }
+          },
+          "defaultTab": "eval-overview",
+          "tabs": [
+            {
+              "key": "eval-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.eval.overview",
+                "params": {
+                  "eval": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Evaluation",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Evaluation ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "jobId",
+                        "label": "Job",
+                        "copy": true
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "nodeId",
+                        "label": "Client",
+                        "copy": true
+                      },
+                      {
+                        "key": "deploymentId",
+                        "label": "Deployment",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "blocked": "warn",
+                          "canceled": "secondary",
+                          "complete": "success",
+                          "failed": "danger",
+                          "pending": "warn"
+                        }
+                      },
+                      {
+                        "key": "statusDescription",
+                        "label": "Status detail"
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "triggeredBy",
+                        "label": "Triggered by"
+                      },
+                      {
+                        "key": "priority",
+                        "label": "Priority",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Scheduling",
+                    "fields": [
+                      {
+                        "key": "queuedAllocations",
+                        "label": "Queued allocations",
+                        "type": "number"
+                      },
+                      {
+                        "key": "placementFailures",
+                        "label": "Placement failures",
+                        "type": "json"
+                      },
+                      {
+                        "key": "quotaLimitReached",
+                        "label": "Quota limit reached"
+                      },
+                      {
+                        "key": "blockedEval",
+                        "label": "Blocked evaluation",
+                        "copy": true
+                      },
+                      {
+                        "key": "nextEval",
+                        "label": "Next evaluation",
+                        "copy": true
+                      },
+                      {
+                        "key": "previousEval",
+                        "label": "Previous evaluation",
+                        "copy": true
+                      },
+                      {
+                        "key": "waitUntil",
+                        "label": "Wait until",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "createTime",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "modifyTime",
+                        "label": "Modified",
+                        "type": "relative_time"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "allocations",
+              "label": "Allocations",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "nomad.allocs.list",
+                "params": {
+                  "eval": "${resource.uid}",
+                  "ns": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "shortId",
+                    "label": "ID",
+                    "width": "9rem"
+                  },
+                  {
+                    "key": "name",
+                    "label": "Allocation",
+                    "sortable": true
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "taskGroup",
+                    "label": "Task group",
+                    "sortable": true
+                  },
+                  {
+                    "key": "clientStatus",
+                    "label": "Client status",
+                    "type": "badge",
+                    "severities": {
+                      "complete": "secondary",
+                      "failed": "danger",
+                      "lost": "danger",
+                      "pending": "warn",
+                      "running": "success",
+                      "starting": "warn",
+                      "unknown": "warn"
+                    }
+                  },
+                  {
+                    "key": "desiredStatus",
+                    "label": "Desired",
+                    "type": "badge",
+                    "severities": {
+                      "evict": "danger",
+                      "run": "success",
+                      "stop": "secondary"
+                    }
+                  },
+                  {
+                    "key": "nodeName",
+                    "label": "Client",
+                    "sortable": true
+                  },
+                  {
+                    "key": "jobVersion",
+                    "label": "Version",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "cpu",
+                    "label": "CPU",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "memory",
+                    "label": "Memory (MB)",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "modifyTime",
+                    "label": "Modified",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "nomad.alloc.stop"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "modifyTime",
+                  "desc": true
+                },
+                "emptyText": "No allocations here yet.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "volume",
+        "title": "CSI volumes",
+        "list": {
+          "routeId": "nomad.volumes.list"
+        },
+        "columns": [
+          {
+            "key": "id",
+            "label": "Volume",
+            "sortable": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "pluginId",
+            "label": "Plugin",
+            "sortable": true
+          },
+          {
+            "key": "provider",
+            "label": "Provider",
+            "sortable": true
+          },
+          {
+            "key": "accessMode",
+            "label": "Access mode",
+            "type": "badge"
+          },
+          {
+            "key": "schedulable",
+            "label": "Schedulable",
+            "type": "bool"
+          },
+          {
+            "key": "readers",
+            "label": "Readers",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "writers",
+            "label": "Writers",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "createTime",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "volume-overview",
+          "tabs": [
+            {
+              "key": "volume-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.volume.overview",
+                "params": {
+                  "ns": "${resource.namespace}",
+                  "volume": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Volume",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "Volume ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "externalId",
+                        "label": "External ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "pluginId",
+                        "label": "Plugin"
+                      },
+                      {
+                        "key": "provider",
+                        "label": "Provider"
+                      },
+                      {
+                        "key": "providerVersion",
+                        "label": "Provider version"
+                      },
+                      {
+                        "key": "capacity",
+                        "label": "Capacity",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Health",
+                    "fields": [
+                      {
+                        "key": "schedulable",
+                        "label": "Schedulable",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "accessMode",
+                        "label": "Access mode",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "attachmentMode",
+                        "label": "Attachment mode",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "controllersHealthy",
+                        "label": "Healthy controllers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "controllersExpected",
+                        "label": "Expected controllers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "nodesHealthy",
+                        "label": "Healthy nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "nodesExpected",
+                        "label": "Expected nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "readers",
+                        "label": "Readers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "writers",
+                        "label": "Writers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "createTime",
+                        "label": "Created",
+                        "type": "datetime"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "host_volume",
+        "title": "Host volumes",
+        "list": {
+          "routeId": "nomad.hostvolumes.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Volume",
+            "sortable": true
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "type": "badge",
+            "severities": {
+              "pending": "warn",
+              "ready": "success",
+              "unavailable": "danger"
+            }
+          },
+          {
+            "key": "pluginId",
+            "label": "Plugin",
+            "sortable": true
+          },
+          {
+            "key": "nodePool",
+            "label": "Node pool",
+            "sortable": true
+          },
+          {
+            "key": "nodeId",
+            "label": "Client",
+            "width": "18rem"
+          },
+          {
+            "key": "capacity",
+            "label": "Capacity",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "createTime",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "state",
+            "severities": {
+              "pending": "warn",
+              "ready": "success",
+              "unavailable": "danger"
+            }
+          },
+          "defaultTab": "host-volume-overview",
+          "tabs": [
+            {
+              "key": "host-volume-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "nomad.hostvolume.overview",
+                "params": {
+                  "ns": "${resource.namespace}",
+                  "volume": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Volume",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "id",
+                        "label": "Volume ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "pending": "warn",
+                          "ready": "success",
+                          "unavailable": "danger"
+                        }
+                      },
+                      {
+                        "key": "pluginId",
+                        "label": "Plugin"
+                      },
+                      {
+                        "key": "nodeId",
+                        "label": "Client",
+                        "copy": true
+                      },
+                      {
+                        "key": "nodePool",
+                        "label": "Node pool"
+                      },
+                      {
+                        "key": "hostPath",
+                        "label": "Host path",
+                        "copy": true
+                      },
+                      {
+                        "key": "capacity",
+                        "label": "Capacity",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "allocations",
+                        "label": "Claiming allocations",
+                        "type": "number"
+                      },
+                      {
+                        "key": "parameters",
+                        "label": "Parameters",
+                        "type": "json"
+                      },
+                      {
+                        "key": "createTime",
+                        "label": "Created",
+                        "type": "datetime"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "nomad.job.submit",
+        "label": "Submit job",
+        "icon": {
+          "type": "lucide",
+          "value": "upload"
+        },
+        "routeId": "nomad.job.submit",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "hcl",
+          "initialContent": "job \"example\" {\n  type = \"service\"\n\n  group \"app\" {\n    count = 1\n\n    task \"server\" {\n      driver = \"docker\"\n\n      config {\n        image = \"nginx:alpine\"\n      }\n\n      resources {\n        cpu    = 100\n        memory = 128\n      }\n    }\n  }\n}\n",
+          "saveRouteId": "nomad.job.submit",
+          "saveMethod": "POST",
+          "saveToast": {
+            "summary": "Job submitted",
+            "detail": "${response.job} registered as evaluation ${response.evalId}",
+            "severity": "success"
+          },
+          "saveDismiss": "close"
+        }
+      },
+      {
+        "id": "nomad.job.plan",
+        "label": "Plan job",
+        "icon": {
+          "type": "lucide",
+          "value": "clipboard-check"
+        },
+        "routeId": "nomad.job.plan",
+        "method": "POST",
+        "risk": "safe",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Job",
+              "fields": [
+                {
+                  "key": "content",
+                  "label": "Job specification",
+                  "type": "textarea",
+                  "required": true,
+                  "default": "job \"example\" {\n  type = \"service\"\n\n  group \"app\" {\n    count = 1\n\n    task \"server\" {\n      driver = \"docker\"\n\n      config {\n        image = \"nginx:alpine\"\n      }\n\n      resources {\n        cpu    = 100\n        memory = 128\n      }\n    }\n  }\n}\n",
+                  "help": "HCL2 or JSON job specification."
+                },
+                {
+                  "key": "ns",
+                  "label": "Namespace",
+                  "type": "select",
+                  "help": "Leave empty to use the connection namespace.",
+                  "optionsSource": {
+                    "routeId": "nomad.namespaces.list"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.job.evaluate",
+        "label": "Force evaluate",
+        "icon": {
+          "type": "lucide",
+          "value": "refresh-cw"
+        },
+        "routeId": "nomad.job.evaluate",
+        "method": "POST",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "group": "Lifecycle"
+      },
+      {
+        "id": "nomad.job.periodic",
+        "label": "Force periodic run",
+        "icon": {
+          "type": "lucide",
+          "value": "timer"
+        },
+        "routeId": "nomad.job.periodic",
+        "method": "POST",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "visibleWhen": {
+          "allOf": [
+            {
+              "field": "periodic",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "nomad.job.scale",
+        "label": "Scale group",
+        "icon": {
+          "type": "lucide",
+          "value": "scaling"
+        },
+        "routeId": "nomad.job.scale",
+        "method": "POST",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Scale",
+              "fields": [
+                {
+                  "key": "group",
+                  "label": "Task group",
+                  "type": "text",
+                  "required": true,
+                  "default": "${record.name}"
+                },
+                {
+                  "key": "count",
+                  "label": "Count",
+                  "type": "number",
+                  "required": true,
+                  "default": "${record.count}",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    },
+                    {
+                      "type": "max",
+                      "value": 10000
+                    }
+                  ]
+                },
+                {
+                  "key": "message",
+                  "label": "Reason",
+                  "type": "text",
+                  "placeholder": "Scaled from ShellCN"
+                }
+              ]
+            }
+          ]
+        },
+        "visibleWhen": {
+          "allOf": [
+            {
+              "field": "type",
+              "op": "in",
+              "value": [
+                "service",
+                "batch"
+              ]
+            }
+          ]
+        },
+        "group": "Lifecycle"
+      },
+      {
+        "id": "nomad.job.restart",
+        "label": "Restart allocations",
+        "icon": {
+          "type": "lucide",
+          "value": "rotate-ccw"
+        },
+        "routeId": "nomad.job.restart",
+        "method": "POST",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Restart every running allocation of this job?",
+        "group": "Lifecycle"
+      },
+      {
+        "id": "nomad.job.revert",
+        "label": "Revert to this version",
+        "icon": {
+          "type": "lucide",
+          "value": "undo-2"
+        },
+        "routeId": "nomad.job.revert",
+        "method": "POST",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Roll the job back to this version? Running allocations are replaced.",
+        "input": {
+          "groups": [
+            {
+              "name": "Revert",
+              "fields": [
+                {
+                  "key": "version",
+                  "label": "Target version",
+                  "type": "number",
+                  "required": true,
+                  "default": "${record.version}",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.job.stop",
+        "label": "Stop",
+        "icon": {
+          "type": "lucide",
+          "value": "square"
+        },
+        "routeId": "nomad.job.stop",
+        "method": "DELETE",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Stop this job? Every allocation is shut down.",
+        "bulk": true
+      },
+      {
+        "id": "nomad.job.purge",
+        "label": "Purge",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "nomad.job.purge",
+        "method": "DELETE",
+        "params": {
+          "job": "${resource.name}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Purge this job? It is removed from state and cannot be inspected afterwards.",
+        "bulk": true
+      },
+      {
+        "id": "nomad.alloc.restart",
+        "label": "Restart",
+        "icon": {
+          "type": "lucide",
+          "value": "rotate-ccw"
+        },
+        "routeId": "nomad.alloc.restart",
+        "method": "POST",
+        "params": {
+          "alloc": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Restart",
+              "fields": [
+                {
+                  "key": "task",
+                  "label": "Task",
+                  "type": "text",
+                  "help": "Leave empty to restart every task in the allocation."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.alloc.signal",
+        "label": "Send signal",
+        "icon": {
+          "type": "lucide",
+          "value": "zap"
+        },
+        "routeId": "nomad.alloc.signal",
+        "method": "POST",
+        "params": {
+          "alloc": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Signal",
+              "fields": [
+                {
+                  "key": "signal",
+                  "label": "Signal",
+                  "type": "select",
+                  "required": true,
+                  "default": "SIGHUP",
+                  "options": [
+                    {
+                      "label": "SIGHUP",
+                      "value": "SIGHUP"
+                    },
+                    {
+                      "label": "SIGINT",
+                      "value": "SIGINT"
+                    },
+                    {
+                      "label": "SIGTERM",
+                      "value": "SIGTERM"
+                    },
+                    {
+                      "label": "SIGUSR1",
+                      "value": "SIGUSR1"
+                    },
+                    {
+                      "label": "SIGUSR2",
+                      "value": "SIGUSR2"
+                    }
+                  ]
+                },
+                {
+                  "key": "task",
+                  "label": "Task",
+                  "type": "text",
+                  "help": "Leave empty to signal every task in the allocation."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.alloc.stop",
+        "label": "Stop",
+        "icon": {
+          "type": "lucide",
+          "value": "square"
+        },
+        "routeId": "nomad.alloc.stop",
+        "method": "POST",
+        "params": {
+          "alloc": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Stop this allocation? It is rescheduled according to the job policy.",
+        "bulk": true
+      },
+      {
+        "id": "nomad.node.drain",
+        "label": "Drain",
+        "icon": {
+          "type": "lucide",
+          "value": "download"
+        },
+        "routeId": "nomad.node.drain",
+        "method": "POST",
+        "params": {
+          "node": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drain this client? Every allocation migrates off it.",
+        "input": {
+          "groups": [
+            {
+              "name": "Drain",
+              "fields": [
+                {
+                  "key": "deadline",
+                  "label": "Deadline",
+                  "type": "duration",
+                  "default": "1h",
+                  "help": "Force-stop remaining allocations after this long. 0 waits forever."
+                },
+                {
+                  "key": "ignore_system_jobs",
+                  "label": "Keep system jobs",
+                  "type": "toggle",
+                  "default": false
+                }
+              ]
+            }
+          ]
+        },
+        "visibleWhen": {
+          "allOf": [
+            {
+              "field": "drain",
+              "op": "neq",
+              "value": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.node.drain.cancel",
+        "label": "Cancel drain",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-stop"
+        },
+        "routeId": "nomad.node.drain.cancel",
+        "method": "DELETE",
+        "params": {
+          "node": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "visibleWhen": {
+          "allOf": [
+            {
+              "field": "drain",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.node.eligibility",
+        "label": "Scheduling eligibility",
+        "icon": {
+          "type": "lucide",
+          "value": "toggle-left"
+        },
+        "routeId": "nomad.node.eligibility",
+        "method": "POST",
+        "params": {
+          "node": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Scheduling",
+              "fields": [
+                {
+                  "key": "eligible",
+                  "label": "Eligible for scheduling",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.deployment.promote",
+        "label": "Promote canaries",
+        "icon": {
+          "type": "lucide",
+          "value": "badge-check"
+        },
+        "routeId": "nomad.deployment.promote",
+        "method": "POST",
+        "params": {
+          "deployment": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false
+      },
+      {
+        "id": "nomad.deployment.pause",
+        "label": "Pause or resume",
+        "icon": {
+          "type": "lucide",
+          "value": "pause"
+        },
+        "routeId": "nomad.deployment.pause",
+        "method": "POST",
+        "params": {
+          "deployment": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rollout",
+              "fields": [
+                {
+                  "key": "pause",
+                  "label": "Pause the rollout",
+                  "type": "toggle",
+                  "default": true,
+                  "help": "Turn off to resume a paused rollout."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "nomad.deployment.unblock",
+        "label": "Unblock",
+        "icon": {
+          "type": "lucide",
+          "value": "unlock"
+        },
+        "routeId": "nomad.deployment.unblock",
+        "method": "POST",
+        "params": {
+          "deployment": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false
+      },
+      {
+        "id": "nomad.deployment.fail",
+        "label": "Fail rollout",
+        "icon": {
+          "type": "lucide",
+          "value": "octagon-x"
+        },
+        "routeId": "nomad.deployment.fail",
+        "method": "POST",
+        "params": {
+          "deployment": "${resource.uid}",
+          "ns": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Fail this rollout? Nomad reverts to the previous stable version when auto-revert is on."
+      }
+    ],
+    "scope": [
+      {
+        "param": "namespace",
+        "label": "Namespace",
+        "icon": {
+          "type": "lucide",
+          "value": "folder"
+        },
+        "control": "select",
+        "optionsSource": {
+          "routeId": "nomad.scope.namespaces"
+        },
+        "valueField": "value",
+        "labelField": "label"
+      },
+      {
+        "param": "region",
+        "label": "Region",
+        "icon": {
+          "type": "lucide",
+          "value": "globe"
+        },
+        "control": "select",
+        "optionsSource": {
+          "routeId": "nomad.regions.list"
+        },
+        "valueField": "name",
+        "labelField": "label",
+        "allLabel": "Connection region"
+      }
+    ],
+    "streams": [
+      {
+        "id": "nomad.job.watch",
+        "kind": "resource",
+        "routeId": "nomad.job.watch"
+      },
+      {
+        "id": "nomad.alloc.watch",
+        "kind": "resource",
+        "routeId": "nomad.alloc.watch"
+      },
+      {
+        "id": "nomad.node.watch",
+        "kind": "resource",
+        "routeId": "nomad.node.watch"
+      },
+      {
+        "id": "nomad.alloc.logs",
+        "kind": "logs",
+        "routeId": "nomad.alloc.logs"
+      },
+      {
+        "id": "nomad.alloc.exec",
+        "kind": "terminal",
+        "routeId": "nomad.alloc.exec"
+      },
+      {
+        "id": "nomad.alloc.metrics",
+        "kind": "metrics",
+        "routeId": "nomad.alloc.metrics"
+      },
+      {
+        "id": "nomad.node.metrics",
+        "kind": "metrics",
+        "routeId": "nomad.node.metrics"
+      },
+      {
+        "id": "nomad.deployment.progress",
+        "kind": "task",
+        "routeId": "nomad.deployment.progress"
+      },
+      {
+        "id": "nomad.resources.watch",
+        "kind": "resource",
+        "routeId": "nomad.resources.watch"
+      }
+    ],
+    "recording": [
+      {
+        "class": "terminal",
+        "formats": [
+          "asciicast_v2"
+        ],
+        "authoritative": true,
+        "inputCapture": true
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4248 @@
+{
+  "name": "pinecone",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" id=\"Pinecone-Icon--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003ePinecone Icon Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"#002bff\" d=\"M10.415975 21.060525c0.742675 0 1.34475 0.60205 1.34475 1.344725 0 0.7427 -0.602075 1.34475 -1.34475 1.34475 -0.742675 0 -1.344725 -0.60205 -1.344725 -1.34475 0 -0.742675 0.60205 -1.344725 1.344725 -1.344725Zm7.460625 -2.45355 1.328875 0.393725 -1.05485 3.560175c-0.092175 0.3111 -0.38785 0.516575 -0.71155 0.494525l-0.325825 -0.02235 -0.007975 0.006575 -3.385325 -0.237575 0.0942 -1.382775 2.27445 0.15435 -1.489025 -2.148 1.139025 -0.7897 1.490975 2.15065 0.647025 -2.1796Zm-14.463625 -2.46115 1.382525 0.097925 -0.161925 2.2741 2.144075 -1.490925 0.791475 1.13775 -2.146875 1.4925 2.19135 0.6457 -0.3917 1.329475 -3.576975 -1.053825c-0.312275 -0.092 -0.518425 -0.388975 -0.4954 -0.713725l0.26345 -3.718975Zm8.926525 -1.9365 2.495225 3.012525 -1.124575 0.931475 -1.485 -1.79285 -0.481425 2.7565 -1.43845 -0.25145 0.481925 -2.760775 -1.999175 1.178725 -0.7412 -1.25815 3.3598 -1.979325c0.308875 -0.181975 0.7042 -0.112775 0.932875 0.163325Zm6.9811 -2.02115 1.24645 -0.67815 1.815825 3.33745c0.159075 0.292375 0.093525 0.656 -0.157625 0.874425l-0.2569 0.221975 -2.621425 2.281375 -0.9312 -1.0707 1.762375 -1.53325 -2.625075 -0.472925 0.251825 -1.39645 2.623225 0.47265 -1.107475 -2.0364ZM4.621 8.698925l0.93895 1.0639 -1.738175 1.533025 2.630075 0.459175 -0.243775 1.3979 -2.632975 -0.45955 1.13095 2.044575 -1.241675 0.686875 -1.84492 -3.33505c-0.16108 -0.291175 -0.098145 -0.6552 0.1513525 -0.8754L4.621 8.698925Zm8.89015 -1.0976 2.486775 3.004425 -1.124875 0.931075 -1.48465 -1.793625 -0.48145 2.757325 -1.438425 -0.25145 0.48025 -2.750075 -1.9915 1.16745 -0.738375 -1.259825 3.05905 -1.79355 0.003025 -0.01165 0.013475 0.00175 0.285075 -0.166225c0.30885 -0.181 0.703375 -0.1114 0.931625 0.164375Zm3.204525 -1.477575 0.543875 -1.310625 3.51805 1.459925c0.30705 0.127425 0.484475 0.451 0.4268 0.7784l-0.058575 0.325675 -0.60075 3.4173 -1.397475 -0.246175 0.402675 -2.28755 -2.334 1.28995 -0.6859 -1.2422 2.338475 -1.291025 -2.153175 -0.893675ZM10.01385 3.54105l0.060475 1.4177 -2.323925 0.099325 1.75275 2.003025 -1.0679 0.934425 -1.7557 -2.00605 -0.40905 2.290225 -1.396825 -0.24985 0.669425 -3.742625c0.0585 -0.3271 0.336175 -0.569775 0.668175 -0.58395l0.32885 -0.0147 0.007375 -0.00535 3.46635 -0.142175ZM14.767625 0.517615 17.24315 3.541l-1.129825 0.9251 -1.469275 -1.79475 -0.495575 2.753675 -1.43715 -0.258625 0.4964 -2.759865 -2.006025 1.172865 -0.736725 -1.2607775L13.83435 0.349775c0.310025 -0.18116675 0.705775 -0.1099955 0.933275 0.16784Z\" stroke-width=\"0.25\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "pinecone",
+    "version": "0.1.0",
+    "title": "Pinecone",
+    "description": "Pinecone cockpit: serverless and pod indexes, index configuration and stats, namespaces, vector browsing and CRUD, metadata-filtered similarity search, and backup collections.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" id=\"Pinecone-Icon--Streamline-Svg-Logos\" height=\"24\" width=\"24\"\u003e\u003cdesc\u003ePinecone Icon Streamline Icon: https://streamlinehq.com\u003c/desc\u003e\u003cpath fill=\"#002bff\" d=\"M10.415975 21.060525c0.742675 0 1.34475 0.60205 1.34475 1.344725 0 0.7427 -0.602075 1.34475 -1.34475 1.34475 -0.742675 0 -1.344725 -0.60205 -1.344725 -1.34475 0 -0.742675 0.60205 -1.344725 1.344725 -1.344725Zm7.460625 -2.45355 1.328875 0.393725 -1.05485 3.560175c-0.092175 0.3111 -0.38785 0.516575 -0.71155 0.494525l-0.325825 -0.02235 -0.007975 0.006575 -3.385325 -0.237575 0.0942 -1.382775 2.27445 0.15435 -1.489025 -2.148 1.139025 -0.7897 1.490975 2.15065 0.647025 -2.1796Zm-14.463625 -2.46115 1.382525 0.097925 -0.161925 2.2741 2.144075 -1.490925 0.791475 1.13775 -2.146875 1.4925 2.19135 0.6457 -0.3917 1.329475 -3.576975 -1.053825c-0.312275 -0.092 -0.518425 -0.388975 -0.4954 -0.713725l0.26345 -3.718975Zm8.926525 -1.9365 2.495225 3.012525 -1.124575 0.931475 -1.485 -1.79285 -0.481425 2.7565 -1.43845 -0.25145 0.481925 -2.760775 -1.999175 1.178725 -0.7412 -1.25815 3.3598 -1.979325c0.308875 -0.181975 0.7042 -0.112775 0.932875 0.163325Zm6.9811 -2.02115 1.24645 -0.67815 1.815825 3.33745c0.159075 0.292375 0.093525 0.656 -0.157625 0.874425l-0.2569 0.221975 -2.621425 2.281375 -0.9312 -1.0707 1.762375 -1.53325 -2.625075 -0.472925 0.251825 -1.39645 2.623225 0.47265 -1.107475 -2.0364ZM4.621 8.698925l0.93895 1.0639 -1.738175 1.533025 2.630075 0.459175 -0.243775 1.3979 -2.632975 -0.45955 1.13095 2.044575 -1.241675 0.686875 -1.84492 -3.33505c-0.16108 -0.291175 -0.098145 -0.6552 0.1513525 -0.8754L4.621 8.698925Zm8.89015 -1.0976 2.486775 3.004425 -1.124875 0.931075 -1.48465 -1.793625 -0.48145 2.757325 -1.438425 -0.25145 0.48025 -2.750075 -1.9915 1.16745 -0.738375 -1.259825 3.05905 -1.79355 0.003025 -0.01165 0.013475 0.00175 0.285075 -0.166225c0.30885 -0.181 0.703375 -0.1114 0.931625 0.164375Zm3.204525 -1.477575 0.543875 -1.310625 3.51805 1.459925c0.30705 0.127425 0.484475 0.451 0.4268 0.7784l-0.058575 0.325675 -0.60075 3.4173 -1.397475 -0.246175 0.402675 -2.28755 -2.334 1.28995 -0.6859 -1.2422 2.338475 -1.291025 -2.153175 -0.893675ZM10.01385 3.54105l0.060475 1.4177 -2.323925 0.099325 1.75275 2.003025 -1.0679 0.934425 -1.7557 -2.00605 -0.40905 2.290225 -1.396825 -0.24985 0.669425 -3.742625c0.0585 -0.3271 0.336175 -0.569775 0.668175 -0.58395l0.32885 -0.0147 0.007375 -0.00535 3.46635 -0.142175ZM14.767625 0.517615 17.24315 3.541l-1.129825 0.9251 -1.469275 -1.79475 -0.495575 2.753675 -1.43715 -0.258625 0.4964 -2.759865 -2.006025 1.172865 -0.736725 -1.2607775L13.83435 0.349775c0.310025 -0.18116675 0.705775 -0.1099955 0.933275 0.16784Z\" stroke-width=\"0.25\"\u003e\u003c/path\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "search",
+      "label": "Search",
+      "icon": {
+        "type": "lucide",
+        "value": "search"
+      },
+      "order": 130
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Project",
+          "fields": [
+            {
+              "key": "endpoint",
+              "label": "Control plane",
+              "type": "url",
+              "required": true,
+              "default": "https://api.pinecone.io",
+              "placeholder": "https://api.pinecone.io",
+              "help": "Pinecone control plane. Index data-plane hosts are discovered from it."
+            },
+            {
+              "key": "api_version",
+              "label": "API version",
+              "type": "autocomplete",
+              "required": true,
+              "default": "2026-04",
+              "help": "Sent as the X-Pinecone-Api-Version header on every request.",
+              "options": [
+                {
+                  "label": "2026-04 (latest)",
+                  "value": "2026-04"
+                },
+                {
+                  "label": "2025-10",
+                  "value": "2025-10"
+                },
+                {
+                  "label": "2025-04",
+                  "value": "2025-04"
+                }
+              ]
+            },
+            {
+              "key": "namespace",
+              "label": "Default namespace",
+              "type": "text",
+              "default": "__default__",
+              "help": "Namespace used when a panel does not carry one."
+            },
+            {
+              "key": "private_host",
+              "label": "Use private endpoints",
+              "type": "toggle",
+              "help": "Prefer an index's private host when the project exposes one."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "credential",
+              "options": [
+                {
+                  "label": "Stored API key",
+                  "value": "credential"
+                },
+                {
+                  "label": "API key",
+                  "value": "api_key"
+                }
+              ]
+            },
+            {
+              "key": "api_key",
+              "label": "API key",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "in",
+                    "value": [
+                      "api_key"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored API key",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "pinecone"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "in",
+                    "value": [
+                      "credential"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "verify-full",
+              "options": [
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks every index, collection, namespace, and vector mutation."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "20s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page limit",
+              "type": "number",
+              "default": 100,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "indexes",
+      "namespaces",
+      "vectors",
+      "collections",
+      "vector-search",
+      "metadata-filter",
+      "metrics"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "project",
+        "label": "Project",
+        "icon": {
+          "type": "lucide",
+          "value": "layout-dashboard"
+        },
+        "ref": {
+          "kind": "project",
+          "name": "Pinecone",
+          "uid": "project"
+        }
+      },
+      {
+        "key": "indexes",
+        "label": "Indexes",
+        "icon": {
+          "type": "lucide",
+          "value": "box"
+        },
+        "source": {
+          "routeId": "pinecone.indexes.tree"
+        },
+        "resourceKind": "index"
+      },
+      {
+        "key": "collections",
+        "label": "Collections",
+        "icon": {
+          "type": "lucide",
+          "value": "archive"
+        },
+        "source": {
+          "routeId": "pinecone.collections.tree"
+        },
+        "resourceKind": "collection"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "project",
+        "title": "Pinecone project",
+        "list": {
+          "routeId": "pinecone.overview"
+        },
+        "columns": [
+          {
+            "key": "endpoint",
+            "label": "Control plane",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "degraded": "warn",
+              "initializing": "info",
+              "ready": "success",
+              "terminating": "warn",
+              "unreachable": "danger"
+            }
+          },
+          {
+            "key": "indexes",
+            "label": "Indexes",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "collections",
+            "label": "Collections",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "detail": [
+            "pinecone.index.create",
+            "pinecone.collection.create"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "degraded": "warn",
+              "initializing": "info",
+              "ready": "success",
+              "terminating": "warn",
+              "unreachable": "danger"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Project",
+                    "fields": [
+                      {
+                        "key": "endpoint",
+                        "label": "Control plane",
+                        "copy": true
+                      },
+                      {
+                        "key": "apiVersion",
+                        "label": "API version",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "degraded": "warn",
+                          "initializing": "info",
+                          "ready": "success",
+                          "terminating": "warn",
+                          "unreachable": "danger"
+                        }
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Default namespace",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Inventory",
+                    "fields": [
+                      {
+                        "key": "indexes",
+                        "label": "Indexes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "readyIndexes",
+                        "label": "Ready",
+                        "type": "number"
+                      },
+                      {
+                        "key": "serverlessIndexes",
+                        "label": "Serverless",
+                        "type": "number"
+                      },
+                      {
+                        "key": "podIndexes",
+                        "label": "Pod-based",
+                        "type": "number"
+                      },
+                      {
+                        "key": "collections",
+                        "label": "Collections",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Connection",
+                    "fields": [
+                      {
+                        "key": "readOnly",
+                        "label": "Read-only connection",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "privateNet",
+                        "label": "Private endpoints",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "indexes",
+              "label": "Indexes",
+              "icon": {
+                "type": "lucide",
+                "value": "box"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.indexes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Index",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "disabled": "warn",
+                      "initializationfailed": "danger",
+                      "initializing": "info",
+                      "ready": "success",
+                      "scalingdown": "info",
+                      "scalingdownpodsize": "info",
+                      "scalingup": "info",
+                      "scalinguppodsize": "info",
+                      "terminating": "warn",
+                      "unknown": "secondary"
+                    }
+                  },
+                  {
+                    "key": "deployment",
+                    "label": "Deployment",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "byoc": "warn",
+                      "pod": "info",
+                      "serverless": "success",
+                      "unknown": "secondary"
+                    }
+                  },
+                  {
+                    "key": "vectors",
+                    "label": "Vectors",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "namespaces",
+                    "label": "Namespaces",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "dimension",
+                    "label": "Dimensions",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "metric",
+                    "label": "Metric",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "cosine": "info",
+                      "dotproduct": "success",
+                      "euclidean": "secondary"
+                    }
+                  },
+                  {
+                    "key": "vector_type",
+                    "label": "Vectors type",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "dense": "info",
+                      "sparse": "secondary"
+                    }
+                  },
+                  {
+                    "key": "fullness",
+                    "label": "Fullness",
+                    "sortable": true,
+                    "type": "percent",
+                    "precision": 2
+                  },
+                  {
+                    "key": "location",
+                    "label": "Location",
+                    "sortable": true
+                  },
+                  {
+                    "key": "deletion_protection",
+                    "label": "Protected",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "disabled": "secondary",
+                      "enabled": "warn"
+                    }
+                  },
+                  {
+                    "key": "tags",
+                    "label": "Tags",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "pinecone.index.create"
+                ],
+                "rowActionIds": [
+                  "pinecone.index.delete"
+                ],
+                "refreshIntervalMs": 20000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This project has no indexes yet. Create one to start storing embeddings.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "collections",
+              "label": "Collections",
+              "icon": {
+                "type": "lucide",
+                "value": "archive"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.collections.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Collection",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "degraded": "warn",
+                      "initializing": "info",
+                      "ready": "success",
+                      "terminating": "warn",
+                      "unreachable": "danger"
+                    }
+                  },
+                  {
+                    "key": "vector_count",
+                    "label": "Vectors",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "dimension",
+                    "label": "Dimensions",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "environment",
+                    "label": "Environment",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "pinecone.collection.create"
+                ],
+                "rowActionIds": [
+                  "pinecone.collection.delete"
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No backup collections. Create one from a pod-based index to snapshot its vectors.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "index",
+        "title": "Indexes",
+        "list": {
+          "routeId": "pinecone.indexes.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Index",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "disabled": "warn",
+              "initializationfailed": "danger",
+              "initializing": "info",
+              "ready": "success",
+              "scalingdown": "info",
+              "scalingdownpodsize": "info",
+              "scalingup": "info",
+              "scalinguppodsize": "info",
+              "terminating": "warn",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "deployment",
+            "label": "Deployment",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "byoc": "warn",
+              "pod": "info",
+              "serverless": "success",
+              "unknown": "secondary"
+            }
+          },
+          {
+            "key": "vectors",
+            "label": "Vectors",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "namespaces",
+            "label": "Namespaces",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "dimension",
+            "label": "Dimensions",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "metric",
+            "label": "Metric",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "cosine": "info",
+              "dotproduct": "success",
+              "euclidean": "secondary"
+            }
+          },
+          {
+            "key": "vector_type",
+            "label": "Vectors type",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "dense": "info",
+              "sparse": "secondary"
+            }
+          },
+          {
+            "key": "fullness",
+            "label": "Fullness",
+            "sortable": true,
+            "type": "percent",
+            "precision": 2
+          },
+          {
+            "key": "location",
+            "label": "Location",
+            "sortable": true
+          },
+          {
+            "key": "deletion_protection",
+            "label": "Protected",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "disabled": "secondary",
+              "enabled": "warn"
+            }
+          },
+          {
+            "key": "tags",
+            "label": "Tags",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "pinecone.index.create"
+          ],
+          "row": [
+            "pinecone.index.delete"
+          ],
+          "detail": [
+            "pinecone.vectors.upsert",
+            "pinecone.index.configure",
+            "pinecone.collection.create",
+            "pinecone.vectors.purge",
+            "pinecone.index.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "state",
+            "severities": {
+              "disabled": "warn",
+              "initializationfailed": "danger",
+              "initializing": "info",
+              "ready": "success",
+              "scalingdown": "info",
+              "scalingdownpodsize": "info",
+              "scalingup": "info",
+              "scalinguppodsize": "info",
+              "terminating": "warn",
+              "unknown": "secondary"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.index.read",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "host",
+                        "label": "Data-plane host",
+                        "copy": true
+                      },
+                      {
+                        "key": "private_host",
+                        "label": "Private host",
+                        "copy": true
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "disabled": "warn",
+                          "initializationfailed": "danger",
+                          "initializing": "info",
+                          "ready": "success",
+                          "scalingdown": "info",
+                          "scalingdownpodsize": "info",
+                          "scalingup": "info",
+                          "scalinguppodsize": "info",
+                          "terminating": "warn",
+                          "unknown": "secondary"
+                        }
+                      },
+                      {
+                        "key": "ready",
+                        "label": "Ready",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "deletion_protection",
+                        "label": "Deletion protection",
+                        "type": "badge",
+                        "severities": {
+                          "disabled": "secondary",
+                          "enabled": "warn"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Vectors",
+                    "fields": [
+                      {
+                        "key": "vectors",
+                        "label": "Records",
+                        "type": "number"
+                      },
+                      {
+                        "key": "namespaces",
+                        "label": "Namespaces",
+                        "type": "number"
+                      },
+                      {
+                        "key": "dimension",
+                        "label": "Dimensions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "metric",
+                        "label": "Metric",
+                        "type": "badge",
+                        "severities": {
+                          "cosine": "info",
+                          "dotproduct": "success",
+                          "euclidean": "secondary"
+                        }
+                      },
+                      {
+                        "key": "vector_type",
+                        "label": "Vector type",
+                        "type": "badge",
+                        "severities": {
+                          "dense": "info",
+                          "sparse": "secondary"
+                        }
+                      },
+                      {
+                        "key": "estimated_vector_bytes",
+                        "label": "Vector payload",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "fullness",
+                        "label": "Index fullness",
+                        "type": "percent"
+                      },
+                      {
+                        "key": "read_capacity",
+                        "label": "Read capacity",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Placement",
+                    "fields": [
+                      {
+                        "key": "deployment",
+                        "label": "Deployment",
+                        "type": "badge",
+                        "severities": {
+                          "byoc": "warn",
+                          "pod": "info",
+                          "serverless": "success",
+                          "unknown": "secondary"
+                        }
+                      },
+                      {
+                        "key": "location",
+                        "label": "Location"
+                      },
+                      {
+                        "key": "pod_type",
+                        "label": "Pod type"
+                      },
+                      {
+                        "key": "pods",
+                        "label": "Pods",
+                        "type": "number"
+                      },
+                      {
+                        "key": "replicas",
+                        "label": "Replicas",
+                        "type": "number"
+                      },
+                      {
+                        "key": "shards",
+                        "label": "Shards",
+                        "type": "number"
+                      },
+                      {
+                        "key": "source_collection",
+                        "label": "Restored from"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Metadata",
+                    "fields": [
+                      {
+                        "key": "tags",
+                        "label": "Tags",
+                        "type": "json"
+                      },
+                      {
+                        "key": "embed",
+                        "label": "Integrated embedding",
+                        "type": "json"
+                      },
+                      {
+                        "key": "spec",
+                        "label": "Spec",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "namespaces",
+              "label": "Namespaces",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.namespaces.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "record_count",
+                    "label": "Records",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "index",
+                    "label": "Index",
+                    "sortable": true
+                  }
+                ],
+                "rowActionIds": [
+                  "pinecone.namespace.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "emptyText": "No namespaces in this index yet. A namespace appears once a record is written to it.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "vectors",
+              "label": "Vectors",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.vectors.list",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "id",
+                    "label": "ID",
+                    "readOnly": true
+                  },
+                  {
+                    "key": "metadata",
+                    "label": "Metadata",
+                    "type": "json"
+                  },
+                  {
+                    "key": "dimension",
+                    "label": "Dimensions",
+                    "type": "number"
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace"
+                  }
+                ],
+                "rowActionIds": [
+                  "pinecone.vector.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "emptyText": "No records listed. Pinecone lists record IDs for serverless indexes only, in sorted order; the search box matches IDs.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "pinecone.query",
+                "method": "WS",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "Pinecone query",
+                "executeLabel": "Search",
+                "runningLabel": "Searching...",
+                "emptyText": "Send a Pinecone /query body. Use vector for a dense search, sparseVector for a sparse one, or id to search by an existing record. Add filter for metadata narrowing and namespace to target another namespace.",
+                "initialQuery": "{\n  \"id\": \"record-1\",\n  \"topK\": 10,\n  \"includeMetadata\": true,\n  \"includeValues\": false\n}",
+                "completionRouteId": "pinecone.query.complete",
+                "completionParams": {
+                  "index": "${resource.name}"
+                },
+                "exportable": true
+              }
+            },
+            {
+              "key": "stats",
+              "label": "Stats",
+              "icon": {
+                "type": "lucide",
+                "value": "gauge"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.index.stats",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Totals",
+                    "fields": [
+                      {
+                        "key": "vectors",
+                        "label": "Records",
+                        "type": "number"
+                      },
+                      {
+                        "key": "namespaces",
+                        "label": "Namespaces",
+                        "type": "number"
+                      },
+                      {
+                        "key": "dimension",
+                        "label": "Dimensions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "metric",
+                        "label": "Metric",
+                        "type": "badge",
+                        "severities": {
+                          "cosine": "info",
+                          "dotproduct": "success",
+                          "euclidean": "secondary"
+                        }
+                      },
+                      {
+                        "key": "vector_type",
+                        "label": "Vector type",
+                        "type": "badge",
+                        "severities": {
+                          "dense": "info",
+                          "sparse": "secondary"
+                        }
+                      },
+                      {
+                        "key": "estimated_vector_bytes",
+                        "label": "Vector payload",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "fullness",
+                        "label": "Index fullness",
+                        "type": "percent"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Per namespace",
+                    "fields": [
+                      {
+                        "key": "namespace_counts",
+                        "label": "Record counts",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "pinecone.index.metrics",
+                "method": "WS",
+                "params": {
+                  "index": "${resource.name}"
+                }
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "vectors",
+                    "label": "Records"
+                  },
+                  {
+                    "key": "namespaces",
+                    "label": "Namespaces"
+                  },
+                  {
+                    "key": "dimension",
+                    "label": "Dimensions"
+                  },
+                  {
+                    "key": "vectorBytes",
+                    "label": "Vector payload",
+                    "unit": "bytes"
+                  },
+                  {
+                    "key": "latencyMs",
+                    "label": "Stats latency",
+                    "unit": "ms"
+                  }
+                ],
+                "usage": [
+                  {
+                    "key": "fullnessPct",
+                    "label": "Index fullness",
+                    "type": "percent",
+                    "usage": {
+                      "percentKey": "fullnessPct",
+                      "warnAt": 80,
+                      "criticalAt": 95
+                    }
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "vectors",
+                    "label": "Records"
+                  },
+                  {
+                    "key": "latencyMs",
+                    "label": "Stats latency",
+                    "unit": "ms"
+                  }
+                ],
+                "history": 90
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "namespace",
+        "title": "Namespaces",
+        "list": {
+          "routeId": "pinecone.namespaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "record_count",
+            "label": "Records",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "index",
+            "label": "Index",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "row": [
+            "pinecone.namespace.delete"
+          ],
+          "detail": [
+            "pinecone.namespace.vectors.upsert",
+            "pinecone.namespace.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.namespace.read",
+                "params": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Namespace",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "index",
+                        "label": "Index",
+                        "copy": true
+                      },
+                      {
+                        "key": "record_count",
+                        "label": "Records",
+                        "type": "number"
+                      },
+                      {
+                        "key": "read_only",
+                        "label": "Read-only connection",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "vectors",
+              "label": "Vectors",
+              "icon": {
+                "type": "lucide",
+                "value": "braces"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.vectors.list",
+                "params": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "id",
+                    "label": "ID",
+                    "readOnly": true
+                  },
+                  {
+                    "key": "metadata",
+                    "label": "Metadata",
+                    "type": "json"
+                  },
+                  {
+                    "key": "dimension",
+                    "label": "Dimensions",
+                    "type": "number"
+                  },
+                  {
+                    "key": "namespace",
+                    "label": "Namespace"
+                  }
+                ],
+                "rowActionIds": [
+                  "pinecone.vector.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "emptyText": "No records listed. Pinecone lists record IDs for serverless indexes only, in sorted order; the search box matches IDs.",
+                "exportable": true,
+                "rowClick": "navigate"
+              }
+            },
+            {
+              "key": "search",
+              "label": "Search",
+              "icon": {
+                "type": "lucide",
+                "value": "search"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "pinecone.query",
+                "method": "WS",
+                "params": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "json",
+                "label": "Pinecone query",
+                "executeLabel": "Search",
+                "runningLabel": "Searching...",
+                "emptyText": "Send a Pinecone /query body. Use vector for a dense search, sparseVector for a sparse one, or id to search by an existing record. Add filter for metadata narrowing and namespace to target another namespace.",
+                "initialQuery": "{\n  \"id\": \"record-1\",\n  \"topK\": 10,\n  \"includeMetadata\": true,\n  \"includeValues\": false\n}",
+                "completionRouteId": "pinecone.query.complete",
+                "completionParams": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "vector",
+        "title": "Vectors",
+        "list": {
+          "routeId": "pinecone.vectors.list"
+        },
+        "columns": [
+          {
+            "key": "id",
+            "label": "ID",
+            "readOnly": true
+          },
+          {
+            "key": "metadata",
+            "label": "Metadata",
+            "type": "json"
+          },
+          {
+            "key": "dimension",
+            "label": "Dimensions",
+            "type": "number"
+          },
+          {
+            "key": "namespace",
+            "label": "Namespace"
+          }
+        ],
+        "actions": {
+          "row": [
+            "pinecone.vector.delete"
+          ],
+          "detail": [
+            "pinecone.vector.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Record",
+              "icon": {
+                "type": "lucide",
+                "value": "file-text"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.vector.read",
+                "params": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.namespace}",
+                  "vector": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Record",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "index",
+                        "label": "Index"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Vector",
+                    "fields": [
+                      {
+                        "key": "dimension",
+                        "label": "Dimensions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "norm",
+                        "label": "L2 norm",
+                        "type": "number"
+                      },
+                      {
+                        "key": "sparse_terms",
+                        "label": "Sparse terms",
+                        "type": "number"
+                      },
+                      {
+                        "key": "values",
+                        "label": "Values",
+                        "type": "json"
+                      },
+                      {
+                        "key": "sparse_values",
+                        "label": "Sparse values",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Metadata",
+                    "fields": [
+                      {
+                        "key": "metadata_keys",
+                        "label": "Keys",
+                        "type": "json"
+                      },
+                      {
+                        "key": "metadata",
+                        "label": "Metadata",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "neighbors",
+              "label": "Nearest neighbors",
+              "icon": {
+                "type": "lucide",
+                "value": "radar"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pinecone.vector.neighbors",
+                "params": {
+                  "index": "${resource.scope}",
+                  "namespace": "${resource.namespace}",
+                  "vector": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "rank",
+                    "label": "Rank",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "id",
+                    "label": "ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "score",
+                    "label": "Score",
+                    "sortable": true,
+                    "type": "number",
+                    "precision": 5
+                  },
+                  {
+                    "key": "metadata",
+                    "label": "Metadata",
+                    "type": "json"
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "rank"
+                },
+                "emptyText": "No other records in this namespace to compare against.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "collection",
+        "title": "Collections",
+        "list": {
+          "routeId": "pinecone.collections.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Collection",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "degraded": "warn",
+              "initializing": "info",
+              "ready": "success",
+              "terminating": "warn",
+              "unreachable": "danger"
+            }
+          },
+          {
+            "key": "vector_count",
+            "label": "Vectors",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "dimension",
+            "label": "Dimensions",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "size",
+            "label": "Size",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "environment",
+            "label": "Environment",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "pinecone.collection.create"
+          ],
+          "row": [
+            "pinecone.collection.delete"
+          ],
+          "detail": [
+            "pinecone.collection.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "degraded": "warn",
+              "initializing": "info",
+              "ready": "success",
+              "terminating": "warn",
+              "unreachable": "danger"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pinecone.collection.read",
+                "params": {
+                  "collection": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Collection",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "degraded": "warn",
+                          "initializing": "info",
+                          "ready": "success",
+                          "terminating": "warn",
+                          "unreachable": "danger"
+                        }
+                      },
+                      {
+                        "key": "vector_count",
+                        "label": "Records",
+                        "type": "number"
+                      },
+                      {
+                        "key": "dimension",
+                        "label": "Dimensions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "size",
+                        "label": "Size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "environment",
+                        "label": "Environment"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "pinecone.index.create",
+        "label": "Create index",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "pinecone.index.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[a-z0-9][a-z0-9-]{0,44}$",
+                      "message": "lower-case letters, digits, or hyphens"
+                    }
+                  ]
+                },
+                {
+                  "key": "vector_type",
+                  "label": "Vector type",
+                  "type": "select",
+                  "required": true,
+                  "default": "dense",
+                  "options": [
+                    {
+                      "label": "Dense",
+                      "value": "dense"
+                    },
+                    {
+                      "label": "Sparse",
+                      "value": "sparse"
+                    }
+                  ]
+                },
+                {
+                  "key": "dimension",
+                  "label": "Dimension",
+                  "type": "number",
+                  "default": 1536,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "vector_type",
+                        "op": "eq",
+                        "value": "dense"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    },
+                    {
+                      "type": "max",
+                      "value": 20000
+                    }
+                  ]
+                },
+                {
+                  "key": "metric",
+                  "label": "Metric",
+                  "type": "select",
+                  "default": "cosine",
+                  "help": "Sparse indexes always use dot product.",
+                  "options": [
+                    {
+                      "label": "Cosine",
+                      "value": "cosine"
+                    },
+                    {
+                      "label": "Euclidean",
+                      "value": "euclidean"
+                    },
+                    {
+                      "label": "Dot product",
+                      "value": "dotproduct"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "vector_type",
+                        "op": "eq",
+                        "value": "dense"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "deletion_protection",
+                  "label": "Deletion protection",
+                  "type": "toggle"
+                }
+              ]
+            },
+            {
+              "name": "Deployment",
+              "fields": [
+                {
+                  "key": "deployment",
+                  "label": "Deployment",
+                  "type": "select",
+                  "required": true,
+                  "default": "serverless",
+                  "options": [
+                    {
+                      "label": "Serverless",
+                      "value": "serverless"
+                    },
+                    {
+                      "label": "Pod-based",
+                      "value": "pod"
+                    }
+                  ]
+                },
+                {
+                  "key": "cloud",
+                  "label": "Cloud",
+                  "type": "select",
+                  "default": "aws",
+                  "options": [
+                    {
+                      "label": "AWS",
+                      "value": "aws"
+                    },
+                    {
+                      "label": "GCP",
+                      "value": "gcp"
+                    },
+                    {
+                      "label": "Azure",
+                      "value": "azure"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "serverless"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "region",
+                  "label": "Region",
+                  "type": "autocomplete",
+                  "default": "us-east-1",
+                  "options": [
+                    {
+                      "label": "us-east-1",
+                      "value": "us-east-1"
+                    },
+                    {
+                      "label": "us-west-2",
+                      "value": "us-west-2"
+                    },
+                    {
+                      "label": "eu-west-1",
+                      "value": "eu-west-1"
+                    },
+                    {
+                      "label": "us-central1",
+                      "value": "us-central1"
+                    },
+                    {
+                      "label": "eastus2",
+                      "value": "eastus2"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "serverless"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "environment",
+                  "label": "Environment",
+                  "type": "text",
+                  "placeholder": "us-east-1-aws",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "pod"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "pod_type",
+                  "label": "Pod type",
+                  "type": "autocomplete",
+                  "default": "p1.x1",
+                  "options": [
+                    {
+                      "label": "s1.x1",
+                      "value": "s1.x1"
+                    },
+                    {
+                      "label": "s1.x2",
+                      "value": "s1.x2"
+                    },
+                    {
+                      "label": "s1.x4",
+                      "value": "s1.x4"
+                    },
+                    {
+                      "label": "s1.x8",
+                      "value": "s1.x8"
+                    },
+                    {
+                      "label": "p1.x1",
+                      "value": "p1.x1"
+                    },
+                    {
+                      "label": "p1.x2",
+                      "value": "p1.x2"
+                    },
+                    {
+                      "label": "p1.x4",
+                      "value": "p1.x4"
+                    },
+                    {
+                      "label": "p1.x8",
+                      "value": "p1.x8"
+                    },
+                    {
+                      "label": "p2.x1",
+                      "value": "p2.x1"
+                    },
+                    {
+                      "label": "p2.x2",
+                      "value": "p2.x2"
+                    },
+                    {
+                      "label": "p2.x4",
+                      "value": "p2.x4"
+                    },
+                    {
+                      "label": "p2.x8",
+                      "value": "p2.x8"
+                    }
+                  ],
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "pod"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "key": "pods",
+                  "label": "Pods",
+                  "type": "number",
+                  "default": 1,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "pod"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "replicas",
+                  "label": "Replicas",
+                  "type": "number",
+                  "default": 1,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "pod"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "shards",
+                  "label": "Shards",
+                  "type": "number",
+                  "default": 1,
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "deployment",
+                        "op": "eq",
+                        "value": "pod"
+                      }
+                    ]
+                  },
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "source_collection",
+                  "label": "Restore from collection",
+                  "type": "autocomplete",
+                  "help": "Seed the new index from a backup collection with a matching dimension.",
+                  "optionsSource": {
+                    "routeId": "pinecone.collections.list"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "indexes"
+        },
+        "group": "Create"
+      },
+      {
+        "id": "pinecone.index.configure",
+        "label": "Configure",
+        "icon": {
+          "type": "lucide",
+          "value": "settings"
+        },
+        "routeId": "pinecone.index.configure",
+        "method": "PATCH",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Index",
+              "fields": [
+                {
+                  "key": "deletion_protection",
+                  "label": "Deletion protection",
+                  "type": "select",
+                  "options": [
+                    {
+                      "label": "Leave unchanged",
+                      "value": ""
+                    },
+                    {
+                      "label": "Enabled",
+                      "value": "enabled"
+                    },
+                    {
+                      "label": "Disabled",
+                      "value": "disabled"
+                    }
+                  ]
+                },
+                {
+                  "key": "tags",
+                  "label": "Tags",
+                  "type": "map",
+                  "help": "Free-form key/value labels stored on the index.",
+                  "item": {
+                    "key": "value",
+                    "label": "Value",
+                    "type": "text"
+                  }
+                },
+                {
+                  "key": "pod_type",
+                  "label": "Pod type",
+                  "type": "autocomplete",
+                  "help": "Pod indexes only; vertical scaling is one-way.",
+                  "options": [
+                    {
+                      "label": "s1.x1",
+                      "value": "s1.x1"
+                    },
+                    {
+                      "label": "s1.x2",
+                      "value": "s1.x2"
+                    },
+                    {
+                      "label": "s1.x4",
+                      "value": "s1.x4"
+                    },
+                    {
+                      "label": "s1.x8",
+                      "value": "s1.x8"
+                    },
+                    {
+                      "label": "p1.x1",
+                      "value": "p1.x1"
+                    },
+                    {
+                      "label": "p1.x2",
+                      "value": "p1.x2"
+                    },
+                    {
+                      "label": "p1.x4",
+                      "value": "p1.x4"
+                    },
+                    {
+                      "label": "p1.x8",
+                      "value": "p1.x8"
+                    },
+                    {
+                      "label": "p2.x1",
+                      "value": "p2.x1"
+                    },
+                    {
+                      "label": "p2.x2",
+                      "value": "p2.x2"
+                    },
+                    {
+                      "label": "p2.x4",
+                      "value": "p2.x4"
+                    },
+                    {
+                      "label": "p2.x8",
+                      "value": "p2.x8"
+                    }
+                  ]
+                },
+                {
+                  "key": "replicas",
+                  "label": "Replicas",
+                  "type": "number",
+                  "help": "Pod indexes only.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "overview"
+        }
+      },
+      {
+        "id": "pinecone.index.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pinecone.index.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this index and every vector in it? Embeddings and metadata cannot be recovered without a collection backup.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pinecone.collection.create",
+        "label": "Create collection",
+        "icon": {
+          "type": "lucide",
+          "value": "archive"
+        },
+        "routeId": "pinecone.collection.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Collection",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[a-z0-9][a-z0-9-]{0,44}$",
+                      "message": "lower-case letters, digits, or hyphens"
+                    }
+                  ]
+                },
+                {
+                  "key": "source",
+                  "label": "Source index",
+                  "type": "autocomplete",
+                  "required": true,
+                  "default": "${resource.name}",
+                  "optionsSource": {
+                    "routeId": "pinecone.indexes.list"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "collections"
+        },
+        "group": "Create"
+      },
+      {
+        "id": "pinecone.collection.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pinecone.collection.delete",
+        "method": "DELETE",
+        "params": {
+          "collection": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this backup collection? Indexes restored from it are unaffected, but the backup is gone.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pinecone.namespace.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pinecone.namespace.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.scope}",
+          "namespace": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this namespace and every record inside it? Deleting a namespace is irreversible.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pinecone.vectors.upsert",
+        "label": "Upsert vectors",
+        "icon": {
+          "type": "lucide",
+          "value": "file-plus"
+        },
+        "routeId": "pinecone.vectors.upsert",
+        "method": "POST",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "vectors"
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"vectors\": [\n    {\n      \"id\": \"record-1\",\n      \"values\": [0.1, 0.2, 0.3],\n      \"metadata\": {\"source\": \"shellcn\"}\n    }\n  ]\n}",
+          "saveRouteId": "pinecone.vectors.upsert",
+          "saveMethod": "POST",
+          "saveParams": {
+            "index": "${resource.name}"
+          },
+          "saveBodyKey": "vectors",
+          "saveToast": {
+            "summary": "Vectors upserted",
+            "detail": "${response.upserted} record(s) written to ${response.namespace}",
+            "severity": "success"
+          },
+          "saveDismiss": "close"
+        }
+      },
+      {
+        "id": "pinecone.namespace.vectors.upsert",
+        "label": "Upsert vectors",
+        "icon": {
+          "type": "lucide",
+          "value": "file-plus"
+        },
+        "routeId": "pinecone.vectors.upsert",
+        "method": "POST",
+        "params": {
+          "index": "${resource.scope}",
+          "namespace": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "vectors"
+        },
+        "open": "dialog",
+        "panel": "code_editor",
+        "config": {
+          "language": "json",
+          "initialContent": "{\n  \"vectors\": [\n    {\n      \"id\": \"record-1\",\n      \"values\": [0.1, 0.2, 0.3],\n      \"metadata\": {\"source\": \"shellcn\"}\n    }\n  ]\n}",
+          "saveRouteId": "pinecone.vectors.upsert",
+          "saveMethod": "POST",
+          "saveParams": {
+            "index": "${resource.scope}",
+            "namespace": "${resource.name}"
+          },
+          "saveBodyKey": "vectors",
+          "saveToast": {
+            "summary": "Vectors upserted",
+            "detail": "${response.upserted} record(s) written to ${response.namespace}",
+            "severity": "success"
+          },
+          "saveDismiss": "close"
+        }
+      },
+      {
+        "id": "pinecone.vector.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash"
+        },
+        "routeId": "pinecone.vectors.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.scope}",
+          "namespace": "${resource.namespace}"
+        },
+        "body": {
+          "id": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete the selected record(s) from this namespace?",
+        "bulk": true
+      },
+      {
+        "id": "pinecone.vectors.purge",
+        "label": "Delete all vectors",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "pinecone.vectors.delete",
+        "method": "DELETE",
+        "params": {
+          "index": "${resource.name}"
+        },
+        "body": {
+          "deleteAll": true
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete every record in this index's namespace? The vectors cannot be recovered.",
+        "onSuccess": {
+          "selectTab": "vectors"
+        },
+        "group": "Danger zone"
+      }
+    ],
+    "streams": [
+      {
+        "id": "pinecone.query",
+        "kind": "query",
+        "routeId": "pinecone.query"
+      },
+      {
+        "id": "pinecone.index.metrics",
+        "kind": "metrics",
+        "routeId": "pinecone.index.metrics"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

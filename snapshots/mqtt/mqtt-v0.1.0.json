@@ -1,0 +1,3456 @@
+{
+  "name": "mqtt",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M1.5 290.2H0V486c0 14.1 11.6 25.7 25.7 25.7h201.6C225.6 389.4 125.2 290.2 1.5 290.2m0-161.5H0V212c166.3.8 301.5 134.5 303.3 299.8h86.3C388.1 300.3 214.7 128.7 1.5 128.7M512 486.3V309.4C453.5 166 335.6 52.7 189 0H25.7C11.6 0 0 11.6 0 25.7v25c255.9.8 464.1 206.9 465.6 461.3h20.7c14.3-.3 25.7-11.6 25.7-25.7M444.6 71.4c23.7 23.7 47.9 53.7 67.4 80.2V25.5c0-14-11.3-25.4-25.3-25.5H356.5c30.3 20.9 61.6 44.9 88.1 71.4\" style=\"fill:#606\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "mqtt",
+    "version": "0.1.0",
+    "title": "MQTT",
+    "description": "MQTT broker client with live subscriptions, publishing, retained-message browsing, a topic tree, $SYS metrics, and EMQX management tables.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" viewBox=\"0 0 512 512\"\u003e\u003cpath d=\"M1.5 290.2H0V486c0 14.1 11.6 25.7 25.7 25.7h201.6C225.6 389.4 125.2 290.2 1.5 290.2m0-161.5H0V212c166.3.8 301.5 134.5 303.3 299.8h86.3C388.1 300.3 214.7 128.7 1.5 128.7M512 486.3V309.4C453.5 166 335.6 52.7 189 0H25.7C11.6 0 0 11.6 0 25.7v25c255.9.8 464.1 206.9 465.6 461.3h20.7c14.3-.3 25.7-11.6 25.7-25.7M444.6 71.4c23.7 23.7 47.9 53.7 67.4 80.2V25.5c0-14-11.3-25.4-25.3-25.5H356.5c30.3 20.9 61.6 44.9 88.1 71.4\" style=\"fill:#606\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "messaging",
+      "label": "Messaging",
+      "icon": {
+        "type": "lucide",
+        "value": "messages-square"
+      },
+      "order": 140
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Broker",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "default": "localhost",
+              "placeholder": "mqtt.example.internal"
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 1883,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "client_id",
+              "label": "Client ID",
+              "type": "text",
+              "default": "shellcn",
+              "help": "Must be unique on the broker; a duplicate ID disconnects the other client. Left at the default, each session gets its own suffix."
+            },
+            {
+              "key": "clean_session",
+              "label": "Clean session",
+              "type": "toggle",
+              "default": true
+            },
+            {
+              "key": "keep_alive",
+              "label": "Keep alive",
+              "type": "duration",
+              "default": "30s"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "Username and password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored username and password",
+                  "value": "stored_password"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "basic_credential_id",
+              "label": "Stored username and password",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "mqtt"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "stored_password"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "placeholder": "-----BEGIN CERTIFICATE-----",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Observation",
+          "fields": [
+            {
+              "key": "observe",
+              "label": "Observe topics",
+              "type": "toggle",
+              "default": true,
+              "help": "Keeps a background subscription so the topic tree, retained snapshot, and recent messages have data."
+            },
+            {
+              "key": "observe_filter",
+              "label": "Observe filter",
+              "type": "text",
+              "default": "#",
+              "placeholder": "sensors/#",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "observe",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            },
+            {
+              "key": "sys_metrics",
+              "label": "Collect $SYS metrics",
+              "type": "toggle",
+              "default": true
+            },
+            {
+              "key": "topic_limit",
+              "label": "Topic limit",
+              "type": "number",
+              "default": 2000,
+              "help": "Maximum distinct topics held in the observation cache.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 50000
+                }
+              ]
+            },
+            {
+              "key": "message_limit",
+              "label": "Message buffer",
+              "type": "number",
+              "default": 200,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "EMQX management API",
+          "fields": [
+            {
+              "key": "emqx_url",
+              "label": "EMQX dashboard URL",
+              "type": "text",
+              "placeholder": "http://localhost:18083",
+              "help": "Optional. Enables the clients, subscriptions, and node tables; plain brokers can leave this empty."
+            },
+            {
+              "key": "emqx_auth",
+              "label": "EMQX authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "API key",
+                  "value": "api_key"
+                },
+                {
+                  "label": "Stored API key",
+                  "value": "stored_api_key"
+                }
+              ],
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "emqx_url",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "emqx_api_key",
+              "label": "API key",
+              "type": "text",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "emqx_auth",
+                    "op": "eq",
+                    "value": "api_key"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "emqx_api_secret",
+              "label": "Secret key",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "emqx_auth",
+                    "op": "eq",
+                    "value": "api_key"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "emqx_credential_id",
+              "label": "Stored API key",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "mqtt"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "emqx_auth",
+                    "op": "eq",
+                    "value": "stored_api_key"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks publish, retained-message removal, and client kicks."
+            },
+            {
+              "key": "confirm_writes",
+              "label": "Confirm write operations",
+              "type": "toggle",
+              "default": true
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "5s"
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "subscribe",
+      "publish",
+      "retained",
+      "topics",
+      "metrics",
+      "emqx"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tabs": [
+      {
+        "key": "live",
+        "label": "Live",
+        "icon": {
+          "type": "lucide",
+          "value": "radio"
+        },
+        "panel": "log_stream",
+        "source": {
+          "routeId": "mqtt.subscribe",
+          "method": "WS"
+        },
+        "config": {
+          "controls": [
+            {
+              "param": "filter",
+              "label": "Topic filter",
+              "optionsSource": {
+                "routeId": "mqtt.filters.options"
+              }
+            },
+            {
+              "param": "qos",
+              "label": "QoS",
+              "optionsSource": {
+                "routeId": "mqtt.qos.options"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "key": "broker",
+        "label": "Broker",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "panel": "object_detail",
+        "source": {
+          "routeId": "mqtt.overview"
+        },
+        "config": {
+          "sections": [
+            {
+              "title": "Connection",
+              "fields": [
+                {
+                  "key": "address",
+                  "label": "Broker",
+                  "copy": true
+                },
+                {
+                  "key": "scheme",
+                  "label": "Scheme",
+                  "type": "badge"
+                },
+                {
+                  "key": "client_id",
+                  "label": "Client ID",
+                  "copy": true
+                },
+                {
+                  "key": "connected",
+                  "label": "Connected",
+                  "type": "bool"
+                },
+                {
+                  "key": "protocol_version",
+                  "label": "Protocol"
+                },
+                {
+                  "key": "clean_session",
+                  "label": "Clean session",
+                  "type": "bool"
+                },
+                {
+                  "key": "keep_alive",
+                  "label": "Keep alive",
+                  "type": "duration"
+                },
+                {
+                  "key": "read_only",
+                  "label": "Read-only",
+                  "type": "bool"
+                }
+              ]
+            },
+            {
+              "title": "Observation",
+              "fields": [
+                {
+                  "key": "observe_filter",
+                  "label": "Observe filter",
+                  "copy": true
+                },
+                {
+                  "key": "topics",
+                  "label": "Topics observed",
+                  "type": "number"
+                },
+                {
+                  "key": "retained_topics",
+                  "label": "Retained topics",
+                  "type": "number"
+                },
+                {
+                  "key": "messages_observed",
+                  "label": "Messages observed",
+                  "type": "number"
+                },
+                {
+                  "key": "messages_buffered",
+                  "label": "Messages buffered",
+                  "type": "number"
+                },
+                {
+                  "key": "topics_dropped",
+                  "label": "Topics dropped at cap",
+                  "type": "number"
+                },
+                {
+                  "key": "topic_limit",
+                  "label": "Topic limit",
+                  "type": "number"
+                }
+              ]
+            },
+            {
+              "title": "Broker ($SYS)",
+              "fields": [
+                {
+                  "key": "sys_version",
+                  "label": "Version"
+                },
+                {
+                  "key": "sys_uptime",
+                  "label": "Uptime"
+                },
+                {
+                  "key": "sys_clients_connected",
+                  "label": "Clients connected",
+                  "type": "number"
+                },
+                {
+                  "key": "sys_clients_total",
+                  "label": "Clients total",
+                  "type": "number"
+                },
+                {
+                  "key": "sys_subscriptions",
+                  "label": "Subscriptions",
+                  "type": "number"
+                },
+                {
+                  "key": "sys_messages_received",
+                  "label": "Messages received",
+                  "type": "number"
+                },
+                {
+                  "key": "sys_messages_sent",
+                  "label": "Messages sent",
+                  "type": "number"
+                },
+                {
+                  "key": "sys_bytes_received",
+                  "label": "Bytes received",
+                  "type": "bytes"
+                },
+                {
+                  "key": "sys_bytes_sent",
+                  "label": "Bytes sent",
+                  "type": "bytes"
+                }
+              ]
+            },
+            {
+              "title": "EMQX",
+              "fields": [
+                {
+                  "key": "emqx_url",
+                  "label": "Dashboard URL",
+                  "copy": true
+                },
+                {
+                  "key": "emqx_enabled",
+                  "label": "Management API",
+                  "type": "bool"
+                }
+              ]
+            }
+          ],
+          "rawToggle": true
+        }
+      },
+      {
+        "key": "retained",
+        "label": "Retained",
+        "icon": {
+          "type": "lucide",
+          "value": "pin"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.retained.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "topic",
+              "label": "Topic",
+              "sortable": true
+            },
+            {
+              "key": "payload",
+              "label": "Payload"
+            },
+            {
+              "key": "size",
+              "label": "Size",
+              "sortable": true,
+              "type": "bytes"
+            },
+            {
+              "key": "qos",
+              "label": "QoS",
+              "sortable": true,
+              "type": "badge",
+              "severities": {
+                "0": "secondary",
+                "1": "info",
+                "2": "success"
+              }
+            },
+            {
+              "key": "retained",
+              "label": "Retained",
+              "sortable": true,
+              "type": "bool"
+            },
+            {
+              "key": "messages",
+              "label": "Messages",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "last_seen",
+              "label": "Last seen",
+              "sortable": true,
+              "type": "relative_time"
+            }
+          ],
+          "actionIds": [
+            "mqtt.message.publish",
+            "mqtt.retained.rescan"
+          ],
+          "rowActionIds": [
+            "mqtt.retained.clear"
+          ],
+          "refreshIntervalMs": 10000,
+          "defaultSort": {
+            "field": "topic"
+          },
+          "emptyText": "No retained messages observed. Retained messages arrive when the observation subscription is (re)established.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "messages",
+        "label": "Messages",
+        "icon": {
+          "type": "lucide",
+          "value": "mail"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.messages.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "seq",
+              "label": "#",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "time",
+              "label": "Time",
+              "sortable": true,
+              "type": "relative_time"
+            },
+            {
+              "key": "topic",
+              "label": "Topic",
+              "sortable": true
+            },
+            {
+              "key": "qos",
+              "label": "QoS",
+              "sortable": true,
+              "type": "badge",
+              "severities": {
+                "0": "secondary",
+                "1": "info",
+                "2": "success"
+              }
+            },
+            {
+              "key": "retained",
+              "label": "Retained",
+              "sortable": true,
+              "type": "bool"
+            },
+            {
+              "key": "size",
+              "label": "Size",
+              "sortable": true,
+              "type": "bytes"
+            },
+            {
+              "key": "payload",
+              "label": "Payload"
+            }
+          ],
+          "actionIds": [
+            "mqtt.message.publish",
+            "mqtt.messages.clear"
+          ],
+          "refreshIntervalMs": 5000,
+          "defaultSort": {
+            "field": "seq",
+            "desc": true
+          },
+          "emptyText": "No messages buffered yet on the observed topic filter.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "sys",
+        "label": "$SYS",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.sys.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "topic",
+              "label": "Metric",
+              "sortable": true
+            },
+            {
+              "key": "payload",
+              "label": "Value"
+            },
+            {
+              "key": "last_seen",
+              "label": "Updated",
+              "sortable": true,
+              "type": "relative_time"
+            }
+          ],
+          "refreshIntervalMs": 10000,
+          "defaultSort": {
+            "field": "topic"
+          },
+          "emptyText": "No $SYS metrics published. The broker may not expose $SYS, or this client may not be allowed to read it.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "subscriptions",
+        "label": "Subscriptions",
+        "icon": {
+          "type": "lucide",
+          "value": "list-tree"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.emqx.subscriptions.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "clientid",
+              "label": "Client ID",
+              "sortable": true
+            },
+            {
+              "key": "topic",
+              "label": "Topic filter",
+              "sortable": true
+            },
+            {
+              "key": "qos",
+              "label": "QoS",
+              "sortable": true,
+              "type": "badge",
+              "severities": {
+                "0": "secondary",
+                "1": "info",
+                "2": "success"
+              }
+            },
+            {
+              "key": "node",
+              "label": "Node",
+              "sortable": true
+            }
+          ],
+          "refreshIntervalMs": 15000,
+          "emptyText": "No subscriptions. This table needs the EMQX management API; set the dashboard URL on the connection.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "routes",
+        "label": "Routed topics",
+        "icon": {
+          "type": "lucide",
+          "value": "route"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.emqx.topics.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "topic",
+              "label": "Topic",
+              "sortable": true
+            },
+            {
+              "key": "node",
+              "label": "Node",
+              "sortable": true
+            }
+          ],
+          "refreshIntervalMs": 15000,
+          "emptyText": "No routed topics. This table needs the EMQX management API; set the dashboard URL on the connection.",
+          "exportable": true
+        }
+      },
+      {
+        "key": "nodes",
+        "label": "Nodes",
+        "icon": {
+          "type": "lucide",
+          "value": "cpu"
+        },
+        "panel": "table",
+        "source": {
+          "routeId": "mqtt.emqx.nodes.list"
+        },
+        "config": {
+          "columns": [
+            {
+              "key": "node",
+              "label": "Node",
+              "sortable": true
+            },
+            {
+              "key": "node_status",
+              "label": "Status",
+              "type": "badge",
+              "severities": {
+                "running": "success",
+                "stopped": "danger"
+              }
+            },
+            {
+              "key": "version",
+              "label": "Version"
+            },
+            {
+              "key": "connections",
+              "label": "Connections",
+              "sortable": true,
+              "type": "number"
+            },
+            {
+              "key": "uptime",
+              "label": "Uptime",
+              "sortable": true,
+              "type": "duration"
+            },
+            {
+              "key": "memory_used",
+              "label": "Memory",
+              "sortable": true,
+              "type": "bytes"
+            }
+          ],
+          "refreshIntervalMs": 15000,
+          "emptyText": "No cluster nodes. This table needs the EMQX management API; set the dashboard URL on the connection.",
+          "exportable": true
+        }
+      }
+    ],
+    "tree": [
+      {
+        "key": "topics",
+        "label": "Topics",
+        "icon": {
+          "type": "lucide",
+          "value": "list-tree"
+        },
+        "source": {
+          "routeId": "mqtt.topics.tree"
+        },
+        "resourceKind": "topic"
+      },
+      {
+        "key": "clients",
+        "label": "Clients",
+        "icon": {
+          "type": "lucide",
+          "value": "users"
+        },
+        "resourceKind": "client"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "topic",
+        "title": "Topics",
+        "list": {
+          "routeId": "mqtt.topics.list"
+        },
+        "columns": [
+          {
+            "key": "topic",
+            "label": "Topic",
+            "sortable": true
+          },
+          {
+            "key": "payload",
+            "label": "Payload"
+          },
+          {
+            "key": "size",
+            "label": "Size",
+            "sortable": true,
+            "type": "bytes"
+          },
+          {
+            "key": "qos",
+            "label": "QoS",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "0": "secondary",
+              "1": "info",
+              "2": "success"
+            }
+          },
+          {
+            "key": "retained",
+            "label": "Retained",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "messages",
+            "label": "Messages",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "last_seen",
+            "label": "Last seen",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "mqtt.message.publish",
+            "mqtt.retained.rescan"
+          ],
+          "row": [
+            "mqtt.retained.clear"
+          ],
+          "detail": [
+            "mqtt.topic.publish",
+            "mqtt.retained.clear"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "mqtt.topic.overview",
+                "params": {
+                  "topic": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Topic",
+                    "fields": [
+                      {
+                        "key": "topic",
+                        "label": "Topic",
+                        "copy": true
+                      },
+                      {
+                        "key": "qos",
+                        "label": "QoS",
+                        "type": "badge",
+                        "severities": {
+                          "0": "secondary",
+                          "1": "info",
+                          "2": "success"
+                        }
+                      },
+                      {
+                        "key": "retained",
+                        "label": "Retained",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "messages",
+                        "label": "Messages observed",
+                        "type": "number"
+                      },
+                      {
+                        "key": "first_seen",
+                        "label": "First seen",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "last_seen",
+                        "label": "Last seen",
+                        "type": "relative_time"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Last payload",
+                    "fields": [
+                      {
+                        "key": "size",
+                        "label": "Size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "encoding",
+                        "label": "Encoding",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "payload",
+                        "label": "Payload",
+                        "copy": true
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "topic_messages",
+              "label": "Messages",
+              "icon": {
+                "type": "lucide",
+                "value": "mail"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "mqtt.messages.list",
+                "params": {
+                  "topic": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "seq",
+                    "label": "#",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "time",
+                    "label": "Time",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "topic",
+                    "label": "Topic",
+                    "sortable": true
+                  },
+                  {
+                    "key": "qos",
+                    "label": "QoS",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "0": "secondary",
+                      "1": "info",
+                      "2": "success"
+                    }
+                  },
+                  {
+                    "key": "retained",
+                    "label": "Retained",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "sortable": true,
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "payload",
+                    "label": "Payload"
+                  }
+                ],
+                "actionIds": [
+                  "mqtt.topic.publish"
+                ],
+                "refreshIntervalMs": 5000,
+                "defaultSort": {
+                  "field": "seq",
+                  "desc": true
+                },
+                "emptyText": "No buffered messages for this topic.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "topic_live",
+              "label": "Live",
+              "icon": {
+                "type": "lucide",
+                "value": "radio"
+              },
+              "panel": "log_stream",
+              "source": {
+                "routeId": "mqtt.subscribe",
+                "method": "WS",
+                "params": {
+                  "topic": "${resource.name}"
+                }
+              },
+              "config": {
+                "controls": [
+                  {
+                    "param": "qos",
+                    "label": "QoS",
+                    "optionsSource": {
+                      "routeId": "mqtt.qos.options"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "client",
+        "title": "Clients",
+        "list": {
+          "routeId": "mqtt.emqx.clients.list"
+        },
+        "columns": [
+          {
+            "key": "clientid",
+            "label": "Client ID",
+            "sortable": true
+          },
+          {
+            "key": "username",
+            "label": "Username",
+            "sortable": true
+          },
+          {
+            "key": "connected",
+            "label": "Connected",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "ip_address",
+            "label": "Address"
+          },
+          {
+            "key": "proto_ver",
+            "label": "Protocol",
+            "type": "number"
+          },
+          {
+            "key": "subscriptions_cnt",
+            "label": "Subscriptions",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "connected_at",
+            "label": "Connected at",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "mqtt.client.kick"
+          ],
+          "detail": [
+            "mqtt.client.kick"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "connected",
+            "severities": {
+              "false": "danger",
+              "true": "success"
+            }
+          },
+          "tabs": [
+            {
+              "key": "client_overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "mqtt.emqx.client.overview",
+                "params": {
+                  "clientid": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Identity",
+                    "fields": [
+                      {
+                        "key": "clientid",
+                        "label": "Client ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "username",
+                        "label": "Username",
+                        "copy": true
+                      },
+                      {
+                        "key": "connected",
+                        "label": "Connected",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "node",
+                        "label": "Node"
+                      },
+                      {
+                        "key": "ip_address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "proto_name",
+                        "label": "Protocol"
+                      },
+                      {
+                        "key": "proto_ver",
+                        "label": "Protocol version",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Session",
+                    "fields": [
+                      {
+                        "key": "clean_start",
+                        "label": "Clean start",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "keepalive",
+                        "label": "Keep alive",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "expiry_interval",
+                        "label": "Session expiry",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "subscriptions_cnt",
+                        "label": "Subscriptions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "inflight_cnt",
+                        "label": "Inflight",
+                        "type": "number"
+                      },
+                      {
+                        "key": "mqueue_len",
+                        "label": "Queued",
+                        "type": "number"
+                      },
+                      {
+                        "key": "connected_at",
+                        "label": "Connected at",
+                        "type": "relative_time"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Traffic",
+                    "fields": [
+                      {
+                        "key": "recv_msg",
+                        "label": "Messages received",
+                        "type": "number"
+                      },
+                      {
+                        "key": "send_msg",
+                        "label": "Messages sent",
+                        "type": "number"
+                      },
+                      {
+                        "key": "recv_oct",
+                        "label": "Bytes received",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "send_oct",
+                        "label": "Bytes sent",
+                        "type": "bytes"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "client_subscriptions",
+              "label": "Subscriptions",
+              "icon": {
+                "type": "lucide",
+                "value": "list-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "mqtt.emqx.subscriptions.list",
+                "params": {
+                  "clientid": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "clientid",
+                    "label": "Client ID",
+                    "sortable": true
+                  },
+                  {
+                    "key": "topic",
+                    "label": "Topic filter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "qos",
+                    "label": "QoS",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "0": "secondary",
+                      "1": "info",
+                      "2": "success"
+                    }
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "emptyText": "This client has no subscriptions.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "mqtt.message.publish",
+        "label": "Publish",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "mqtt.publish",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Message",
+              "fields": [
+                {
+                  "key": "topic",
+                  "label": "Topic",
+                  "type": "text",
+                  "placeholder": "sensors/kitchen/temperature",
+                  "help": "Required unless publishing from a topic view, which supplies the selected topic."
+                },
+                {
+                  "key": "payload",
+                  "label": "Payload",
+                  "type": "textarea"
+                },
+                {
+                  "key": "encoding",
+                  "label": "Payload encoding",
+                  "type": "select",
+                  "required": true,
+                  "default": "string",
+                  "options": [
+                    {
+                      "label": "String",
+                      "value": "string"
+                    },
+                    {
+                      "label": "Base64",
+                      "value": "base64"
+                    }
+                  ]
+                },
+                {
+                  "key": "qos",
+                  "label": "QoS",
+                  "type": "select",
+                  "required": true,
+                  "default": "0",
+                  "options": [
+                    {
+                      "label": "0 - At most once",
+                      "value": "0"
+                    },
+                    {
+                      "label": "1 - At least once",
+                      "value": "1"
+                    },
+                    {
+                      "label": "2 - Exactly once",
+                      "value": "2"
+                    }
+                  ]
+                },
+                {
+                  "key": "retain",
+                  "label": "Retain",
+                  "type": "toggle",
+                  "help": "The broker keeps this payload and replays it to every new subscriber of the topic."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "mqtt.topic.publish",
+        "label": "Publish",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "mqtt.publish",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Message",
+              "fields": [
+                {
+                  "key": "topic",
+                  "label": "Topic",
+                  "type": "text",
+                  "placeholder": "sensors/kitchen/temperature",
+                  "help": "Required unless publishing from a topic view, which supplies the selected topic."
+                },
+                {
+                  "key": "payload",
+                  "label": "Payload",
+                  "type": "textarea"
+                },
+                {
+                  "key": "encoding",
+                  "label": "Payload encoding",
+                  "type": "select",
+                  "required": true,
+                  "default": "string",
+                  "options": [
+                    {
+                      "label": "String",
+                      "value": "string"
+                    },
+                    {
+                      "label": "Base64",
+                      "value": "base64"
+                    }
+                  ]
+                },
+                {
+                  "key": "qos",
+                  "label": "QoS",
+                  "type": "select",
+                  "required": true,
+                  "default": "0",
+                  "options": [
+                    {
+                      "label": "0 - At most once",
+                      "value": "0"
+                    },
+                    {
+                      "label": "1 - At least once",
+                      "value": "1"
+                    },
+                    {
+                      "label": "2 - Exactly once",
+                      "value": "2"
+                    }
+                  ]
+                },
+                {
+                  "key": "retain",
+                  "label": "Retain",
+                  "type": "toggle",
+                  "help": "The broker keeps this payload and replays it to every new subscriber of the topic."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "mqtt.retained.rescan",
+        "label": "Rescan retained",
+        "icon": {
+          "type": "lucide",
+          "value": "refresh-cw"
+        },
+        "routeId": "mqtt.retained.rescan",
+        "method": "POST",
+        "risk": "safe",
+        "requiresConfirm": true,
+        "confirmText": "Drop the observation cache and re-subscribe so the broker replays its retained messages?"
+      },
+      {
+        "id": "mqtt.retained.clear",
+        "label": "Clear retained",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "mqtt.retained.clear",
+        "method": "DELETE",
+        "params": {
+          "topic": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Remove the retained message from the broker? Subscribers will no longer receive it on connect.",
+        "bulk": true
+      },
+      {
+        "id": "mqtt.messages.clear",
+        "label": "Clear buffer",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "mqtt.messages.clear",
+        "method": "POST",
+        "risk": "safe",
+        "requiresConfirm": true,
+        "confirmText": "Discard the buffered messages held for this connection?"
+      },
+      {
+        "id": "mqtt.client.kick",
+        "label": "Kick",
+        "icon": {
+          "type": "lucide",
+          "value": "user-x"
+        },
+        "routeId": "mqtt.emqx.client.kick",
+        "method": "DELETE",
+        "params": {
+          "clientid": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Disconnect this client from the broker?",
+        "bulk": true
+      }
+    ],
+    "headerActions": [
+      "mqtt.message.publish"
+    ],
+    "streams": [
+      {
+        "id": "mqtt.subscribe",
+        "kind": "logs",
+        "routeId": "mqtt.subscribe"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

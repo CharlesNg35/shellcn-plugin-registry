@@ -1,0 +1,4583 @@
+{
+  "name": "pulsar",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg fill=\"#188fff\" viewBox=\"0 0 24 24\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cg id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_iconCarrier\"\u003e\u003cpath d=\"M24 8.925h-5.866c-1.586-3.041-3.262-5.402-5.544-5.402-2.97 0-4.367 2.593-5.717 5.115l-.118.22H0v1.5h3.934c1.39 0 1.673.468 1.673.468-1.09 1.691-2.4 3.363-4.584 3.363H0v1.574h1.03c4.234 0 6.083-3.434 7.567-6.193 1.361-2.541 2.31-4.08 3.993-4.08 1.747 0 3.584 3.801 5.201 7.157.237.488.477.988.72 1.483-6.2.197-9.155 1.649-11.559 2.833-1.759.866-3.147 1.94-5.433 1.94H0v1.574h1.507c2.754 0 4.47-.85 6.295-1.751 2.53-1.243 5.398-2.652 12.157-2.652h3.907V14.5H21.66a1.18 1.18 0 0 1-.972-.393 70.83 70.83 0 0 1-1.133-2.321l-.511-1.047s.366-.393 1.38-.393H24z\"\u003e\u003c/path\u003e\u003c/g\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "pulsar",
+    "version": "0.1.0",
+    "title": "Apache Pulsar",
+    "description": "Pulsar browser for tenants, namespaces, topics, subscriptions, producers, consumers, schemas, message browsing, live tailing, and publishing.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg fill=\"#188fff\" viewBox=\"0 0 24 24\" role=\"img\" xmlns=\"http://www.w3.org/2000/svg\"\u003e\u003cg id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\u003e\u003c/g\u003e\u003cg id=\"SVGRepo_iconCarrier\"\u003e\u003cpath d=\"M24 8.925h-5.866c-1.586-3.041-3.262-5.402-5.544-5.402-2.97 0-4.367 2.593-5.717 5.115l-.118.22H0v1.5h3.934c1.39 0 1.673.468 1.673.468-1.09 1.691-2.4 3.363-4.584 3.363H0v1.574h1.03c4.234 0 6.083-3.434 7.567-6.193 1.361-2.541 2.31-4.08 3.993-4.08 1.747 0 3.584 3.801 5.201 7.157.237.488.477.988.72 1.483-6.2.197-9.155 1.649-11.559 2.833-1.759.866-3.147 1.94-5.433 1.94H0v1.574h1.507c2.754 0 4.47-.85 6.295-1.751 2.53-1.243 5.398-2.652 12.157-2.652h3.907V14.5H21.66a1.18 1.18 0 0 1-.972-.393 70.83 70.83 0 0 1-1.133-2.321l-.511-1.047s.366-.393 1.38-.393H24z\"\u003e\u003c/path\u003e\u003c/g\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "messaging",
+      "label": "Messaging",
+      "icon": {
+        "type": "lucide",
+        "value": "messages-square"
+      },
+      "order": 140
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Cluster",
+          "fields": [
+            {
+              "key": "admin_url",
+              "label": "Admin API URL",
+              "type": "url",
+              "required": true,
+              "default": "http://localhost:8080",
+              "placeholder": "https://pulsar.example.internal:8080",
+              "help": "Broker or proxy web service URL that serves the /admin/v2 REST API."
+            },
+            {
+              "key": "service_url",
+              "label": "Broker service URL",
+              "type": "text",
+              "default": "pulsar://localhost:6650",
+              "placeholder": "pulsar+ssl://pulsar.example.internal:6651",
+              "help": "Binary protocol URL used to produce and tail messages. Browsing works without it."
+            },
+            {
+              "key": "tenant",
+              "label": "Default tenant",
+              "type": "text",
+              "default": "public",
+              "placeholder": "public"
+            },
+            {
+              "key": "namespace",
+              "label": "Default namespace",
+              "type": "text",
+              "default": "default",
+              "placeholder": "default"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None",
+                  "value": "none"
+                },
+                {
+                  "label": "JWT token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored bearer token",
+                  "value": "token_credential"
+                },
+                {
+                  "label": "Username and password",
+                  "value": "basic"
+                },
+                {
+                  "label": "Stored username \u0026 password",
+                  "value": "basic_credential"
+                }
+              ]
+            },
+            {
+              "key": "token",
+              "label": "JWT token",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_id",
+              "label": "Stored bearer token",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "bearer_token",
+                "protocols": [
+                  "pulsar"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token_credential"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "required": true,
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored username \u0026 password",
+              "type": "credential_ref",
+              "required": true,
+              "credential": {
+                "kind": "basic_auth",
+                "protocols": [
+                  "pulsar"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "basic_credential"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "placeholder": "-----BEGIN CERTIFICATE-----",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "in",
+                    "value": [
+                      "verify-ca",
+                      "verify-full"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional mutual-TLS certificate presented to the broker.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "pulsar"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks produce, create, cursor changes, and delete operations."
+            },
+            {
+              "key": "include_system_topics",
+              "label": "Show system topics",
+              "type": "toggle",
+              "default": false,
+              "help": "Include the broker's internal topics (transaction, change events, health check) in topic listings."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "10s"
+            },
+            {
+              "key": "message_limit",
+              "label": "Message page size",
+              "type": "number",
+              "default": 25,
+              "help": "Upper bound on how many messages one browse request reads from a topic.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "tenants",
+      "namespaces",
+      "topics",
+      "partitions",
+      "subscriptions",
+      "producers",
+      "consumers",
+      "schemas",
+      "messages",
+      "produce",
+      "tail"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "overview",
+        "label": "Overview",
+        "icon": {
+          "type": "lucide",
+          "value": "layout-dashboard"
+        },
+        "ref": {
+          "kind": "instance",
+          "name": "Cluster",
+          "uid": "instance"
+        }
+      },
+      {
+        "key": "tenants",
+        "label": "Tenants",
+        "icon": {
+          "type": "lucide",
+          "value": "building-2"
+        },
+        "source": {
+          "routeId": "pulsar.tenants.tree"
+        },
+        "resourceKind": "tenant"
+      },
+      {
+        "key": "clusters",
+        "label": "Clusters",
+        "icon": {
+          "type": "lucide",
+          "value": "globe"
+        },
+        "resourceKind": "cluster"
+      },
+      {
+        "key": "brokers",
+        "label": "Brokers",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "resourceKind": "broker"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "instance",
+        "title": "Cluster",
+        "list": {
+          "routeId": "pulsar.overview"
+        },
+        "columns": [
+          {
+            "key": "admin_url",
+            "label": "Admin API URL"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "Pulsar"
+          },
+          "tabs": [
+            {
+              "key": "instance-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Connection",
+                    "fields": [
+                      {
+                        "key": "admin_url",
+                        "label": "Admin API URL",
+                        "copy": true
+                      },
+                      {
+                        "key": "service_url",
+                        "label": "Broker service URL",
+                        "copy": true
+                      },
+                      {
+                        "key": "version",
+                        "label": "Broker version"
+                      },
+                      {
+                        "key": "readOnly",
+                        "label": "Read-only",
+                        "type": "bool"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Topology",
+                    "fields": [
+                      {
+                        "key": "clusters",
+                        "label": "Clusters",
+                        "type": "json"
+                      },
+                      {
+                        "key": "brokers",
+                        "label": "Active brokers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "tenant",
+                        "label": "Default tenant"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Default namespace"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "tenant",
+        "title": "Tenants",
+        "list": {
+          "routeId": "pulsar.tenants.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Tenant",
+            "sortable": true
+          },
+          {
+            "key": "admin_roles",
+            "label": "Admin roles",
+            "type": "json"
+          },
+          {
+            "key": "allowed_clusters",
+            "label": "Allowed clusters",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "pulsar.tenant.create"
+          ],
+          "row": [
+            "pulsar.tenant.delete"
+          ],
+          "detail": [
+            "pulsar.tenant.update",
+            "pulsar.tenant.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "tenant-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.tenant.read",
+                "params": {
+                  "tenant": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Tenant",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "namespaces",
+                        "label": "Namespaces",
+                        "type": "number"
+                      },
+                      {
+                        "key": "admin_roles",
+                        "label": "Admin roles",
+                        "type": "json"
+                      },
+                      {
+                        "key": "allowed_clusters",
+                        "label": "Allowed clusters",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "tenant-namespaces",
+              "label": "Namespaces",
+              "icon": {
+                "type": "lucide",
+                "value": "folder"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.namespaces.list",
+                "params": {
+                  "tenant": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Namespace",
+                    "sortable": true
+                  },
+                  {
+                    "key": "tenant",
+                    "label": "Tenant",
+                    "sortable": true
+                  },
+                  {
+                    "key": "bundles",
+                    "label": "Bundles",
+                    "type": "number"
+                  },
+                  {
+                    "key": "message_ttl",
+                    "label": "Message TTL",
+                    "type": "duration"
+                  },
+                  {
+                    "key": "retention_minutes",
+                    "label": "Retention (min)",
+                    "type": "number"
+                  },
+                  {
+                    "key": "retention_size",
+                    "label": "Retention size",
+                    "type": "number"
+                  },
+                  {
+                    "key": "replication_clusters",
+                    "label": "Replication",
+                    "type": "json"
+                  }
+                ],
+                "actionIds": [
+                  "pulsar.namespace.create"
+                ],
+                "rowActionIds": [
+                  "pulsar.namespace.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This tenant has no namespaces yet.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "namespace",
+        "title": "Namespaces",
+        "list": {
+          "routeId": "pulsar.namespaces.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Namespace",
+            "sortable": true
+          },
+          {
+            "key": "tenant",
+            "label": "Tenant",
+            "sortable": true
+          },
+          {
+            "key": "bundles",
+            "label": "Bundles",
+            "type": "number"
+          },
+          {
+            "key": "message_ttl",
+            "label": "Message TTL",
+            "type": "duration"
+          },
+          {
+            "key": "retention_minutes",
+            "label": "Retention (min)",
+            "type": "number"
+          },
+          {
+            "key": "retention_size",
+            "label": "Retention size",
+            "type": "number"
+          },
+          {
+            "key": "replication_clusters",
+            "label": "Replication",
+            "type": "json"
+          }
+        ],
+        "actions": {
+          "row": [
+            "pulsar.namespace.delete"
+          ],
+          "detail": [
+            "pulsar.namespace.retention",
+            "pulsar.namespace.unload",
+            "pulsar.namespace.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}/${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "namespace-topics",
+              "label": "Topics",
+              "icon": {
+                "type": "lucide",
+                "value": "radio-tower"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.topics.list",
+                "params": {
+                  "namespace": "${resource.name}",
+                  "tenant": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Topic",
+                    "sortable": true
+                  },
+                  {
+                    "key": "domain",
+                    "label": "Domain",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "non-persistent": "warn",
+                      "persistent": "success"
+                    }
+                  },
+                  {
+                    "key": "partitions",
+                    "label": "Partitions",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "producers",
+                    "label": "Producers",
+                    "type": "number"
+                  },
+                  {
+                    "key": "subscriptions",
+                    "label": "Subscriptions",
+                    "type": "number"
+                  },
+                  {
+                    "key": "msg_rate_in",
+                    "label": "Rate in",
+                    "type": "number"
+                  },
+                  {
+                    "key": "msg_rate_out",
+                    "label": "Rate out",
+                    "type": "number"
+                  },
+                  {
+                    "key": "storage_size",
+                    "label": "Storage",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "backlog_size",
+                    "label": "Backlog",
+                    "type": "bytes"
+                  }
+                ],
+                "actionIds": [
+                  "pulsar.topic.create"
+                ],
+                "rowActionIds": [
+                  "pulsar.topic.delete"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This namespace has no topics yet.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "namespace-policies",
+              "label": "Policies",
+              "icon": {
+                "type": "lucide",
+                "value": "shield"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.namespace.policies",
+                "params": {
+                  "namespace": "${resource.name}",
+                  "tenant": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Namespace",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "tenant",
+                        "label": "Tenant",
+                        "copy": true
+                      },
+                      {
+                        "key": "bundles",
+                        "label": "Bundles",
+                        "type": "json"
+                      },
+                      {
+                        "key": "replication_clusters",
+                        "label": "Replication clusters",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Retention",
+                    "fields": [
+                      {
+                        "key": "message_ttl_in_seconds",
+                        "label": "Message TTL",
+                        "type": "duration"
+                      },
+                      {
+                        "key": "retention_policies",
+                        "label": "Retention",
+                        "type": "json"
+                      },
+                      {
+                        "key": "backlog_quota_map",
+                        "label": "Backlog quotas",
+                        "type": "json"
+                      },
+                      {
+                        "key": "compaction_threshold",
+                        "label": "Compaction threshold",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Limits",
+                    "fields": [
+                      {
+                        "key": "max_producers_per_topic",
+                        "label": "Max producers per topic",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_consumers_per_topic",
+                        "label": "Max consumers per topic",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_consumers_per_subscription",
+                        "label": "Max consumers per subscription",
+                        "type": "number"
+                      },
+                      {
+                        "key": "max_unacked_messages_per_consumer",
+                        "label": "Max unacked per consumer",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Safety",
+                    "fields": [
+                      {
+                        "key": "deduplicationEnabled",
+                        "label": "Deduplication",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "encryption_required",
+                        "label": "Encryption required",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "schema_validation_enforced",
+                        "label": "Schema validation enforced",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "is_allow_auto_update_schema",
+                        "label": "Auto schema update",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "topic",
+        "title": "Topics",
+        "list": {
+          "routeId": "pulsar.topics.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Topic",
+            "sortable": true
+          },
+          {
+            "key": "domain",
+            "label": "Domain",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "non-persistent": "warn",
+              "persistent": "success"
+            }
+          },
+          {
+            "key": "partitions",
+            "label": "Partitions",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "producers",
+            "label": "Producers",
+            "type": "number"
+          },
+          {
+            "key": "subscriptions",
+            "label": "Subscriptions",
+            "type": "number"
+          },
+          {
+            "key": "msg_rate_in",
+            "label": "Rate in",
+            "type": "number"
+          },
+          {
+            "key": "msg_rate_out",
+            "label": "Rate out",
+            "type": "number"
+          },
+          {
+            "key": "storage_size",
+            "label": "Storage",
+            "type": "bytes"
+          },
+          {
+            "key": "backlog_size",
+            "label": "Backlog",
+            "type": "bytes"
+          }
+        ],
+        "actions": {
+          "row": [
+            "pulsar.topic.delete"
+          ],
+          "detail": [
+            "pulsar.message.produce",
+            "pulsar.subscription.create",
+            "pulsar.topic.compact",
+            "pulsar.topic.unload",
+            "pulsar.topic.terminate",
+            "pulsar.topic.schema.delete",
+            "pulsar.topic.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "topic-stats",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.topic.stats",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Topic",
+                    "fields": [
+                      {
+                        "key": "topic",
+                        "label": "Topic",
+                        "copy": true
+                      },
+                      {
+                        "key": "domain",
+                        "label": "Domain",
+                        "type": "badge",
+                        "severities": {
+                          "non-persistent": "warn",
+                          "persistent": "success"
+                        }
+                      },
+                      {
+                        "key": "partitioned",
+                        "label": "Partitioned",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "partitions",
+                        "label": "Partitions",
+                        "type": "number"
+                      },
+                      {
+                        "key": "ownerBroker",
+                        "label": "Owner broker",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Throughput",
+                    "fields": [
+                      {
+                        "key": "msgRateIn",
+                        "label": "Publish rate",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msgRateOut",
+                        "label": "Dispatch rate",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msgThroughputIn",
+                        "label": "Publish throughput",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msgThroughputOut",
+                        "label": "Dispatch throughput",
+                        "type": "number"
+                      },
+                      {
+                        "key": "averageMsgSize",
+                        "label": "Average message size",
+                        "type": "bytes"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Storage",
+                    "fields": [
+                      {
+                        "key": "storageSize",
+                        "label": "Storage size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "backlogSize",
+                        "label": "Backlog size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "msgInCounter",
+                        "label": "Messages in",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msgOutCounter",
+                        "label": "Messages out",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Clients",
+                    "fields": [
+                      {
+                        "key": "producer_count",
+                        "label": "Producers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "subscription_count",
+                        "label": "Subscriptions",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "topic-subscriptions",
+              "label": "Subscriptions",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.subscriptions.list",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Subscription",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "exclusive": "info",
+                      "failover": "warn",
+                      "key_shared": "secondary",
+                      "shared": "success"
+                    }
+                  },
+                  {
+                    "key": "msg_backlog",
+                    "label": "Backlog",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "unacked_messages",
+                    "label": "Unacked",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "consumers",
+                    "label": "Consumers",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "msg_rate_out",
+                    "label": "Rate out",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "durable",
+                    "label": "Durable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "last_consumed",
+                    "label": "Last consumed",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "actionIds": [
+                  "pulsar.subscription.create"
+                ],
+                "rowActionIds": [
+                  "pulsar.subscription.clear",
+                  "pulsar.subscription.delete"
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No subscriptions on this topic.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "topic-producers",
+              "label": "Producers",
+              "icon": {
+                "type": "lucide",
+                "value": "send"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.producers.list",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "producer_name",
+                    "label": "Producer",
+                    "sortable": true
+                  },
+                  {
+                    "key": "topic",
+                    "label": "Topic",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "client_version",
+                    "label": "Client"
+                  },
+                  {
+                    "key": "access_mode",
+                    "label": "Access mode",
+                    "type": "badge"
+                  },
+                  {
+                    "key": "msg_rate_in",
+                    "label": "Rate in",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "average_msg_size",
+                    "label": "Avg size",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "connected_since",
+                    "label": "Connected",
+                    "sortable": true,
+                    "type": "datetime"
+                  }
+                ],
+                "actionIds": [
+                  "pulsar.message.produce"
+                ],
+                "refreshIntervalMs": 10000,
+                "emptyText": "No producer is connected to this topic.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "topic-consumers",
+              "label": "Consumers",
+              "icon": {
+                "type": "lucide",
+                "value": "download"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.consumers.list",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "consumer_name",
+                    "label": "Consumer",
+                    "sortable": true
+                  },
+                  {
+                    "key": "subscription",
+                    "label": "Subscription",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "client_version",
+                    "label": "Client"
+                  },
+                  {
+                    "key": "msg_rate_out",
+                    "label": "Rate out",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "unacked_messages",
+                    "label": "Unacked",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "available_permits",
+                    "label": "Permits",
+                    "type": "number"
+                  },
+                  {
+                    "key": "connected_since",
+                    "label": "Connected",
+                    "sortable": true,
+                    "type": "datetime"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "emptyText": "No consumer is connected to this topic.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "topic-partitions",
+              "label": "Partitions",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.topic.partitions",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "partition",
+                    "label": "Partition",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "producers",
+                    "label": "Producers",
+                    "type": "number"
+                  },
+                  {
+                    "key": "subscriptions",
+                    "label": "Subscriptions",
+                    "type": "number"
+                  },
+                  {
+                    "key": "msg_rate_in",
+                    "label": "Rate in",
+                    "type": "number"
+                  },
+                  {
+                    "key": "msg_rate_out",
+                    "label": "Rate out",
+                    "type": "number"
+                  },
+                  {
+                    "key": "storage_size",
+                    "label": "Storage",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "backlog_size",
+                    "label": "Backlog",
+                    "type": "bytes"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "partition"
+                },
+                "emptyText": "This topic is not partitioned.",
+                "exportable": true
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "partitioned",
+                    "op": "eq",
+                    "value": true
+                  }
+                ]
+              }
+            },
+            {
+              "key": "topic-messages",
+              "label": "Messages",
+              "icon": {
+                "type": "lucide",
+                "value": "mail"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.messages.list",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "position",
+                    "label": "#",
+                    "type": "number"
+                  },
+                  {
+                    "key": "message_id",
+                    "label": "Message ID"
+                  },
+                  {
+                    "key": "publish_time",
+                    "label": "Published",
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "producer",
+                    "label": "Producer"
+                  },
+                  {
+                    "key": "key",
+                    "label": "Key"
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties",
+                    "type": "json"
+                  },
+                  {
+                    "key": "payload",
+                    "label": "Payload"
+                  }
+                ],
+                "actionIds": [
+                  "pulsar.message.produce"
+                ],
+                "emptyText": "No messages are retained on this topic.",
+                "exportable": true,
+                "rowClick": "detail"
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "partitioned",
+                    "op": "neq",
+                    "value": true
+                  },
+                  {
+                    "field": "domain",
+                    "op": "eq",
+                    "value": "persistent"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "topic-tail",
+              "label": "Live tail",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "log_stream",
+              "source": {
+                "routeId": "pulsar.messages.consume",
+                "method": "WS",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "controls": [
+                  {
+                    "param": "position",
+                    "label": "Start from",
+                    "optionsSource": {
+                      "routeId": "pulsar.messages.positions"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "key": "topic-schema",
+              "label": "Schema",
+              "icon": {
+                "type": "lucide",
+                "value": "file-code"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.topic.schema",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Schema",
+                    "fields": [
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "type": "number"
+                      },
+                      {
+                        "key": "registered",
+                        "label": "Registered",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "timestamp",
+                        "label": "Registered at",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "properties",
+                        "label": "Properties",
+                        "type": "json"
+                      },
+                      {
+                        "key": "data",
+                        "label": "Definition"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "topic-internal",
+              "label": "Internal",
+              "icon": {
+                "type": "lucide",
+                "value": "hard-drive"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.topic.internal_stats",
+                "params": {
+                  "topic": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Managed ledger",
+                    "fields": [
+                      {
+                        "key": "entriesAddedCounter",
+                        "label": "Entries added",
+                        "type": "number"
+                      },
+                      {
+                        "key": "numberOfEntries",
+                        "label": "Entries",
+                        "type": "number"
+                      },
+                      {
+                        "key": "totalSize",
+                        "label": "Total size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "currentLedgerEntries",
+                        "label": "Current ledger entries",
+                        "type": "number"
+                      },
+                      {
+                        "key": "currentLedgerSize",
+                        "label": "Current ledger size",
+                        "type": "bytes"
+                      },
+                      {
+                        "key": "lastConfirmedEntry",
+                        "label": "Last confirmed entry",
+                        "copy": true
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "ledgers",
+                        "label": "Ledgers",
+                        "type": "json"
+                      },
+                      {
+                        "key": "cursors",
+                        "label": "Cursors",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "subscription",
+        "title": "Subscriptions",
+        "list": {
+          "routeId": "pulsar.subscriptions.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Subscription",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "exclusive": "info",
+              "failover": "warn",
+              "key_shared": "secondary",
+              "shared": "success"
+            }
+          },
+          {
+            "key": "msg_backlog",
+            "label": "Backlog",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "unacked_messages",
+            "label": "Unacked",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "consumers",
+            "label": "Consumers",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "msg_rate_out",
+            "label": "Rate out",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "durable",
+            "label": "Durable",
+            "type": "bool"
+          },
+          {
+            "key": "last_consumed",
+            "label": "Last consumed",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "pulsar.subscription.clear",
+            "pulsar.subscription.delete"
+          ],
+          "detail": [
+            "pulsar.subscription.skip",
+            "pulsar.subscription.clear",
+            "pulsar.subscription.reset",
+            "pulsar.subscription.expire",
+            "pulsar.subscription.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "subscription-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.subscription.read",
+                "params": {
+                  "subscription": "${resource.name}",
+                  "topic": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Subscription",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "topic",
+                        "label": "Topic",
+                        "copy": true
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge",
+                        "severities": {
+                          "exclusive": "info",
+                          "failover": "warn",
+                          "key_shared": "secondary",
+                          "shared": "success"
+                        }
+                      },
+                      {
+                        "key": "durable",
+                        "label": "Durable",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "replicated",
+                        "label": "Replicated",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "active_consumer",
+                        "label": "Active consumer"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Backlog",
+                    "fields": [
+                      {
+                        "key": "msg_backlog",
+                        "label": "Backlog",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msg_backlog_no_delayed",
+                        "label": "Backlog without delayed",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msg_delayed",
+                        "label": "Delayed",
+                        "type": "number"
+                      },
+                      {
+                        "key": "unacked_messages",
+                        "label": "Unacked",
+                        "type": "number"
+                      },
+                      {
+                        "key": "blocked",
+                        "label": "Blocked on unacked",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "total_msg_expired",
+                        "label": "Expired",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Activity",
+                    "fields": [
+                      {
+                        "key": "consumers",
+                        "label": "Consumers",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msg_rate_out",
+                        "label": "Dispatch rate",
+                        "type": "number"
+                      },
+                      {
+                        "key": "msg_rate_redeliver",
+                        "label": "Redelivery rate",
+                        "type": "number"
+                      },
+                      {
+                        "key": "last_consumed",
+                        "label": "Last consumed",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "last_acked",
+                        "label": "Last acknowledged",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "last_expire",
+                        "label": "Last expire",
+                        "type": "relative_time"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "subscription-consumers",
+              "label": "Consumers",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.consumers.list",
+                "params": {
+                  "subscription": "${resource.name}",
+                  "topic": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "consumer_name",
+                    "label": "Consumer",
+                    "sortable": true
+                  },
+                  {
+                    "key": "subscription",
+                    "label": "Subscription",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "client_version",
+                    "label": "Client"
+                  },
+                  {
+                    "key": "msg_rate_out",
+                    "label": "Rate out",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "unacked_messages",
+                    "label": "Unacked",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "available_permits",
+                    "label": "Permits",
+                    "type": "number"
+                  },
+                  {
+                    "key": "connected_since",
+                    "label": "Connected",
+                    "sortable": true,
+                    "type": "datetime"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "emptyText": "No consumer is attached to this subscription.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "subscription-messages",
+              "label": "Backlog",
+              "icon": {
+                "type": "lucide",
+                "value": "mail"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "pulsar.messages.list",
+                "params": {
+                  "subscription": "${resource.name}",
+                  "topic": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "position",
+                    "label": "#",
+                    "type": "number"
+                  },
+                  {
+                    "key": "message_id",
+                    "label": "Message ID"
+                  },
+                  {
+                    "key": "publish_time",
+                    "label": "Published",
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "producer",
+                    "label": "Producer"
+                  },
+                  {
+                    "key": "key",
+                    "label": "Key"
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "properties",
+                    "label": "Properties",
+                    "type": "json"
+                  },
+                  {
+                    "key": "payload",
+                    "label": "Payload"
+                  }
+                ],
+                "emptyText": "This subscription has no readable backlog.",
+                "exportable": true,
+                "rowClick": "detail"
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "partitioned",
+                    "op": "neq",
+                    "value": true
+                  },
+                  {
+                    "field": "domain",
+                    "op": "eq",
+                    "value": "persistent"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "cluster",
+        "title": "Clusters",
+        "list": {
+          "routeId": "pulsar.clusters.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Cluster",
+            "sortable": true
+          },
+          {
+            "key": "service_url",
+            "label": "Web service URL"
+          },
+          {
+            "key": "broker_service_url",
+            "label": "Broker service URL"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "cluster-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.cluster.read",
+                "params": {
+                  "cluster": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Cluster",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "serviceUrl",
+                        "label": "Web service URL",
+                        "copy": true
+                      },
+                      {
+                        "key": "serviceUrlTls",
+                        "label": "Web service URL (TLS)",
+                        "copy": true
+                      },
+                      {
+                        "key": "brokerServiceUrl",
+                        "label": "Broker service URL",
+                        "copy": true
+                      },
+                      {
+                        "key": "brokerServiceUrlTls",
+                        "label": "Broker service URL (TLS)",
+                        "copy": true
+                      },
+                      {
+                        "key": "peerClusterNames",
+                        "label": "Peer clusters",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "broker",
+        "title": "Brokers",
+        "list": {
+          "routeId": "pulsar.brokers.list"
+        },
+        "columns": [
+          {
+            "key": "broker",
+            "label": "Broker",
+            "sortable": true
+          },
+          {
+            "key": "cluster",
+            "label": "Cluster",
+            "sortable": true
+          },
+          {
+            "key": "leader",
+            "label": "Leader",
+            "type": "bool"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "broker-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "pulsar.broker.read",
+                "params": {
+                  "broker": "${resource.name}",
+                  "cluster": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Broker",
+                    "fields": [
+                      {
+                        "key": "broker",
+                        "label": "Broker",
+                        "copy": true
+                      },
+                      {
+                        "key": "cluster",
+                        "label": "Cluster",
+                        "copy": true
+                      },
+                      {
+                        "key": "owned_namespaces",
+                        "label": "Owned namespaces",
+                        "type": "number"
+                      },
+                      {
+                        "key": "namespaces",
+                        "label": "Namespace bundles",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "pulsar.tenant.create",
+        "label": "Create tenant",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "pulsar.tenant.create",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Tenant",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Tenant name",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "analytics"
+                },
+                {
+                  "key": "admin_roles",
+                  "label": "Admin roles",
+                  "type": "array",
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text",
+                    "placeholder": "team-admin"
+                  },
+                  "addLabel": "Add role"
+                },
+                {
+                  "key": "allowed_clusters",
+                  "label": "Allowed clusters",
+                  "type": "multiselect",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "pulsar.clusters.list"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.tenant.update",
+        "label": "Edit",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "pulsar.tenant.update",
+        "method": "PUT",
+        "params": {
+          "tenant": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Tenant",
+              "fields": [
+                {
+                  "key": "admin_roles",
+                  "label": "Admin roles",
+                  "type": "array",
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text",
+                    "placeholder": "team-admin"
+                  },
+                  "addLabel": "Add role"
+                },
+                {
+                  "key": "allowed_clusters",
+                  "label": "Allowed clusters",
+                  "type": "multiselect",
+                  "required": true,
+                  "optionsSource": {
+                    "routeId": "pulsar.clusters.list"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.tenant.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pulsar.tenant.delete",
+        "method": "DELETE",
+        "params": {
+          "tenant": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this tenant? It must have no namespaces left.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pulsar.namespace.create",
+        "label": "Create namespace",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "pulsar.namespace.create",
+        "method": "POST",
+        "params": {
+          "tenant": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Namespace",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Namespace name",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "events"
+                },
+                {
+                  "key": "bundles",
+                  "label": "Bundles",
+                  "type": "number",
+                  "help": "Number of hash bundles the namespace is split into. Leave empty for the broker default.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "replication_clusters",
+                  "label": "Replication clusters",
+                  "type": "multiselect",
+                  "optionsSource": {
+                    "routeId": "pulsar.clusters.list"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.namespace.retention",
+        "label": "Set retention",
+        "icon": {
+          "type": "lucide",
+          "value": "archive"
+        },
+        "routeId": "pulsar.namespace.retention",
+        "method": "POST",
+        "params": {
+          "namespace": "${resource.name}",
+          "tenant": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Retention",
+              "fields": [
+                {
+                  "key": "time_minutes",
+                  "label": "Retention time (minutes)",
+                  "type": "number",
+                  "required": true,
+                  "default": 0,
+                  "help": "0 disables time retention; -1 keeps messages forever."
+                },
+                {
+                  "key": "size_mb",
+                  "label": "Retention size (MB)",
+                  "type": "number",
+                  "required": true,
+                  "default": 0,
+                  "help": "0 disables size retention; -1 means unlimited."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.namespace.unload",
+        "label": "Unload",
+        "icon": {
+          "type": "lucide",
+          "value": "power"
+        },
+        "routeId": "pulsar.namespace.unload",
+        "method": "POST",
+        "params": {
+          "namespace": "${resource.name}",
+          "tenant": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Unload this namespace? Every producer and consumer on it is disconnected while the bundles move."
+      },
+      {
+        "id": "pulsar.namespace.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pulsar.namespace.delete",
+        "method": "DELETE",
+        "params": {
+          "namespace": "${resource.name}",
+          "tenant": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this namespace and every topic in it?",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pulsar.topic.create",
+        "label": "Create topic",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "pulsar.topic.create",
+        "method": "POST",
+        "params": {
+          "namespace": "${resource.name}",
+          "tenant": "${resource.namespace}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Topic",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Topic name",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "orders"
+                },
+                {
+                  "key": "domain",
+                  "label": "Persistence",
+                  "type": "select",
+                  "required": true,
+                  "default": "persistent",
+                  "options": [
+                    {
+                      "label": "Persistent",
+                      "value": "persistent"
+                    },
+                    {
+                      "label": "Non-persistent",
+                      "value": "non-persistent"
+                    }
+                  ]
+                },
+                {
+                  "key": "partitions",
+                  "label": "Partitions",
+                  "type": "number",
+                  "default": 0,
+                  "help": "0 creates a non-partitioned topic.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.topic.compact",
+        "label": "Compact",
+        "icon": {
+          "type": "lucide",
+          "value": "layers"
+        },
+        "routeId": "pulsar.topic.compact",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false
+      },
+      {
+        "id": "pulsar.topic.unload",
+        "label": "Unload",
+        "icon": {
+          "type": "lucide",
+          "value": "power"
+        },
+        "routeId": "pulsar.topic.unload",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Unload this topic? Connected producers and consumers reconnect through another broker."
+      },
+      {
+        "id": "pulsar.topic.terminate",
+        "label": "Terminate",
+        "icon": {
+          "type": "lucide",
+          "value": "octagon-x"
+        },
+        "routeId": "pulsar.topic.terminate",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Terminate this topic? No message can ever be published to it again."
+      },
+      {
+        "id": "pulsar.topic.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pulsar.topic.delete",
+        "method": "DELETE",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this topic and every message stored in it?",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "pulsar.topic.schema.delete",
+        "label": "Delete schema",
+        "icon": {
+          "type": "lucide",
+          "value": "file-x"
+        },
+        "routeId": "pulsar.topic.schema.delete",
+        "method": "DELETE",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete every registered schema version for this topic?"
+      },
+      {
+        "id": "pulsar.message.produce",
+        "label": "Produce",
+        "icon": {
+          "type": "lucide",
+          "value": "send"
+        },
+        "routeId": "pulsar.message.produce",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": true,
+        "confirmText": "Publish this message to the topic?",
+        "input": {
+          "groups": [
+            {
+              "name": "Message",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "help": "Routing key used by partitioned topics and key-shared subscriptions."
+                },
+                {
+                  "key": "payload",
+                  "label": "Payload",
+                  "type": "textarea",
+                  "required": true
+                },
+                {
+                  "key": "encoding",
+                  "label": "Payload encoding",
+                  "type": "select",
+                  "required": true,
+                  "default": "string",
+                  "options": [
+                    {
+                      "label": "String",
+                      "value": "string"
+                    },
+                    {
+                      "label": "Base64",
+                      "value": "base64"
+                    }
+                  ]
+                },
+                {
+                  "key": "properties",
+                  "label": "Properties",
+                  "type": "map",
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "text"
+                  },
+                  "addLabel": "Add property",
+                  "keyPlaceholder": "property"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.subscription.create",
+        "label": "Create subscription",
+        "icon": {
+          "type": "lucide",
+          "value": "user-plus"
+        },
+        "routeId": "pulsar.subscription.create",
+        "method": "POST",
+        "params": {
+          "topic": "${resource.uid}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Subscription",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Subscription name",
+                  "type": "text",
+                  "required": true,
+                  "placeholder": "billing-workers"
+                },
+                {
+                  "key": "position",
+                  "label": "Start from",
+                  "type": "select",
+                  "required": true,
+                  "default": "latest",
+                  "options": [
+                    {
+                      "label": "Latest",
+                      "value": "latest"
+                    },
+                    {
+                      "label": "Earliest",
+                      "value": "earliest"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.subscription.skip",
+        "label": "Skip messages",
+        "icon": {
+          "type": "lucide",
+          "value": "skip-forward"
+        },
+        "routeId": "pulsar.subscription.skip",
+        "method": "POST",
+        "params": {
+          "subscription": "${resource.name}",
+          "topic": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Skip messages on this subscription? They are acknowledged without being delivered.",
+        "input": {
+          "groups": [
+            {
+              "name": "Skip messages",
+              "fields": [
+                {
+                  "key": "count",
+                  "label": "Messages to skip",
+                  "type": "number",
+                  "required": true,
+                  "default": 1,
+                  "help": "Acknowledges the next N messages without delivering them.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.subscription.clear",
+        "label": "Clear backlog",
+        "icon": {
+          "type": "lucide",
+          "value": "eraser"
+        },
+        "routeId": "pulsar.subscription.clear",
+        "method": "POST",
+        "params": {
+          "subscription": "${resource.name}",
+          "topic": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Clear the whole backlog? Every pending message is acknowledged and never delivered.",
+        "bulk": true
+      },
+      {
+        "id": "pulsar.subscription.reset",
+        "label": "Reset cursor",
+        "icon": {
+          "type": "lucide",
+          "value": "history"
+        },
+        "routeId": "pulsar.subscription.reset",
+        "method": "POST",
+        "params": {
+          "subscription": "${resource.name}",
+          "topic": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Reset this cursor? Connected consumers are disconnected and the delivery position moves.",
+        "input": {
+          "groups": [
+            {
+              "name": "Reset cursor",
+              "fields": [
+                {
+                  "key": "target",
+                  "label": "Reset to",
+                  "type": "select",
+                  "required": true,
+                  "default": "earliest",
+                  "options": [
+                    {
+                      "label": "Earliest (replay everything)",
+                      "value": "earliest"
+                    },
+                    {
+                      "label": "Latest (drop the backlog)",
+                      "value": "latest"
+                    },
+                    {
+                      "label": "A point in time",
+                      "value": "time"
+                    }
+                  ]
+                },
+                {
+                  "key": "age",
+                  "label": "How far back",
+                  "type": "duration",
+                  "default": "1h",
+                  "help": "Used when resetting to a point in time; the cursor moves to now minus this duration.",
+                  "visibleWhen": {
+                    "allOf": [
+                      {
+                        "field": "target",
+                        "op": "eq",
+                        "value": "time"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.subscription.expire",
+        "label": "Expire messages",
+        "icon": {
+          "type": "lucide",
+          "value": "clock"
+        },
+        "routeId": "pulsar.subscription.expire",
+        "method": "POST",
+        "params": {
+          "subscription": "${resource.name}",
+          "topic": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Expire the older part of this backlog? Those messages are acknowledged and never delivered.",
+        "input": {
+          "groups": [
+            {
+              "name": "Expire messages",
+              "fields": [
+                {
+                  "key": "age",
+                  "label": "Older than",
+                  "type": "duration",
+                  "required": true,
+                  "default": "24h",
+                  "help": "Acknowledges every backlog message published before now minus this duration."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "pulsar.subscription.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "pulsar.subscription.delete",
+        "method": "DELETE",
+        "params": {
+          "subscription": "${resource.name}",
+          "topic": "${resource.namespace}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete this subscription and its cursor?",
+        "bulk": true
+      }
+    ],
+    "streams": [
+      {
+        "id": "pulsar.messages.consume",
+        "kind": "logs",
+        "routeId": "pulsar.messages.consume"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

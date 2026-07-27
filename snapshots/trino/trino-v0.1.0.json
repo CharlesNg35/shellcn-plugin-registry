@@ -1,0 +1,3962 @@
+{
+  "name": "trino",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 42.1 62.45\"\u003e\u003cdefs\u003e\u003cstyle\u003e.cls-1{fill:#fff}.cls-2{fill:#dd00a1}.cls-3{fill:#f9d8d2}.cls-4{fill:#10110e}.cls-5{fill:#e5e5e5}.cls-6{fill:#8accce;opacity:.2;isolation:isolate}.cls-7{fill:#515151}\u003c/style\u003e\u003c/defs\u003e\u003cpath class=\"cls-1\" d=\"M14.24,55.36c.92-.61-1.49-.38-1.69-.79a15,15,0,0,1-2.82-.51C8,53.62,3.9,50.85,3.47,48.25s0-7.65,1.83-10.61A17,17,0,0,1,9.73,33S6.16,24.51,5.85,18.1,6,.21,10.24,0s3.49,10.48,2.82,17.43a89.47,89.47,0,0,0-.21,13.89,19.45,19.45,0,0,1,5.51-.92,21.2,21.2,0,0,1,4.9.46S24.58,21,29,14.86,38,2.4,41,4.19s-.81,8.19-3.46,11.52-7.25,8.33-8.78,11a47.26,47.26,0,0,0-2.65,5.51,15,15,0,0,1,6.4,6.32c2.07,4.28,2.27,9.59,1.15,11.83a8.1,8.1,0,0,1-5.61,4c-1.32.1-6.91,1.48-6.91,1.48Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M24,30.94s3.33-8.7,6.32-13.6,7-8.59,8.26-7.84S36,14.85,32.66,19.32a112.3,112.3,0,0,0-7.44,12.37Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M10.64,32.44l.95-.75s-.13-8.7,0-14S12,5.78,10.23,5.85,7.23,11,7.92,18.23A86.92,86.92,0,0,0,10.64,32.44Z\" transform=\"translate(0 0)\"/\u003e\u003ccircle class=\"cls-3\" cx=\"7.65\" cy=\"49.17\" r=\"1.94\"/\u003e\u003ccircle class=\"cls-3\" cx=\"30.57\" cy=\"49.17\" r=\"1.94\"/\u003e\u003cpath class=\"cls-4\" d=\"M22.33,49a.19.19,0,0,0-.25,0h0s-.57,1-1.41,1.06a2.11,2.11,0,0,1-1.5-.7V48c.54-.29,1.41-1.19,1.41-1.5a1.4,1.4,0,0,0-1.5-1.09c-1,0-1.7.65-1.7,1.19s1.1,1.23,1.41,1.44v1.45a1.77,1.77,0,0,1-1.3.7c-.8,0-1.4-1.08-1.4-1.09a.19.19,0,0,0-.25-.08h0a.18.18,0,0,0-.08.23h0c0,.06.71,1.29,1.73,1.29a2.07,2.07,0,0,0,1.5-.72,2.46,2.46,0,0,0,1.59.73h.14a2.47,2.47,0,0,0,1.71-1.25.18.18,0,0,0,0-.25A.24.24,0,0,0,22.33,49Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M9.73,33S7,26,6.42,22.29s-1-9.78-.3-13.85A46.3,46.3,0,0,1,7.31,2.85S6,12.34,6.49,16.49,9.73,33,9.73,33Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M23.26,30.85s2-10.59,4.91-14.76S34.73,6.9,36.52,5.62l1.82-1.28S31,12,28.17,18.34,23.26,30.85,23.26,30.85Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M11.6,42.85a1.52,1.52,0,1,0,1.52,1.52h0a1.52,1.52,0,0,0-1.5-1.52Zm.4,1.41a.42.42,0,1,1,.42-.42h0a.42.42,0,0,1-.41.43h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M26.55,42.85a1.52,1.52,0,1,0,1.51,1.53h0a1.52,1.52,0,0,0-1.51-1.53ZM27,44.26a.42.42,0,0,1-.43-.41h0a.43.43,0,0,1,.41-.43.42.42,0,0,1,.43.41h0a.41.41,0,0,1-.4.42h0Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-6\" cx=\"19.36\" cy=\"44.95\" rx=\"14.1\" ry=\"10.16\"/\u003e\u003cpath class=\"cls-1\" d=\"M36.43,39.3V32.58a2.46,2.46,0,0,0,1.91-2.29,2.65,2.65,0,0,0-5.27,0A2.48,2.48,0,0,0,35,32.58v6.55h-.2c-2-6.94-7.91-11.28-15.63-11.28S5.51,32.15,3.55,39.13H2.88A2.76,2.76,0,0,0,0,41.71v5.14a2.75,2.75,0,0,0,2.88,2.59h.91a13,13,0,0,0,3.59,5.11L6.09,55.72A.78.78,0,0,0,6,56.82l0,0H6c2.93,3.53,7.72,5.6,13.13,5.6s10.21-2,13.14-5.6a.79.79,0,0,0-.09-1.11h0l-1.3-1.19a13,13,0,0,0,3.59-5.08h1a2.74,2.74,0,0,0,2.87-2.6V41.71A2.58,2.58,0,0,0,36.43,39.3Zm-17.26-4c7.14,0,12.94,4.7,12.94,10.47,0,6.25-6.51,9-12.94,9S6.23,52,6.23,45.72C6.23,40,12,35.25,19.17,35.25Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M36.91,45.16H35v-1a18.61,18.61,0,0,0-.39-3.79h.82a1.35,1.35,0,0,1,1.44,1.25h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M35.47,48.18h-1A16.13,16.13,0,0,0,34.89,46h2v.85a1.34,1.34,0,0,1-1.36,1.32h-.06Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M19.17,61.1c-4.79,0-9.06-1.72-11.74-4.78l1.3-1.21a17.87,17.87,0,0,0,10.4,3,17.73,17.73,0,0,0,10.4-3l1.35,1.21C28.23,59.38,24,61.1,19.17,61.1Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M2.88,40.42h.85a19.33,19.33,0,0,0-.38,3.79,8.34,8.34,0,0,0,0,1H1.49v-3.5a1.27,1.27,0,0,1,1.24-1.29Z\" transform=\"translate(0 0)\"/\u003e\u003cpath d=\"M19.17,34.39a17.66,17.66,0,0,0-4.79.69V29.85a17.23,17.23,0,0,1,4.79-.64,17.3,17.3,0,0,1,4.8.64v5.26A15.91,15.91,0,0,0,19.17,34.39Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M1.44,46h2a17.56,17.56,0,0,0,.43,2.16h-1a1.35,1.35,0,0,1-1.44-1.25h0V46Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-7\" cx=\"35.71\" cy=\"30.29\" rx=\"1.2\" ry=\"1.08\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "trino",
+    "version": "0.1.0",
+    "title": "Trino",
+    "description": "Trino cockpit with catalogs, schemas, tables and views, bounded data grids, SQL editor with live query stats, cluster nodes, running queries with kill, and session properties.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg id=\"Layer_1\" data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 42.1 62.45\"\u003e\u003cdefs\u003e\u003cstyle\u003e.cls-1{fill:#fff}.cls-2{fill:#dd00a1}.cls-3{fill:#f9d8d2}.cls-4{fill:#10110e}.cls-5{fill:#e5e5e5}.cls-6{fill:#8accce;opacity:.2;isolation:isolate}.cls-7{fill:#515151}\u003c/style\u003e\u003c/defs\u003e\u003cpath class=\"cls-1\" d=\"M14.24,55.36c.92-.61-1.49-.38-1.69-.79a15,15,0,0,1-2.82-.51C8,53.62,3.9,50.85,3.47,48.25s0-7.65,1.83-10.61A17,17,0,0,1,9.73,33S6.16,24.51,5.85,18.1,6,.21,10.24,0s3.49,10.48,2.82,17.43a89.47,89.47,0,0,0-.21,13.89,19.45,19.45,0,0,1,5.51-.92,21.2,21.2,0,0,1,4.9.46S24.58,21,29,14.86,38,2.4,41,4.19s-.81,8.19-3.46,11.52-7.25,8.33-8.78,11a47.26,47.26,0,0,0-2.65,5.51,15,15,0,0,1,6.4,6.32c2.07,4.28,2.27,9.59,1.15,11.83a8.1,8.1,0,0,1-5.61,4c-1.32.1-6.91,1.48-6.91,1.48Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M24,30.94s3.33-8.7,6.32-13.6,7-8.59,8.26-7.84S36,14.85,32.66,19.32a112.3,112.3,0,0,0-7.44,12.37Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-2\" d=\"M10.64,32.44l.95-.75s-.13-8.7,0-14S12,5.78,10.23,5.85,7.23,11,7.92,18.23A86.92,86.92,0,0,0,10.64,32.44Z\" transform=\"translate(0 0)\"/\u003e\u003ccircle class=\"cls-3\" cx=\"7.65\" cy=\"49.17\" r=\"1.94\"/\u003e\u003ccircle class=\"cls-3\" cx=\"30.57\" cy=\"49.17\" r=\"1.94\"/\u003e\u003cpath class=\"cls-4\" d=\"M22.33,49a.19.19,0,0,0-.25,0h0s-.57,1-1.41,1.06a2.11,2.11,0,0,1-1.5-.7V48c.54-.29,1.41-1.19,1.41-1.5a1.4,1.4,0,0,0-1.5-1.09c-1,0-1.7.65-1.7,1.19s1.1,1.23,1.41,1.44v1.45a1.77,1.77,0,0,1-1.3.7c-.8,0-1.4-1.08-1.4-1.09a.19.19,0,0,0-.25-.08h0a.18.18,0,0,0-.08.23h0c0,.06.71,1.29,1.73,1.29a2.07,2.07,0,0,0,1.5-.72,2.46,2.46,0,0,0,1.59.73h.14a2.47,2.47,0,0,0,1.71-1.25.18.18,0,0,0,0-.25A.24.24,0,0,0,22.33,49Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M9.73,33S7,26,6.42,22.29s-1-9.78-.3-13.85A46.3,46.3,0,0,1,7.31,2.85S6,12.34,6.49,16.49,9.73,33,9.73,33Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-5\" d=\"M23.26,30.85s2-10.59,4.91-14.76S34.73,6.9,36.52,5.62l1.82-1.28S31,12,28.17,18.34,23.26,30.85,23.26,30.85Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M11.6,42.85a1.52,1.52,0,1,0,1.52,1.52h0a1.52,1.52,0,0,0-1.5-1.52Zm.4,1.41a.42.42,0,1,1,.42-.42h0a.42.42,0,0,1-.41.43h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-4\" d=\"M26.55,42.85a1.52,1.52,0,1,0,1.51,1.53h0a1.52,1.52,0,0,0-1.51-1.53ZM27,44.26a.42.42,0,0,1-.43-.41h0a.43.43,0,0,1,.41-.43.42.42,0,0,1,.43.41h0a.41.41,0,0,1-.4.42h0Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-6\" cx=\"19.36\" cy=\"44.95\" rx=\"14.1\" ry=\"10.16\"/\u003e\u003cpath class=\"cls-1\" d=\"M36.43,39.3V32.58a2.46,2.46,0,0,0,1.91-2.29,2.65,2.65,0,0,0-5.27,0A2.48,2.48,0,0,0,35,32.58v6.55h-.2c-2-6.94-7.91-11.28-15.63-11.28S5.51,32.15,3.55,39.13H2.88A2.76,2.76,0,0,0,0,41.71v5.14a2.75,2.75,0,0,0,2.88,2.59h.91a13,13,0,0,0,3.59,5.11L6.09,55.72A.78.78,0,0,0,6,56.82l0,0H6c2.93,3.53,7.72,5.6,13.13,5.6s10.21-2,13.14-5.6a.79.79,0,0,0-.09-1.11h0l-1.3-1.19a13,13,0,0,0,3.59-5.08h1a2.74,2.74,0,0,0,2.87-2.6V41.71A2.58,2.58,0,0,0,36.43,39.3Zm-17.26-4c7.14,0,12.94,4.7,12.94,10.47,0,6.25-6.51,9-12.94,9S6.23,52,6.23,45.72C6.23,40,12,35.25,19.17,35.25Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M36.91,45.16H35v-1a18.61,18.61,0,0,0-.39-3.79h.82a1.35,1.35,0,0,1,1.44,1.25h0Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M35.47,48.18h-1A16.13,16.13,0,0,0,34.89,46h2v.85a1.34,1.34,0,0,1-1.36,1.32h-.06Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M19.17,61.1c-4.79,0-9.06-1.72-11.74-4.78l1.3-1.21a17.87,17.87,0,0,0,10.4,3,17.73,17.73,0,0,0,10.4-3l1.35,1.21C28.23,59.38,24,61.1,19.17,61.1Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M2.88,40.42h.85a19.33,19.33,0,0,0-.38,3.79,8.34,8.34,0,0,0,0,1H1.49v-3.5a1.27,1.27,0,0,1,1.24-1.29Z\" transform=\"translate(0 0)\"/\u003e\u003cpath d=\"M19.17,34.39a17.66,17.66,0,0,0-4.79.69V29.85a17.23,17.23,0,0,1,4.79-.64,17.3,17.3,0,0,1,4.8.64v5.26A15.91,15.91,0,0,0,19.17,34.39Z\" transform=\"translate(0 0)\"/\u003e\u003cpath class=\"cls-7\" d=\"M1.44,46h2a17.56,17.56,0,0,0,.43,2.16h-1a1.35,1.35,0,0,1-1.44-1.25h0V46Z\" transform=\"translate(0 0)\"/\u003e\u003cellipse class=\"cls-7\" cx=\"35.71\" cy=\"30.29\" rx=\"1.2\" ry=\"1.08\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "databases",
+      "label": "Databases",
+      "icon": {
+        "type": "lucide",
+        "value": "database"
+      },
+      "order": 60
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Coordinator",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "trino.example.internal",
+              "help": "Trino coordinator host."
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 8080,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "catalog",
+              "label": "Default catalog",
+              "type": "text",
+              "placeholder": "tpch",
+              "help": "Catalog used when a query or panel does not name one."
+            },
+            {
+              "key": "schema",
+              "label": "Default schema",
+              "type": "text",
+              "placeholder": "tiny"
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "user",
+              "options": [
+                {
+                  "label": "User only",
+                  "value": "user"
+                },
+                {
+                  "label": "Password",
+                  "value": "password"
+                },
+                {
+                  "label": "Stored password",
+                  "value": "credential"
+                },
+                {
+                  "label": "Access token (JWT)",
+                  "value": "token"
+                },
+                {
+                  "label": "Client certificate",
+                  "value": "client_certificate"
+                }
+              ]
+            },
+            {
+              "key": "username",
+              "label": "Username",
+              "type": "text",
+              "required": true,
+              "placeholder": "trino",
+              "help": "Sent as X-Trino-User and used for query attribution and access control.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "user"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored password",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable password for Trino PASSWORD authentication. The credential identity can also supply the username.",
+              "credential": {
+                "kind": "db_password",
+                "protocols": [
+                  "trino"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "password",
+              "label": "Password",
+              "type": "password",
+              "secret": true,
+              "help": "Trino only accepts password authentication over TLS.",
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "password"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "token_credential_id",
+              "label": "Access token",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable JWT sent as the Authorization bearer token.",
+              "credential": {
+                "kind": "bearer_token",
+                "protocols": [
+                  "trino"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "auth_client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable certificate and private key used for Trino CERTIFICATE authentication.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "trino"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "help": "Anything other than disable makes the coordinator URL https.",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional PEM certificate and private key for mTLS when another authentication mode is used.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "trino"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  },
+                  {
+                    "field": "auth",
+                    "op": "neq",
+                    "value": "client_certificate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Session",
+          "fields": [
+            {
+              "key": "source",
+              "label": "Source",
+              "type": "text",
+              "default": "shellcn",
+              "help": "Reported as X-Trino-Source; resource groups can match on it."
+            },
+            {
+              "key": "client_tags",
+              "label": "Client tags",
+              "type": "text",
+              "help": "Comma separated tags reported to the coordinator for resource group selection."
+            },
+            {
+              "key": "session_properties",
+              "label": "Session properties",
+              "type": "textarea",
+              "help": "One name=value per line, e.g. query_max_run_time=10m."
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks INSERT, UPDATE, DELETE, MERGE, DDL, CALL, GRANT, SET SESSION, and EXPLAIN ANALYZE."
+            },
+            {
+              "key": "require_destructive_confirmation",
+              "label": "Confirm destructive statements",
+              "type": "toggle",
+              "default": true,
+              "help": "Requires explicit confirmation before writes, DDL, procedure calls, and privilege changes execute."
+            },
+            {
+              "key": "query_timeout",
+              "label": "Query timeout",
+              "type": "duration",
+              "default": "1m0s"
+            },
+            {
+              "key": "row_limit",
+              "label": "Row limit",
+              "type": "number",
+              "default": 500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            },
+            {
+              "key": "max_connections",
+              "label": "Pool size",
+              "type": "number",
+              "default": 4,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 20
+                }
+              ]
+            },
+            {
+              "key": "redact_columns",
+              "label": "Redacted columns",
+              "type": "textarea",
+              "help": "Comma or newline separated regular expressions for result columns that must be masked."
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "sql",
+      "schema",
+      "tables",
+      "query_editor",
+      "analytics",
+      "cluster"
+    ],
+    "supportedTransports": [
+      "direct"
+    ],
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "catalogs",
+        "label": "Catalogs",
+        "icon": {
+          "type": "lucide",
+          "value": "library-big"
+        },
+        "source": {
+          "routeId": "trino.catalogs.tree"
+        },
+        "ref": {
+          "kind": "cluster",
+          "name": "Cluster",
+          "uid": "cluster"
+        }
+      },
+      {
+        "key": "nodes",
+        "label": "Nodes",
+        "icon": {
+          "type": "lucide",
+          "value": "server"
+        },
+        "source": {
+          "routeId": "trino.nodes.tree"
+        },
+        "resourceKind": "node"
+      },
+      {
+        "key": "queries",
+        "label": "Queries",
+        "icon": {
+          "type": "lucide",
+          "value": "activity"
+        },
+        "source": {
+          "routeId": "trino.queries.tree"
+        },
+        "resourceKind": "query"
+      }
+    ],
+    "resources": [
+      {
+        "kind": "cluster",
+        "title": "Cluster",
+        "list": {
+          "routeId": "trino.catalogs.list"
+        },
+        "columns": null,
+        "detail": {
+          "header": {
+            "title": "Cluster"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "trino.cluster.overview"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Coordinator",
+                    "fields": [
+                      {
+                        "key": "coordinator",
+                        "label": "Coordinator",
+                        "copy": true
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Capacity",
+                    "fields": [
+                      {
+                        "key": "total_nodes",
+                        "label": "Known nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "active_nodes",
+                        "label": "Active nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "catalogs",
+                        "label": "Catalogs",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Queries",
+                    "fields": [
+                      {
+                        "key": "running_queries",
+                        "label": "Running",
+                        "type": "number"
+                      },
+                      {
+                        "key": "queued_queries",
+                        "label": "Queued",
+                        "type": "number"
+                      },
+                      {
+                        "key": "failed_queries",
+                        "label": "Failed",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Session defaults",
+                    "fields": [
+                      {
+                        "key": "default_catalog",
+                        "label": "Catalog"
+                      },
+                      {
+                        "key": "default_schema",
+                        "label": "Schema"
+                      },
+                      {
+                        "key": "read_only",
+                        "label": "Read-only mode",
+                        "type": "bool"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "metrics",
+              "label": "Metrics",
+              "icon": {
+                "type": "lucide",
+                "value": "gauge"
+              },
+              "panel": "metrics",
+              "source": {
+                "routeId": "trino.cluster.metrics",
+                "method": "WS"
+              },
+              "config": {
+                "stats": [
+                  {
+                    "key": "runningQueries",
+                    "label": "Running queries"
+                  },
+                  {
+                    "key": "queuedQueries",
+                    "label": "Queued queries"
+                  },
+                  {
+                    "key": "failedQueries",
+                    "label": "Failed queries"
+                  },
+                  {
+                    "key": "activeNodes",
+                    "label": "Active nodes"
+                  },
+                  {
+                    "key": "totalNodes",
+                    "label": "Known nodes"
+                  },
+                  {
+                    "key": "catalogs",
+                    "label": "Catalogs"
+                  }
+                ],
+                "series": [
+                  {
+                    "key": "runningQueries",
+                    "label": "Running"
+                  },
+                  {
+                    "key": "queuedQueries",
+                    "label": "Queued"
+                  }
+                ],
+                "history": 60
+              }
+            },
+            {
+              "key": "catalogs",
+              "label": "Catalogs",
+              "icon": {
+                "type": "lucide",
+                "value": "library-big"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.catalogs.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "catalog",
+                    "label": "Catalog",
+                    "sortable": true
+                  },
+                  {
+                    "key": "connector",
+                    "label": "Connector",
+                    "sortable": true
+                  }
+                ],
+                "defaultSort": {
+                  "field": "catalog"
+                }
+              }
+            },
+            {
+              "key": "nodes",
+              "label": "Nodes",
+              "icon": {
+                "type": "lucide",
+                "value": "server"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.nodes.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "node_id",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "http_uri",
+                    "label": "HTTP URI",
+                    "sortable": true
+                  },
+                  {
+                    "key": "node_version",
+                    "label": "Version",
+                    "sortable": true
+                  },
+                  {
+                    "key": "coordinator",
+                    "label": "Coordinator",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "active": "success",
+                      "inactive": "danger",
+                      "shutting_down": "warn"
+                    }
+                  }
+                ],
+                "defaultSort": {
+                  "field": "node_id"
+                }
+              }
+            },
+            {
+              "key": "queries",
+              "label": "Queries",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.queries.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "query_id",
+                    "label": "Query",
+                    "sortable": true
+                  },
+                  {
+                    "key": "state",
+                    "label": "State",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "failed": "danger",
+                      "finished": "info",
+                      "planning": "info",
+                      "queued": "warn",
+                      "running": "success",
+                      "starting": "info",
+                      "waiting_for_resources": "warn"
+                    }
+                  },
+                  {
+                    "key": "user",
+                    "label": "User",
+                    "sortable": true
+                  },
+                  {
+                    "key": "source",
+                    "label": "Source",
+                    "sortable": true
+                  },
+                  {
+                    "key": "created",
+                    "label": "Created",
+                    "sortable": true,
+                    "type": "relative_time"
+                  },
+                  {
+                    "key": "elapsed_ms",
+                    "label": "Elapsed",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "query",
+                    "label": "Statement"
+                  }
+                ],
+                "rowActionIds": [
+                  "trino.query.kill"
+                ],
+                "refreshIntervalMs": 5000
+              }
+            },
+            {
+              "key": "session",
+              "label": "Session",
+              "icon": {
+                "type": "lucide",
+                "value": "sliders-horizontal"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.session.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Property",
+                    "sortable": true
+                  },
+                  {
+                    "key": "value",
+                    "label": "Value"
+                  },
+                  {
+                    "key": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "description",
+                    "label": "Description"
+                  }
+                ],
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No session properties."
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "trino.query",
+                "method": "WS"
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results and cluster statistics.",
+                "initialQuery": "SELECT node_version FROM system.runtime.nodes WHERE coordinator;",
+                "cancelRouteId": "trino.query.cancel",
+                "completionRouteId": "trino.completion",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "catalog",
+        "title": "Catalogs",
+        "list": {
+          "routeId": "trino.catalogs.list"
+        },
+        "columns": [
+          {
+            "key": "catalog",
+            "label": "Catalog",
+            "sortable": true
+          },
+          {
+            "key": "connector",
+            "label": "Connector",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "trino.schema.create"
+          ],
+          "detail": [
+            "trino.schema.create"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "trino.catalog.overview",
+                "params": {
+                  "catalog": "${resource.name}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Catalog",
+                    "fields": [
+                      {
+                        "key": "catalog",
+                        "label": "Catalog",
+                        "copy": true
+                      },
+                      {
+                        "key": "connector",
+                        "label": "Connector"
+                      },
+                      {
+                        "key": "schemas",
+                        "label": "Schemas",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "schemas",
+              "label": "Schemas",
+              "icon": {
+                "type": "lucide",
+                "value": "folder-tree"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.schemas.list",
+                "params": {
+                  "catalog": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "catalog",
+                    "label": "Catalog"
+                  }
+                ],
+                "actionIds": [
+                  "trino.schema.create"
+                ],
+                "rowActionIds": [
+                  "trino.schema.drop"
+                ]
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "trino.query",
+                "method": "WS",
+                "params": {
+                  "catalog": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results and cluster statistics.",
+                "initialQuery": "SHOW SCHEMAS;",
+                "cancelRouteId": "trino.query.cancel",
+                "completionRouteId": "trino.completion",
+                "completionParams": {
+                  "catalog": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "schema",
+        "title": "Schemas",
+        "list": {
+          "routeId": "trino.schemas.list"
+        },
+        "columns": [
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "catalog",
+            "label": "Catalog"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "trino.table.create"
+          ],
+          "row": [
+            "trino.schema.drop"
+          ],
+          "detail": [
+            "trino.table.create",
+            "trino.schema.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "tables",
+              "label": "Tables",
+              "icon": {
+                "type": "lucide",
+                "value": "table-2"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.tables.list",
+                "params": {
+                  "catalog": "${resource.namespace}",
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Table",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "catalog",
+                    "label": "Catalog"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  }
+                ],
+                "actionIds": [
+                  "trino.table.create"
+                ],
+                "rowActionIds": [
+                  "trino.table.drop"
+                ]
+              }
+            },
+            {
+              "key": "views",
+              "label": "Views",
+              "icon": {
+                "type": "lucide",
+                "value": "panel-top"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.views.list",
+                "params": {
+                  "catalog": "${resource.namespace}",
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "View",
+                    "sortable": true
+                  },
+                  {
+                    "key": "schema",
+                    "label": "Schema",
+                    "sortable": true
+                  },
+                  {
+                    "key": "catalog",
+                    "label": "Catalog"
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true
+                  }
+                ],
+                "rowActionIds": [
+                  "trino.view.drop"
+                ]
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "trino.query",
+                "method": "WS",
+                "params": {
+                  "catalog": "${resource.namespace}",
+                  "schema": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results and cluster statistics.",
+                "initialQuery": "SHOW TABLES;",
+                "cancelRouteId": "trino.query.cancel",
+                "completionRouteId": "trino.completion",
+                "completionParams": {
+                  "catalog": "${resource.namespace}",
+                  "schema": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "table",
+        "title": "Tables",
+        "list": {
+          "routeId": "trino.tables.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Table",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "catalog",
+            "label": "Catalog"
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "row": [
+            "trino.table.drop"
+          ],
+          "detail": [
+            "trino.table.rename",
+            "trino.table.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.scope}.${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.table.rows",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "trino.table.columns",
+                  "params": {
+                    "catalog": "${resource.scope}",
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "editable": true,
+                "insert": {
+                  "routeId": "trino.table.row.insert",
+                  "method": "POST",
+                  "params": {
+                    "catalog": "${resource.scope}",
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "emptyText": "No rows.",
+                "exportable": true,
+                "rowClick": "none"
+              }
+            },
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.table.columns",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "nullable",
+                    "label": "Nullable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "comment",
+                    "label": "Comment"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "stats",
+              "label": "Statistics",
+              "icon": {
+                "type": "lucide",
+                "value": "chart-column"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.table.stats",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "column_name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "data_size",
+                    "label": "Data size",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "distinct_values_count",
+                    "label": "Distinct",
+                    "type": "number"
+                  },
+                  {
+                    "key": "nulls_fraction",
+                    "label": "Null fraction",
+                    "type": "number"
+                  },
+                  {
+                    "key": "row_count",
+                    "label": "Rows",
+                    "type": "number"
+                  },
+                  {
+                    "key": "low_value",
+                    "label": "Low"
+                  },
+                  {
+                    "key": "high_value",
+                    "label": "High"
+                  }
+                ],
+                "emptyText": "This connector reports no table statistics."
+              }
+            },
+            {
+              "key": "ddl",
+              "label": "DDL",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "trino.table.ddl",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "trino.query",
+                "method": "WS",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results and cluster statistics.",
+                "initialQuery": "SELECT * FROM \"${resource.scope}\".\"${resource.namespace}\".\"${resource.name}\" LIMIT 100;",
+                "cancelRouteId": "trino.query.cancel",
+                "completionRouteId": "trino.completion",
+                "completionParams": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "view",
+        "title": "Views",
+        "list": {
+          "routeId": "trino.views.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "View",
+            "sortable": true
+          },
+          {
+            "key": "schema",
+            "label": "Schema",
+            "sortable": true
+          },
+          {
+            "key": "catalog",
+            "label": "Catalog"
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true
+          }
+        ],
+        "actions": {
+          "row": [
+            "trino.view.drop"
+          ],
+          "detail": [
+            "trino.view.drop"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.scope}.${resource.namespace}.${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "data",
+              "label": "Data",
+              "icon": {
+                "type": "lucide",
+                "value": "table-properties"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.view.rows",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columnsSource": {
+                  "routeId": "trino.view.columns",
+                  "params": {
+                    "catalog": "${resource.scope}",
+                    "schema": "${resource.namespace}",
+                    "table": "${resource.name}"
+                  }
+                },
+                "emptyText": "No rows.",
+                "exportable": true,
+                "rowClick": "none"
+              }
+            },
+            {
+              "key": "columns",
+              "label": "Columns",
+              "icon": {
+                "type": "lucide",
+                "value": "columns-3"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "trino.view.columns",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Column",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type"
+                  },
+                  {
+                    "key": "nullable",
+                    "label": "Nullable",
+                    "type": "bool"
+                  },
+                  {
+                    "key": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "key": "position",
+                    "label": "Position",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "comment",
+                    "label": "Comment"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "definition",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "trino.view.definition",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              }
+            },
+            {
+              "key": "sql",
+              "label": "SQL",
+              "icon": {
+                "type": "lucide",
+                "value": "square-terminal"
+              },
+              "panel": "query_editor",
+              "source": {
+                "routeId": "trino.query",
+                "method": "WS",
+                "params": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                }
+              },
+              "config": {
+                "language": "sql",
+                "label": "SQL",
+                "executeLabel": "Run query",
+                "cancelLabel": "Cancel query",
+                "runningLabel": "Running...",
+                "emptyText": "Run a query to see results and cluster statistics.",
+                "initialQuery": "SELECT * FROM \"${resource.scope}\".\"${resource.namespace}\".\"${resource.name}\" LIMIT 100;",
+                "cancelRouteId": "trino.query.cancel",
+                "completionRouteId": "trino.completion",
+                "completionParams": {
+                  "catalog": "${resource.scope}",
+                  "schema": "${resource.namespace}",
+                  "table": "${resource.name}"
+                },
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Nodes",
+        "list": {
+          "routeId": "trino.nodes.list"
+        },
+        "columns": [
+          {
+            "key": "node_id",
+            "label": "Node",
+            "sortable": true
+          },
+          {
+            "key": "http_uri",
+            "label": "HTTP URI",
+            "sortable": true
+          },
+          {
+            "key": "node_version",
+            "label": "Version",
+            "sortable": true
+          },
+          {
+            "key": "coordinator",
+            "label": "Coordinator",
+            "type": "bool"
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "active": "success",
+              "inactive": "danger",
+              "shutting_down": "warn"
+            }
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "trino.node.overview",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Node",
+                    "fields": [
+                      {
+                        "key": "node_id",
+                        "label": "Node",
+                        "copy": true
+                      },
+                      {
+                        "key": "http_uri",
+                        "label": "HTTP URI",
+                        "copy": true
+                      },
+                      {
+                        "key": "node_version",
+                        "label": "Version"
+                      },
+                      {
+                        "key": "coordinator",
+                        "label": "Coordinator",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "active": "success",
+                          "inactive": "danger",
+                          "shutting_down": "warn"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "query",
+        "title": "Queries",
+        "list": {
+          "routeId": "trino.queries.list"
+        },
+        "columns": [
+          {
+            "key": "query_id",
+            "label": "Query",
+            "sortable": true
+          },
+          {
+            "key": "state",
+            "label": "State",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "failed": "danger",
+              "finished": "info",
+              "planning": "info",
+              "queued": "warn",
+              "running": "success",
+              "starting": "info",
+              "waiting_for_resources": "warn"
+            }
+          },
+          {
+            "key": "user",
+            "label": "User",
+            "sortable": true
+          },
+          {
+            "key": "source",
+            "label": "Source",
+            "sortable": true
+          },
+          {
+            "key": "created",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          },
+          {
+            "key": "elapsed_ms",
+            "label": "Elapsed",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "query",
+            "label": "Statement"
+          }
+        ],
+        "actions": {
+          "row": [
+            "trino.query.kill"
+          ],
+          "detail": [
+            "trino.query.kill"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "trino.query.overview",
+                "params": {
+                  "query": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Query",
+                    "fields": [
+                      {
+                        "key": "query_id",
+                        "label": "Query ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "state",
+                        "label": "State",
+                        "type": "badge",
+                        "severities": {
+                          "failed": "danger",
+                          "finished": "info",
+                          "planning": "info",
+                          "queued": "warn",
+                          "running": "success",
+                          "starting": "info",
+                          "waiting_for_resources": "warn"
+                        }
+                      },
+                      {
+                        "key": "user",
+                        "label": "User"
+                      },
+                      {
+                        "key": "source",
+                        "label": "Source"
+                      },
+                      {
+                        "key": "resource_group",
+                        "label": "Resource group"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Timing",
+                    "fields": [
+                      {
+                        "key": "created",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "started",
+                        "label": "Started",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "end",
+                        "label": "Ended",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "queued_time_ms",
+                        "label": "Queued",
+                        "type": "number"
+                      },
+                      {
+                        "key": "analysis_time_ms",
+                        "label": "Analysis",
+                        "type": "number"
+                      },
+                      {
+                        "key": "planning_time_ms",
+                        "label": "Planning",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "sql",
+              "label": "Statement",
+              "icon": {
+                "type": "lucide",
+                "value": "code"
+              },
+              "panel": "document",
+              "source": {
+                "routeId": "trino.query.statement",
+                "params": {
+                  "query": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "trino.schema.create",
+        "label": "Create schema",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-plus"
+        },
+        "routeId": "trino.schema.create",
+        "method": "POST",
+        "params": {
+          "catalog": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Schema",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Schema name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_][A-Za-z0-9_$-]{0,127}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "schemas"
+        }
+      },
+      {
+        "id": "trino.schema.drop",
+        "label": "Drop schema",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "trino.schema.drop",
+        "method": "DELETE",
+        "params": {
+          "catalog": "${resource.namespace}",
+          "schema": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this schema? Most connectors refuse while it still holds tables or views.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "trino.table.create",
+        "label": "Create table",
+        "icon": {
+          "type": "lucide",
+          "value": "plus"
+        },
+        "routeId": "trino.table.create",
+        "method": "POST",
+        "params": {
+          "catalog": "${resource.namespace}",
+          "schema": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Table",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Table name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_][A-Za-z0-9_$-]{0,127}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "columns",
+                  "label": "Columns",
+                  "type": "array",
+                  "required": true,
+                  "item": {
+                    "key": "",
+                    "label": "",
+                    "type": "object",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "type": "text",
+                        "required": true,
+                        "validators": [
+                          {
+                            "type": "regex",
+                            "value": "^[A-Za-z_][A-Za-z0-9_]{0,62}$"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "autocomplete",
+                        "required": true,
+                        "placeholder": "varchar",
+                        "options": [
+                          {
+                            "label": "boolean",
+                            "value": "boolean"
+                          },
+                          {
+                            "label": "tinyint",
+                            "value": "tinyint"
+                          },
+                          {
+                            "label": "smallint",
+                            "value": "smallint"
+                          },
+                          {
+                            "label": "integer",
+                            "value": "integer"
+                          },
+                          {
+                            "label": "bigint",
+                            "value": "bigint"
+                          },
+                          {
+                            "label": "real",
+                            "value": "real"
+                          },
+                          {
+                            "label": "double",
+                            "value": "double"
+                          },
+                          {
+                            "label": "decimal(18,2)",
+                            "value": "decimal(18,2)"
+                          },
+                          {
+                            "label": "varchar",
+                            "value": "varchar"
+                          },
+                          {
+                            "label": "varchar(255)",
+                            "value": "varchar(255)"
+                          },
+                          {
+                            "label": "char(10)",
+                            "value": "char(10)"
+                          },
+                          {
+                            "label": "varbinary",
+                            "value": "varbinary"
+                          },
+                          {
+                            "label": "json",
+                            "value": "json"
+                          },
+                          {
+                            "label": "date",
+                            "value": "date"
+                          },
+                          {
+                            "label": "time",
+                            "value": "time"
+                          },
+                          {
+                            "label": "timestamp",
+                            "value": "timestamp"
+                          },
+                          {
+                            "label": "timestamp(3) with time zone",
+                            "value": "timestamp(3) with time zone"
+                          },
+                          {
+                            "label": "uuid",
+                            "value": "uuid"
+                          },
+                          {
+                            "label": "array(varchar)",
+                            "value": "array(varchar)"
+                          },
+                          {
+                            "label": "map(varchar, varchar)",
+                            "value": "map(varchar, varchar)"
+                          }
+                        ]
+                      },
+                      {
+                        "key": "nullable",
+                        "label": "Nullable",
+                        "type": "toggle"
+                      }
+                    ]
+                  },
+                  "minItems": 1,
+                  "itemLabel": "Column"
+                },
+                {
+                  "key": "comment",
+                  "label": "Comment",
+                  "type": "text"
+                },
+                {
+                  "key": "if_not_exists",
+                  "label": "If not exists",
+                  "type": "toggle",
+                  "default": true
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "tables"
+        }
+      },
+      {
+        "id": "trino.table.rename",
+        "label": "Rename",
+        "icon": {
+          "type": "lucide",
+          "value": "pencil"
+        },
+        "routeId": "trino.table.rename",
+        "method": "POST",
+        "params": {
+          "catalog": "${resource.scope}",
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Rename table",
+              "fields": [
+                {
+                  "key": "schema",
+                  "label": "Target schema",
+                  "type": "text",
+                  "help": "Leave blank to keep the current schema.",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_][A-Za-z0-9_$-]{0,127}$"
+                    }
+                  ]
+                },
+                {
+                  "key": "name",
+                  "label": "New name",
+                  "type": "text",
+                  "required": true,
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "value": "^[A-Za-z0-9_][A-Za-z0-9_$-]{0,127}$"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "trino.table.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "trino.table.drop",
+        "method": "DELETE",
+        "params": {
+          "catalog": "${resource.scope}",
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this table? The definition and its data are permanently deleted.",
+        "bulk": true
+      },
+      {
+        "id": "trino.view.drop",
+        "label": "Drop",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "trino.view.drop",
+        "method": "DELETE",
+        "params": {
+          "catalog": "${resource.scope}",
+          "schema": "${resource.namespace}",
+          "table": "${resource.name}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Drop this view?",
+        "bulk": true
+      },
+      {
+        "id": "trino.query.kill",
+        "label": "Kill query",
+        "icon": {
+          "type": "lucide",
+          "value": "circle-stop"
+        },
+        "routeId": "trino.query.kill",
+        "method": "POST",
+        "params": {
+          "query": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Kill this query? It is terminated on the coordinator and its client receives an error.",
+        "bulk": true
+      }
+    ],
+    "streams": [
+      {
+        "id": "trino.query",
+        "kind": "query",
+        "routeId": "trino.query"
+      },
+      {
+        "id": "trino.cluster.metrics",
+        "kind": "metrics",
+        "routeId": "trino.cluster.metrics"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

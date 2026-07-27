@@ -1,0 +1,4718 @@
+{
+  "name": "consul",
+  "version": "0.1.0",
+  "apiVersion": 1,
+  "protocolVersion": 1,
+  "icon": {
+    "type": "svg",
+    "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" id=\"Logos\" x=\"0\" y=\"0\" version=\"1.1\" viewBox=\"0 0 512 512\"\u003e\u003cstyle\u003e.st0{fill:#e03875}\u003c/style\u003e\u003cpath d=\"M258.6 512c-41.7 0-82.7-10.1-119.5-29.6-36.9-19.4-68.4-47.5-92-81.9S8.8 326.5 4 285.2c-4.7-41.4.6-83.3 15.8-122.1s39.5-73.4 71-100.6S160 16 200.6 6.6s82.8-8.8 123.1 1.9 77.4 30.9 108 59.1l-60.8 63.5c-24.2-21.8-54.1-36.1-86.2-41.2s-65.1-.8-94.8 12.4-55 34.8-72.7 62C99.5 191.6 90 223.5 90 256.1s9.4 64.4 27.2 91.7c17.7 27.3 43 48.8 72.7 62s62.7 17.5 94.8 12.4 62.1-19.4 86.2-41.2l60.8 63.5c-47.2 43.4-109 67.6-173.1 67.5m206-128c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.2 6-14.8 6.1\" class=\"st0\"/\u003e\u003cpath d=\"M257 311.4c-10.9 0-21.7-3.2-30.8-9.2-9.1-6.1-16.3-14.7-20.5-24.8s-5.4-21.3-3.3-32c2.1-10.8 7.4-20.7 15.1-28.5 7.8-7.8 17.6-13 28.4-15.2s21.9-1.1 32.1 3.1c10.1 4.2 18.8 11.3 24.9 20.4s9.3 19.9 9.3 30.8c0 14.7-5.8 28.7-16.2 39.1-10.3 10.4-24.3 16.3-39 16.3m231.6 1c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8c2.9-2.9 6.7-4.9 10.8-5.7s8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8s-9.2 6.1-14.8 6.1m-62.3-2.6c-4.2 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.5c-1.6-3.8-2-8.1-1.2-12.1.8-4.1 2.8-7.8 5.8-10.8 2.9-2.9 6.8-4.9 10.8-5.7 4.1-.8 8.3-.4 12.1 1.3 3.8 1.6 7.1 4.4 9.4 7.8s3.5 7.6 3.4 11.7c0 5.6-2.3 10.8-6.2 14.7s-9.1 6.1-14.6 6.2m62.3-68.1c-4.1 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.9-9.2 6-14.8 6.1m-62.3 2.4c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.9-3.8 3.8-9.2 6-14.8 6m39.5-72.9c-4.1 0-8.2-1.2-11.7-3.5s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.1 6-14.8 6\" class=\"st0\"/\u003e\u003c/svg\u003e"
+  },
+  "projection": {
+    "apiVersion": 1,
+    "name": "consul",
+    "version": "0.1.0",
+    "title": "Consul",
+    "description": "HashiCorp Consul cockpit: hierarchical KV browsing and editing, catalog services and nodes, health checks, sessions, prepared queries, service-mesh intentions, and ACL tokens, policies, and roles.",
+    "icon": {
+      "type": "svg",
+      "value": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" xml:space=\"preserve\" id=\"Logos\" x=\"0\" y=\"0\" version=\"1.1\" viewBox=\"0 0 512 512\"\u003e\u003cstyle\u003e.st0{fill:#e03875}\u003c/style\u003e\u003cpath d=\"M258.6 512c-41.7 0-82.7-10.1-119.5-29.6-36.9-19.4-68.4-47.5-92-81.9S8.8 326.5 4 285.2c-4.7-41.4.6-83.3 15.8-122.1s39.5-73.4 71-100.6S160 16 200.6 6.6s82.8-8.8 123.1 1.9 77.4 30.9 108 59.1l-60.8 63.5c-24.2-21.8-54.1-36.1-86.2-41.2s-65.1-.8-94.8 12.4-55 34.8-72.7 62C99.5 191.6 90 223.5 90 256.1s9.4 64.4 27.2 91.7c17.7 27.3 43 48.8 72.7 62s62.7 17.5 94.8 12.4 62.1-19.4 86.2-41.2l60.8 63.5c-47.2 43.4-109 67.6-173.1 67.5m206-128c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.2 6-14.8 6.1\" class=\"st0\"/\u003e\u003cpath d=\"M257 311.4c-10.9 0-21.7-3.2-30.8-9.2-9.1-6.1-16.3-14.7-20.5-24.8s-5.4-21.3-3.3-32c2.1-10.8 7.4-20.7 15.1-28.5 7.8-7.8 17.6-13 28.4-15.2s21.9-1.1 32.1 3.1c10.1 4.2 18.8 11.3 24.9 20.4s9.3 19.9 9.3 30.8c0 14.7-5.8 28.7-16.2 39.1-10.3 10.4-24.3 16.3-39 16.3m231.6 1c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8c2.9-2.9 6.7-4.9 10.8-5.7s8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8s-9.2 6.1-14.8 6.1m-62.3-2.6c-4.2 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.5c-1.6-3.8-2-8.1-1.2-12.1.8-4.1 2.8-7.8 5.8-10.8 2.9-2.9 6.8-4.9 10.8-5.7 4.1-.8 8.3-.4 12.1 1.3 3.8 1.6 7.1 4.4 9.4 7.8s3.5 7.6 3.4 11.7c0 5.6-2.3 10.8-6.2 14.7s-9.1 6.1-14.6 6.2m62.3-68.1c-4.1 0-8.2-1.3-11.7-3.6s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.9-9.2 6-14.8 6.1m-62.3 2.4c-4.1 0-8.2-1.2-11.7-3.6-3.5-2.3-6.1-5.6-7.8-9.4-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.9-3.8 3.8-9.2 6-14.8 6m39.5-72.9c-4.1 0-8.2-1.2-11.7-3.5s-6.1-5.6-7.8-9.4c-1.6-3.8-2-8-1.2-12.1s2.8-7.8 5.7-10.8 6.7-4.9 10.8-5.7 8.3-.4 12.1 1.2 7.1 4.3 9.4 7.8 3.6 7.5 3.6 11.7c0 5.6-2.2 10.9-6.1 14.8-3.8 3.8-9.1 6-14.8 6\" class=\"st0\"/\u003e\u003c/svg\u003e"
+    },
+    "category": {
+      "key": "orchestration",
+      "label": "Orchestration",
+      "icon": {
+        "type": "lucide",
+        "value": "ship-wheel"
+      },
+      "order": 70
+    },
+    "config": {
+      "groups": [
+        {
+          "name": "Agent",
+          "fields": [
+            {
+              "key": "host",
+              "label": "Host",
+              "type": "text",
+              "required": true,
+              "placeholder": "consul.service.consul",
+              "help": "Address of a Consul agent or server HTTP API."
+            },
+            {
+              "key": "port",
+              "label": "Port",
+              "type": "number",
+              "required": true,
+              "default": 8500,
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 1
+                },
+                {
+                  "type": "max",
+                  "value": 65535
+                }
+              ]
+            },
+            {
+              "key": "path_prefix",
+              "label": "Path prefix",
+              "type": "text",
+              "placeholder": "/consul",
+              "help": "Set when the HTTP API is served behind a reverse proxy that strips a prefix."
+            }
+          ]
+        },
+        {
+          "name": "Authentication",
+          "fields": [
+            {
+              "key": "auth",
+              "label": "Authentication",
+              "type": "select",
+              "required": true,
+              "default": "none",
+              "options": [
+                {
+                  "label": "None (ACLs disabled)",
+                  "value": "none"
+                },
+                {
+                  "label": "ACL token",
+                  "value": "token"
+                },
+                {
+                  "label": "Stored ACL token",
+                  "value": "credential"
+                }
+              ]
+            },
+            {
+              "key": "token",
+              "label": "ACL token",
+              "type": "password",
+              "secret": true,
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "token"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "empty"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "credential_id",
+              "label": "Stored ACL token",
+              "type": "credential_ref",
+              "required": true,
+              "help": "Reusable Consul ACL token secret.",
+              "credential": {
+                "kind": "api_token",
+                "protocols": [
+                  "consul"
+                ]
+              },
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "auth",
+                    "op": "eq",
+                    "value": "credential"
+                  },
+                  {
+                    "field": "credential_id",
+                    "op": "notEmpty"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TLS",
+          "fields": [
+            {
+              "key": "tls_mode",
+              "label": "TLS mode",
+              "type": "select",
+              "required": true,
+              "default": "disable",
+              "options": [
+                {
+                  "label": "Disable",
+                  "value": "disable"
+                },
+                {
+                  "label": "Require encryption",
+                  "value": "require"
+                },
+                {
+                  "label": "Verify CA",
+                  "value": "verify-ca"
+                },
+                {
+                  "label": "Verify full",
+                  "value": "verify-full"
+                }
+              ]
+            },
+            {
+              "key": "ca_certificate",
+              "label": "CA certificate",
+              "type": "textarea",
+              "secret": true,
+              "help": "PEM CA bundle used for verify-ca and verify-full.",
+              "visibleWhen": {
+                "anyOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-ca"
+                  },
+                  {
+                    "field": "tls_mode",
+                    "op": "eq",
+                    "value": "verify-full"
+                  }
+                ]
+              }
+            },
+            {
+              "key": "client_cert_id",
+              "label": "Client certificate",
+              "type": "credential_ref",
+              "help": "Optional certificate and private key for mutual TLS.",
+              "credential": {
+                "kind": "tls_client_cert",
+                "protocols": [
+                  "consul"
+                ]
+              },
+              "visibleWhen": {
+                "allOf": [
+                  {
+                    "field": "tls_mode",
+                    "op": "neq",
+                    "value": "disable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Scope",
+          "fields": [
+            {
+              "key": "datacenter",
+              "label": "Datacenter",
+              "type": "text",
+              "placeholder": "dc1",
+              "help": "Default datacenter for every query. Leave empty to use the agent's own datacenter."
+            },
+            {
+              "key": "namespace",
+              "label": "Namespace",
+              "type": "text",
+              "help": "Consul Enterprise namespace applied to every request."
+            },
+            {
+              "key": "partition",
+              "label": "Admin partition",
+              "type": "text",
+              "help": "Consul Enterprise admin partition applied to every request."
+            },
+            {
+              "key": "kv_prefix",
+              "label": "KV root prefix",
+              "type": "text",
+              "placeholder": "apps/",
+              "help": "Root the key browser starts from. Leave empty to browse the whole key space."
+            }
+          ]
+        },
+        {
+          "name": "Safety",
+          "fields": [
+            {
+              "key": "read_only",
+              "label": "Read-only mode",
+              "type": "toggle",
+              "default": true,
+              "help": "Blocks key writes, deregistration, intention changes, and session destruction."
+            },
+            {
+              "key": "allow_stale",
+              "label": "Allow stale reads",
+              "type": "toggle",
+              "default": false,
+              "help": "Lets any server answer reads instead of the leader; faster but possibly out of date."
+            },
+            {
+              "key": "timeout",
+              "label": "Request timeout",
+              "type": "duration",
+              "default": "15s"
+            },
+            {
+              "key": "page_limit",
+              "label": "Page size",
+              "type": "number",
+              "default": 100,
+              "help": "Caps rows fetched per page and nodes shown per key-tree level.",
+              "validators": [
+                {
+                  "type": "min",
+                  "value": 10
+                },
+                {
+                  "type": "max",
+                  "value": 500
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "capabilities": [
+      "kv",
+      "catalog",
+      "health",
+      "sessions",
+      "prepared-queries",
+      "service-mesh",
+      "acl",
+      "watch"
+    ],
+    "supportedTransports": [
+      "direct",
+      "agent"
+    ],
+    "agent": {
+      "modes": [
+        "tcp"
+      ],
+      "riskNote": "privileged"
+    },
+    "layout": "sidebar_tree",
+    "tree": [
+      {
+        "key": "cluster",
+        "label": "Cluster",
+        "icon": {
+          "type": "lucide",
+          "value": "server-cog"
+        },
+        "ref": {
+          "kind": "cluster",
+          "name": "Cluster",
+          "uid": "cluster"
+        }
+      },
+      {
+        "key": "kv",
+        "label": "Key/value",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-tree"
+        },
+        "source": {
+          "routeId": "consul.kv.tree"
+        }
+      },
+      {
+        "key": "catalog",
+        "label": "Catalog",
+        "icon": {
+          "type": "lucide",
+          "value": "boxes"
+        },
+        "source": {
+          "routeId": "consul.catalog.tree"
+        }
+      },
+      {
+        "key": "mesh",
+        "label": "Mesh \u0026 coordination",
+        "icon": {
+          "type": "lucide",
+          "value": "share-2"
+        },
+        "source": {
+          "routeId": "consul.mesh.tree"
+        }
+      },
+      {
+        "key": "acl",
+        "label": "Access control",
+        "icon": {
+          "type": "lucide",
+          "value": "shield"
+        },
+        "source": {
+          "routeId": "consul.acl.tree"
+        }
+      }
+    ],
+    "resources": [
+      {
+        "kind": "cluster",
+        "title": "Cluster",
+        "list": {
+          "routeId": "consul.cluster.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Cluster",
+            "sortable": true
+          },
+          {
+            "key": "datacenter",
+            "label": "Datacenter",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "degraded": "warn",
+              "no-leader": "danger",
+              "ready": "success"
+            }
+          },
+          {
+            "key": "leader",
+            "label": "Leader"
+          },
+          {
+            "key": "version",
+            "label": "Version",
+            "sortable": true
+          },
+          {
+            "key": "nodes",
+            "label": "Nodes",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "services",
+            "label": "Services",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "degraded": "warn",
+              "no-leader": "danger",
+              "ready": "success"
+            }
+          },
+          "defaultTab": "agent",
+          "tabs": [
+            {
+              "key": "agent",
+              "label": "Agent",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.agent.self"
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Agent",
+                    "fields": [
+                      {
+                        "key": "node_name",
+                        "label": "Node name",
+                        "copy": true
+                      },
+                      {
+                        "key": "node_id",
+                        "label": "Node ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "datacenter",
+                        "label": "Datacenter",
+                        "copy": true
+                      },
+                      {
+                        "key": "primary_datacenter",
+                        "label": "Primary datacenter"
+                      },
+                      {
+                        "key": "server",
+                        "label": "Server",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "version",
+                        "label": "Version",
+                        "copy": true
+                      },
+                      {
+                        "key": "revision",
+                        "label": "Revision"
+                      },
+                      {
+                        "key": "endpoint",
+                        "label": "Endpoint",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Networking",
+                    "fields": [
+                      {
+                        "key": "advertise_addr",
+                        "label": "Advertise address",
+                        "copy": true
+                      },
+                      {
+                        "key": "bind_addr",
+                        "label": "Bind address"
+                      },
+                      {
+                        "key": "tagged_addresses",
+                        "label": "Tagged addresses",
+                        "type": "json"
+                      },
+                      {
+                        "key": "gossip_tags",
+                        "label": "Gossip tags",
+                        "type": "json"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Node meta",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Connection",
+                    "fields": [
+                      {
+                        "key": "read_only",
+                        "label": "Read-only connection",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "allow_stale",
+                        "label": "Stale reads allowed",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "namespace",
+                        "label": "Namespace"
+                      },
+                      {
+                        "key": "partition",
+                        "label": "Admin partition"
+                      },
+                      {
+                        "key": "kv_prefix",
+                        "label": "KV root prefix",
+                        "copy": true
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "config",
+              "label": "Configuration",
+              "icon": {
+                "type": "lucide",
+                "value": "settings"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.agent.config"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "setting",
+                    "label": "Setting",
+                    "sortable": true
+                  },
+                  {
+                    "key": "value",
+                    "label": "Value"
+                  }
+                ],
+                "defaultSort": {
+                  "field": "setting"
+                },
+                "emptyText": "The agent reported no runtime configuration; the token needs agent:read.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "members",
+              "label": "Members",
+              "icon": {
+                "type": "lucide",
+                "value": "users"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.members.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Member",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "alive": "success",
+                      "failed": "danger",
+                      "leaving": "warn",
+                      "left": "secondary",
+                      "none": "secondary"
+                    }
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "role",
+                    "label": "Role",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "datacenter",
+                    "label": "Datacenter",
+                    "sortable": true
+                  },
+                  {
+                    "key": "build",
+                    "label": "Build",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "The agent reported no gossip members.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "raft",
+              "label": "Raft peers",
+              "icon": {
+                "type": "lucide",
+                "value": "network"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.raft.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "leader",
+                    "label": "Leader",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "voter",
+                    "label": "Voter",
+                    "sortable": true,
+                    "type": "bool"
+                  },
+                  {
+                    "key": "last_index",
+                    "label": "Last index",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "protocol",
+                    "label": "Raft protocol"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "node"
+                },
+                "emptyText": "Raft configuration is unavailable; the token needs operator:read.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "datacenters",
+              "label": "Datacenters",
+              "icon": {
+                "type": "lucide",
+                "value": "globe"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.datacenters.list"
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "label",
+                    "label": "Datacenter",
+                    "sortable": true
+                  }
+                ],
+                "refreshIntervalMs": 60000,
+                "defaultSort": {
+                  "field": "label"
+                },
+                "emptyText": "No federated datacenters were reported."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "kv",
+        "title": "Key/value",
+        "list": {
+          "routeId": "consul.kv.entries"
+        },
+        "columns": [
+          {
+            "key": "key",
+            "label": "Key",
+            "sortable": true
+          },
+          {
+            "key": "size",
+            "label": "Size",
+            "type": "bytes"
+          },
+          {
+            "key": "flags",
+            "label": "Flags",
+            "type": "number"
+          },
+          {
+            "key": "session",
+            "label": "Lock session"
+          },
+          {
+            "key": "modify_index",
+            "label": "Modify index",
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "toolbar": [
+            "consul.kv.put"
+          ],
+          "detail": [
+            "consul.kv.put",
+            "consul.kv.prefix.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "browse",
+          "tabs": [
+            {
+              "key": "browse",
+              "label": "Keys",
+              "icon": {
+                "type": "lucide",
+                "value": "key-round"
+              },
+              "panel": "kv",
+              "source": {
+                "routeId": "consul.kv.list",
+                "params": {
+                  "prefix": "${resource.uid}"
+                }
+              },
+              "config": {
+                "createRouteId": "consul.kv.write",
+                "readRouteId": "consul.kv.read",
+                "writeRouteId": "consul.kv.write",
+                "deleteRouteId": "consul.kv.delete",
+                "keyParam": "key",
+                "writable": true,
+                "valueTypes": [
+                  "string",
+                  "json",
+                  "binary"
+                ],
+                "delimiter": "/"
+              }
+            },
+            {
+              "key": "entries",
+              "label": "Entries",
+              "icon": {
+                "type": "lucide",
+                "value": "table"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.kv.entries",
+                "params": {
+                  "prefix": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "key",
+                    "label": "Key",
+                    "sortable": true
+                  },
+                  {
+                    "key": "size",
+                    "label": "Size",
+                    "type": "bytes"
+                  },
+                  {
+                    "key": "flags",
+                    "label": "Flags",
+                    "type": "number"
+                  },
+                  {
+                    "key": "session",
+                    "label": "Lock session"
+                  },
+                  {
+                    "key": "modify_index",
+                    "label": "Modify index",
+                    "type": "number"
+                  }
+                ],
+                "actionIds": [
+                  "consul.kv.put"
+                ],
+                "rowActionIds": [
+                  "consul.kv.entry.delete"
+                ],
+                "refreshIntervalMs": 20000,
+                "defaultSort": {
+                  "field": "key"
+                },
+                "emptyText": "No keys directly under this prefix. Open a folder in the sidebar for nested keys, or use Set key to create one.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "changes",
+              "label": "Changes",
+              "icon": {
+                "type": "lucide",
+                "value": "activity"
+              },
+              "panel": "log_stream",
+              "source": {
+                "routeId": "consul.kv.watch",
+                "method": "WS",
+                "params": {
+                  "prefix": "${resource.uid}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "service",
+        "title": "Services",
+        "list": {
+          "routeId": "consul.services.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Service",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          {
+            "key": "tags",
+            "label": "Tags"
+          },
+          {
+            "key": "passing",
+            "label": "Passing",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "warning",
+            "label": "Warning",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "critical",
+            "label": "Critical",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          "defaultTab": "overview",
+          "tabs": [
+            {
+              "key": "overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.service.read",
+                "params": {
+                  "service": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Service",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Aggregate status",
+                        "type": "badge",
+                        "severities": {
+                          "critical": "danger",
+                          "maintenance": "secondary",
+                          "passing": "success",
+                          "unknown": "secondary",
+                          "warning": "warn"
+                        }
+                      },
+                      {
+                        "key": "instances",
+                        "label": "Instances",
+                        "type": "number"
+                      },
+                      {
+                        "key": "nodes",
+                        "label": "Nodes",
+                        "type": "number"
+                      },
+                      {
+                        "key": "kinds",
+                        "label": "Kinds"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Health",
+                    "fields": [
+                      {
+                        "key": "passing",
+                        "label": "Passing checks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "warning",
+                        "label": "Warning checks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "critical",
+                        "label": "Critical checks",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Registration",
+                    "fields": [
+                      {
+                        "key": "tags",
+                        "label": "Tags"
+                      },
+                      {
+                        "key": "ports",
+                        "label": "Ports"
+                      },
+                      {
+                        "key": "datacenter",
+                        "label": "Datacenter"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Service meta",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "instances",
+              "label": "Instances",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.service.instances",
+                "params": {
+                  "service": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Instance",
+                    "sortable": true
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "critical": "danger",
+                      "maintenance": "secondary",
+                      "passing": "success",
+                      "unknown": "secondary",
+                      "warning": "warn"
+                    }
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "tags",
+                    "label": "Tags"
+                  },
+                  {
+                    "key": "kind",
+                    "label": "Kind",
+                    "sortable": true,
+                    "type": "badge"
+                  }
+                ],
+                "rowActionIds": [
+                  "consul.instance.deregister"
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "No instances of this service are registered in the selected datacenter.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "service-checks",
+              "label": "Health checks",
+              "icon": {
+                "type": "lucide",
+                "value": "heart-pulse"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.service.checks",
+                "params": {
+                  "service": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Check",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "critical": "danger",
+                      "maintenance": "secondary",
+                      "passing": "success",
+                      "unknown": "secondary",
+                      "warning": "warn"
+                    }
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "service",
+                    "label": "Service",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "output",
+                    "label": "Output"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "status"
+                },
+                "emptyText": "No health checks match this scope.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "service-intentions",
+              "label": "Intentions",
+              "icon": {
+                "type": "lucide",
+                "value": "shield-check"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.intentions.list",
+                "params": {
+                  "destination": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "source",
+                    "label": "Source",
+                    "sortable": true
+                  },
+                  {
+                    "key": "destination",
+                    "label": "Destination",
+                    "sortable": true
+                  },
+                  {
+                    "key": "action",
+                    "label": "Action",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "allow": "success",
+                      "deny": "danger"
+                    }
+                  },
+                  {
+                    "key": "precedence",
+                    "label": "Precedence",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "permissions",
+                    "label": "L7 rules",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "updated_at",
+                    "label": "Updated",
+                    "sortable": true,
+                    "type": "relative_time"
+                  }
+                ],
+                "rowActionIds": [
+                  "consul.intention.delete"
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "precedence",
+                  "desc": true
+                },
+                "emptyText": "No intentions are defined; mesh traffic follows the default policy.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "instance",
+        "title": "Service instances",
+        "list": {
+          "routeId": "consul.service.instances"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Instance",
+            "sortable": true
+          },
+          {
+            "key": "node",
+            "label": "Node",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          {
+            "key": "address",
+            "label": "Address"
+          },
+          {
+            "key": "port",
+            "label": "Port",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "tags",
+            "label": "Tags"
+          },
+          {
+            "key": "kind",
+            "label": "Kind",
+            "sortable": true,
+            "type": "badge"
+          }
+        ],
+        "actions": {
+          "row": [
+            "consul.instance.deregister"
+          ],
+          "detail": [
+            "consul.instance.deregister"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          "defaultTab": "instance-overview",
+          "tabs": [
+            {
+              "key": "instance-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.instance.read",
+                "params": {
+                  "instance": "${resource.name}",
+                  "node": "${resource.namespace}",
+                  "service": "${resource.scope}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Instance",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Instance ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "service",
+                        "label": "Service",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "critical": "danger",
+                          "maintenance": "secondary",
+                          "passing": "success",
+                          "unknown": "secondary",
+                          "warning": "warn"
+                        }
+                      },
+                      {
+                        "key": "kind",
+                        "label": "Kind",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "node",
+                        "label": "Node",
+                        "copy": true
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Addressing",
+                    "fields": [
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "port",
+                        "label": "Port",
+                        "type": "number"
+                      },
+                      {
+                        "key": "socket_path",
+                        "label": "Socket path"
+                      },
+                      {
+                        "key": "node_address",
+                        "label": "Node address"
+                      },
+                      {
+                        "key": "tagged_addresses",
+                        "label": "Tagged addresses",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Mesh",
+                    "fields": [
+                      {
+                        "key": "proxy_destination",
+                        "label": "Proxy destination"
+                      },
+                      {
+                        "key": "connect_native",
+                        "label": "Connect native",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "upstreams",
+                        "label": "Upstreams",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Metadata",
+                    "fields": [
+                      {
+                        "key": "tags",
+                        "label": "Tags"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Meta",
+                        "type": "json"
+                      },
+                      {
+                        "key": "weights",
+                        "label": "Weights",
+                        "type": "json"
+                      },
+                      {
+                        "key": "passing",
+                        "label": "Passing checks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "critical",
+                        "label": "Critical checks",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "node",
+        "title": "Nodes",
+        "list": {
+          "routeId": "consul.nodes.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Node",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          {
+            "key": "address",
+            "label": "Address",
+            "sortable": true
+          },
+          {
+            "key": "datacenter",
+            "label": "Datacenter",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "Node ID"
+          },
+          {
+            "key": "meta",
+            "label": "Meta",
+            "type": "json"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          "defaultTab": "node-overview",
+          "tabs": [
+            {
+              "key": "node-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.node.read",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Node",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "id",
+                        "label": "Node ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "critical": "danger",
+                          "maintenance": "secondary",
+                          "passing": "success",
+                          "unknown": "secondary",
+                          "warning": "warn"
+                        }
+                      },
+                      {
+                        "key": "address",
+                        "label": "Address",
+                        "copy": true
+                      },
+                      {
+                        "key": "datacenter",
+                        "label": "Datacenter"
+                      },
+                      {
+                        "key": "partition",
+                        "label": "Admin partition"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Registration",
+                    "fields": [
+                      {
+                        "key": "services",
+                        "label": "Services",
+                        "type": "number"
+                      },
+                      {
+                        "key": "passing",
+                        "label": "Passing checks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "warning",
+                        "label": "Warning checks",
+                        "type": "number"
+                      },
+                      {
+                        "key": "critical",
+                        "label": "Critical checks",
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Metadata",
+                    "fields": [
+                      {
+                        "key": "tagged_addresses",
+                        "label": "Tagged addresses",
+                        "type": "json"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Meta",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "node-services",
+              "label": "Services",
+              "icon": {
+                "type": "lucide",
+                "value": "boxes"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.node.services",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Instance",
+                    "sortable": true
+                  },
+                  {
+                    "key": "service",
+                    "label": "Service",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "tags",
+                    "label": "Tags"
+                  },
+                  {
+                    "key": "kind",
+                    "label": "Kind",
+                    "sortable": true,
+                    "type": "badge"
+                  }
+                ],
+                "refreshIntervalMs": 15000,
+                "defaultSort": {
+                  "field": "name"
+                },
+                "emptyText": "This node has no registered services.",
+                "exportable": true
+              }
+            },
+            {
+              "key": "node-checks",
+              "label": "Health checks",
+              "icon": {
+                "type": "lucide",
+                "value": "heart-pulse"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.node.checks",
+                "params": {
+                  "node": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "name",
+                    "label": "Check",
+                    "sortable": true
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "critical": "danger",
+                      "maintenance": "secondary",
+                      "passing": "success",
+                      "unknown": "secondary",
+                      "warning": "warn"
+                    }
+                  },
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "service",
+                    "label": "Service",
+                    "sortable": true
+                  },
+                  {
+                    "key": "type",
+                    "label": "Type",
+                    "sortable": true,
+                    "type": "badge"
+                  },
+                  {
+                    "key": "output",
+                    "label": "Output"
+                  }
+                ],
+                "refreshIntervalMs": 10000,
+                "defaultSort": {
+                  "field": "status"
+                },
+                "emptyText": "No health checks match this scope.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "check",
+        "title": "Health checks",
+        "list": {
+          "routeId": "consul.checks.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Check",
+            "sortable": true
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          {
+            "key": "node",
+            "label": "Node",
+            "sortable": true
+          },
+          {
+            "key": "service",
+            "label": "Service",
+            "sortable": true
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "output",
+            "label": "Output"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "status",
+            "severities": {
+              "critical": "danger",
+              "maintenance": "secondary",
+              "passing": "success",
+              "unknown": "secondary",
+              "warning": "warn"
+            }
+          },
+          "defaultTab": "check-overview",
+          "tabs": [
+            {
+              "key": "check-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.check.read",
+                "params": {
+                  "check": "${resource.name}",
+                  "node": "${resource.namespace}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Check",
+                    "fields": [
+                      {
+                        "key": "name",
+                        "label": "Check ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "title",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "status",
+                        "label": "Status",
+                        "type": "badge",
+                        "severities": {
+                          "critical": "danger",
+                          "maintenance": "secondary",
+                          "passing": "success",
+                          "unknown": "secondary",
+                          "warning": "warn"
+                        }
+                      },
+                      {
+                        "key": "type",
+                        "label": "Type",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "node",
+                        "label": "Node",
+                        "copy": true
+                      },
+                      {
+                        "key": "service",
+                        "label": "Service"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Definition",
+                    "fields": [
+                      {
+                        "key": "http",
+                        "label": "HTTP endpoint",
+                        "copy": true
+                      },
+                      {
+                        "key": "tcp",
+                        "label": "TCP endpoint"
+                      },
+                      {
+                        "key": "grpc",
+                        "label": "gRPC endpoint"
+                      },
+                      {
+                        "key": "interval",
+                        "label": "Interval"
+                      },
+                      {
+                        "key": "timeout",
+                        "label": "Timeout"
+                      },
+                      {
+                        "key": "deregister_after",
+                        "label": "Deregister critical after"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Last result",
+                    "fields": [
+                      {
+                        "key": "notes",
+                        "label": "Notes"
+                      },
+                      {
+                        "key": "output",
+                        "label": "Output"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "session",
+        "title": "Sessions",
+        "list": {
+          "routeId": "consul.sessions.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Session",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "ID"
+          },
+          {
+            "key": "node",
+            "label": "Node",
+            "sortable": true
+          },
+          {
+            "key": "behavior",
+            "label": "Behavior",
+            "sortable": true,
+            "type": "badge"
+          },
+          {
+            "key": "ttl",
+            "label": "TTL",
+            "sortable": true
+          },
+          {
+            "key": "lock_delay",
+            "label": "Lock delay",
+            "sortable": true,
+            "type": "duration"
+          },
+          {
+            "key": "checks",
+            "label": "Checks",
+            "sortable": true,
+            "type": "number"
+          }
+        ],
+        "actions": {
+          "row": [
+            "consul.session.destroy"
+          ],
+          "detail": [
+            "consul.session.destroy"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "session-overview",
+          "tabs": [
+            {
+              "key": "session-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.session.read",
+                "params": {
+                  "session": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Session",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name"
+                      },
+                      {
+                        "key": "node",
+                        "label": "Node",
+                        "copy": true
+                      },
+                      {
+                        "key": "behavior",
+                        "label": "Invalidation behavior",
+                        "type": "badge"
+                      },
+                      {
+                        "key": "ttl",
+                        "label": "TTL"
+                      },
+                      {
+                        "key": "lock_delay",
+                        "label": "Lock delay",
+                        "type": "duration"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Attached checks",
+                    "fields": [
+                      {
+                        "key": "node_checks",
+                        "label": "Node checks",
+                        "type": "json"
+                      },
+                      {
+                        "key": "service_checks",
+                        "label": "Service checks",
+                        "type": "json"
+                      },
+                      {
+                        "key": "create_index",
+                        "label": "Create index",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "prepared_query",
+        "title": "Prepared queries",
+        "list": {
+          "routeId": "consul.queries.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Query",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "ID"
+          },
+          {
+            "key": "service",
+            "label": "Service",
+            "sortable": true
+          },
+          {
+            "key": "only_passing",
+            "label": "Only passing",
+            "type": "bool"
+          },
+          {
+            "key": "near",
+            "label": "Near"
+          },
+          {
+            "key": "session",
+            "label": "Session"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "query-overview",
+          "tabs": [
+            {
+              "key": "query-overview",
+              "label": "Definition",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.query.read",
+                "params": {
+                  "query": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Query",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "session",
+                        "label": "Session"
+                      },
+                      {
+                        "key": "template_type",
+                        "label": "Template type"
+                      },
+                      {
+                        "key": "template_regexp",
+                        "label": "Template regexp"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Service selection",
+                    "fields": [
+                      {
+                        "key": "service",
+                        "label": "Service",
+                        "copy": true
+                      },
+                      {
+                        "key": "near",
+                        "label": "Near"
+                      },
+                      {
+                        "key": "only_passing",
+                        "label": "Only passing",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "tags",
+                        "label": "Tags"
+                      },
+                      {
+                        "key": "node_meta",
+                        "label": "Node meta",
+                        "type": "json"
+                      },
+                      {
+                        "key": "failover",
+                        "label": "Failover",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "DNS",
+                    "fields": [
+                      {
+                        "key": "dns_ttl",
+                        "label": "DNS TTL"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            },
+            {
+              "key": "query-results",
+              "label": "Results",
+              "icon": {
+                "type": "lucide",
+                "value": "play"
+              },
+              "panel": "table",
+              "source": {
+                "routeId": "consul.query.execute",
+                "params": {
+                  "query": "${resource.uid}"
+                }
+              },
+              "config": {
+                "columns": [
+                  {
+                    "key": "node",
+                    "label": "Node",
+                    "sortable": true
+                  },
+                  {
+                    "key": "address",
+                    "label": "Address"
+                  },
+                  {
+                    "key": "port",
+                    "label": "Port",
+                    "sortable": true,
+                    "type": "number"
+                  },
+                  {
+                    "key": "status",
+                    "label": "Status",
+                    "sortable": true,
+                    "type": "badge",
+                    "severities": {
+                      "critical": "danger",
+                      "maintenance": "secondary",
+                      "passing": "success",
+                      "unknown": "secondary",
+                      "warning": "warn"
+                    }
+                  },
+                  {
+                    "key": "tags",
+                    "label": "Tags"
+                  }
+                ],
+                "refreshIntervalMs": 30000,
+                "defaultSort": {
+                  "field": "node"
+                },
+                "emptyText": "Executing this prepared query returned no service instances.",
+                "exportable": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "intention",
+        "title": "Intentions",
+        "list": {
+          "routeId": "consul.intentions.list"
+        },
+        "columns": [
+          {
+            "key": "source",
+            "label": "Source",
+            "sortable": true
+          },
+          {
+            "key": "destination",
+            "label": "Destination",
+            "sortable": true
+          },
+          {
+            "key": "action",
+            "label": "Action",
+            "sortable": true,
+            "type": "badge",
+            "severities": {
+              "allow": "success",
+              "deny": "danger"
+            }
+          },
+          {
+            "key": "precedence",
+            "label": "Precedence",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "permissions",
+            "label": "L7 rules",
+            "sortable": true,
+            "type": "number"
+          },
+          {
+            "key": "updated_at",
+            "label": "Updated",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "actions": {
+          "row": [
+            "consul.intention.delete"
+          ],
+          "detail": [
+            "consul.intention.toggle",
+            "consul.intention.delete"
+          ]
+        },
+        "detail": {
+          "header": {
+            "title": "${resource.name}",
+            "statusField": "action",
+            "severities": {
+              "allow": "success",
+              "deny": "danger"
+            }
+          },
+          "defaultTab": "intention-overview",
+          "tabs": [
+            {
+              "key": "intention-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.intention.read",
+                "params": {
+                  "destination": "${resource.name}",
+                  "source": "${resource.scope}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Intention",
+                    "fields": [
+                      {
+                        "key": "source",
+                        "label": "Source",
+                        "copy": true
+                      },
+                      {
+                        "key": "destination",
+                        "label": "Destination",
+                        "copy": true
+                      },
+                      {
+                        "key": "action",
+                        "label": "Action",
+                        "type": "badge",
+                        "severities": {
+                          "allow": "success",
+                          "deny": "danger"
+                        }
+                      },
+                      {
+                        "key": "precedence",
+                        "label": "Precedence",
+                        "type": "number"
+                      },
+                      {
+                        "key": "source_type",
+                        "label": "Source type"
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Layer 7",
+                    "fields": [
+                      {
+                        "key": "permissions",
+                        "label": "Permission rules",
+                        "type": "number"
+                      },
+                      {
+                        "key": "permission_detail",
+                        "label": "Permissions",
+                        "type": "json"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "History",
+                    "fields": [
+                      {
+                        "key": "created_at",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "updated_at",
+                        "label": "Updated",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "meta",
+                        "label": "Meta",
+                        "type": "json"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "acl_token",
+        "title": "ACL tokens",
+        "list": {
+          "routeId": "consul.acl.tokens.list"
+        },
+        "columns": [
+          {
+            "key": "description",
+            "label": "Description",
+            "sortable": true
+          },
+          {
+            "key": "accessor_id",
+            "label": "Accessor ID"
+          },
+          {
+            "key": "policies",
+            "label": "Policies"
+          },
+          {
+            "key": "roles",
+            "label": "Roles"
+          },
+          {
+            "key": "local",
+            "label": "Local",
+            "sortable": true,
+            "type": "bool"
+          },
+          {
+            "key": "created_at",
+            "label": "Created",
+            "sortable": true,
+            "type": "relative_time"
+          },
+          {
+            "key": "expires_at",
+            "label": "Expires",
+            "sortable": true,
+            "type": "relative_time"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "token-overview",
+          "tabs": [
+            {
+              "key": "token-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.acl.token.read",
+                "params": {
+                  "token": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Token",
+                    "fields": [
+                      {
+                        "key": "accessor_id",
+                        "label": "Accessor ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "secret_id",
+                        "label": "Secret ID",
+                        "redacted": true
+                      },
+                      {
+                        "key": "local",
+                        "label": "Local token",
+                        "type": "bool"
+                      },
+                      {
+                        "key": "auth_method",
+                        "label": "Auth method"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Grants",
+                    "fields": [
+                      {
+                        "key": "policies",
+                        "label": "Policies"
+                      },
+                      {
+                        "key": "roles",
+                        "label": "Roles"
+                      },
+                      {
+                        "key": "service_identities",
+                        "label": "Service identities"
+                      },
+                      {
+                        "key": "node_identities",
+                        "label": "Node identities"
+                      },
+                      {
+                        "key": "templated_policies",
+                        "label": "Templated policies"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Lifetime",
+                    "fields": [
+                      {
+                        "key": "created_at",
+                        "label": "Created",
+                        "type": "datetime"
+                      },
+                      {
+                        "key": "expires_at",
+                        "label": "Expires",
+                        "type": "relative_time"
+                      },
+                      {
+                        "key": "create_index",
+                        "label": "Create index",
+                        "type": "number"
+                      },
+                      {
+                        "key": "modify_index",
+                        "label": "Modify index",
+                        "type": "number"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "acl_policy",
+        "title": "ACL policies",
+        "list": {
+          "routeId": "consul.acl.policies.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Policy",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "ID"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "datacenters",
+            "label": "Datacenters"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "policy-overview",
+          "tabs": [
+            {
+              "key": "policy-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.acl.policy.read",
+                "params": {
+                  "policy": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Policy",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      },
+                      {
+                        "key": "datacenters",
+                        "label": "Datacenters"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Rules",
+                    "fields": [
+                      {
+                        "key": "rules",
+                        "label": "HCL rules",
+                        "copy": true
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "acl_role",
+        "title": "ACL roles",
+        "list": {
+          "routeId": "consul.acl.roles.list"
+        },
+        "columns": [
+          {
+            "key": "name",
+            "label": "Role",
+            "sortable": true
+          },
+          {
+            "key": "id",
+            "label": "ID"
+          },
+          {
+            "key": "description",
+            "label": "Description"
+          },
+          {
+            "key": "policies",
+            "label": "Policies"
+          }
+        ],
+        "detail": {
+          "header": {
+            "title": "${resource.name}"
+          },
+          "defaultTab": "role-overview",
+          "tabs": [
+            {
+              "key": "role-overview",
+              "label": "Overview",
+              "icon": {
+                "type": "lucide",
+                "value": "info"
+              },
+              "panel": "object_detail",
+              "source": {
+                "routeId": "consul.acl.role.read",
+                "params": {
+                  "role": "${resource.uid}"
+                }
+              },
+              "config": {
+                "sections": [
+                  {
+                    "title": "Role",
+                    "fields": [
+                      {
+                        "key": "id",
+                        "label": "ID",
+                        "copy": true
+                      },
+                      {
+                        "key": "name",
+                        "label": "Name",
+                        "copy": true
+                      },
+                      {
+                        "key": "description",
+                        "label": "Description"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Grants",
+                    "fields": [
+                      {
+                        "key": "policies",
+                        "label": "Policies"
+                      },
+                      {
+                        "key": "service_identities",
+                        "label": "Service identities"
+                      },
+                      {
+                        "key": "node_identities",
+                        "label": "Node identities"
+                      },
+                      {
+                        "key": "templated_policies",
+                        "label": "Templated policies"
+                      }
+                    ]
+                  }
+                ],
+                "rawToggle": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "consul.kv.put",
+        "label": "Set key",
+        "icon": {
+          "type": "lucide",
+          "value": "file-plus"
+        },
+        "routeId": "consul.kv.put",
+        "method": "POST",
+        "risk": "write",
+        "requiresConfirm": false,
+        "input": {
+          "groups": [
+            {
+              "name": "Entry",
+              "fields": [
+                {
+                  "key": "key",
+                  "label": "Key",
+                  "type": "text",
+                  "required": true,
+                  "default": "${resource.uid}",
+                  "help": "Full key path, for example apps/web/config."
+                },
+                {
+                  "key": "value",
+                  "label": "Value",
+                  "type": "textarea"
+                },
+                {
+                  "key": "flags",
+                  "label": "Flags",
+                  "type": "number",
+                  "help": "Opaque 64-bit marker Consul stores alongside the value.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                },
+                {
+                  "key": "cas",
+                  "label": "Check-and-set index",
+                  "type": "number",
+                  "help": "Write only when the key is still at this modify index. Leave empty for an unconditional write.",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "value": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "onSuccess": {
+          "selectTab": "entries"
+        }
+      },
+      {
+        "id": "consul.kv.entry.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "consul.kv.delete",
+        "method": "DELETE",
+        "params": {
+          "key": "${record.key}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete the selected key(s)? The stored value is removed from every Consul server.",
+        "bulk": true
+      },
+      {
+        "id": "consul.kv.prefix.delete",
+        "label": "Delete folder",
+        "icon": {
+          "type": "lucide",
+          "value": "folder-x"
+        },
+        "routeId": "consul.kv.tree.delete",
+        "method": "DELETE",
+        "params": {
+          "prefix": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Recursively delete every key under this prefix? The values cannot be recovered.",
+        "onSuccess": {
+          "navigate": "list"
+        }
+      },
+      {
+        "id": "consul.instance.deregister",
+        "label": "Deregister",
+        "icon": {
+          "type": "lucide",
+          "value": "power-off"
+        },
+        "routeId": "consul.instance.deregister",
+        "method": "DELETE",
+        "params": {
+          "instance": "${resource.name}",
+          "node": "${resource.namespace}",
+          "service": "${resource.scope}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Deregister the selected instance(s) from the catalog? The node must re-register to appear again.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "consul.session.destroy",
+        "label": "Destroy",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "consul.session.destroy",
+        "method": "DELETE",
+        "params": {
+          "session": "${resource.uid}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Destroy the selected session(s)? Locks held by them are released or their keys deleted.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      },
+      {
+        "id": "consul.intention.toggle",
+        "label": "Toggle allow/deny",
+        "icon": {
+          "type": "lucide",
+          "value": "toggle-right"
+        },
+        "routeId": "consul.intention.toggle",
+        "method": "POST",
+        "params": {
+          "destination": "${resource.name}",
+          "source": "${resource.scope}"
+        },
+        "risk": "write",
+        "requiresConfirm": false,
+        "onSuccess": {
+          "selectTab": "intention-overview"
+        }
+      },
+      {
+        "id": "consul.intention.delete",
+        "label": "Delete",
+        "icon": {
+          "type": "lucide",
+          "value": "trash-2"
+        },
+        "routeId": "consul.intention.delete",
+        "method": "DELETE",
+        "params": {
+          "destination": "${resource.name}",
+          "source": "${resource.scope}"
+        },
+        "risk": "destructive",
+        "requiresConfirm": true,
+        "confirmText": "Delete the selected intention(s)? Traffic then falls back to the default mesh policy.",
+        "onSuccess": {
+          "navigate": "list"
+        },
+        "bulk": true
+      }
+    ],
+    "scope": [
+      {
+        "param": "datacenter",
+        "label": "Datacenter",
+        "icon": {
+          "type": "lucide",
+          "value": "globe"
+        },
+        "control": "select",
+        "optionsSource": {
+          "routeId": "consul.datacenters.list"
+        },
+        "valueField": "value",
+        "labelField": "label",
+        "allLabel": "Connection datacenter"
+      }
+    ],
+    "streams": [
+      {
+        "id": "consul.kv.watch",
+        "kind": "logs",
+        "routeId": "consul.kv.watch"
+      }
+    ],
+    "panelConfigSchemas": {
+      "canvas": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "focusOnPointer": {
+            "type": "boolean"
+          },
+          "height": {
+            "type": "number"
+          },
+          "hidpi": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "interactive": {
+            "type": "boolean"
+          },
+          "keyboard": {
+            "type": "boolean"
+          },
+          "maxScale": {
+            "type": "number"
+          },
+          "minScale": {
+            "type": "number"
+          },
+          "pointer": {
+            "type": "boolean"
+          },
+          "resizeEvents": {
+            "type": "boolean"
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "resize",
+              "fit",
+              "scroll"
+            ]
+          },
+          "wheelMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "capture",
+              "modified",
+              "none"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      },
+      "code_editor": {
+        "type": "object",
+        "properties": {
+          "dryRunKey": {
+            "type": "string"
+          },
+          "initialContent": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "refreshField": {
+            "type": "string"
+          },
+          "saveBodyKey": {
+            "type": "string"
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveExtra": {
+            "type": "object"
+          },
+          "saveMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "saveParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveRouteId": {
+            "type": "string"
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "dashboard": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "diff": {
+        "type": "object",
+        "properties": {
+          "collapseUnchanged": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "side_by_side",
+              "unified"
+            ]
+          },
+          "modifiedField": {
+            "type": "string"
+          },
+          "modifiedLabel": {
+            "type": "string"
+          },
+          "originalField": {
+            "type": "string"
+          },
+          "originalLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "document": {
+        "type": "object",
+        "properties": {}
+      },
+      "enroll": {
+        "type": "object",
+        "properties": {}
+      },
+      "file_browser": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "pathParam": {
+            "type": "string"
+          },
+          "routes": {
+            "type": "object",
+            "properties": {
+              "archive": {
+                "type": "string"
+              },
+              "chmod": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              },
+              "delete": {
+                "type": "string"
+              },
+              "download": {
+                "type": "string"
+              },
+              "mkdir": {
+                "type": "string"
+              },
+              "move": {
+                "type": "string"
+              },
+              "read": {
+                "type": "string"
+              },
+              "rename": {
+                "type": "string"
+              },
+              "write": {
+                "type": "string"
+              }
+            }
+          },
+          "upload": {
+            "type": "object",
+            "properties": {
+              "fieldName": {
+                "type": "string"
+              },
+              "maxBytes": {
+                "type": "number"
+              },
+              "multiple": {
+                "type": "boolean"
+              },
+              "routeId": {
+                "type": "string"
+              }
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "form": {
+        "type": "object",
+        "properties": {
+          "params": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "saveDismiss": {
+            "type": "string",
+            "enum": [
+              "close"
+            ]
+          },
+          "saveToast": {
+            "type": "object",
+            "properties": {
+              "detail": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string",
+                "enum": [
+                  "info",
+                  "success",
+                  "warn",
+                  "danger",
+                  "secondary"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          },
+          "submitLabel": {
+            "type": "string"
+          },
+          "submitMethod": {
+            "type": "string",
+            "enum": [
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "submitRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "graph": {
+        "type": "object",
+        "properties": {
+          "expandParam": {
+            "type": "string"
+          },
+          "expandRouteId": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "fitView": {
+            "type": "boolean"
+          },
+          "layout": {
+            "type": "string",
+            "enum": [
+              "grid",
+              "manual"
+            ]
+          }
+        }
+      },
+      "http_client": {
+        "type": "object",
+        "properties": {
+          "defaultBody": {
+            "type": "string"
+          },
+          "defaultHeaders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ]
+            }
+          },
+          "defaultMethod": {
+            "type": "string"
+          },
+          "defaultUrl": {
+            "type": "string"
+          },
+          "executeRouteId": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "kv": {
+        "type": "object",
+        "properties": {
+          "createRouteId": {
+            "type": "string"
+          },
+          "deleteRouteId": {
+            "type": "string"
+          },
+          "delimiter": {
+            "type": "string"
+          },
+          "keyParam": {
+            "type": "string"
+          },
+          "readRouteId": {
+            "type": "string"
+          },
+          "valueTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "writable": {
+            "type": "boolean"
+          },
+          "writeRouteId": {
+            "type": "string"
+          }
+        }
+      },
+      "log_stream": {
+        "type": "object",
+        "properties": {
+          "allowPrevious": {
+            "type": "boolean"
+          },
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "gauges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "history": {
+            "type": "number"
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "unit": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "usage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "copy": {
+                  "type": "boolean"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "redacted": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "usage": {
+                  "type": "object",
+                  "properties": {
+                    "criticalAt": {
+                      "type": "number"
+                    },
+                    "percentKey": {
+                      "type": "string"
+                    },
+                    "totalKey": {
+                      "type": "string"
+                    },
+                    "totalLabel": {
+                      "type": "string"
+                    },
+                    "totalType": {
+                      "type": "string"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "usedKey": {
+                      "type": "string"
+                    },
+                    "usedType": {
+                      "type": "string"
+                    },
+                    "warnAt": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          }
+        }
+      },
+      "object_detail": {
+        "type": "object",
+        "properties": {
+          "rawToggle": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fields": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "copy": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "redacted": {
+                        "type": "boolean"
+                      },
+                      "severities": {
+                        "type": "object",
+                        "properties": {
+                          "*": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "usage": {
+                        "type": "object",
+                        "properties": {
+                          "criticalAt": {
+                            "type": "number"
+                          },
+                          "percentKey": {
+                            "type": "string"
+                          },
+                          "totalKey": {
+                            "type": "string"
+                          },
+                          "totalLabel": {
+                            "type": "string"
+                          },
+                          "totalType": {
+                            "type": "string"
+                          },
+                          "unit": {
+                            "type": "string"
+                          },
+                          "usedKey": {
+                            "type": "string"
+                          },
+                          "usedType": {
+                            "type": "string"
+                          },
+                          "warnAt": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "key"
+                    ]
+                  }
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "query_editor": {
+        "type": "object",
+        "properties": {
+          "cancelLabel": {
+            "type": "string"
+          },
+          "cancelParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "completionParams": {
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "string"
+              }
+            }
+          },
+          "completionRouteId": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "executeLabel": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "initialQuery": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "runningLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "remote_desktop": {
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "boolean"
+          },
+          "clipboard": {
+            "type": "boolean"
+          },
+          "repeaterID": {
+            "type": "string"
+          },
+          "resize": {
+            "type": "boolean"
+          }
+        }
+      },
+      "split": {
+        "type": "object",
+        "properties": {
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "config": {
+                  "type": "object"
+                },
+                "icon": {
+                  "type": "object"
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "minSize": {
+                  "type": "number"
+                },
+                "panel": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "span": {
+                  "type": "number"
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                },
+                "visibleWhen": {
+                  "type": "object",
+                  "properties": {
+                    "allOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    },
+                    "anyOf": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "op": {
+                            "type": "string",
+                            "enum": [
+                              "eq",
+                              "neq",
+                              "in",
+                              "nin",
+                              "empty",
+                              "notEmpty"
+                            ]
+                          },
+                          "value": {
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "field",
+                          "op"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "panel"
+              ]
+            }
+          }
+        }
+      },
+      "table": {
+        "type": "object",
+        "properties": {
+          "actionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "editable": {
+                  "type": "boolean"
+                },
+                "editor": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "number",
+                    "toggle",
+                    "select",
+                    "json"
+                  ]
+                },
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "nullable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "value"
+                    ]
+                  }
+                },
+                "precision": {
+                  "type": "number"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "severities": {
+                  "type": "object",
+                  "properties": {
+                    "*": {
+                      "type": "string",
+                      "enum": [
+                        "info",
+                        "success",
+                        "warn",
+                        "danger",
+                        "secondary"
+                      ]
+                    }
+                  }
+                },
+                "sortable": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "badge",
+                    "bytes",
+                    "datetime",
+                    "relative_time",
+                    "duration",
+                    "number",
+                    "percent",
+                    "bool",
+                    "json",
+                    "icon"
+                  ]
+                },
+                "width": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label"
+              ]
+            }
+          },
+          "columnsSource": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "defaultSort": {
+            "type": "object",
+            "properties": {
+              "desc": {
+                "type": "boolean"
+              },
+              "field": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "field"
+            ]
+          },
+          "delete": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "editable": {
+            "type": "boolean"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "exportable": {
+            "type": "boolean"
+          },
+          "hiddenColumns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insert": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "rowActionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowClick": {
+            "type": "string",
+            "enum": [
+              "navigate",
+              "detail",
+              "select",
+              "none"
+            ]
+          },
+          "rowKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "stagedEdits": {
+            "type": "boolean"
+          },
+          "update": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "task_progress": {
+        "type": "object",
+        "properties": {
+          "cancelRouteId": {
+            "type": "string"
+          },
+          "retryRouteId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "terminal": {
+        "type": "object",
+        "properties": {
+          "controls": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "optionsSource": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                },
+                "param": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "param"
+              ]
+            }
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "terminal_grid": {
+        "type": "object",
+        "properties": {
+          "defaultPanes": {
+            "type": "number"
+          },
+          "maxPanes": {
+            "type": "number"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "zoom": {
+            "type": "boolean"
+          }
+        }
+      },
+      "timeline": {
+        "type": "object",
+        "properties": {
+          "bodyField": {
+            "type": "string"
+          },
+          "emptyText": {
+            "type": "string"
+          },
+          "iconField": {
+            "type": "string"
+          },
+          "refreshIntervalMs": {
+            "type": "number"
+          },
+          "resourceField": {
+            "type": "string"
+          },
+          "severityField": {
+            "type": "string"
+          },
+          "timestampField": {
+            "type": "string"
+          },
+          "titleField": {
+            "type": "string"
+          },
+          "watch": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE",
+                  "WS"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "properties": {
+                  "*": {
+                    "type": "string"
+                  }
+                }
+              },
+              "routeId": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "routeId"
+            ]
+          }
+        }
+      },
+      "trace": {
+        "type": "object",
+        "properties": {
+          "serviceField": {
+            "type": "string"
+          }
+        }
+      },
+      "wasm": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "mime": {
+                  "type": "string"
+                },
+                "path": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE",
+                        "WS"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "required": [
+                "path",
+                "source"
+              ]
+            }
+          },
+          "boot": {
+            "type": "object",
+            "properties": {
+              "scripts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "bridge": {
+            "type": "object",
+            "properties": {
+              "routes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "enum": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "PATCH",
+                        "DELETE"
+                      ]
+                    },
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              },
+              "streams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "params": {
+                      "type": "object",
+                      "properties": {
+                        "*": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "routeId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "routeId"
+                  ]
+                }
+              }
+            }
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "audio": {
+                "type": "boolean"
+              },
+              "fullscreen": {
+                "type": "boolean"
+              },
+              "gamepad": {
+                "type": "boolean"
+              },
+              "keyboard": {
+                "type": "boolean"
+              },
+              "pointer": {
+                "type": "boolean"
+              },
+              "pointerLock": {
+                "type": "boolean"
+              }
+            }
+          },
+          "entry": {
+            "type": "string"
+          },
+          "height": {
+            "type": "number"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "string",
+            "enum": [
+              "go",
+              "generic"
+            ]
+          },
+          "scaleMode": {
+            "type": "string",
+            "enum": [
+              "fit",
+              "resize",
+              "scroll"
+            ]
+          },
+          "width": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "entry"
+        ]
+      },
+      "web_proxy": {
+        "type": "object",
+        "properties": {
+          "ariaLabel": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "clipboard",
+                "downloads",
+                "fullscreen",
+                "popups",
+                "same_origin"
+              ]
+            }
+          },
+          "inlineToolbar": {
+            "type": "boolean"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "openExternal": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
