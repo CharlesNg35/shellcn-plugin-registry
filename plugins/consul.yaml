@@ -1,0 +1,27 @@
+name: consul
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.consul.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-amd64
+        sha256: 0303abcbac58fff795dd79613e35e40f44b3c0402e13c71696d77e81cd97d1f9
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-linux-arm64
+        sha256: e0bf4620ee0dd8b80ab3685a9049c8b6845c36e75dbee0d72c9c0e0497addfa4
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-amd64
+        sha256: a4c4bfb2d487bbcfe76515eb005d23be96f01c049e1a250370c465bc521aa90f
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-darwin-arm64
+        sha256: 6dd30aaabe12c4378c0e725d4dd2fec6e931a363eb203d2e8da52f0e633aa913
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-amd64.exe
+        sha256: e317d35cab7980d673126b4ffafe4814362d9f4dd593b1fee38d833b1738508c
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/consul-v0.1.0/shellcn-plugin-consul-windows-arm64.exe
+        sha256: aac73af2dff12f561e1d6f14417e716ee4aa37b931857470e8e3ea382b69a3c2

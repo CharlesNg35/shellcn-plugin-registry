@@ -1,0 +1,27 @@
+name: pinecone
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.pinecone.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-amd64
+        sha256: 57b0e786e941d40fa983cfdc51123e4d020a9fca93a205185e326f561444eea1
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-linux-arm64
+        sha256: c4a951fc72de1588ce81a93edf068ad142f1794034fcbc35a1a89de304135b63
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-amd64
+        sha256: 5e3e15e6a529c68d139e94c1faa7ff0b5f4d2953b3bc20fff6dbbd49f42e3c4e
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-darwin-arm64
+        sha256: c3d357af22f58f4c4a92e7b8f439f71331230d8f0a5b72a2b33532e4bdf0c08f
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-amd64.exe
+        sha256: 377f92d0e4502cc33441a91bb36293eba3f7ee97518bafc788000120af105006
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pinecone-v0.1.0/shellcn-plugin-pinecone-windows-arm64.exe
+        sha256: e9da6e5bd8ad6d2e3b4d46bca22062a637abaed81dda25ed6d5620447b27f934

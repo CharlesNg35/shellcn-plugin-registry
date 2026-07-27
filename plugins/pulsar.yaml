@@ -1,0 +1,27 @@
+name: pulsar
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://pulsar.apache.org
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-amd64
+        sha256: 39188807721b2ad6dc3a7104068037fc0be2bb929678cb32895686f72f3a6f90
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-linux-arm64
+        sha256: 018356a128060c9d6e073e4b4fe936385d4902610a373700a0f1f05ae28bf714
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-amd64
+        sha256: 6b0513f46feeb2c047292a4254ffcde388a84825b97d4da3f24263bdef005be2
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-darwin-arm64
+        sha256: 5110561d4d3be80a8019f10de16d2cc4eba7af21679454af218bf71495b40b17
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-amd64.exe
+        sha256: 2771550e6fe4ac5acbb2e1f6fcca2be24e9d3dd4a223f1b12488228ef1bf9bb0
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/pulsar-v0.1.0/shellcn-plugin-pulsar-windows-arm64.exe
+        sha256: 6c1cdefa7d780aed6151d51cfa42fb2c88dca7c5291a128812ff1c54ccd95019

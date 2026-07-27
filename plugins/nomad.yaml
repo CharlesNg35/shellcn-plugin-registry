@@ -1,0 +1,27 @@
+name: nomad
+repo: github.com/CharlesNg35/shellcn-contrib
+homepage: https://www.nomadproject.io
+license: GPL-3.0
+maintainers:
+  - CharlesNg35
+versions:
+  - version: 0.1.0
+    assets:
+      linux/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-amd64
+        sha256: f3cb6582ddcb3dd05ef79380d1af402b181446138e4e014f0016457658258f4e
+      linux/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-linux-arm64
+        sha256: 1ec32b2c4fcf1cdb52ff74cb5c8d10f6d75d2b413f27592109954359e0c41b72
+      darwin/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-amd64
+        sha256: 31aaf2010aa801f1b92139ed4faf0f4cd66e75cf4a0c363dad485225c4c36b7d
+      darwin/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-darwin-arm64
+        sha256: 80bbe53c39bf7b3c4e3d307a4363ed57cac7627e564d143479d2fd2740b9f945
+      windows/amd64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-amd64.exe
+        sha256: 47e0bf2a9d56cf3d989f917b6b095457ae90db89ee8f6fad500322ca3f079d29
+      windows/arm64:
+        url: https://github.com/CharlesNg35/shellcn-contrib/releases/download/nomad-v0.1.0/shellcn-plugin-nomad-windows-arm64.exe
+        sha256: 442b8610072d0e8b32c12ca3cedf52e7b0f5917561abe8ba3f2075732931fea9
